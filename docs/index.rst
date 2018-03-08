@@ -19,7 +19,6 @@ Welcome to zeta-learn's documentation!
    writeups/tutorials/perceptron
    writeups/tutorials/cnn
 
-
 .. toctree::
    :maxdepth: 1
    :caption: API
