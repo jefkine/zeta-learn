@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Objective Functions &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Optimization Functions" href="optimizers.html" />
+    <link rel="prev" title="Activation Functions" href="activations.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Objective Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/writeups/api/objectives.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objective-functions">
+<h1>Objective Functions<a class="headerlink" href="#objective-functions" title="Permalink to this headline">¶</a></h1>
+<p>Objective functions are used measure the performance of a model.</p>
+<div class="section" id="featured-objectives">
+<h2>Featured Objectives<a class="headerlink" href="#featured-objectives" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.objectives.MeanSquaredError" title="zeta.dl.objectives.MeanSquaredError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MeanSquaredError</span></code></a></td>
+<td><strong>Mean Squared error (MSE)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.objectives.HellingerDistance" title="zeta.dl.objectives.HellingerDistance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HellingerDistance</span></code></a></td>
+<td><strong>Hellinger Distance</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.objectives.BinaryCrossEntropy" title="zeta.dl.objectives.BinaryCrossEntropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BinaryCrossEntropy</span></code></a></td>
+<td><strong>Binary Cross Entropy</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.objectives.CategoricalCrossEntropy" title="zeta.dl.objectives.CategoricalCrossEntropy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CategoricalCrossEntropy</span></code></a></td>
+<td><strong>Categorical Cross Entropy</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-zeta.dl.objectives">
+<span id="function-descriptions"></span><h2>Function Descriptions<a class="headerlink" href="#module-zeta.dl.objectives" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.objectives.BinaryCrossEntropy">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">BinaryCrossEntropy</code><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#BinaryCrossEntropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.BinaryCrossEntropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.objectives.Objective" title="zeta.dl.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.objectives.Objective</span></code></a></p>
+<p><strong>Binary Cross Entropy</strong></p>
+<p>Binary CrossEntropy measures the performance of a classification model whose
+output is a probability value between 0 &amp; 1. ‘Binary’ is meant for discrete
+classification tasks in which the classes are independent and not mutually
+exclusive. Targets here could be either 0 or 1 scalar</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Cross Entropy</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.objectives.BinaryCrossEntropy.accuracy">
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.BinaryCrossEntropy.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the BinaryCrossEntropy Accuracy Score given prediction and targets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+<li><strong>threshold</strong> (<em>numpy.float32</em>) – the threshold value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Accuracy Score</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.float32</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.BinaryCrossEntropy.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.BinaryCrossEntropy.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the BinaryCrossEntropy Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.BinaryCrossEntropy.loss">
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.BinaryCrossEntropy.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the BinaryCrossEntropy Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.objectives.BinaryCrossEntropy.objective_name">
+<code class="descname">objective_name</code><a class="headerlink" href="#zeta.dl.objectives.BinaryCrossEntropy.objective_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.objectives.CategoricalCrossEntropy">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">CategoricalCrossEntropy</code><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.CategoricalCrossEntropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.objectives.Objective" title="zeta.dl.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.objectives.Objective</span></code></a></p>
+<p><strong>Categorical Cross Entropy</strong></p>
+<p>Categorical Cross Entropy measures the performance of a classification model
+whose output is a probability value between 0 and 1. ‘Categorical’ is  meant
+for discrete classification tasks in which the classes are mutually exclusive.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Cross Entropy</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.objectives.CategoricalCrossEntropy.accuracy">
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.CategoricalCrossEntropy.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the CategoricalCrossEntropy Accuracy Score given prediction and targets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Accuracy Score</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.float32</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.CategoricalCrossEntropy.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.CategoricalCrossEntropy.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the CategoricalCrossEntropy Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.CategoricalCrossEntropy.loss">
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.CategoricalCrossEntropy.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the CategoricalCrossEntropy Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.objectives.CategoricalCrossEntropy.objective_name">
+<code class="descname">objective_name</code><a class="headerlink" href="#zeta.dl.objectives.CategoricalCrossEntropy.objective_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.objectives.HellingerDistance">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">HellingerDistance</code><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#HellingerDistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Hellinger Distance</strong></p>
+<p>Hellinger Distance is used to quantify the similarity between two probability
+distributions.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Hellinger Distance</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Hellinger_distance">https://en.wikipedia.org/wiki/Hellinger_distance</a></dd>
+</dl>
+<dl class="attribute">
+<dt id="zeta.dl.objectives.HellingerDistance.SQRT_2">
+<code class="descname">SQRT_2</code><em class="property"> = 1.4142135623730951</em><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.SQRT_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.HellingerDistance.accuracy">
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#HellingerDistance.accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.HellingerDistance.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#HellingerDistance.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the HellingerDistance Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of HellingerDistance Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.HellingerDistance.loss">
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#HellingerDistance.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the HellingerDistance Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of HellingerDistance Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.objectives.HellingerDistance.objective_name">
+<code class="descname">objective_name</code><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.objective_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.HellingerDistance.sqrt_difference">
+<code class="descname">sqrt_difference</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#HellingerDistance.sqrt_difference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.HellingerDistance.sqrt_difference" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.objectives.MeanSquaredError">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">MeanSquaredError</code><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#MeanSquaredError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.MeanSquaredError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Mean Squared error (MSE)</strong></p>
+<p>MSE measures the average squared difference between the predictions and the
+targets. The closer the predictions are to the targets the more efficient
+the estimator.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Mean Squared error</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">https://en.wikipedia.org/wiki/Mean_squared_error</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.objectives.MeanSquaredError.accuracy">
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#MeanSquaredError.accuracy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.MeanSquaredError.accuracy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.MeanSquaredError.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#MeanSquaredError.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.MeanSquaredError.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the MeanSquaredError Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of MeanSquaredError Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.objectives.MeanSquaredError.loss">
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#MeanSquaredError.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.MeanSquaredError.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the MeanSquaredError Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of MeanSquaredError Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.objectives.MeanSquaredError.objective_name">
+<code class="descname">objective_name</code><a class="headerlink" href="#zeta.dl.objectives.MeanSquaredError.objective_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.objectives.Objective">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">Objective</code><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#Objective"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.Objective" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="zeta.dl.objectives.Objective.clip">
+<code class="descname">clip</code><span class="sig-paren">(</span><em>predictions</em>, <em>epsilon=1e-15</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#Objective.clip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.Objective.clip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.objectives.Objective.objective_name">
+<code class="descname">objective_name</code><a class="headerlink" href="#zeta.dl.objectives.Objective.objective_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.objectives.ObjectiveFunction">
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">ObjectiveFunction</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/objectives.html#ObjectiveFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.objectives.ObjectiveFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.objectives.ObjectiveFunction.name">
+<code class="descname">name</code><a class="headerlink" href="#zeta.dl.objectives.ObjectiveFunction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="optimizers.html" class="btn btn-neutral float-right" title="Optimization Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="activations.html" class="btn btn-neutral" title="Activation Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

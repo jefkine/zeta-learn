@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Optimization Functions &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Regularization Functions" href="regularizers.html" />
+    <link rel="prev" title="Objective Functions" href="objectives.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Optimization Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/writeups/api/optimizers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="optimization-functions">
+<h1>Optimization Functions<a class="headerlink" href="#optimization-functions" title="Permalink to this headline">¶</a></h1>
+<p>The optimization functions helps us to minimize (or maximize) an Objective function
+by improving the quality of the weights and bias.</p>
+<div class="section" id="featured-optimizers">
+<h2>Featured Optimizers<a class="headerlink" href="#featured-optimizers" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.optimizers.SGD" title="zeta.dl.optimizers.SGD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SGD</span></code></a>(**kwargs)</td>
+<td><strong>Stochastic Gradient Descent (SGD)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.optimizers.SGDMomentum" title="zeta.dl.optimizers.SGDMomentum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SGDMomentum</span></code></a>(**kwargs)</td>
+<td><strong>Stochastic Gradient Descent with Momentum (SGDMomentum)</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.optimizers.NesterovAcceleratedGradient" title="zeta.dl.optimizers.NesterovAcceleratedGradient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NesterovAcceleratedGradient</span></code></a>(**kwargs)</td>
+<td><strong>Nesterov Accelerated Gradient (NAG)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.optimizers.RMSprop" title="zeta.dl.optimizers.RMSprop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMSprop</span></code></a>(**kwargs)</td>
+<td><strong>Root Mean Squared Propagation (RMSprop)</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.optimizers.Adam" title="zeta.dl.optimizers.Adam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Adam</span></code></a>(**kwargs)</td>
+<td><strong>Adaptive Moment Estimation (Adam)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.optimizers.Adamax" title="zeta.dl.optimizers.Adamax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Adamax</span></code></a>(**kwargs)</td>
+<td><strong>Admax</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.optimizers.AdaGrad" title="zeta.dl.optimizers.AdaGrad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AdaGrad</span></code></a>(**kwargs)</td>
+<td><strong>Adaptive Gradient Algorithm (AdaGrad)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.optimizers.Adadelta" title="zeta.dl.optimizers.Adadelta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Adadelta</span></code></a>(**kwargs)</td>
+<td><strong>An Adaptive Learning Rate Method (Adadelta)</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-zeta.dl.optimizers">
+<span id="optimization-descriptions"></span><h2>Optimization Descriptions<a class="headerlink" href="#module-zeta.dl.optimizers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.optimizers.AdaGrad">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">AdaGrad</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#AdaGrad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.AdaGrad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Adaptive Gradient Algorithm (AdaGrad)</strong></p>
+<p>AdaGrad is an optimization method that allows different step sizes for
+different features. It increases the influence of rare but informative
+features</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adaptive Subgradient Methods for Online Learning and Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[John Duchi et. al., 2011] <a class="reference external" href="http://jmlr.org/papers/v12/duchi11a.html">http://jmlr.org/papers/v12/duchi11a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf">http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.AdaGrad.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.AdaGrad.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.AdaGrad.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#AdaGrad.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.AdaGrad.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.Adadelta">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adadelta</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adadelta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adadelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>An Adaptive Learning Rate Method (Adadelta)</strong></p>
+<p>Adadelta is an extension of Adagrad that seeks to avoid setting the learing
+rate to an aggresively monotonically decreasing rate. This is achieved via
+a dynamic learning rate i.e a diffrent learning rate is computed for each
+training sample</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] ADADELTA: An Adaptive Learning Rate Method</dt>
+<dd><ul class="first last simple">
+<li>[Matthew D. Zeiler, 2012] <a class="reference external" href="https://arxiv.org/abs/1212.5701">https://arxiv.org/abs/1212.5701</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1212.5701.pdf">https://arxiv.org/pdf/1212.5701.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.Adadelta.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.Adadelta.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.Adadelta.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adadelta.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adadelta.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.Adam">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adam</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Adaptive Moment Estimation (Adam)</strong></p>
+<p>Adam computes adaptive learning rates for by updating each of the training
+samples while storing an exponentially decaying average of past squared
+gradients. Adam also keeps an exponentially decaying average of past
+gradients.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adam: A Method for Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[Diederik P. Kingma et. al., 2014] <a class="reference external" href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.Adam.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.Adam.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.Adam.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adam.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adam.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.Adamax">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adamax</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adamax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adamax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Admax</strong></p>
+<p>AdaMax, a variant of Adam based on the infinity norm. In Adam, the update rule
+for individual weights is to scale their gradients inversely proportional to a
+(scaled) L2 norm of their individual current and past gradients. For Adamax we
+generalize the L2 norm based update rule to a Lp norm based update rule. These
+variants are numerically unstable for large p. but have special cases where as
+p tens to infinity, a simple and stable algorithm emerges.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adam: A Method for Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[Diederik P. Kingma et. al., 2014] <a class="reference external" href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.Adamax.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.Adamax.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.Adamax.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Adamax.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Adamax.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.GD">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">GD</code><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#GD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.GD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Gradient Descent (GD)</strong></p>
+<p>GD optimizes parameters theta of an objective function J(theta) by updating
+all of the training samples in the dataset. The update is perfomed in the
+opposite direction of the gradient of the objective function d/d_theta
+J(theta) - with respect to the parameters (theta). The learning rate
+eta helps determine the size of teh steps we take to the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.NesterovAcceleratedGradient">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">NesterovAcceleratedGradient</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#NesterovAcceleratedGradient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.NesterovAcceleratedGradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Nesterov Accelerated Gradient (NAG)</strong></p>
+<p>NAG is an improvement in SGDMomentum where the the previous parameter values
+are smoothed and a gradient descent step is taken from this smoothed value.
+This enables a more intelligent way of arriving at the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] A method for unconstrained convex minimization problem with the rate of convergence</dt>
+<dd>[Nesterov, Y. 1983][PDF] <a class="reference external" href="https://goo.gl/X8313t">https://goo.gl/X8313t</a></dd>
+<dt>[3] Nesterov’s Accelerated Gradient and Momentum as approximations to Regularised Update Descent</dt>
+<dd><ul class="first last simple">
+<li>[Aleksandar Botev, 2016] <a class="reference external" href="https://arxiv.org/abs/1607.01981">https://arxiv.org/abs/1607.01981</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1607.01981.pdf">https://arxiv.org/pdf/1607.01981.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.NesterovAcceleratedGradient.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.NesterovAcceleratedGradient.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.NesterovAcceleratedGradient.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#NesterovAcceleratedGradient.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.NesterovAcceleratedGradient.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.OptimizationFunction">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">OptimizationFunction</code><span class="sig-paren">(</span><em>optimizer_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#OptimizationFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.OptimizationFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.OptimizationFunction.name">
+<code class="descname">name</code><a class="headerlink" href="#zeta.dl.optimizers.OptimizationFunction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.Optimizer">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Optimizer</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#Optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.Optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.Optimizer.get_learning_rate">
+<code class="descname">get_learning_rate</code><a class="headerlink" href="#zeta.dl.optimizers.Optimizer.get_learning_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.RMSprop">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">RMSprop</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#RMSprop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.RMSprop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Root Mean Squared Propagation (RMSprop)</strong></p>
+<p>RMSprop utilizes the magnitude of recent gradients to normalize the gradients.
+A moving average over the root mean squared (RMS) gradients is kept and then
+divided by the current gradient. Parameters are recomended to be set as
+follows rho = 0.9 and eta (learning rate) = 0.001</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Lecture 6.5 - rmsprop, COURSERA: Neural Networks for Machine Learning</dt>
+<dd>[Tieleman, T. and Hinton, G. 2012][PDF] <a class="reference external" href="https://goo.gl/Dhkvpk">https://goo.gl/Dhkvpk</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.RMSprop.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.RMSprop.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.RMSprop.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#RMSprop.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.RMSprop.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.SGD">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">SGD</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#SGD"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.SGD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Stochastic Gradient Descent (SGD)</strong></p>
+<p>SGD optimizes parameters theta of an objective function J(theta) by updating
+each of the training samples inputs(i) and targets(i) for all samples in the
+dataset. The update is perfomed in the opposite direction of the gradient of
+the objective function d/d_theta J(theta) - with respect to the parameters
+(theta). The learning rate eta helps determine the size of the steps we
+take to the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Large-Scale Machine Learning with Stochastic Gradient Descent</dt>
+<dd>[Leon Botou, 2011][PDF] <a class="reference external" href="http://leon.bottou.org/publications/pdf/compstat-2010.pdf">http://leon.bottou.org/publications/pdf/compstat-2010.pdf</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.SGD.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.SGD.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.SGD.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#SGD.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.SGD.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.optimizers.SGDMomentum">
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">SGDMomentum</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#SGDMomentum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.SGDMomentum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Stochastic Gradient Descent with Momentum (SGDMomentum)</strong></p>
+<p>The objective function regularly forms places on the contour map in which
+the surface curves more steeply than others (ravines). Standard SGD will
+tend to oscillate across the narrow ravine since the negative gradient
+will point down one of the steep sides rather than along the ravine
+towards the optimum. Momentum hepls to push the objective more
+quickly along the shallow ravine towards the global minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] On the Momentum Term in Gradient Descent Learning Algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Ning Qian, 199] <a class="reference external" href="https://goo.gl/7fhr14">https://goo.gl/7fhr14</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/91HtDt">https://goo.gl/91HtDt</a></li>
+</ul>
+</dd>
+<dt>[3] Two problems with backpropagation and other steepest-descent learning procedures for networks.</dt>
+<dd>[Sutton, R. S., 1986][PDF] <a class="reference external" href="https://goo.gl/M3VFM1">https://goo.gl/M3VFM1</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.optimizers.SGDMomentum.optimization_name">
+<code class="descname">optimization_name</code><a class="headerlink" href="#zeta.dl.optimizers.SGDMomentum.optimization_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.optimizers.SGDMomentum.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#SGDMomentum.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.SGDMomentum.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="zeta.dl.optimizers.register_opt">
+<code class="descclassname">zeta.dl.optimizers.</code><code class="descname">register_opt</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/optimizers.html#register_opt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.optimizers.register_opt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="regularizers.html" class="btn btn-neutral float-right" title="Regularization Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="objectives.html" class="btn btn-neutral" title="Objective Functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

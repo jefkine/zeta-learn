@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zeta.dl.layers package &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>zeta.dl.layers package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/zeta.dl.layers.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="zeta-dl-layers-package">
+<h1>zeta.dl.layers package<a class="headerlink" href="#zeta-dl-layers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zeta.dl.layers.recurrent.html">zeta.dl.layers.recurrent package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.recurrent.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.gru">zeta.dl.layers.recurrent.gru module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.lstm">zeta.dl.layers.recurrent.lstm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.rnn">zeta.dl.layers.recurrent.rnn module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-zeta.dl.layers.base">
+<span id="zeta-dl-layers-base-module"></span><h2>zeta.dl.layers.base module<a class="headerlink" href="#module-zeta.dl.layers.base" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.base.Layer">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.base.</code><code class="descname">Layer</code><span class="sig-paren">(</span><em>layer_name='zeta_squential'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/base.html#Layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.base.Layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.base.Layer.input_shape">
+<code class="descname">input_shape</code><a class="headerlink" href="#zeta.dl.layers.base.Layer.input_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.base.Layer.layer_cls_name">
+<code class="descname">layer_cls_name</code><a class="headerlink" href="#zeta.dl.layers.base.Layer.layer_cls_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.base.Layer.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.base.Layer.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.base.Layer.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/base.html#Layer.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.base.Layer.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.base.Layer.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/base.html#Layer.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.base.Layer.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers.convolutional">
+<span id="zeta-dl-layers-convolutional-module"></span><h2>zeta.dl.layers.convolutional module<a class="headerlink" href="#module-zeta.dl.layers.convolutional" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.convolutional.Conv2d">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.convolutional.</code><code class="descname">Conv2d</code><span class="sig-paren">(</span><em>filters=32</em>, <em>kernel_size=(3</em>, <em>3)</em>, <em>activation='relu'</em>, <em>input_shape=(1</em>, <em>8</em>, <em>8)</em>, <em>strides=(1</em>, <em>1)</em>, <em>padding='valid'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/convolutional.html#Conv2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.convolutional.Conv2d.layer_activation">
+<code class="descname">layer_activation</code><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.layer_activation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.convolutional.Conv2d.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.convolutional.Conv2d.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/convolutional.html#Conv2d.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.convolutional.Conv2d.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/convolutional.html#Conv2d.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.convolutional.Conv2d.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/convolutional.html#Conv2d.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.convolutional.Conv2d.weight_initializer">
+<code class="descname">weight_initializer</code><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.weight_initializer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.convolutional.Conv2d.weight_optimizer">
+<code class="descname">weight_optimizer</code><a class="headerlink" href="#zeta.dl.layers.convolutional.Conv2d.weight_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers.core">
+<span id="zeta-dl-layers-core-module"></span><h2>zeta.dl.layers.core module<a class="headerlink" href="#module-zeta.dl.layers.core" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.core.Activation">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.core.</code><code class="descname">Activation</code><span class="sig-paren">(</span><em>function_name</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Activation.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.core.Activation.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Activation.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Activation.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Activation.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Activation.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>input_signal</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Activation.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Activation.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Activation.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Activation.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Activation.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.layers.core.Dense">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.core.</code><code class="descname">Dense</code><span class="sig-paren">(</span><em>units</em>, <em>activation='relu'</em>, <em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dense"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Dense.layer_activation">
+<code class="descname">layer_activation</code><a class="headerlink" href="#zeta.dl.layers.core.Dense.layer_activation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Dense.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.core.Dense.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dense.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dense.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dense.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dense.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dense.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dense.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dense.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dense.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dense.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Dense.weight_initializer">
+<code class="descname">weight_initializer</code><a class="headerlink" href="#zeta.dl.layers.core.Dense.weight_initializer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Dense.weight_optimizer">
+<code class="descname">weight_optimizer</code><a class="headerlink" href="#zeta.dl.layers.core.Dense.weight_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.layers.core.Dropout">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.core.</code><code class="descname">Dropout</code><span class="sig-paren">(</span><em>drop=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dropout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dropout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Dropout.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.core.Dropout.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dropout.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dropout.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dropout.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dropout.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dropout.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dropout.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Dropout.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Dropout.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Dropout.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.layers.core.Flatten">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.core.</code><code class="descname">Flatten</code><span class="sig-paren">(</span><em>input_shape=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Flatten"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.core.Flatten.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.core.Flatten.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Flatten.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Flatten.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Flatten.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Flatten.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Flatten.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Flatten.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.core.Flatten.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/core.html#Flatten.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.core.Flatten.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers.embedding">
+<span id="zeta-dl-layers-embedding-module"></span><h2>zeta.dl.layers.embedding module<a class="headerlink" href="#module-zeta.dl.layers.embedding" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.embedding.Embedding">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.embedding.</code><code class="descname">Embedding</code><span class="sig-paren">(</span><em>input_dim</em>, <em>output_dim</em>, <em>activation='relu'</em>, <em>input_shape=(1</em>, <em>10)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/embedding.html#Embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.embedding.Embedding.layer_activation">
+<code class="descname">layer_activation</code><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.layer_activation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.embedding.Embedding.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.embedding.Embedding.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/embedding.html#Embedding.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.embedding.Embedding.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/embedding.html#Embedding.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.embedding.Embedding.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/embedding.html#Embedding.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.embedding.Embedding.weight_initializer">
+<code class="descname">weight_initializer</code><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.weight_initializer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.embedding.Embedding.weight_optimizer">
+<code class="descname">weight_optimizer</code><a class="headerlink" href="#zeta.dl.layers.embedding.Embedding.weight_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers.normalization">
+<span id="zeta-dl-layers-normalization-module"></span><h2>zeta.dl.layers.normalization module<a class="headerlink" href="#module-zeta.dl.layers.normalization" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.normalization.BatchNomalization">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.normalization.</code><code class="descname">BatchNomalization</code><span class="sig-paren">(</span><em>eps=0.01</em>, <em>momentum=0.99</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/normalization.html#BatchNomalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.normalization.BatchNomalization.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.normalization.BatchNomalization.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/normalization.html#BatchNomalization.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.normalization.BatchNomalization.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/normalization.html#BatchNomalization.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.normalization.BatchNomalization.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/normalization.html#BatchNomalization.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.layers.normalization.BatchNomalization.weight_optimizer">
+<code class="descname">weight_optimizer</code><a class="headerlink" href="#zeta.dl.layers.normalization.BatchNomalization.weight_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers.pooling">
+<span id="zeta-dl-layers-pooling-module"></span><h2>zeta.dl.layers.pooling module<a class="headerlink" href="#module-zeta.dl.layers.pooling" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.layers.pooling.AveragePool2d">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.pooling.</code><code class="descname">AveragePool2d</code><span class="sig-paren">(</span><em>pool_size=(2</em>, <em>2)</em>, <em>strides=(1</em>, <em>1)</em>, <em>padding='valid'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#AveragePool2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.AveragePool2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.pooling.Pool" title="zeta.dl.layers.pooling.Pool"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.pooling.Pool</span></code></a></p>
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.AveragePool2d.pool_backward">
+<code class="descname">pool_backward</code><span class="sig-paren">(</span><em>d_input_col</em>, <em>grad_col</em>, <em>pool_cache=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#AveragePool2d.pool_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.AveragePool2d.pool_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.AveragePool2d.pool_forward">
+<code class="descname">pool_forward</code><span class="sig-paren">(</span><em>input_col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#AveragePool2d.pool_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.AveragePool2d.pool_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.layers.pooling.MaxPooling2d">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.pooling.</code><code class="descname">MaxPooling2d</code><span class="sig-paren">(</span><em>pool_size=(2</em>, <em>2)</em>, <em>strides=(1</em>, <em>1)</em>, <em>padding='valid'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#MaxPooling2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.MaxPooling2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.pooling.Pool" title="zeta.dl.layers.pooling.Pool"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.pooling.Pool</span></code></a></p>
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.MaxPooling2d.pool_backward">
+<code class="descname">pool_backward</code><span class="sig-paren">(</span><em>d_input_col</em>, <em>grad_col</em>, <em>pool_cache</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#MaxPooling2d.pool_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.MaxPooling2d.pool_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.MaxPooling2d.pool_forward">
+<code class="descname">pool_forward</code><span class="sig-paren">(</span><em>input_col</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#MaxPooling2d.pool_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.MaxPooling2d.pool_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.layers.pooling.Pool">
+<em class="property">class </em><code class="descclassname">zeta.dl.layers.pooling.</code><code class="descname">Pool</code><span class="sig-paren">(</span><em>pool_size=(2</em>, <em>2)</em>, <em>strides=(1</em>, <em>1)</em>, <em>padding='valid'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#Pool"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.Pool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.layers.base.Layer" title="zeta.dl.layers.base.Layer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.layers.base.Layer</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.layers.pooling.Pool.output_shape">
+<code class="descname">output_shape</code><a class="headerlink" href="#zeta.dl.layers.pooling.Pool.output_shape" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.Pool.pass_backward">
+<code class="descname">pass_backward</code><span class="sig-paren">(</span><em>grad</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#Pool.pass_backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.Pool.pass_backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.Pool.pass_forward">
+<code class="descname">pass_forward</code><span class="sig-paren">(</span><em>inputs</em>, <em>train_mode=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#Pool.pass_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.Pool.pass_forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.layers.pooling.Pool.prep_layer">
+<code class="descname">prep_layer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/layers/pooling.html#Pool.prep_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.layers.pooling.Pool.prep_layer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.layers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-zeta.dl.layers" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

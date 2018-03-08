@@ -1,0 +1,2101 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zeta.dl package &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/api/initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../writeups/api/initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../writeups/general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>zeta.dl package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/zeta.dl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="zeta-dl-package">
+<h1>zeta.dl package<a class="headerlink" href="#zeta-dl-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="zeta.dl.layers.html">zeta.dl.layers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zeta.dl.layers.recurrent.html">zeta.dl.layers.recurrent package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zeta.dl.layers.recurrent.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.gru">zeta.dl.layers.recurrent.gru module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.lstm">zeta.dl.layers.recurrent.lstm module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent.rnn">zeta.dl.layers.recurrent.rnn module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zeta.dl.layers.recurrent.html#module-zeta.dl.layers.recurrent">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.base">zeta.dl.layers.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.convolutional">zeta.dl.layers.convolutional module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.core">zeta.dl.layers.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.embedding">zeta.dl.layers.embedding module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.normalization">zeta.dl.layers.normalization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers.pooling">zeta.dl.layers.pooling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.layers.html#module-zeta.dl.layers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="zeta.dl.models.html">zeta.dl.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.models.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.models.html#module-zeta.dl.models.sequential">zeta.dl.models.sequential module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zeta.dl.models.html#module-zeta.dl.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="zeta-dl-activations-module">
+<h2>zeta.dl.activations module<a class="headerlink" href="#zeta-dl-activations-module" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ActivationFunction</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ActivationFunction"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt>
+<code class="descname">name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ELU</code><span class="sig-paren">(</span><em>alpha=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ELU"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Exponential Linear Units (ELUs)</strong></p>
+<p>ELUs are exponential functions which have negative values that allow them
+to push mean unit activations closer to zero like batch normalization but
+with lower computational complexity.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)</dt>
+<dd><ul class="first last simple">
+<li>[Djork-Arné Clevert et. al., 2016] <a class="reference external" href="https://arxiv.org/abs/1511.07289">https://arxiv.org/abs/1511.07289</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1511.07289.pdf">https://arxiv.org/pdf/1511.07289.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alpha</strong> (<em>float32</em>) – controls the value to which an ELU saturates for negative net inputs</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ELU.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ELU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ELU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ELU.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ELU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ELU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ElliotSigmoid</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#ElliotSigmoid"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Elliot Sigmoid Activation Function</strong></p>
+<p>Elliot Sigmoid squashes each element of the input from the interval [-inf, inf]
+to the interval [-1, 1] with an ‘S-shaped’ function. The fucntion is fast to
+calculate on simple computing hardware as it does not require any
+exponential or trigonometric functions</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] A better Activation Function for Artificial Neural Networks</dt>
+<dd><ul class="first last simple">
+<li>[David L. Elliott, et. al., 1993] <a class="reference external" href="https://goo.gl/qqBdne">https://goo.gl/qqBdne</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/fPLPcr">https://goo.gl/fPLPcr</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ElliotSigmoid.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ElliotSigmoid activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ElliotSigmoid function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ElliotSigmoid.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ElliotSigmoid derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ElliotSigmoid derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">LeakyReLU</code><span class="sig-paren">(</span><em>leakage=0.01</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#LeakyReLU"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>LeakyReLU Activation Functions</strong></p>
+<p>Leaky ReLUs allow a small, non-zero gradient to propagate through the network
+when the unit is not active hence avoiding bottlenecks that can prevent
+learning in the Neural Network.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Rectifier Nonlinearities Improve Neural Network Acoustic Models</dt>
+<dd><ul class="first last simple">
+<li>[Andrew L. Mass, et. al., 2013] <a class="reference external" href="https://goo.gl/k9fhEZ">https://goo.gl/k9fhEZ</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/v48yXT">https://goo.gl/v48yXT</a></li>
+</ul>
+</dd>
+<dt>[2] Empirical Evaluation of Rectified Activations in Convolutional Network</dt>
+<dd><ul class="first last simple">
+<li>[Bing Xu, et. al., 2015] <a class="reference external" href="https://arxiv.org/abs/1505.00853">https://arxiv.org/abs/1505.00853</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1505.00853.pdf">https://arxiv.org/pdf/1505.00853.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>leakage</strong> (<em>float32</em>) – provides for a small non-zero gradient (e.g. 0.01) when the unit is not active.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#LeakyReLU.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>LeakyReLU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the LeakyReLU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#LeakyReLU.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>LeakyReLU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the LeakyReLU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Linear</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#Linear"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Linear Activation Function</strong></p>
+<p>Linear Activation applies identity operation on your data such that the output
+data is proportional to the input data. The function always returns the same
+value that was used as its argument.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Identity Function</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Identity_function">https://en.wikipedia.org/wiki/Identity_function</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Linear.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Linear activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Linear function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Linear.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Linear derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Linear derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ReLU</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#ReLU"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Rectified Linear Units (ReLUs)</strong></p>
+<p>Rectifying neurons are an even better model of biological neurons yielding
+equal or better performance than hyperbolic tangent networks in-spite of
+the hard non-linearity and non-differentiability at zero hence creating
+sparse representations with true zeros which seem remarkably suitable
+for naturally sparse data.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Deep Sparse Rectifier Neural Networks</dt>
+<dd><ul class="first last simple">
+<li>[Xavier Glorot., et. al., 2011] <a class="reference external" href="http://proceedings.mlr.press/v15/glorot11a.html">http://proceedings.mlr.press/v15/glorot11a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf">http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Delving Deep into Rectifiers</dt>
+<dd><ul class="first last simple">
+<li>[Kaiming He, et. al., 2015] <a class="reference external" href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1502.01852.pdf">https://arxiv.org/pdf/1502.01852.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ReLU.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ReLU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ReLU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#ReLU.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>ReLU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ReLU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">SELU</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#SELU"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Scaled Exponential Linear Units (SELUs)</strong></p>
+<p>SELUs are activations which induce self-normalizing properties and are used
+in Self-Normalizing Neural Networks (SNNs). SNNs enable high-level abstract
+representations that tend to automatically converge towards zero mean and
+unit variance.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Self-Normalizing Neural Networks (SELUs)</dt>
+<dd><ul class="first last simple">
+<li>[Klambauer, G., et. al., 2017] <a class="reference external" href="https://arxiv.org/abs/1706.02515">https://arxiv.org/abs/1706.02515</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1706.02515.pdf">https://arxiv.org/pdf/1706.02515.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ALPHA</strong> (<em>float32</em>) – 1.6732632423543772848170429916717</li>
+<li><strong>_LAMBDA</strong> (<em>float32</em>) – 1.6732632423543772848170429916717</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">ALPHA</code><em class="property"> = 1.6732632423543772</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#SELU.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>SELU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SELU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#SELU.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>SELU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SELU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Sigmoid</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#Sigmoid"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Sigmoid Activation Function</strong></p>
+<p>A Sigmoid function is often used as the output activation function for binary
+classification problems as it outputs values that are in the range (0, 1).
+Sigmoid functions are real-valued and differentiable, producing a curve
+that is ‘S-shaped’ and feature one local minimum, and one local maximum</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] The influence of the sigmoid function parameters on the speed of</dt>
+<dd>backpropagation learning <a class="reference external" href="https://goo.gl/MavJjj">https://goo.gl/MavJjj</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Sigmoid.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sigmoid activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Sigmoid function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Sigmoid.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Sigmoid derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Sigmoid derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">SoftPlus</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#SoftPlus"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>SoftPlus Activation Function</strong></p>
+<p>A Softplus function is a smooth approximation to the rectifier linear units
+(ReLUs). Near point 0, it is smooth and differentiable and produces outputs
+in scale of (0, +inf).</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Incorporating Second-Order Functional Knowledge for Better Option Pricing</dt>
+<dd><ul class="first last simple">
+<li>[Charles Dugas, et. al., 2001] <a class="reference external" href="https://goo.gl/z3jeYc">https://goo.gl/z3jeYc</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/z3jeYc">https://goo.gl/z3jeYc</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#SoftPlus.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>SoftPlus activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SoftPlus function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#SoftPlus.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>SoftPlus derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SoftPlus derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Softmax</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#Softmax"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Softmax Activation Function</strong></p>
+<p>The Softmax Activation Function is a generalization of the logistic function
+that squashes the outputs of each unit to real values in the range [0, 1]
+but it also divides each output such that the total sum of the outputs
+is equal to 1.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Softmax Regression</dt>
+<dd>[UFLDL Tutorial] <a class="reference external" href="https://goo.gl/1qgqdg">https://goo.gl/1qgqdg</a></dd>
+<dt>[2] Deep Learning using Linear Support Vector Machines</dt>
+<dd><ul class="first last simple">
+<li>[Yichuan Tang, 2015] <a class="reference external" href="https://arxiv.org/abs/1306.0239">https://arxiv.org/abs/1306.0239</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1306.0239.pdf">https://arxiv.org/pdf/1306.0239.pdf</a></li>
+</ul>
+</dd>
+<dt>[3] Probabilistic Interpretation of Feedforward Network Outputs</dt>
+<dd>[Mario Costa, 1989] [PDF] <a class="reference external" href="https://goo.gl/ZhBY4r">https://goo.gl/ZhBY4r</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Softmax.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Softmax activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Softmax function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#Softmax.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Softmax derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Softmax derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">TanH</code><a class="reference internal" href="../_modules/zeta/dl/activations.html#TanH"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Tangent Hyperbolic (TanH)</strong></p>
+<p>The Tangent Hyperbolic function is a rescaled version of the  sigmoid
+function that produces outputs in scale of [-1, +1]. As an activation
+function it produces an output for every input value hence making
+it a continuous function.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Hyperbolic Functions</dt>
+<dd><ul class="first last simple">
+<li>[Mathematics Education Centre] <a class="reference external" href="https://goo.gl/4Dkkrd">https://goo.gl/4Dkkrd</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/xPSnif">https://goo.gl/xPSnif</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#TanH.activation"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>TanH activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the TanH function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">activation_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/activations.html#TanH.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>TanH derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the TanH derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl.decayers">
+<span id="zeta-dl-decayers-module"></span><h2>zeta.dl.decayers module<a class="headerlink" href="#module-zeta.dl.decayers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.decayers.Decay">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">Decay</code><span class="sig-paren">(</span><em>lrate</em>, <em>decay</em>, <em>epoch</em>, <em>min_lrate</em>, <em>max_lrate</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#Decay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.Decay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.Decay.clip_lrate">
+<code class="descname">clip_lrate</code><a class="headerlink" href="#zeta.dl.decayers.Decay.clip_lrate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.decayers.DecayFunction">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">DecayFunction</code><span class="sig-paren">(</span><em>lrate=0.001</em>, <em>name='inverse-time-decay'</em>, <em>decay=1e-06</em>, <em>epoch=1</em>, <em>min_lrate=0.0</em>, <em>max_lrate=inf</em>, <em>step_size=10.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#DecayFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.DecayFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.DecayFunction.name">
+<code class="descname">name</code><a class="headerlink" href="#zeta.dl.decayers.DecayFunction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.decayers.ExponetialDecay">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">ExponetialDecay</code><span class="sig-paren">(</span><em>lrate</em>, <em>decay</em>, <em>epoch</em>, <em>min_lrate</em>, <em>max_lrate</em>, <em>step_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#ExponetialDecay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.ExponetialDecay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.decayers.Decay" title="zeta.dl.decayers.Decay"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.decayers.Decay</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.ExponetialDecay.decay_name">
+<code class="descname">decay_name</code><a class="headerlink" href="#zeta.dl.decayers.ExponetialDecay.decay_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.decayers.ExponetialDecay.decompose">
+<code class="descname">decompose</code><a class="headerlink" href="#zeta.dl.decayers.ExponetialDecay.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.decayers.InverseTimeDecay">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">InverseTimeDecay</code><span class="sig-paren">(</span><em>lrate</em>, <em>decay</em>, <em>epoch</em>, <em>min_lrate</em>, <em>max_lrate</em>, <em>step_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#InverseTimeDecay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.InverseTimeDecay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.decayers.Decay" title="zeta.dl.decayers.Decay"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.decayers.Decay</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.InverseTimeDecay.decay_name">
+<code class="descname">decay_name</code><a class="headerlink" href="#zeta.dl.decayers.InverseTimeDecay.decay_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.decayers.InverseTimeDecay.decompose">
+<code class="descname">decompose</code><a class="headerlink" href="#zeta.dl.decayers.InverseTimeDecay.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.decayers.NaturalExponentialDecay">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">NaturalExponentialDecay</code><span class="sig-paren">(</span><em>lrate</em>, <em>decay</em>, <em>epoch</em>, <em>min_lrate</em>, <em>max_lrate</em>, <em>step_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#NaturalExponentialDecay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.NaturalExponentialDecay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.decayers.Decay" title="zeta.dl.decayers.Decay"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.decayers.Decay</span></code></a></p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.NaturalExponentialDecay.decay_name">
+<code class="descname">decay_name</code><a class="headerlink" href="#zeta.dl.decayers.NaturalExponentialDecay.decay_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.decayers.NaturalExponentialDecay.decompose">
+<code class="descname">decompose</code><a class="headerlink" href="#zeta.dl.decayers.NaturalExponentialDecay.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.decayers.StepDecay">
+<em class="property">class </em><code class="descclassname">zeta.dl.decayers.</code><code class="descname">StepDecay</code><span class="sig-paren">(</span><em>lrate</em>, <em>decay</em>, <em>epoch</em>, <em>min_lrate</em>, <em>max_lrate</em>, <em>step_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/decayers.html#StepDecay"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.decayers.StepDecay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#zeta.dl.decayers.Decay" title="zeta.dl.decayers.Decay"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.decayers.Decay</span></code></a></p>
+<p>Decay the learning rate every after step_size steps</p>
+<dl class="attribute">
+<dt id="zeta.dl.decayers.StepDecay.decay_name">
+<code class="descname">decay_name</code><a class="headerlink" href="#zeta.dl.decayers.StepDecay.decay_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.decayers.StepDecay.decompose">
+<code class="descname">decompose</code><a class="headerlink" href="#zeta.dl.decayers.StepDecay.decompose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="zeta-dl-initializers-module">
+<h2>zeta.dl.initializers module<a class="headerlink" href="#zeta-dl-initializers-module" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">GlorotNormal</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#GlorotNormal"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>Glorot Normal (GlorotNormal)</strong></p>
+<p>GlorotNormal more famously known as the Xavier initialization is based on the
+effort to try mantain the same variance of the gradients of the weights for
+all the layers. Glorot normal is an implementation based on
+Gaussian distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Understanding the difficulty of training deep feedforward neural networks</dt>
+<dd><ul class="first last simple">
+<li>[Xavier Glorot, 2010] <a class="reference external" href="http://proceedings.mlr.press/v9/glorot10a.html">http://proceedings.mlr.press/v9/glorot10a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Initialization Of Deep Feedfoward Networks</dt>
+<dd>[DeepGrid Article - Jefkine Kafunah] <a class="reference external" href="https://goo.gl/E2XrGe">https://goo.gl/E2XrGe</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#GlorotNormal.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">GlorotUniform</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#GlorotUniform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>Glorot Uniform (GlorotUniform)</strong></p>
+<p>GlorotUniform more famously known as the Xavier initialization is based on the
+effort to try mantain the same variance of the gradients of the weights for
+all the layers. Glorot uniform is an implementation based on
+Uniform distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Understanding the difficulty of training deep feedforward neural networks</dt>
+<dd><ul class="first last simple">
+<li>[Xavier Glorot, 2010] <a class="reference external" href="http://proceedings.mlr.press/v9/glorot10a.html">http://proceedings.mlr.press/v9/glorot10a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf">http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Initialization Of Deep Feedfoward Networks</dt>
+<dd>[DeepGrid Article - Jefkine Kafunah] <a class="reference external" href="https://goo.gl/E2XrGe">https://goo.gl/E2XrGe</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#GlorotUniform.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">HeNormal</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#HeNormal"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>He Normal (HeNormal)</strong></p>
+<p>HeNormal is a robust initialization method that particularly considers the
+rectifier nonlinearities. He normal is an implementation based on
+Gaussian distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</dt>
+<dd><ul class="first last simple">
+<li>[Kaiming He, 2015] <a class="reference external" href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1502.01852.pdf">https://arxiv.org/pdf/1502.01852.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Initialization Of Deep Networks Case of Rectifiers</dt>
+<dd>[DeepGrid Article - Jefkine Kafunah] <a class="reference external" href="https://goo.gl/TBNw5t">https://goo.gl/TBNw5t</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#HeNormal.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">HeUniform</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#HeUniform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>He Normal (HeNormal)</strong></p>
+<p>HeNormal is a robust initialization method that particularly considers the
+rectifier nonlinearities. He uniform is an implementation based on
+Uniform distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</dt>
+<dd><ul class="first last simple">
+<li>[Kaiming He, 2015] <a class="reference external" href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1502.01852.pdf">https://arxiv.org/pdf/1502.01852.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Initialization Of Deep Networks Case of Rectifiers</dt>
+<dd>[DeepGrid Article - Jefkine Kafunah] <a class="reference external" href="https://goo.gl/TBNw5t">https://goo.gl/TBNw5t</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#HeUniform.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">InitializeWeights</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#InitializeWeights"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt>
+<code class="descname">initialize_weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#InitializeWeights.initialize_weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">LeCunNormal</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#LeCunNormal"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>LeCun Normal (LeCunNormal)</strong></p>
+<p>Weights should be randomly chosen but in such a way that the sigmoid is
+primarily activated in its linear region. LeCun uniform is the
+implementation based on Gaussian distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Efficient Backprop</dt>
+<dd>[LeCun, 1998][PDF] <a class="reference external" href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#LeCunNormal.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">LeCunUniform</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#LeCunUniform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>LeCun Uniform (LeCunUniform)</strong></p>
+<p>Weights should be randomly chosen but in such a way that the sigmoid is
+primarily activated in its linear region. LeCun uniform is an
+implementation based on Uniform distribution</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Efficient Backprop</dt>
+<dd>[LeCun, 1998][PDF] <a class="reference external" href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#LeCunUniform.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">One</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#One"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>One (One)</strong></p>
+<p>One is an implementation of weight initialization that returns all ones</p>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#One.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">RandomNormal</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#RandomNormal"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>Random Normal (RandomNormal)</strong></p>
+<p>Random uniform is an implementation of weight initialization based on
+Gaussian distribution</p>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#RandomNormal.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">RandomUniform</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#RandomUniform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>Random Uniform (RandomUniform)</strong></p>
+<p>Random uniform is an implementation of weight initialization based on
+Uniform distribution</p>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#RandomUniform.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">WeightInitializer</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#WeightInitializer"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt>
+<code class="descname">compute_fans</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#WeightInitializer.compute_fans"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.initializers.</code><code class="descname">Zero</code><a class="reference internal" href="../_modules/zeta/dl/initializers.html#Zero"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer" title="zeta.dl.initializers.WeightInitializer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.initializers.WeightInitializer</span></code></a></p>
+<p><strong>Zero (Zero)</strong></p>
+<p>Zero is an implementation of weight initialization that returns all zeros</p>
+<dl class="attribute">
+<dt>
+<code class="descname">init_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">weights</code><span class="sig-paren">(</span><em>shape</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/initializers.html#Zero.weights"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="zeta-dl-objectives-module">
+<h2>zeta.dl.objectives module<a class="headerlink" href="#zeta-dl-objectives-module" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">BinaryCrossEntropy</code><a class="reference internal" href="../_modules/zeta/dl/objectives.html#BinaryCrossEntropy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/objectives.html#zeta.dl.objectives.Objective" title="zeta.dl.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.objectives.Objective</span></code></a></p>
+<p><strong>Binary Cross Entropy</strong></p>
+<p>Binary CrossEntropy measures the performance of a classification model whose
+output is a probability value between 0 &amp; 1. ‘Binary’ is meant for discrete
+classification tasks in which the classes are independent and not mutually
+exclusive. Targets here could be either 0 or 1 scalar</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Cross Entropy</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.accuracy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Calculates the BinaryCrossEntropy Accuracy Score given prediction and targets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+<li><strong>threshold</strong> (<em>numpy.float32</em>) – the threshold value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Accuracy Score</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.float32</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the BinaryCrossEntropy Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#BinaryCrossEntropy.loss"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the BinaryCrossEntropy Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of BinaryCrossEntropy Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">objective_name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">CategoricalCrossEntropy</code><a class="reference internal" href="../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/objectives.html#zeta.dl.objectives.Objective" title="zeta.dl.objectives.Objective"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.objectives.Objective</span></code></a></p>
+<p><strong>Categorical Cross Entropy</strong></p>
+<p>Categorical Cross Entropy measures the performance of a classification model
+whose output is a probability value between 0 and 1. ‘Categorical’ is  meant
+for discrete classification tasks in which the classes are mutually exclusive.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Cross Entropy</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">https://en.wikipedia.org/wiki/Cross_entropy</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.accuracy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Calculates the CategoricalCrossEntropy Accuracy Score given prediction and targets</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Accuracy Score</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.float32</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the CategoricalCrossEntropy Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#CategoricalCrossEntropy.loss"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the CategoricalCrossEntropy Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of CategoricalCrossEntropy Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">objective_name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">HellingerDistance</code><a class="reference internal" href="../_modules/zeta/dl/objectives.html#HellingerDistance"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Hellinger Distance</strong></p>
+<p>Hellinger Distance is used to quantify the similarity between two probability
+distributions.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Hellinger Distance</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Hellinger_distance">https://en.wikipedia.org/wiki/Hellinger_distance</a></dd>
+</dl>
+<dl class="attribute">
+<dt>
+<code class="descname">SQRT_2</code><em class="property"> = 1.4142135623730951</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#HellingerDistance.accuracy"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#HellingerDistance.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the HellingerDistance Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of HellingerDistance Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#HellingerDistance.loss"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the HellingerDistance Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of HellingerDistance Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">objective_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">sqrt_difference</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#HellingerDistance.sqrt_difference"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">MeanSquaredError</code><a class="reference internal" href="../_modules/zeta/dl/objectives.html#MeanSquaredError"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Mean Squared error (MSE)</strong></p>
+<p>MSE measures the average squared difference between the predictions and the
+targets. The closer the predictions are to the targets the more efficient
+the estimator.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Mean Squared error</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_error">https://en.wikipedia.org/wiki/Mean_squared_error</a></dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">accuracy</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>threshold=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#MeanSquaredError.accuracy"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#MeanSquaredError.derivative"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the MeanSquaredError Derivative to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of MeanSquaredError Derivative to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">loss</code><span class="sig-paren">(</span><em>predictions</em>, <em>targets</em>, <em>np_type</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#MeanSquaredError.loss"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Applies the MeanSquaredError Loss to prediction and targets provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictions</strong> (<em>numpy.array</em>) – the predictions numpy array</li>
+<li><strong>targets</strong> (<em>numpy.array</em>) – the targets numpy array</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output of MeanSquaredError Loss to prediction and targets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.array</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">objective_name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">Objective</code><a class="reference internal" href="../_modules/zeta/dl/objectives.html#Objective"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt>
+<code class="descname">clip</code><span class="sig-paren">(</span><em>predictions</em>, <em>epsilon=1e-15</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#Objective.clip"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">objective_name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.objectives.</code><code class="descname">ObjectiveFunction</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/objectives.html#ObjectiveFunction"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt>
+<code class="descname">name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="zeta-dl-optimizers-module">
+<h2>zeta.dl.optimizers module<a class="headerlink" href="#zeta-dl-optimizers-module" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">AdaGrad</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#AdaGrad"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Adaptive Gradient Algorithm (AdaGrad)</strong></p>
+<p>AdaGrad is an optimization method that allows different step sizes for
+different features. It increases the influence of rare but informative
+features</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adaptive Subgradient Methods for Online Learning and Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[John Duchi et. al., 2011] <a class="reference external" href="http://jmlr.org/papers/v12/duchi11a.html">http://jmlr.org/papers/v12/duchi11a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf">http://www.jmlr.org/papers/volume12/duchi11a/duchi11a.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#AdaGrad.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adadelta</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adadelta"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>An Adaptive Learning Rate Method (Adadelta)</strong></p>
+<p>Adadelta is an extension of Adagrad that seeks to avoid setting the learing
+rate to an aggresively monotonically decreasing rate. This is achieved via
+a dynamic learning rate i.e a diffrent learning rate is computed for each
+training sample</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] ADADELTA: An Adaptive Learning Rate Method</dt>
+<dd><ul class="first last simple">
+<li>[Matthew D. Zeiler, 2012] <a class="reference external" href="https://arxiv.org/abs/1212.5701">https://arxiv.org/abs/1212.5701</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1212.5701.pdf">https://arxiv.org/pdf/1212.5701.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adadelta.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adam</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adam"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Adaptive Moment Estimation (Adam)</strong></p>
+<p>Adam computes adaptive learning rates for by updating each of the training
+samples while storing an exponentially decaying average of past squared
+gradients. Adam also keeps an exponentially decaying average of past
+gradients.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adam: A Method for Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[Diederik P. Kingma et. al., 2014] <a class="reference external" href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adam.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Adamax</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adamax"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Admax</strong></p>
+<p>AdaMax, a variant of Adam based on the infinity norm. In Adam, the update rule
+for individual weights is to scale their gradients inversely proportional to a
+(scaled) L2 norm of their individual current and past gradients. For Adamax we
+generalize the L2 norm based update rule to a Lp norm based update rule. These
+variants are numerically unstable for large p. but have special cases where as
+p tens to infinity, a simple and stable algorithm emerges.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Adam: A Method for Stochastic Optimization</dt>
+<dd><ul class="first last simple">
+<li>[Diederik P. Kingma et. al., 2014] <a class="reference external" href="https://arxiv.org/abs/1412.6980">https://arxiv.org/abs/1412.6980</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Adamax.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">GD</code><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#GD"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Gradient Descent (GD)</strong></p>
+<p>GD optimizes parameters theta of an objective function J(theta) by updating
+all of the training samples in the dataset. The update is perfomed in the
+opposite direction of the gradient of the objective function d/d_theta
+J(theta) - with respect to the parameters (theta). The learning rate
+eta helps determine the size of teh steps we take to the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">NesterovAcceleratedGradient</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#NesterovAcceleratedGradient"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Nesterov Accelerated Gradient (NAG)</strong></p>
+<p>NAG is an improvement in SGDMomentum where the the previous parameter values
+are smoothed and a gradient descent step is taken from this smoothed value.
+This enables a more intelligent way of arriving at the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] A method for unconstrained convex minimization problem with the rate of convergence</dt>
+<dd>[Nesterov, Y. 1983][PDF] <a class="reference external" href="https://goo.gl/X8313t">https://goo.gl/X8313t</a></dd>
+<dt>[3] Nesterov’s Accelerated Gradient and Momentum as approximations to Regularised Update Descent</dt>
+<dd><ul class="first last simple">
+<li>[Aleksandar Botev, 2016] <a class="reference external" href="https://arxiv.org/abs/1607.01981">https://arxiv.org/abs/1607.01981</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1607.01981.pdf">https://arxiv.org/pdf/1607.01981.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#NesterovAcceleratedGradient.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">OptimizationFunction</code><span class="sig-paren">(</span><em>optimizer_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#OptimizationFunction"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt>
+<code class="descname">name</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">Optimizer</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#Optimizer"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt>
+<code class="descname">get_learning_rate</code></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">RMSprop</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#RMSprop"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Root Mean Squared Propagation (RMSprop)</strong></p>
+<p>RMSprop utilizes the magnitude of recent gradients to normalize the gradients.
+A moving average over the root mean squared (RMS) gradients is kept and then
+divided by the current gradient. Parameters are recomended to be set as
+follows rho = 0.9 and eta (learning rate) = 0.001</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Lecture 6.5 - rmsprop, COURSERA: Neural Networks for Machine Learning</dt>
+<dd>[Tieleman, T. and Hinton, G. 2012][PDF] <a class="reference external" href="https://goo.gl/Dhkvpk">https://goo.gl/Dhkvpk</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#RMSprop.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">SGD</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#SGD"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Stochastic Gradient Descent (SGD)</strong></p>
+<p>SGD optimizes parameters theta of an objective function J(theta) by updating
+each of the training samples inputs(i) and targets(i) for all samples in the
+dataset. The update is perfomed in the opposite direction of the gradient of
+the objective function d/d_theta J(theta) - with respect to the parameters
+(theta). The learning rate eta helps determine the size of the steps we
+take to the minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Large-Scale Machine Learning with Stochastic Gradient Descent</dt>
+<dd>[Leon Botou, 2011][PDF] <a class="reference external" href="http://leon.bottou.org/publications/pdf/compstat-2010.pdf">http://leon.bottou.org/publications/pdf/compstat-2010.pdf</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#SGD.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">zeta.dl.optimizers.</code><code class="descname">SGDMomentum</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#SGDMomentum"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Bases: <a class="reference internal" href="../writeups/api/optimizers.html#zeta.dl.optimizers.Optimizer" title="zeta.dl.optimizers.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">zeta.dl.optimizers.Optimizer</span></code></a></p>
+<p><strong>Stochastic Gradient Descent with Momentum (SGDMomentum)</strong></p>
+<p>The objective function regularly forms places on the contour map in which
+the surface curves more steeply than others (ravines). Standard SGD will
+tend to oscillate across the narrow ravine since the negative gradient
+will point down one of the steep sides rather than along the ravine
+towards the optimum. Momentum hepls to push the objective more
+quickly along the shallow ravine towards the global minima</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] An overview of gradient descent optimization algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Sebastien Ruder, 2016] <a class="reference external" href="https://arxiv.org/abs/1609.04747">https://arxiv.org/abs/1609.04747</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1609.04747.pdf">https://arxiv.org/pdf/1609.04747.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] On the Momentum Term in Gradient Descent Learning Algorithms</dt>
+<dd><ul class="first last simple">
+<li>[Ning Qian, 199] <a class="reference external" href="https://goo.gl/7fhr14">https://goo.gl/7fhr14</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/91HtDt">https://goo.gl/91HtDt</a></li>
+</ul>
+</dd>
+<dt>[3] Two problems with backpropagation and other steepest-descent learning procedures for networks.</dt>
+<dd>[Sutton, R. S., 1986][PDF] <a class="reference external" href="https://goo.gl/M3VFM1">https://goo.gl/M3VFM1</a></dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>kwargs</strong> – Arbitrary keyword arguments.</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt>
+<code class="descname">optimization_name</code></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">update</code><span class="sig-paren">(</span><em>weights</em>, <em>grads</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#SGDMomentum.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt>
+<code class="descclassname">zeta.dl.optimizers.</code><code class="descname">register_opt</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/zeta/dl/optimizers.html#register_opt"><span class="viewcode-link">[source]</span></a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-zeta.dl">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-zeta.dl" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

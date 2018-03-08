@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zeta.utils.data &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>zeta.utils.data</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for zeta.utils.data</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1">#-----------------------------------------------------------------------------#</span>
+<span class="c1">#                       DATA UTILITY FUNCTIONS                                #</span>
+<span class="c1">#-----------------------------------------------------------------------------#</span>
+
+<div class="viewcode-block" id="clip_gradients"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.clip_gradients">[docs]</a><span class="k">def</span> <span class="nf">clip_gradients</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="n">g_min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">g_max</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">grad</span><span class="p">,</span> <span class="n">g_min</span><span class="p">,</span> <span class="n">g_max</span><span class="p">,</span> <span class="n">out</span> <span class="o">=</span> <span class="n">grad</span><span class="p">)</span>
+
+<div class="viewcode-block" id="accuracy_score"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.accuracy_score">[docs]</a><span class="k">def</span> <span class="nf">accuracy_score</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predictions</span> <span class="o">==</span> <span class="n">targets</span><span class="p">)</span>
+
+<div class="viewcode-block" id="one_hot"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.one_hot">[docs]</a><span class="k">def</span> <span class="nf">one_hot</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">num_classes</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">num_classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">num_classes</span> <span class="k">else</span> <span class="n">num_classes</span>
+    <span class="n">one_hot_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">])</span>
+    <span class="n">one_hot_labels</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">),</span> <span class="n">labels</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span></div>
+    <span class="k">return</span> <span class="n">one_hot_labels</span>
+
+<div class="viewcode-block" id="unhot"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.unhot">[docs]</a><span class="k">def</span> <span class="nf">unhot</span><span class="p">(</span><span class="n">one_hot</span><span class="p">,</span> <span class="n">unhot_axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">one_hot</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">unhot_axis</span><span class="p">)</span>
+
+<div class="viewcode-block" id="shuffle_data"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.shuffle_data">[docs]</a><span class="k">def</span> <span class="nf">shuffle_data</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">input_label</span><span class="p">,</span> <span class="n">random_seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">input_label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;input data and label sizes do not match!&#39;</span>
+    <span class="k">if</span> <span class="n">random_seed</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">input_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">input_data</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">input_label</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+<div class="viewcode-block" id="train_test_split"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.train_test_split">[docs]</a><span class="k">def</span> <span class="nf">train_test_split</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">random_seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="n">samples</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">shuffle_data</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">)</span>
+    <span class="n">split_ratio</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">test_size</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+    <span class="n">samples_train</span><span class="p">,</span> <span class="n">samples_test</span> <span class="o">=</span> <span class="n">samples</span><span class="p">[:</span><span class="n">split_ratio</span><span class="p">],</span> <span class="n">samples</span><span class="p">[</span><span class="n">split_ratio</span><span class="p">:]</span>
+    <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[:</span><span class="n">split_ratio</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">split_ratio</span><span class="p">:]</span></div>
+    <span class="k">return</span> <span class="n">samples_train</span><span class="p">,</span> <span class="n">samples_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span>
+
+<div class="viewcode-block" id="minibatches"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.minibatches">[docs]</a><span class="k">def</span> <span class="nf">minibatches</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">input_label</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">input_label</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;input data and label sizes do not match!&#39;</span>
+    <span class="n">minibatches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">input_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">input_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">mini_batch</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[</span><span class="n">idx</span><span class="p">:</span><span class="n">idx</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">minibatches</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">input_data</span><span class="p">[</span><span class="n">mini_batch</span><span class="p">],</span> <span class="n">input_label</span><span class="p">[</span><span class="n">mini_batch</span><span class="p">]))</span></div>
+    <span class="k">return</span> <span class="n">minibatches</span>
+
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">l2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">l2</span><span class="p">[</span><span class="n">l2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span></div>
+    <span class="k">return</span> <span class="n">input_data</span> <span class="o">/</span> <span class="n">l2</span>
+
+<div class="viewcode-block" id="min_max"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.min_max">[docs]</a><span class="k">def</span> <span class="nf">min_max</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">min_input</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">max_input</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">input_data</span> <span class="o">-</span> <span class="n">min_input</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">max_input</span> <span class="o">-</span> <span class="n">min_input</span><span class="p">)</span>
+
+<div class="viewcode-block" id="z_score"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.z_score">[docs]</a><span class="k">def</span> <span class="nf">z_score</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="n">input_mean</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">input_std</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="p">(</span><span class="n">input_data</span> <span class="o">-</span> <span class="n">input_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">input_std</span>
+
+<div class="viewcode-block" id="print_results"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.print_results">[docs]</a><span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Targeted  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">test_labels</span><span class="p">[:</span><span class="n">num_samples</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predictions</span><span class="p">[:</span><span class="n">num_samples</span><span class="p">]))</span></div>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Model Accuracy : </span><span class="si">{:2.2f}</span><span class="s1">% </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+    
+<div class="viewcode-block" id="print_seq_samples"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.print_seq_samples">[docs]</a><span class="k">def</span> <span class="nf">print_seq_samples</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_label</span><span class="p">,</span> <span class="n">unhot_axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sample_num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample Sequence : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unhot</span><span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="n">sample_num</span><span class="p">])))</span></div>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Next Entry      : </span><span class="si">{}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unhot</span><span class="p">(</span><span class="n">train_label</span><span class="p">[</span><span class="n">sample_num</span><span class="p">],</span> <span class="n">unhot_axis</span><span class="p">)))</span>
+    
+<div class="viewcode-block" id="print_seq_results"><a class="viewcode-back" href="../../../source/zeta.utils.html#zeta.utils.data.print_seq_results">[docs]</a><span class="k">def</span> <span class="nf">print_seq_results</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">test_label</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">unhot_axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">unhot</span><span class="p">(</span><span class="n">predicted</span><span class="p">,</span> <span class="n">unhot_axis</span><span class="p">)</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">unhot</span><span class="p">(</span><span class="n">test_label</span><span class="p">,</span> <span class="n">unhot_axis</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">interval</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sequence  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unhot</span><span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Targeted  : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted : </span><span class="si">{}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        </div>
+    <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Model Accuracy : </span><span class="si">{:2.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

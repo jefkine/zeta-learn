@@ -1,0 +1,537 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zeta.dl.objectives &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>zeta.dl.objectives</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for zeta.dl.objectives</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="Objective"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.Objective">[docs]</a><span class="k">class</span> <span class="nc">Objective</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Objective.clip"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.Objective.clip">[docs]</a>    <span class="k">def</span> <span class="nf">clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mi">1</span><span class="n">e</span><span class="o">-</span><span class="mi">15</span><span class="p">):</span>
+        <span class="n">clipped_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+        <span class="n">clipped_divisor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">predictions</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">predictions</span><span class="p">),</span> <span class="n">epsilon</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">clipped_predictions</span><span class="p">,</span> <span class="n">clipped_divisor</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">objective_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="MeanSquaredError"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.MeanSquaredError">[docs]</a><span class="k">class</span> <span class="nc">MeanSquaredError</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Mean Squared error (MSE)**</span>
+
+<span class="sd">    MSE measures the average squared difference between the predictions and the</span>
+<span class="sd">    targets. The closer the predictions are to the targets the more efficient</span>
+<span class="sd">    the estimator.</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Mean Squared error</span>
+<span class="sd">            [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MeanSquaredError.loss"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.MeanSquaredError.loss">[docs]</a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the MeanSquaredError Loss to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of MeanSquaredError Loss to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+        <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">predictions</span> <span class="o">-</span> <span class="n">targets</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="MeanSquaredError.derivative"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.MeanSquaredError.derivative">[docs]</a>    <span class="k">def</span> <span class="nf">derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the MeanSquaredError Derivative to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of MeanSquaredError Derivative to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+        <span class="k">return</span> <span class="n">predictions</span> <span class="o">-</span> <span class="n">targets</span>
+
+<div class="viewcode-block" id="MeanSquaredError.accuracy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.MeanSquaredError.accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">objective_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="HellingerDistance"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.HellingerDistance">[docs]</a><span class="k">class</span> <span class="nc">HellingerDistance</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Hellinger Distance**</span>
+
+<span class="sd">    Hellinger Distance is used to quantify the similarity between two probability</span>
+<span class="sd">    distributions.</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Hellinger Distance</span>
+<span class="sd">            [Wikipedia Article] https://en.wikipedia.org/wiki/Hellinger_distance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SQRT_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HellingerDistance.sqrt_difference"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.HellingerDistance.sqrt_difference">[docs]</a>    <span class="k">def</span> <span class="nf">sqrt_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HellingerDistance.loss"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.HellingerDistance.loss">[docs]</a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the HellingerDistance Loss to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of HellingerDistance Loss to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">root_difference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqrt_difference</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">root_difference</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">HellingerDistance</span><span class="o">.</span><span class="n">SQRT_2</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HellingerDistance.derivative"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.HellingerDistance.derivative">[docs]</a>    <span class="k">def</span> <span class="nf">derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the HellingerDistance Derivative to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of HellingerDistance Derivative to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">root_difference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sqrt_difference</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">root_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">HellingerDistance</span><span class="o">.</span><span class="n">SQRT_2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+
+<div class="viewcode-block" id="HellingerDistance.accuracy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.HellingerDistance.accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">objective_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="BinaryCrossEntropy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.BinaryCrossEntropy">[docs]</a><span class="k">class</span> <span class="nc">BinaryCrossEntropy</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Binary Cross Entropy**</span>
+
+<span class="sd">    Binary CrossEntropy measures the performance of a classification model whose</span>
+<span class="sd">    output is a probability value between 0 &amp; 1. &#39;Binary&#39; is meant for discrete</span>
+<span class="sd">    classification tasks in which the classes are independent and not mutually</span>
+<span class="sd">    exclusive. Targets here could be either 0 or 1 scalar</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Cross Entropy</span>
+<span class="sd">            [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="BinaryCrossEntropy.loss"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.BinaryCrossEntropy.loss">[docs]</a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the BinaryCrossEntropy Loss to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of BinaryCrossEntropy Loss to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">clipped_predictions</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BinaryCrossEntropy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">targets</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">clipped_predictions</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">clipped_predictions</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="BinaryCrossEntropy.derivative"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.BinaryCrossEntropy.derivative">[docs]</a>    <span class="k">def</span> <span class="nf">derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the BinaryCrossEntropy Derivative to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of BinaryCrossEntropy Derivative to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">clipped_predictions</span><span class="p">,</span> <span class="n">clipped_divisor</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">BinaryCrossEntropy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="p">(</span><span class="n">clipped_predictions</span> <span class="o">-</span> <span class="n">targets</span><span class="p">)</span> <span class="o">/</span> <span class="n">clipped_divisor</span>
+
+<div class="viewcode-block" id="BinaryCrossEntropy.accuracy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.BinaryCrossEntropy.accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the BinaryCrossEntropy Accuracy Score given prediction and targets</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+<span class="sd">            threshold   (numpy.float32): the threshold value</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.float32: the output of BinaryCrossEntropy Accuracy Score</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">((</span><span class="n">predictions</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span> <span class="o">==</span> <span class="n">targets</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">targets</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">objective_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="CategoricalCrossEntropy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.CategoricalCrossEntropy">[docs]</a><span class="k">class</span> <span class="nc">CategoricalCrossEntropy</span><span class="p">(</span><span class="n">Objective</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Categorical Cross Entropy**</span>
+
+<span class="sd">    Categorical Cross Entropy measures the performance of a classification model</span>
+<span class="sd">    whose output is a probability value between 0 and 1. &#39;Categorical&#39; is  meant</span>
+<span class="sd">    for discrete classification tasks in which the classes are mutually exclusive.</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Cross Entropy</span>
+<span class="sd">            [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="CategoricalCrossEntropy.loss"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.CategoricalCrossEntropy.loss">[docs]</a>    <span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the CategoricalCrossEntropy Loss to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of CategoricalCrossEntropy Loss to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">clipped_predictions</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CategoricalCrossEntropy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">targets</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">clipped_predictions</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+
+<div class="viewcode-block" id="CategoricalCrossEntropy.derivative"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.CategoricalCrossEntropy.derivative">[docs]</a>    <span class="k">def</span> <span class="nf">derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the CategoricalCrossEntropy Derivative to prediction and targets provided</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.array: the output of CategoricalCrossEntropy Derivative to prediction and targets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">clipped_predictions</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CategoricalCrossEntropy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">clipped_predictions</span> <span class="o">-</span> <span class="n">targets</span>
+
+<div class="viewcode-block" id="CategoricalCrossEntropy.accuracy"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.CategoricalCrossEntropy.accuracy">[docs]</a>    <span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the CategoricalCrossEntropy Accuracy Score given prediction and targets</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            predictions (numpy.array): the predictions numpy array</span>
+<span class="sd">            targets     (numpy.array): the targets numpy array</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.float32: the output of CategoricalCrossEntropy Accuracy Score</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+</div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">objective_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="ObjectiveFunction"><a class="viewcode-back" href="../../../writeups/api/objectives.html#zeta.dl.objectives.ObjectiveFunction">[docs]</a><span class="k">class</span> <span class="nc">ObjectiveFunction</span><span class="p">:</span>
+
+    <span class="n">_functions</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;mse&#39;</span><span class="p">:</span> <span class="n">MeanSquaredError</span><span class="p">,</span>
+        <span class="s1">&#39;mean-squared-error&#39;</span><span class="p">:</span> <span class="n">MeanSquaredError</span><span class="p">,</span>
+        <span class="s1">&#39;hellinger-distance&#39;</span><span class="p">:</span> <span class="n">HellingerDistance</span><span class="p">,</span>
+        <span class="s1">&#39;binary-cross-entropy&#39;</span><span class="p">:</span> <span class="n">BinaryCrossEntropy</span><span class="p">,</span>
+        <span class="s1">&#39;categorical-cross-entropy&#39;</span><span class="p">:</span> <span class="n">CategoricalCrossEntropy</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Objective function must be either one of the following: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objective_func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_functions</span><span class="p">[</span><span class="n">name</span><span class="p">]()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective_func</span><span class="o">.</span><span class="n">objective_name</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective_func</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">np_type</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective_func</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_accuracy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">objective_func</span><span class="o">.</span><span class="n">accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

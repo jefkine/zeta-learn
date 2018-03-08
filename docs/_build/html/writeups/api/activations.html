@@ -1,0 +1,971 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Activation Functions &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Objective Functions" href="objectives.html" />
+    <link rel="prev" title="Convolutional Neural Networks (CNNs)" href="../tutorials/cnn.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Activation Functions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/writeups/api/activations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="activation-functions">
+<h1>Activation Functions<a class="headerlink" href="#activation-functions" title="Permalink to this headline">¶</a></h1>
+<p>The activation functions introduce the required non-linearities in the neural networks.
+The non linear transformation is implemented over the input signal and it basically
+decides whether a neuron should be activated or not.</p>
+<div class="section" id="featured-activations">
+<h2>Featured Activations<a class="headerlink" href="#featured-activations" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.activations.ELU" title="zeta.dl.activations.ELU"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ELU</span></code></a>([alpha])</td>
+<td><strong>Exponential Linear Units (ELUs)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.activations.SELU" title="zeta.dl.activations.SELU"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SELU</span></code></a></td>
+<td><strong>Scaled Exponential Linear Units (SELUs)</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.activations.ReLU" title="zeta.dl.activations.ReLU"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReLU</span></code></a></td>
+<td><strong>Rectified Linear Units (ReLUs)</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.activations.TanH" title="zeta.dl.activations.TanH"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TanH</span></code></a></td>
+<td><strong>Tangent Hyperbolic (TanH)</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.activations.Linear" title="zeta.dl.activations.Linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code></a></td>
+<td><strong>Linear Activation Function</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.activations.Sigmoid" title="zeta.dl.activations.Sigmoid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sigmoid</span></code></a></td>
+<td><strong>Sigmoid Activation Function</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.activations.Softmax" title="zeta.dl.activations.Softmax"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Softmax</span></code></a></td>
+<td><strong>Softmax Activation Function</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.activations.SoftPlus" title="zeta.dl.activations.SoftPlus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SoftPlus</span></code></a></td>
+<td><strong>SoftPlus Activation Function</strong></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#zeta.dl.activations.LeakyReLU" title="zeta.dl.activations.LeakyReLU"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LeakyReLU</span></code></a>([leakage])</td>
+<td><strong>LeakyReLU Activation Functions</strong></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#zeta.dl.activations.ElliotSigmoid" title="zeta.dl.activations.ElliotSigmoid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ElliotSigmoid</span></code></a></td>
+<td><strong>Elliot Sigmoid Activation Function</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-zeta.dl.activations">
+<span id="function-descriptions"></span><h2>Function Descriptions<a class="headerlink" href="#module-zeta.dl.activations" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="zeta.dl.activations.ActivationFunction">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ActivationFunction</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ActivationFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ActivationFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="zeta.dl.activations.ActivationFunction.name">
+<code class="descname">name</code><a class="headerlink" href="#zeta.dl.activations.ActivationFunction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.ELU">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ELU</code><span class="sig-paren">(</span><em>alpha=0.1</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ELU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ELU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Exponential Linear Units (ELUs)</strong></p>
+<p>ELUs are exponential functions which have negative values that allow them
+to push mean unit activations closer to zero like batch normalization but
+with lower computational complexity.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)</dt>
+<dd><ul class="first last simple">
+<li>[Djork-Arné Clevert et. al., 2016] <a class="reference external" href="https://arxiv.org/abs/1511.07289">https://arxiv.org/abs/1511.07289</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1511.07289.pdf">https://arxiv.org/pdf/1511.07289.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alpha</strong> (<em>float32</em>) – controls the value to which an ELU saturates for negative net inputs</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zeta.dl.activations.ELU.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ELU.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ELU.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>ELU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ELU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.ELU.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.ELU.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.ELU.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ELU.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ELU.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>ELU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ELU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.ElliotSigmoid">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ElliotSigmoid</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ElliotSigmoid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ElliotSigmoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Elliot Sigmoid Activation Function</strong></p>
+<p>Elliot Sigmoid squashes each element of the input from the interval [-inf, inf]
+to the interval [-1, 1] with an ‘S-shaped’ function. The fucntion is fast to
+calculate on simple computing hardware as it does not require any
+exponential or trigonometric functions</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] A better Activation Function for Artificial Neural Networks</dt>
+<dd><ul class="first last simple">
+<li>[David L. Elliott, et. al., 1993] <a class="reference external" href="https://goo.gl/qqBdne">https://goo.gl/qqBdne</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/fPLPcr">https://goo.gl/fPLPcr</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.ElliotSigmoid.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ElliotSigmoid.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ElliotSigmoid.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>ElliotSigmoid activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ElliotSigmoid function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.ElliotSigmoid.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.ElliotSigmoid.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.ElliotSigmoid.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ElliotSigmoid.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ElliotSigmoid.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>ElliotSigmoid derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ElliotSigmoid derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.LeakyReLU">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">LeakyReLU</code><span class="sig-paren">(</span><em>leakage=0.01</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#LeakyReLU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.LeakyReLU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>LeakyReLU Activation Functions</strong></p>
+<p>Leaky ReLUs allow a small, non-zero gradient to propagate through the network
+when the unit is not active hence avoiding bottlenecks that can prevent
+learning in the Neural Network.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Rectifier Nonlinearities Improve Neural Network Acoustic Models</dt>
+<dd><ul class="first last simple">
+<li>[Andrew L. Mass, et. al., 2013] <a class="reference external" href="https://goo.gl/k9fhEZ">https://goo.gl/k9fhEZ</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/v48yXT">https://goo.gl/v48yXT</a></li>
+</ul>
+</dd>
+<dt>[2] Empirical Evaluation of Rectified Activations in Convolutional Network</dt>
+<dd><ul class="first last simple">
+<li>[Bing Xu, et. al., 2015] <a class="reference external" href="https://arxiv.org/abs/1505.00853">https://arxiv.org/abs/1505.00853</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1505.00853.pdf">https://arxiv.org/pdf/1505.00853.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>leakage</strong> (<em>float32</em>) – provides for a small non-zero gradient (e.g. 0.01) when the unit is not active.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="zeta.dl.activations.LeakyReLU.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#LeakyReLU.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.LeakyReLU.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>LeakyReLU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the LeakyReLU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.LeakyReLU.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.LeakyReLU.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.LeakyReLU.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#LeakyReLU.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.LeakyReLU.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>LeakyReLU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the LeakyReLU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.Linear">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Linear</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Linear Activation Function</strong></p>
+<p>Linear Activation applies identity operation on your data such that the output
+data is proportional to the input data. The function always returns the same
+value that was used as its argument.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Identity Function</dt>
+<dd>[Wikipedia Article] <a class="reference external" href="https://en.wikipedia.org/wiki/Identity_function">https://en.wikipedia.org/wiki/Identity_function</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.Linear.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Linear.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Linear.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Linear function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.Linear.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.Linear.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.Linear.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Linear.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Linear.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Linear derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.ReLU">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">ReLU</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ReLU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ReLU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Rectified Linear Units (ReLUs)</strong></p>
+<p>Rectifying neurons are an even better model of biological neurons yielding
+equal or better performance than hyperbolic tangent networks in-spite of
+the hard non-linearity and non-differentiability at zero hence creating
+sparse representations with true zeros which seem remarkably suitable
+for naturally sparse data.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Deep Sparse Rectifier Neural Networks</dt>
+<dd><ul class="first last simple">
+<li>[Xavier Glorot., et. al., 2011] <a class="reference external" href="http://proceedings.mlr.press/v15/glorot11a.html">http://proceedings.mlr.press/v15/glorot11a.html</a></li>
+<li>[PDF] <a class="reference external" href="http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf">http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf</a></li>
+</ul>
+</dd>
+<dt>[2] Delving Deep into Rectifiers</dt>
+<dd><ul class="first last simple">
+<li>[Kaiming He, et. al., 2015] <a class="reference external" href="https://arxiv.org/abs/1502.01852">https://arxiv.org/abs/1502.01852</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1502.01852.pdf">https://arxiv.org/pdf/1502.01852.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.ReLU.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ReLU.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ReLU.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>ReLU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ReLU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.ReLU.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.ReLU.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.ReLU.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#ReLU.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.ReLU.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>ReLU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the ReLU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.SELU">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">SELU</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SELU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SELU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Scaled Exponential Linear Units (SELUs)</strong></p>
+<p>SELUs are activations which induce self-normalizing properties and are used
+in Self-Normalizing Neural Networks (SNNs). SNNs enable high-level abstract
+representations that tend to automatically converge towards zero mean and
+unit variance.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Self-Normalizing Neural Networks (SELUs)</dt>
+<dd><ul class="first last simple">
+<li>[Klambauer, G., et. al., 2017] <a class="reference external" href="https://arxiv.org/abs/1706.02515">https://arxiv.org/abs/1706.02515</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1706.02515.pdf">https://arxiv.org/pdf/1706.02515.pdf</a></li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>ALPHA</strong> (<em>float32</em>) – 1.6732632423543772848170429916717</li>
+<li><strong>_LAMBDA</strong> (<em>float32</em>) – 1.6732632423543772848170429916717</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="zeta.dl.activations.SELU.ALPHA">
+<code class="descname">ALPHA</code><em class="property"> = 1.6732632423543772</em><a class="headerlink" href="#zeta.dl.activations.SELU.ALPHA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.SELU.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SELU.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SELU.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>SELU activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SELU function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.SELU.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.SELU.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.SELU.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SELU.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SELU.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>SELU derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SELU derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.Sigmoid">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Sigmoid</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Sigmoid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Sigmoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Sigmoid Activation Function</strong></p>
+<p>A Sigmoid function is often used as the output activation function for binary
+classification problems as it outputs values that are in the range (0, 1).
+Sigmoid functions are real-valued and differentiable, producing a curve
+that is ‘S-shaped’ and feature one local minimum, and one local maximum</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] The influence of the sigmoid function parameters on the speed of</dt>
+<dd>backpropagation learning <a class="reference external" href="https://goo.gl/MavJjj">https://goo.gl/MavJjj</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.Sigmoid.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Sigmoid.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Sigmoid.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sigmoid activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Sigmoid function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.Sigmoid.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.Sigmoid.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.Sigmoid.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Sigmoid.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Sigmoid.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sigmoid derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Sigmoid derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.SoftPlus">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">SoftPlus</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SoftPlus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SoftPlus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>SoftPlus Activation Function</strong></p>
+<p>A Softplus function is a smooth approximation to the rectifier linear units
+(ReLUs). Near point 0, it is smooth and differentiable and produces outputs
+in scale of (0, +inf).</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Incorporating Second-Order Functional Knowledge for Better Option Pricing</dt>
+<dd><ul class="first last simple">
+<li>[Charles Dugas, et. al., 2001] <a class="reference external" href="https://goo.gl/z3jeYc">https://goo.gl/z3jeYc</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/z3jeYc">https://goo.gl/z3jeYc</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.SoftPlus.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SoftPlus.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SoftPlus.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>SoftPlus activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SoftPlus function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.SoftPlus.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.SoftPlus.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.SoftPlus.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#SoftPlus.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.SoftPlus.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>SoftPlus derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the SoftPlus derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.Softmax">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">Softmax</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Softmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Softmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Softmax Activation Function</strong></p>
+<p>The Softmax Activation Function is a generalization of the logistic function
+that squashes the outputs of each unit to real values in the range [0, 1]
+but it also divides each output such that the total sum of the outputs
+is equal to 1.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Softmax Regression</dt>
+<dd>[UFLDL Tutorial] <a class="reference external" href="https://goo.gl/1qgqdg">https://goo.gl/1qgqdg</a></dd>
+<dt>[2] Deep Learning using Linear Support Vector Machines</dt>
+<dd><ul class="first last simple">
+<li>[Yichuan Tang, 2015] <a class="reference external" href="https://arxiv.org/abs/1306.0239">https://arxiv.org/abs/1306.0239</a></li>
+<li>[PDF] <a class="reference external" href="https://arxiv.org/pdf/1306.0239.pdf">https://arxiv.org/pdf/1306.0239.pdf</a></li>
+</ul>
+</dd>
+<dt>[3] Probabilistic Interpretation of Feedforward Network Outputs</dt>
+<dd>[Mario Costa, 1989] [PDF] <a class="reference external" href="https://goo.gl/ZhBY4r">https://goo.gl/ZhBY4r</a></dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.Softmax.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Softmax.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Softmax.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Softmax activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Softmax function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.Softmax.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.Softmax.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.Softmax.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#Softmax.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.Softmax.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Softmax derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the Softmax derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="zeta.dl.activations.TanH">
+<em class="property">class </em><code class="descclassname">zeta.dl.activations.</code><code class="descname">TanH</code><a class="reference internal" href="../../_modules/zeta/dl/activations.html#TanH"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.TanH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><strong>Tangent Hyperbolic (TanH)</strong></p>
+<p>The Tangent Hyperbolic function is a rescaled version of the  sigmoid
+function that produces outputs in scale of [-1, +1]. As an activation
+function it produces an output for every input value hence making
+it a continuous function.</p>
+<p class="rubric">References</p>
+<dl class="docutils">
+<dt>[1] Hyperbolic Functions</dt>
+<dd><ul class="first last simple">
+<li>[Mathematics Education Centre] <a class="reference external" href="https://goo.gl/4Dkkrd">https://goo.gl/4Dkkrd</a></li>
+<li>[PDF] <a class="reference external" href="https://goo.gl/xPSnif">https://goo.gl/xPSnif</a></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="zeta.dl.activations.TanH.activation">
+<code class="descname">activation</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#TanH.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.TanH.activation" title="Permalink to this definition">¶</a></dt>
+<dd><p>TanH activation applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the TanH function applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="zeta.dl.activations.TanH.activation_name">
+<code class="descname">activation_name</code><a class="headerlink" href="#zeta.dl.activations.TanH.activation_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="zeta.dl.activations.TanH.derivative">
+<code class="descname">derivative</code><span class="sig-paren">(</span><em>input_signal</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/zeta/dl/activations.html#TanH.derivative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#zeta.dl.activations.TanH.derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>TanH derivative applied to input provided</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>input_signal</strong> (<em>numpy.array</em>) – the input numpy array</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the output of the TanH derivative applied to the input</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">numpy.array</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="objectives.html" class="btn btn-neutral float-right" title="Objective Functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tutorials/cnn.html" class="btn btn-neutral" title="Convolutional Neural Networks (CNNs)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>

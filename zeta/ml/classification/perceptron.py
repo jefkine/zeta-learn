@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+
+import numpy as np
+
+from zeta.utils import LogIfBusy
+from zeta.dl.initializers import InitializeWeights as init
+from zeta.dl.objectives import ObjectiveFunction as objective
+from zeta.dl.optimizers import OptimizationFunction as optimize
+from zeta.dl.activations import ActivationFunction as activate
+
+from ..regularizers import RegularizationFunction as regularize
+
+
+class Perceptron:
+
+    def __init__(self, epochs,
+                       activation = 'sigmoid',
+                       loss = 'categorical-cross-entropy',
+                       init_method = 'he-normal',
+                       optimizer = {},
+                       penalty = 'lasso',
+                       penalty_weight = 0,
+                       l1_ratio = 0.5):
+        self.epochs = epochs
+        self.activate = activate(activation)
+        self.loss = objective(loss)
+        self.init_method = init(init_method)
+        self.optimizer = optimizer
+        self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
+
+    @LogIfBusy
+    def fit(self, inputs, targets, verbose = True):
+        fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
+        self.weights = self.init_method.initialize_weights((inputs.shape[1], targets.shape[1]))
+        self.bias = np.zeros((1, targets.shape[1]))
+
+        for i in range(self.epochs):
+            linear_predictions = inputs.dot(self.weights) + self.bias
+            predictions = self.activate._forward(linear_predictions)
+
+            loss = self.loss._forward(predictions, targets) + self.regularization._regulate(self.weights)
+            acc = self.loss._accuracy(predictions, targets)
+
+            fit_stats["train_loss"].append(np.mean(loss))
+            fit_stats["train_acc"].append(np.mean(acc))
+
+            if verbose:
+                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, loss, acc))
+
+            grad = self.loss._backward(predictions, targets) * self.activate._backward(linear_predictions)
+            d_weights = inputs.T.dot(grad) + self.regularization._derivative(self.weights)
+            d_bias = np.sum(grad, axis = 0, keepdims = True)
+
+            self.weights = optimize(self.optimizer)._update(self.weights, d_weights)
+            self.bias = optimize(self.optimizer)._update(self.bias, d_bias)
+
+        return fit_stats
+
+    def predict(self, inputs):
+        # return self.activate._forward(inputs.dot(self.weights) + self.bias)
+        return inputs.dot(self.weights) + self.bias
+
+    @property
+    def model_weights(self):
+        return self.weights

@@ -1,0 +1,528 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>zeta.dl.initializers &mdash; zeta-learn 1.0.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> zeta-learn
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Home</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/general/introduction.html#features">Features</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Featured Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/perceptron.html">The Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/tutorials/cnn.html">Convolutional Neural Networks (CNNs)</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/activations.html">Activation Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#featured-activations">Featured Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/activations.html#module-zeta.dl.activations">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/objectives.html">Objective Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#featured-objectives">Featured Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/objectives.html#module-zeta.dl.objectives">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/optimizers.html">Optimization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#featured-optimizers">Featured Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/optimizers.html#module-zeta.dl.optimizers">Optimization Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/regularizers.html">Regularization Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#featured-regularizers">Featured Regularizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/regularizers.html#module-zeta.ml.regularizers">Function Descriptions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/api/initializers.html">Weight Initialization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#featured-initializers">Featured Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../writeups/api/initializers.html#module-zeta.dl.initializers">Function Descriptions</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Support</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../writeups/general/support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">zeta-learn</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>zeta.dl.initializers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for zeta.dl.initializers</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<div class="viewcode-block" id="WeightInitializer"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer">[docs]</a><span class="k">class</span> <span class="nc">WeightInitializer</span><span class="p">:</span>
+
+<div class="viewcode-block" id="WeightInitializer.compute_fans"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.WeightInitializer.compute_fans">[docs]</a>    <span class="k">def</span> <span class="nf">compute_fans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="c1"># Original code forked from MIT licensed keras project</span>
+        <span class="c1"># https://github.com/fchollet/keras/blob/master/keras/initializers.py</span>
+        <span class="c1"># kernel shape: (&#39;NF&#39;: Total Filters, &#39;CF&#39;: Filter Channels, &#39;HF&#39;: Filter Height &#39;WF&#39;: Filter Width)</span>
+
+        <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span>  <span class="mi">1</span> <span class="k">else</span> <span class="n">shape</span>
+        <span class="n">receptive_field_size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">fan_out</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">receptive_field_size</span> <span class="c1"># NF *receptive_field_size</span>
+        <span class="n">fan_in</span> <span class="o">=</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">receptive_field_size</span> <span class="c1"># CF *receptive_field_size</span></div></div>
+        <span class="k">return</span> <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span>
+
+
+<div class="viewcode-block" id="HeNormal"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.HeNormal">[docs]</a><span class="k">class</span> <span class="nc">HeNormal</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **He Normal (HeNormal)**</span>
+
+<span class="sd">    HeNormal is a robust initialization method that particularly considers the</span>
+<span class="sd">    rectifier nonlinearities. He normal is an implementation based on</span>
+<span class="sd">    Gaussian distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</span>
+<span class="sd">            * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852</span>
+<span class="sd">            * [PDF] https://arxiv.org/pdf/1502.01852.pdf</span>
+
+<span class="sd">        [2] Initialization Of Deep Networks Case of Rectifiers</span>
+<span class="sd">            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HeNormal.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.HeNormal.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span> <span class="o">/</span> <span class="n">fan_in</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="HeUniform"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.HeUniform">[docs]</a><span class="k">class</span> <span class="nc">HeUniform</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **He Normal (HeNormal)**</span>
+
+<span class="sd">    HeNormal is a robust initialization method that particularly considers the</span>
+<span class="sd">    rectifier nonlinearities. He uniform is an implementation based on</span>
+<span class="sd">    Uniform distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification</span>
+<span class="sd">            * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852</span>
+<span class="sd">            * [PDF] https://arxiv.org/pdf/1502.01852.pdf</span>
+
+<span class="sd">        [2] Initialization Of Deep Networks Case of Rectifiers</span>
+<span class="sd">            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HeUniform.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.HeUniform.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.</span> <span class="o">/</span> <span class="n">fan_in</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="GlorotNormal"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.GlorotNormal">[docs]</a><span class="k">class</span> <span class="nc">GlorotNormal</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Glorot Normal (GlorotNormal)**</span>
+
+<span class="sd">    GlorotNormal more famously known as the Xavier initialization is based on the</span>
+<span class="sd">    effort to try mantain the same variance of the gradients of the weights for</span>
+<span class="sd">    all the layers. Glorot normal is an implementation based on</span>
+<span class="sd">    Gaussian distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Understanding the difficulty of training deep feedforward neural networks</span>
+<span class="sd">            * [Xavier Glorot, 2010] http://proceedings.mlr.press/v9/glorot10a.html</span>
+<span class="sd">            * [PDF] http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf</span>
+
+<span class="sd">        [2] Initialization Of Deep Feedfoward Networks</span>
+<span class="sd">            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GlorotNormal.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.GlorotNormal.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="n">fan_in</span> <span class="o">+</span> <span class="n">fan_out</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="GlorotUniform"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.GlorotUniform">[docs]</a><span class="k">class</span> <span class="nc">GlorotUniform</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Glorot Uniform (GlorotUniform)**</span>
+
+<span class="sd">    GlorotUniform more famously known as the Xavier initialization is based on the</span>
+<span class="sd">    effort to try mantain the same variance of the gradients of the weights for</span>
+<span class="sd">    all the layers. Glorot uniform is an implementation based on</span>
+<span class="sd">    Uniform distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Understanding the difficulty of training deep feedforward neural networks</span>
+<span class="sd">            * [Xavier Glorot, 2010] http://proceedings.mlr.press/v9/glorot10a.html</span>
+<span class="sd">            * [PDF] http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf</span>
+
+<span class="sd">        [2] Initialization Of Deep Feedfoward Networks</span>
+<span class="sd">            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GlorotUniform.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.GlorotUniform.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">6.</span> <span class="o">/</span> <span class="p">(</span><span class="n">fan_in</span> <span class="o">+</span> <span class="n">fan_out</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="LeCunUniform"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.LeCunUniform">[docs]</a><span class="k">class</span> <span class="nc">LeCunUniform</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **LeCun Uniform (LeCunUniform)**</span>
+
+<span class="sd">    Weights should be randomly chosen but in such a way that the sigmoid is</span>
+<span class="sd">    primarily activated in its linear region. LeCun uniform is an</span>
+<span class="sd">    implementation based on Uniform distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Efficient Backprop</span>
+<span class="sd">            [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LeCunUniform.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.LeCunUniform.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">3.</span> <span class="o">/</span> <span class="n">fan_in</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="LeCunNormal"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.LeCunNormal">[docs]</a><span class="k">class</span> <span class="nc">LeCunNormal</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **LeCun Normal (LeCunNormal)**</span>
+
+<span class="sd">    Weights should be randomly chosen but in such a way that the sigmoid is</span>
+<span class="sd">    primarily activated in its linear region. LeCun uniform is the</span>
+<span class="sd">    implementation based on Gaussian distribution</span>
+
+<span class="sd">    References:</span>
+<span class="sd">        [1] Efficient Backprop</span>
+<span class="sd">            [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LeCunNormal.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.LeCunNormal.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">fan_in</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="RandomUniform"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.RandomUniform">[docs]</a><span class="k">class</span> <span class="nc">RandomUniform</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Random Uniform (RandomUniform)**</span>
+
+<span class="sd">    Random uniform is an implementation of weight initialization based on</span>
+<span class="sd">    Uniform distribution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RandomUniform.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.RandomUniform.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">fan_in</span> <span class="o">+</span> <span class="n">fan_out</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span> <span class="o">=</span> <span class="o">-</span><span class="n">scale</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="RandomNormal"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.RandomNormal">[docs]</a><span class="k">class</span> <span class="nc">RandomNormal</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Random Normal (RandomNormal)**</span>
+
+<span class="sd">    Random uniform is an implementation of weight initialization based on</span>
+<span class="sd">    Gaussian distribution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RandomNormal.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.RandomNormal.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">fan_in</span><span class="p">,</span> <span class="n">fan_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_fans</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">fan_in</span> <span class="o">+</span> <span class="n">fan_out</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="Zero"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.Zero">[docs]</a><span class="k">class</span> <span class="nc">Zero</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **Zero (Zero)**</span>
+
+<span class="sd">    Zero is an implementation of weight initialization that returns all zeros</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Zero.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.Zero.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="One"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.One">[docs]</a><span class="k">class</span> <span class="nc">One</span><span class="p">(</span><span class="n">WeightInitializer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    **One (One)**</span>
+
+<span class="sd">    One is an implementation of weight initialization that returns all ones</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="One.weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.One.weights">[docs]</a>    <span class="k">def</span> <span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">init_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+
+<div class="viewcode-block" id="InitializeWeights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.InitializeWeights">[docs]</a><span class="k">class</span> <span class="nc">InitializeWeights</span><span class="p">:</span>
+
+    <span class="n">_methods</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;ones&#39;</span><span class="p">:</span> <span class="n">One</span><span class="p">,</span>
+        <span class="s1">&#39;zeros&#39;</span><span class="p">:</span> <span class="n">Zero</span><span class="p">,</span>
+        <span class="s1">&#39;he-normal&#39;</span><span class="p">:</span> <span class="n">HeNormal</span><span class="p">,</span>
+        <span class="s1">&#39;he-uniform&#39;</span><span class="p">:</span> <span class="n">HeUniform</span><span class="p">,</span>
+        <span class="s1">&#39;lecun-normal&#39;</span><span class="p">:</span> <span class="n">LeCunNormal</span><span class="p">,</span>
+        <span class="s1">&#39;lecun-uniform&#39;</span><span class="p">:</span> <span class="n">LeCunUniform</span><span class="p">,</span>
+        <span class="s1">&#39;random-normal&#39;</span><span class="p">:</span> <span class="n">RandomNormal</span><span class="p">,</span>
+        <span class="s1">&#39;glorot-normal&#39;</span><span class="p">:</span> <span class="n">GlorotNormal</span><span class="p">,</span>
+        <span class="s1">&#39;random-uniform&#39;</span><span class="p">:</span> <span class="n">RandomUniform</span><span class="p">,</span>
+        <span class="s1">&#39;glorot-uniform&#39;</span><span class="p">:</span> <span class="n">GlorotUniform</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_methods</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Weight initialization method must be either one of the following: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_methods</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init_method</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_methods</span><span class="p">[</span><span class="n">name</span><span class="p">]()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_method</span><span class="o">.</span><span class="n">init_name</span>
+
+<div class="viewcode-block" id="InitializeWeights.initialize_weights"><a class="viewcode-back" href="../../../writeups/api/initializers.html#zeta.dl.initializers.InitializeWeights.initialize_weights">[docs]</a>    <span class="k">def</span> <span class="nf">initialize_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">):</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_method</span><span class="o">.</span><span class="n">weights</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, zeta-team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.0.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
