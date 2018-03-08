@@ -16,6 +16,6 @@ Dependencies
  
 Features
 --------
-  *  ``Keras`` like ``Sequential`` api for building models.
-  * Examples folder with readily implemented machine learning models.
+  - Keras like ``Sequential`` api for building models.
+  - Examples folder with readily implemented machine learning models.
  
