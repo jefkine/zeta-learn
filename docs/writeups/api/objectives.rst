@@ -4,7 +4,7 @@ Objective Functions
 .. automodule:: zeta.dl.objectives
   :noindex:
 
-Objective functions are used measure the performance of a model.
+Objective functions are used measure the performance of a models.
 
 Featured Objectives
 -------------------
