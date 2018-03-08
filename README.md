@@ -10,12 +10,12 @@ It is intended for researchers and students who are interested in obtaining a de
  
 Dependencies
 ------------
-  - numpy >= 1.13.0
-  - scikit-learn >= 0.18.0
-  - matplotlib >= 1.3.1
+ - numpy >= 1.13.0
+ - scikit-learn >= 0.18.0
+ - matplotlib >= 1.3.1
  
 Features
 --------
-  - Examples folder with readily implemented machine learning models.
-  - Keras like Sequential api for building models.
+ - Keras like Sequential api for building models.
+ - Examples folder with readily implemented machine learning models.
  
