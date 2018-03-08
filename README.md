@@ -4,9 +4,9 @@ zeta-learn is a minimalistic python machine learning library which enables fast 
 
 It is intended for researchers and students who are interested in obtaining a deeper understanding on the foundations of machine learning, deep learning models and algorithms.
 
- * **Documentation:**   https://zeta-learn.readthedocs.io.
+ * **Documentation:** https://zeta-learn.readthedocs.io.
  * **Python versions:** 3.5
- * **Free software:**   MIT license
+ * **Free software:** MIT license
  
 Dependencies
 ------------
@@ -16,6 +16,6 @@ Dependencies
  
 Features
 --------
-  - Keras like Sequential api for building models.
+  - ``Keras`` like ``Sequential`` api for building models.
   - Examples folder with readily implemented machine learning models.
  
