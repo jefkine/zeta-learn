@@ -1,16 +1,27 @@
-.. zeta-learn documentation master file, created by
-   sphinx-quickstart on Fri Mar  2 12:22:29 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+zeta-learn: Python Machine Learning Library
+===========================================
 
-Welcome to zeta-learn's documentation!
-======================================
+zeta-learn is a minimalistic python machine learning library which enables easy
+and fast model prototyping with emphasis on the academic aspect of it.
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Home
+zeta-learn aims at providing an extensive understanding of machine learning through
+the use of straightforward algorithms making it useful for researchers and students.
 
-   writeups/general/introduction
+* **Python versions:** 3.4 and above
+* **Free software:** MIT license
+
+Dependencies
+------------
+* numpy >= 1.13.0
+* scikit-learn >= 0.18.0
+* matplotlib >= 1.3.1
+
+Features
+--------
+
+* ``Keras`` like ``Sequential`` api for building models.
+* Built on NumPy and matplotlib
+* Examples folder with readily implemented machine learning models.
 
 .. toctree::
    :maxdepth: 1
@@ -34,7 +45,6 @@ Welcome to zeta-learn's documentation!
    :caption: Support
 
    writeups/general/support
-
 
 Indices and tables
 ==================
