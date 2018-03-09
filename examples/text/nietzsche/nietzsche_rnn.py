@@ -10,7 +10,7 @@ from zeta.dl.optimizers import register_opt
 from zeta.dl.layers import RNN, Flatten, Dense
 
 
-text = open('../../data/text/nietzsche.txt').read().lower()
+text = open('../../data/text/nietzsche_short.txt').read().lower()
 x, y, len_chars = gen_char_sequence_xtym(text, maxlen = 30, step = 1)
 del text
 
