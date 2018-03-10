@@ -15,8 +15,12 @@ and fast model prototyping with emphasis on the academic aspect of it.
 zeta-learn aims at providing an extensive understanding of machine learning through
 the use of straightforward algorithms making it useful for researchers and students.
 
+Find this project on `GitHub`_
+
 * **Python versions:** 3.4 and above
 * **Free software:** MIT license
+
+.. _GitHub: https://github.com/jefkine/zeta-learn
 
 Dependencies
 ------------
