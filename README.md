@@ -1,6 +1,8 @@
 zeta-learn
 ----------
-![zeta-learn](https://github.com/jefkine/zeta-learn/blob/master/docs/img/zeta_learn_slim.png)
+<p align="center">
+    <img src="https://github.com/jefkine/zeta-learn/blob/master/docs/img/zeta_learn_slim.png" width="200"\>
+</p>
 
 zeta-learn is a minimalistic python machine learning library which enables easy
 and fast model prototyping with emphasis on the academic aspect of it.
