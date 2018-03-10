@@ -1,7 +1,7 @@
 zeta-learn
 ----------
-zeta-learn is a minimalistic python machine learning library designed designed to
-deliver fast and easy model prototyping.
+zeta-learn is a minimalistic python machine learning library designed to deliver
+fast and easy model prototyping.
 
 zeta-learn aims to provide extensive understanding of machine learning through
 the use of straightforward algorithms and readily implemented examples making
