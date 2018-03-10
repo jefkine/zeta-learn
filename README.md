@@ -1,11 +1,6 @@
 zeta-learn
 ----------
-.. figure:: docs/img/zeta_learn_slim.png
-    :width: 300px
-    :align: center
-    :height: 300px
-    :alt: mnist samples
-    :figclass: align-center
+[zeta-learn](https://github.com/jefkine/zeta-learn/blob/master/docs/img/zeta_learn_slim.png)
 
 zeta-learn is a minimalistic python machine learning library which enables easy
 and fast model prototyping with emphasis on the academic aspect of it.
