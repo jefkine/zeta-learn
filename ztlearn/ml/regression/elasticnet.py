@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from .base import Regression
-from zeta.utils import normalize
+from ztlearn.utils import normalize
 from sklearn.preprocessing import PolynomialFeatures
 
 

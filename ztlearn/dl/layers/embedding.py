@@ -2,7 +2,7 @@
 
 import numpy as np
 from .base import Layer
-from zeta.utils import one_hot
+from ztlearn.utils import one_hot
 from ..initializers import InitializeWeights as init
 from ..optimizers import OptimizationFunction as optimizer
 
@@ -13,7 +13,7 @@ class Embedding(Layer):
         self.output_dim = output_dim
         self.activation = activation
         self.input_shape = input_shape
-        
+
         self.init_method = None
         self.optimizer_kwargs = None
 

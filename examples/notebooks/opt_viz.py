@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from zeta.dl.optimizers import register_opt
-from zeta.toolkit import GbOptimization as gbopt
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.toolkit import GbOptimization as gbopt
 
 
 """2D module"""

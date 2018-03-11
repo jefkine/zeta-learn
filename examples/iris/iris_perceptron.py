@@ -2,14 +2,14 @@
 
 from sklearn import datasets
 
-from zeta.utils import unhot
-from zeta.utils import one_hot
-from zeta.utils import plot_acc_loss
-from zeta.utils import print_results
-from zeta.utils import train_test_split
+from ztlearn.utils import unhot
+from ztlearn.utils import one_hot
+from ztlearn.utils import plot_acc_loss
+from ztlearn.utils import print_results
+from ztlearn.utils import train_test_split
 
-from zeta.dl.optimizers import register_opt
-from zeta.ml.classification import Perceptron
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_iris()
 train_data, test_data, train_label, test_label = train_test_split(data.data,

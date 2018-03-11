@@ -3,14 +3,14 @@
 import numpy as np
 import pandas as pd
 
-from zeta.utils import z_score
-from zeta.utils import plot_acc_loss
-from zeta.utils import print_results
-from zeta.utils import train_test_split
-from zeta.utils import plot_regression_results
+from ztlearn.utils import z_score
+from ztlearn.utils import plot_acc_loss
+from ztlearn.utils import print_results
+from ztlearn.utils import train_test_split
+from ztlearn.utils import plot_regression_results
 
-from zeta.dl.optimizers import register_opt
-from zeta.ml.regression import LogisticRegression
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.ml.regression import LogisticRegression
 
 #-------------------------------------------------------------#
 #            Diabetes Dataset Features                        #

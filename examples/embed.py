@@ -2,10 +2,10 @@
 
 import numpy as np
 
-from zeta.dl.layers import Embedding
-from zeta.dl.models import Sequential
-from zeta.utils import train_test_split
-from zeta.dl.optimizers import register_opt
+from ztlearn.dl.layers import Embedding
+from ztlearn.dl.models import Sequential
+from ztlearn.utils import train_test_split
+from ztlearn.dl.optimizers import register_opt
 
 
 opt = register_opt(optimizer_name = 'sgd-momentum', momentum = 0.01, learning_rate = 0.001)

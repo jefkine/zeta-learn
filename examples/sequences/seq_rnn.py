@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from zeta.utils import plot_loss
-from zeta.utils import plot_accuracy
-from zeta.utils import train_test_split
-from zeta.utils import print_seq_samples
-from zeta.utils import print_seq_results
-from zeta.utils import gen_mult_sequence_xtym
+from ztlearn.utils import plot_loss
+from ztlearn.utils import plot_accuracy
+from ztlearn.utils import train_test_split
+from ztlearn.utils import print_seq_samples
+from ztlearn.utils import print_seq_results
+from ztlearn.utils import gen_mult_sequence_xtym
 
-from zeta.dl.models import Sequential
-from zeta.dl.optimizers import register_opt
-from zeta.dl.layers import RNN, Flatten, Dense
+from ztlearn.dl.models import Sequential
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.dl.layers import RNN, Flatten, Dense
 
 
 x, y, seq_len = gen_mult_sequence_xtym(3000, 10, 10)

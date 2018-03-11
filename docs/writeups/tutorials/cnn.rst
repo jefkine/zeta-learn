@@ -18,7 +18,7 @@ zeta-learn has a function which enables us to visualize samples of the MNIST dat
 .. code-block:: python
 
     from sklearn import datasets
-    from zeta.utils import plot_mnist_img_results
+    from ztlearn.utils import plot_mnist_img_results
 
     plot_mnist_img_samples(datasets.load_digits())
 

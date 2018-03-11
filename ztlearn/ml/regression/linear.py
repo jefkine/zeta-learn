@@ -3,7 +3,7 @@
 import numpy as np
 
 from .base import Regression
-from zeta.utils import LogIfBusy
+from ztlearn.utils import LogIfBusy
 
 
 class LinearRegression(Regression):

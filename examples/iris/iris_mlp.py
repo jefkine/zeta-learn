@@ -2,16 +2,16 @@
 
 from sklearn import datasets
 
-from zeta.utils import unhot
-from zeta.utils import one_hot
-from zeta.utils import plot_loss
-from zeta.utils import plot_accuracy
-from zeta.utils import print_results
-from zeta.utils import train_test_split
+from ztlearn.utils import unhot
+from ztlearn.utils import one_hot
+from ztlearn.utils import plot_loss
+from ztlearn.utils import plot_accuracy
+from ztlearn.utils import print_results
+from ztlearn.utils import train_test_split
 
-from zeta.dl.layers import Dense
-from zeta.dl.models import Sequential
-from zeta.dl.optimizers import register_opt
+from ztlearn.dl.layers import Dense
+from ztlearn.dl.models import Sequential
+from ztlearn.dl.optimizers import register_opt
 
 
 data = datasets.load_iris()

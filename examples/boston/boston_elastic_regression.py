@@ -3,14 +3,14 @@
 import numpy as np
 from sklearn import datasets
 
-from zeta.utils import z_score
-from zeta.utils import plot_acc_loss
-from zeta.utils import train_test_split
-from zeta.utils import plot_regression_results
+from ztlearn.utils import z_score
+from ztlearn.utils import plot_acc_loss
+from ztlearn.utils import train_test_split
+from ztlearn.utils import plot_regression_results
 
-from zeta.dl.optimizers import register_opt
-from zeta.ml.regression import ElasticNetRegression
-from zeta.dl.objectives import ObjectiveFunction as objective
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.ml.regression import ElasticNetRegression
+from ztlearn.dl.objectives import ObjectiveFunction as objective
 
 data = datasets.load_boston()
 # print(data['DESCR'])

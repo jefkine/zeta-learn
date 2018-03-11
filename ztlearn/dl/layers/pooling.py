@@ -2,8 +2,8 @@
 
 import numpy as np
 from .base import Layer
-from zeta.utils import im2col_indices
-from zeta.utils import col2im_indices
+from ztlearn.utils import im2col_indices
+from ztlearn.utils import col2im_indices
 
 class Pool(Layer):
 

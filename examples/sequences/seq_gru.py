@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from zeta.utils import plot_loss
-from zeta.utils import plot_accuracy
-from zeta.utils import train_test_split
-from zeta.utils import print_seq_samples
-from zeta.utils import print_seq_results
-from zeta.utils import gen_mult_sequence_xtyt
+from ztlearn.utils import plot_loss
+from ztlearn.utils import plot_accuracy
+from ztlearn.utils import train_test_split
+from ztlearn.utils import print_seq_samples
+from ztlearn.utils import print_seq_results
+from ztlearn.utils import gen_mult_sequence_xtyt
 
-from zeta.dl.layers import GRU
-from zeta.dl.models import Sequential
-from zeta.dl.optimizers import register_opt
+from ztlearn.dl.layers import GRU
+from ztlearn.dl.models import Sequential
+from ztlearn.dl.optimizers import register_opt
 
 x, y, seq_len = gen_mult_sequence_xtyt(1000, 10, 10)
 train_data, test_data, train_label, test_label = train_test_split(x, y, test_size = 0.4)

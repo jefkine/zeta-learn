@@ -2,10 +2,10 @@
 
 import numpy as np
 
-from zeta.utils import LogIfBusy
-from zeta.dl.initializers import InitializeWeights as init
-from zeta.dl.objectives import ObjectiveFunction as objective
-from zeta.dl.optimizers import OptimizationFunction as optimize
+from ztlearn.utils import LogIfBusy
+from ztlearn.dl.initializers import InitializeWeights as init
+from ztlearn.dl.objectives import ObjectiveFunction as objective
+from ztlearn.dl.optimizers import OptimizationFunction as optimize
 from ..regularizers import RegularizationFunction as regularize
 
 

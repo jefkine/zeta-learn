@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from zeta.utils import LogIfBusy
-from zeta.utils import minibatches
-from zeta.dl.layers import Activation
+from ztlearn.utils import LogIfBusy
+from ztlearn.utils import minibatches
+from ztlearn.dl.layers import Activation
 from ..objectives import ObjectiveFunction as objective
 
 class Sequential:

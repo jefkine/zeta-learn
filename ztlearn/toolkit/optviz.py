@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as pylab
 from mpl_toolkits.mplot3d import Axes3D
 
-from zeta.dl.initializers import InitializeWeights as init
-from zeta.dl.optimizers import OptimizationFunction as optimize
+from ztlearn.dl.initializers import InitializeWeights as init
+from ztlearn.dl.optimizers import OptimizationFunction as optimize
 
 class GbOptimization(object):
 
@@ -30,7 +30,7 @@ class GbOptimization(object):
             self.fsolve[i,:] = f_solution
             eps = self.f0 - f_solution
 
-            if verbose:            
+            if verbose:
                 if i%5 == 0:
                     print('Epoch-{} weights: {:.20}'.format(i+1, self.npstring(self.inputs.T)))
                     print('Epoch-{} eps: {:.20}'.format(i+1, self.npstring(eps)))

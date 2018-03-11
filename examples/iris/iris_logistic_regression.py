@@ -2,13 +2,13 @@
 
 from sklearn import datasets
 
-from zeta.utils import normalize
-from zeta.utils import plot_acc_loss
-from zeta.utils import print_results
-from zeta.utils import train_test_split
+from ztlearn.utils import normalize
+from ztlearn.utils import plot_acc_loss
+from ztlearn.utils import print_results
+from ztlearn.utils import train_test_split
 
-from zeta.dl.optimizers import register_opt
-from zeta.ml.regression import LogisticRegression
+from ztlearn.dl.optimizers import register_opt
+from ztlearn.ml.regression import LogisticRegression
 
 data = datasets.load_iris()
 input_data = normalize(data.data[data.target != 2])

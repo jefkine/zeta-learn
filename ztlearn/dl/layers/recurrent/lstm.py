@@ -2,10 +2,10 @@
 
 import numpy as np
 from ..base import Layer
-from zeta.utils import clip_gradients as cg
-from zeta.dl.initializers import InitializeWeights as init
-from zeta.dl.activations import ActivationFunction as activate
-from zeta.dl.optimizers import OptimizationFunction as optimizer
+from ztlearn.utils import clip_gradients as cg
+from ztlearn.dl.initializers import InitializeWeights as init
+from ztlearn.dl.activations import ActivationFunction as activate
+from ztlearn.dl.optimizers import OptimizationFunction as optimizer
 
 
 class LSTM(Layer):
