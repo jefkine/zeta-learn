@@ -13,9 +13,9 @@ it a useful resource for researchers and students.
 
 Dependencies
 ------------
- - numpy >= 1.13.0
+ - numpy >= 1.19.0
  - scikit-learn >= 0.18.0
- - matplotlib >= 1.3.1
+ - matplotlib >= 2.0.0
 
 Features
 --------
