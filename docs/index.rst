@@ -18,7 +18,7 @@ it a useful resource for researchers and students.
 
 Find this project on `GitHub`_
 
-* **Python versions:** 3.4 and above
+* **Python versions:** 3.5 and above
 * **Free software:** MIT license
 
 .. _GitHub: https://github.com/jefkine/zeta-learn

@@ -8,7 +8,7 @@ the use of straightforward algorithms and readily implemented examples making
 it a useful resource for researchers and students.
 
  * **Documentation:** https://zeta-learn.com
- * **Python versions:** 3.4 and above
+ * **Python versions:** 3.5 and above
  * **Free software:** MIT license
 
 Dependencies
