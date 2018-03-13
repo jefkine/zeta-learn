@@ -14,7 +14,7 @@ def plot_accuracy(epoch, train_acc, valid_acc, fig_dims = (7, 5), font_size = 10
     plt.xlabel('Iterations', fontsize = font_size)
     plt.legend(['train', 'valid'], loc = 'upper right')
     plt.show()
-    plt.clf()
+    # plt.clf()
 
 def plot_loss(epoch, train_loss, valid_loss, fig_dims = (7, 5), font_size = 10):
     plt.figure(figsize = fig_dims)
@@ -27,7 +27,7 @@ def plot_loss(epoch, train_loss, valid_loss, fig_dims = (7, 5), font_size = 10):
     plt.xlabel('Iterations', fontsize = font_size)
     plt.legend(['train', 'valid'], loc = 'upper right')
     plt.show()
-    plt.clf()
+    # plt.clf()
 
 def plot_acc_loss(epoch, acc, loss, fig_dims = (7, 5), font_size = 10):
     plt.figure(figsize = fig_dims)
@@ -40,7 +40,7 @@ def plot_acc_loss(epoch, acc, loss, fig_dims = (7, 5), font_size = 10):
     plt.xlabel('Iterations', fontsize = font_size)
     plt.legend(['loss', 'acc'], loc = 'upper right')
     plt.show()
-    plt.clf()
+    # plt.clf()
 
 def plot_mnist_img_results(test_data, test_label, predictions, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
@@ -56,7 +56,7 @@ def plot_mnist_img_results(test_data, test_label, predictions, fig_dims = (6, 6)
             digit.text(0, 7, str(predictions[i]), color = 'red')
 
     plt.show()
-    plt.clf()
+    # plt.clf()
 
 def plot_mnist_img_samples(data, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
@@ -68,7 +68,7 @@ def plot_mnist_img_samples(data, fig_dims = (6, 6)):
         digit.text(0, 7, str(data.target[i]))
 
     plt.show()
-    plt.clf()
+    # plt.clf()
 
 def plot_regression_results(train_data, train_label, test_data, test_label, input_data, pred_line, mse, super_title, y_label, x_label, fig_dims = (7, 5), font_size = 10):
     plt.figure(figsize = fig_dims)
@@ -85,5 +85,5 @@ def plot_regression_results(train_data, train_label, test_data, test_label, inpu
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
     plt.show()
-    plt.clf()
+    # plt.clf()
 
