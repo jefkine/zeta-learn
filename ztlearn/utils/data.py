@@ -6,7 +6,7 @@ import numpy as np
 #                       DATA UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
-def clip_gradients(grad, g_min = -0.5, g_max = 0.5):
+def clip_gradients(grad, g_min = -1., g_max = 1.):
     return np.clip(grad, g_min, g_max, out = grad)
 
 def accuracy_score(predictions, targets):
