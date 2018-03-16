@@ -10,6 +10,7 @@ Featured Objectives
 -------------------
 
 .. autosummary::
+   KLDivergence
    MeanSquaredError
    HellingerDistance
    BinaryCrossEntropy
