@@ -9,6 +9,9 @@ class Objective(object):
         clipped_divisor = np.maximum(predictions * (1 - predictions), epsilon)
         return clipped_predictions, clipped_divisor
 
+    def add_fuzz_factor(self, np_array, epsilon = 1e-05):
+        return np.add(np_array, epsilon)
+
     @property
     def objective_name(self):
         return self.__class__.__name__
@@ -258,10 +261,79 @@ class CategoricalCrossEntropy(Objective):
         return self.__class__.__name__
 
 
+class KLDivergence(Objective):
+
+    """
+    **KL Divergence**
+
+     Kullback–Leibler divergence (also called relative entropy) is a measure of
+     divergence between two probability distributions.
+
+    """
+
+    def loss(self, predictions, targets, np_type):
+
+        """
+        Applies the KLDivergence Loss to prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of KLDivergence Loss to prediction and targets
+        """
+
+        targets = super(KLDivergence, self).add_fuzz_factor(targets)
+        predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
+
+        return np.sum(targets * np.log(targets/predictions), axis = 1)
+
+    def derivative(self, predictions, targets):
+
+        """
+        Applies the KLDivergence Derivative to prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of KLDivergence Derivative to prediction and targets
+        """
+
+        targets = super(KLDivergence, self).add_fuzz_factor(targets)
+        predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
+
+        d_log_diff = np.multiply((predictions - targets), (np.log(targets/predictions)))
+        return (1 + np.log(targets/predictions)) * d_log_diff
+
+    def accuracy(self, predictions, targets):
+
+        """
+        Calculates the KLDivergence Accuracy Score given prediction and targets
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.float32: the output of KLDivergence Accuracy Score
+        """
+
+        return np.mean(np.argmax(predictions, axis=1) == np.argmax(targets, axis = 1))
+
+    @property
+    def objective_name(self):
+        return self.__class__.__name__
+
+
 class ObjectiveFunction:
 
     _functions = {
+        'kld': KLDivergence,
         'mse': MeanSquaredError,
+        'kl_divergence': KLDivergence,
         'mean-squared-error': MeanSquaredError,
         'hellinger-distance': HellingerDistance,
         'binary-cross-entropy': BinaryCrossEntropy,

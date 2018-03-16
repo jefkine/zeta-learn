@@ -10,11 +10,11 @@ class LogIfBusy:
         wraps(func)(self)
 
     def __call__(self, *args, **kwargs):
-        print('WORKING...')
+        print('\nWORKING...')
         start = time.time()
         result = self.__wrapped__(*args, **kwargs)
         stop = time.time()
-        print('......DONE \n')
+        print('......DONE\n')
         print('TIMER: {} operation took: {:2.4f} seconds to complete.\n'.format(self.__wrapped__.__name__, stop-start))
         return result
 
