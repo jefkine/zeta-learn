@@ -57,6 +57,16 @@ def plot_mnist_img_results(test_data, test_label, predictions, fig_dims = (6, 6)
 
     plt.show()
     # plt.clf()
+    
+def plot_generated_mnist_samples(data, fig_dims = (6, 6)):
+    fig = plt.figure(figsize = fig_dims)
+    fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
+    
+    for i in range(36):
+        digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
+        digit.imshow(data[i], cmap = plt.cm.binary, interpolation = 'nearest')
+         
+    plt.show()
 
 def plot_mnist_img_samples(data, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)

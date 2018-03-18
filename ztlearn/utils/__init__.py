@@ -34,6 +34,7 @@ from .charts import plot_acc_loss
 from .charts import plot_mnist_img_results
 from .charts import plot_mnist_img_samples
 from .charts import plot_regression_results
+from .charts import plot_generated_mnist_samples
 
 # import from decorate.py
 from .decorate import LogIfBusy
@@ -59,6 +60,7 @@ __all__ = [
             # From charts.py
             'plot_loss','plot_accuracy','plot_acc_loss','plot_mnist_img_results',
             'plot_mnist_img_samples','plot_regression_results',
+            'plot_generated_mnist_samples',
 
             # From sequences.py
             'gen_mult_sequence_xtyt','gen_mult_sequence_xtym'
