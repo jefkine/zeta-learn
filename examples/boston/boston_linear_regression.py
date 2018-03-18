@@ -3,11 +3,7 @@
 import numpy as np
 from sklearn import datasets
 
-from ztlearn.utils import z_score
-from ztlearn.utils import plot_acc_loss
-from ztlearn.utils import train_test_split
-from ztlearn.utils import plot_regression_results
-
+from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.regression import LinearRegression
 from ztlearn.dl.objectives import ObjectiveFunction as objective
@@ -34,12 +30,12 @@ mse = objective('mean-squared-error')._forward(predictions, targets)
 
 print('Mean Squared Error: {:.2f}'.format(mse))
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
-plot_regression_results(train_data, train_label, test_data, test_label, 
+plot_regression_results(train_data, train_label, test_data, test_label,
                                                             input_data,
                                                             model.predict(input_data),
                                                             mse,
-                                                            'Linear Regression',                                                            
-                                                            'Median House Price', 
+                                                            'Linear Regression',
+                                                            'Median House Price',
                                                             'Average Number of Rooms')
 
 

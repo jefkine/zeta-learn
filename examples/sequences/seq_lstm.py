@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from ztlearn.utils import plot_loss
-from ztlearn.utils import plot_accuracy
-from ztlearn.utils import train_test_split
-from ztlearn.utils import print_seq_samples
-from ztlearn.utils import print_seq_results
-from ztlearn.utils import gen_mult_sequence_xtyt
-
+from ztlearn.utils import *
 from ztlearn.dl.layers import LSTM
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt

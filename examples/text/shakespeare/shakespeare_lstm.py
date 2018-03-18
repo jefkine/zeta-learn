@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import LSTM, Flatten, Dense
-
-from ztlearn.utils import plot_loss
-from ztlearn.utils import plot_accuracy
-from ztlearn.utils import train_test_split
-from ztlearn.utils import gen_char_sequence_xtym
 
 
 text = open('../../data/text/tinyshakespeare.txt').read().lower()
@@ -25,9 +21,9 @@ model.add(Dense(len_chars,  activation = 'softmax'))
 model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
 
 model_epochs = 2
-fit_stats = model.fit(train_data, 
-                      train_label, 
-                      batch_size = 128, 
+fit_stats = model.fit(train_data,
+                      train_label,
+                      batch_size = 128,
                       epochs = model_epochs,
                       validation_data = (test_data, test_label))
 

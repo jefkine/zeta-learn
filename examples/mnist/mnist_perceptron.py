@@ -2,15 +2,7 @@
 
 from sklearn import datasets
 
-from ztlearn.utils import unhot
-from ztlearn.utils import one_hot
-from ztlearn.utils import normalize
-from ztlearn.utils import plot_acc_loss
-from ztlearn.utils import print_results
-from ztlearn.utils import train_test_split
-from ztlearn.utils import plot_mnist_img_results
-from ztlearn.utils import plot_mnist_img_samples
-
+from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
@@ -35,4 +27,3 @@ print_results(predictions, unhot(test_label))
 plot_mnist_img_results(test_data, unhot(test_label), predictions)
 
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
-

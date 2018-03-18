@@ -2,15 +2,7 @@
 
 from sklearn import datasets
 
-from ztlearn.utils import unhot
-from ztlearn.utils import one_hot
-from ztlearn.utils import plot_loss
-from ztlearn.utils import plot_accuracy
-from ztlearn.utils import print_results
-from ztlearn.utils import train_test_split
-from ztlearn.utils import plot_mnist_img_results
-from ztlearn.utils import plot_mnist_img_samples
-
+from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNomalization
@@ -56,10 +48,10 @@ plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
 '''
 
 NOTES:
-    
+
 # Even with dropout removed altogether, still adam 20 epochs get to 98.15% accuracy
 # Droput however has positive impact on fit speed (takes less time)
-    
+
 # for sgd-momentum more epochs without batchnorm and dropout help get it to 87% accuracy
 opt = register_opt(optimizer_name = 'sgd-momentum', momentum = 0.01, learning_rate = 0.0001)
 

@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from ztlearn.utils import plot_loss
-from ztlearn.utils import plot_accuracy
-from ztlearn.utils import train_test_split
-from ztlearn.utils import gen_char_sequence_xtym
-
+from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import LSTM, Flatten, Dense

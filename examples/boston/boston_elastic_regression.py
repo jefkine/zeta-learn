@@ -3,11 +3,7 @@
 import numpy as np
 from sklearn import datasets
 
-from ztlearn.utils import z_score
-from ztlearn.utils import plot_acc_loss
-from ztlearn.utils import train_test_split
-from ztlearn.utils import plot_regression_results
-
+from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.regression import ElasticNetRegression
 from ztlearn.dl.objectives import ObjectiveFunction as objective
@@ -42,6 +38,6 @@ plot_regression_results(train_data, train_label, test_data, test_label,
                                                             input_data,
                                                             model.predict(input_data),
                                                             mse,
-                                                            'Elastic Regression',                                                            
+                                                            'Elastic Regression',
                                                             'Median House Price',
                                                             'Average Number of Rooms')

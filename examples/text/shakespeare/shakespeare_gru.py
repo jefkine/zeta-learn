@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from ztlearn.utils import *
 from ztlearn.dl.layers import GRU
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-
-from ztlearn.utils import plot_loss
-from ztlearn.utils import plot_accuracy
-from ztlearn.utils import train_test_split
-from ztlearn.utils import gen_char_sequence_xtyt
 
 
 text = open('../../data/text/tinyshakespeare.txt').read().lower()
@@ -23,9 +19,9 @@ model.add(GRU(128, activation = "tanh", input_shape = (30, len_chars)))
 model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
 
 model_epochs = 20
-fit_stats = model.fit(train_data, 
-                      train_label, 
-                      batch_size = 128, 
+fit_stats = model.fit(train_data,
+                      train_label,
+                      batch_size = 128,
                       epochs = model_epochs,
                       validation_data = (test_data, test_label))
 

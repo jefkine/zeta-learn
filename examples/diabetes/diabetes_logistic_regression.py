@@ -3,12 +3,7 @@
 import numpy as np
 import pandas as pd
 
-from ztlearn.utils import z_score
-from ztlearn.utils import plot_acc_loss
-from ztlearn.utils import print_results
-from ztlearn.utils import train_test_split
-from ztlearn.utils import plot_regression_results
-
+from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
 

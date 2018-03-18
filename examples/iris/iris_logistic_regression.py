@@ -2,11 +2,7 @@
 
 from sklearn import datasets
 
-from ztlearn.utils import normalize
-from ztlearn.utils import plot_acc_loss
-from ztlearn.utils import print_results
-from ztlearn.utils import train_test_split
-
+from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
 
