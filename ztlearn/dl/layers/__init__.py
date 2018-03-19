@@ -18,7 +18,9 @@ from .base import Layer
 from .core import Dense
 from .core import Dropout
 from .core import Flatten
+from .core import Reshape
 from .core import Activation
+from .core import Upsampling2d
 
 # embedding layer(s)
 from .embedding import Embedding

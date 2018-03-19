@@ -132,7 +132,56 @@ class Flatten(Layer):
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
-        return inputs.reshape((inputs.shape[0], -1))
+        return np.reshape(inputs, (inputs.shape[0], -1))
 
     def pass_backward(self, grad):
-        return grad.reshape(self.prev_shape)
+        return np.reshape(grad, self.prev_shape)
+    
+class Upsampling2d(Layer):
+    
+    def __init__(self, size = (2,2), input_shape = None):
+        self.size = size
+        self.input_shape = input_shape
+        self.prev_shape = None
+        
+    def prep_layer(self): pass
+        
+    def pass_forward(self, inputs):
+        self.prev_shape = inputs.shape          
+        upsampled = np.repeat(inputs, self.size[0], axis = 2)
+        return np.repeat(upsampled, self.size[1], axis = 3)  
+    
+    def pass_backward(self, grad):
+        grad = grad[:, :, ::self.size[0], ::self.size[1]]
+        assert grad.shape == self.prev_shape, 'grad shape incorect'
+        return grad
+    
+    @property
+    def output_shape(self):
+        input_depth, input_height, input_width = self.input_shape
+        return input_depth, self.size[0] * input_height, self.size[1] * input_width
+    
+    
+class Reshape(Layer):
+    
+    def __init__(self, target_shape, input_shape = None):
+        self.target_shape = target_shape
+        self.input_shape = input_shape
+        self.prev_shape = None
+        
+    def prep_layer(self): pass
+
+    def pass_forward(self, inputs):
+        self.prev_shape = inputs.shape       
+        return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
+    
+    def pass_backward(self, grad):
+        return np.reshape(grad, self.prev_shape)
+    
+    @property
+    def output_shape(self):
+        return self.target_shape
+    
+    
+        
+

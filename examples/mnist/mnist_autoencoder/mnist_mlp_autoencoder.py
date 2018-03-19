@@ -41,11 +41,11 @@ def stack_decoder_layers(init):
 encoder = stack_encoder_layers(init = init_type)
 decoder = stack_decoder_layers(init = init_type)
 
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
+
 autoencoder = Sequential(init_method = init_type)
 autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
-
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
 autoencoder.compile(loss = 'categorical-cross-entropy', optimizer = opt)
 
 images = (data.data.astype(np.float32)) / 255
@@ -54,7 +54,7 @@ train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   test_size = 0.2,
                                                                   random_seed = 5)
 
-model_epochs = 100
+model_epochs = 500
 fit_stats = autoencoder.fit(train_data,
                             train_label,
                             batch_size = 64,
