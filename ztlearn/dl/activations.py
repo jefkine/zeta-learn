@@ -534,8 +534,8 @@ class ActivationFunction:
         'sigmoid': Sigmoid,
         'softmax': Softmax,
         'softplus': SoftPlus,
-        'leaky-relu': LeakyReLU,
-        'elliot-sigmoid': ElliotSigmoid
+        'leaky_relu': LeakyReLU,
+        'elliot_sigmoid': ElliotSigmoid
     }
 
     def __init__(self, name):

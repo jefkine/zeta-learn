@@ -8,7 +8,7 @@ from ..objectives import ObjectiveFunction as objective
 
 class Sequential:
 
-    def __init__(self, init_method = 'he-normal'):
+    def __init__(self, init_method = 'he_normal'):
         self.layers = []
         self.init_method = init_method
 
@@ -29,7 +29,7 @@ class Sequential:
         layer.prep_layer()
         self.layers.append(layer)
 
-    def compile(self, loss = 'categorical-cross-entropy', optimizer = {}):
+    def compile(self, loss = 'categorical_crossentropy', optimizer = {}):
         self.loss = loss
         for layer in self.layers:
             if hasattr(layer, 'weight_optimizer'):

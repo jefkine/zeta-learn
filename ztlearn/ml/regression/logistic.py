@@ -14,8 +14,8 @@ from ..regularizers import RegularizationFunction as regularize
 class LogisticRegression:
 
     def __init__(self, epochs,
-                       loss = 'binary-cross-entropy',
-                       init_method = 'he-normal',
+                       loss = 'binary_crossentropy',
+                       init_method = 'he_normal',
                        optimizer = {},
                        penalty = 'lasso',
                        penalty_weight = 0,

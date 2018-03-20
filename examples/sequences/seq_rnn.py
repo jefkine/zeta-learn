@@ -18,7 +18,7 @@ model = Sequential()
 model.add(RNN(5, activation = "tanh", bptt_truncate = 5, input_shape = (9, seq_len)))
 model.add(Flatten())
 model.add(Dense(seq_len, activation = 'softmax'))
-model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 15
 fit_stats = model.fit(train_data,

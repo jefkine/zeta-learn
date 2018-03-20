@@ -472,7 +472,7 @@ class OptimizationFunction:
         'adagrad': AdaGrad,
         'rmsprop': RMSprop,
         'adadelta': Adadelta,
-        'sgd-momentum': SGDMomentum,
+        'sgd_momentum': SGDMomentum,
         'nestrov': NesterovAcceleratedGradient
     }
 

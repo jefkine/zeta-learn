@@ -16,7 +16,7 @@ opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, learning_rate = 0
 # Model definition
 model = Sequential()
 model.add(GRU(128, activation = "tanh", input_shape = (30, len_chars)))
-model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 20
 fit_stats = model.fit(train_data,

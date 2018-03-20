@@ -22,7 +22,7 @@ model = Sequential()
 model.add(RNN(128, activation = "tanh", bptt_truncate = 5, input_shape = (8, 8)))
 model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # mnist classes
-model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 100
 fit_stats = model.fit(train_data.reshape(-1,8,8),

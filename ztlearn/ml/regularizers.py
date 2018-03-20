@@ -119,7 +119,7 @@ class RegularizationFunction:
         'lasso': L1Regularization,
         'ridge': L2Regularization,
         'elastic': ElasticNetRegularization,
-        'elastic-net': ElasticNetRegularization
+        'elastic_net': ElasticNetRegularization
     }
 
     def __init__(self, name = 'lasso', _lambda = 0.5, l1_ratio = 0.5):

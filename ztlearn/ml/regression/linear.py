@@ -9,8 +9,8 @@ from ztlearn.utils import LogIfBusy
 class LinearRegression(Regression):
 
     def __init__(self, epochs = 100,
-                       loss = 'mean-squared-error',
-                       init_method = 'random-normal',
+                       loss = 'mean_squared_error',
+                       init_method = 'random_normal',
                        optimizer = {},
                        penalty = 'ridge',
                        penalty_weight = 0.5,

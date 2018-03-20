@@ -16,7 +16,7 @@ opt = register_opt(optimizer_name = 'adagrad', momentum = 0.01, learning_rate = 
 # Model definition
 model = Sequential()
 model.add(LSTM(10, activation = "tanh", input_shape = (10, seq_len)))
-model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 100
 fit_stats = model.fit(train_data,

@@ -333,11 +333,11 @@ class ObjectiveFunction:
     _functions = {
         'kld': KLDivergence,
         'mse': MeanSquaredError,
-        'kl_divergence': KLDivergence,
-        'mean-squared-error': MeanSquaredError,
-        'hellinger-distance': HellingerDistance,
-        'binary-cross-entropy': BinaryCrossEntropy,
-        'categorical-cross-entropy': CategoricalCrossEntropy
+        'mean_squared_error': MeanSquaredError,
+        'hellinger_distance': HellingerDistance,
+        'binary_crossentropy': BinaryCrossEntropy,
+        'kullback_leibler_divergence': KLDivergence,
+        'categorical_crossentropy': CategoricalCrossEntropy
     }
 
     def __init__(self, name):

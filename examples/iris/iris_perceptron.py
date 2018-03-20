@@ -14,7 +14,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 model = Perceptron(epochs = 500, activation = 'leaky-relu',
-                                 loss = 'categorical-cross-entropy',
+                                 loss = 'categorical_crossentropy',
                                  init_method = 'he-normal',
                                  optimizer = opt)
 

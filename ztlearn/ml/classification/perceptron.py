@@ -15,8 +15,8 @@ class Perceptron:
 
     def __init__(self, epochs,
                        activation = 'sigmoid',
-                       loss = 'categorical-cross-entropy',
-                       init_method = 'he-normal',
+                       loss = 'categorical_crossentropy',
+                       init_method = 'he_normal',
                        optimizer = {},
                        penalty = 'lasso',
                        penalty_weight = 0,

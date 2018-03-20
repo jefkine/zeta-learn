@@ -12,8 +12,8 @@ from ..regularizers import RegularizationFunction as regularize
 class Regression(object):
 
     def __init__(self, epochs,
-                       loss = 'mean-squared-error',
-                       init_method = 'he-uniform',
+                       loss = 'mean_squared_error',
+                       init_method = 'he_uniform',
                        optimizer = {},
                        penalty = 'ridge',
                        penalty_weight = 0.5,

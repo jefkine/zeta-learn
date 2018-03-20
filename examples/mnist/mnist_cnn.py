@@ -18,7 +18,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
-model = Sequential(init_method = 'he-uniform')
+model = Sequential(init_method = 'he_uniform')
 model.add(Conv2d(filters = 32, kernel_size = (3,3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
 model.add(Dropout(0.25))
 model.add(BatchNomalization())
@@ -31,7 +31,7 @@ model.add(Dense(256, activation = 'relu'))
 model.add(Dropout(0.5))
 model.add(BatchNomalization())
 model.add(Dense(10, activation = 'softmax')) # 10 mnist classes
-model.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 12
 fit_stats = model.fit(train_data.reshape(-1,1,8,8),

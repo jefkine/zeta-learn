@@ -9,8 +9,8 @@ class ElasticNetRegression(Regression):
 
     def __init__(self, degree = 2,
                        epochs = 100,
-                       loss = 'mean-squared-error',
-                       init_method = 'random-normal',
+                       loss = 'mean_squared_error',
+                       init_method = 'random_normal',
                        optimizer = {},
                        penalty = 'elastic',
                        penalty_weight = 0.5,
@@ -25,14 +25,14 @@ class ElasticNetRegression(Regression):
                                                    l1_ratio = l1_ratio)
 
     def fit(self, inputs, targets, verbose = True, normalized = True):
-        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)        
+        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
         if normalized:
-            polynomial_inputs = normalize(polynomial_inputs)    
+            polynomial_inputs = normalize(polynomial_inputs)
         fit_stats = super(ElasticNetRegression, self).fit(polynomial_inputs, targets, verbose)
         return fit_stats
 
     def predict(self, inputs, normalized = True):
-        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)        
+        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
         if normalized:
-            polynomial_inputs = normalize(polynomial_inputs) 
+            polynomial_inputs = normalize(polynomial_inputs)
         return super(ElasticNetRegression, self).predict(polynomial_inputs)
