@@ -21,7 +21,7 @@ opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 
 model = Sequential()
 model.add(GRU(128, activation = "tanh", input_shape = (8,8)))
 model.add(Flatten())
-model.add(Dense(10, activation = 'softmax')) # mnist classes
+model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 100

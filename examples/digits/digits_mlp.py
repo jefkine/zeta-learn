@@ -22,7 +22,7 @@ model = Sequential()
 model.add(Dense(256, activation = 'relu', input_shape=(64,)))
 model.add(Dropout(0.25))
 model.add(BatchNomalization())
-model.add(Dense(10, activation = 'relu')) # 10 mnist_classes
+model.add(Dense(10, activation = 'relu')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 12

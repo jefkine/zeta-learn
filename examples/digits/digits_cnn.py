@@ -30,7 +30,7 @@ model.add(Flatten())
 model.add(Dense(256, activation = 'relu'))
 model.add(Dropout(0.5))
 model.add(BatchNomalization())
-model.add(Dense(10, activation = 'softmax')) # 10 mnist classes
+model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 12
