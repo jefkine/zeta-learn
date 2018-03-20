@@ -10,7 +10,7 @@ from ztlearn.dl.layers import BatchNomalization, Dropout, Dense
 
 
 data = datasets.load_digits()
-plot_mnist_img_samples(data)
+plot_digits_img_samples(data)
 
 img_rows = 8
 img_cols = 8
@@ -63,9 +63,7 @@ fit_stats = autoencoder.fit(train_data,
                             shuffle_data = True)
 
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
-plot_generated_mnist_samples(predictions)
+plot_generated_digits_samples(predictions)
 
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-
-

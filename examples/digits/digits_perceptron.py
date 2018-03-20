@@ -7,7 +7,7 @@ from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_digits()
-plot_mnist_img_samples(data)
+plot_digits_img_samples(data)
 
 train_data, test_data, train_label, test_label = train_test_split(normalize(data.data),
                                                                   one_hot(data.target),
@@ -24,6 +24,6 @@ fit_stats = model.fit(train_data, train_label, verbose = False)
 
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))
-plot_mnist_img_results(test_data, unhot(test_label), predictions)
+plot_digits_img_results(test_data, unhot(test_label), predictions)
 
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])

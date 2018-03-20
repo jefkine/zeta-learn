@@ -8,7 +8,7 @@ from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import LSTM, Dense, Flatten
 
 data = datasets.load_digits()
-plot_mnist_img_samples(data)
+plot_digits_img_samples(data)
 
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
@@ -35,7 +35,7 @@ fit_stats = model.fit(train_data.reshape(-1,8,8),
 predictions = unhot(model.predict(test_data.reshape(-1,8,8), True))
 
 print_results(predictions, test_label)
-plot_mnist_img_results(test_data, test_label, predictions)
+plot_digits_img_results(test_data, test_label, predictions)
 
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])

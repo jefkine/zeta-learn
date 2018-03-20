@@ -42,7 +42,7 @@ def plot_acc_loss(epoch, acc, loss, fig_dims = (7, 5), font_size = 10):
     plt.show()
     # plt.clf()
 
-def plot_mnist_img_results(test_data, test_label, predictions, fig_dims = (6, 6)):
+def plot_digits_img_results(test_data, test_label, predictions, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
@@ -57,18 +57,18 @@ def plot_mnist_img_results(test_data, test_label, predictions, fig_dims = (6, 6)
 
     plt.show()
     # plt.clf()
-    
-def plot_generated_mnist_samples(data, fig_dims = (6, 6)):
+
+def plot_generated_digits_samples(data, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
-    
+
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
         digit.imshow(data[i], cmap = plt.cm.binary, interpolation = 'nearest')
-         
+
     plt.show()
 
-def plot_mnist_img_samples(data, fig_dims = (6, 6)):
+def plot_digits_img_samples(data, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
@@ -87,13 +87,12 @@ def plot_regression_results(train_data, train_label, test_data, test_label, inpu
     test = plt.scatter(test_data, test_label, color = cmap(0.4), s = 12)
     plt.plot(input_data, pred_line, '*', color = 'green', markersize = 4)
     plt.suptitle(super_title)
-    
+
     if mse is not None:
         plt.title("MSE: {:4.2f}".format(mse), fontsize = font_size)
-        
+
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
     plt.show()
     # plt.clf()
-
