@@ -16,7 +16,7 @@ img_rows = 8
 img_cols = 8
 img_dim = 64  # img_rows * img_cols
 latent_dim = 16
-init_type = 'he-uniform'
+init_type = 'he_normal'
 
 def stack_encoder_layers(init):
     model = Sequential(init_method = init)
@@ -46,9 +46,9 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 autoencoder = Sequential(init_method = init_type)
 autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
-autoencoder.compile(loss = 'categorical-cross-entropy', optimizer = opt)
+autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-images = (data.data.astype(np.float32)) / 255
+images = (data.data.astype(np.float32)) / 255 # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,

@@ -8,7 +8,7 @@ from ztlearn.utils import col2im_indices
 from ..initializers import InitializeWeights as init
 from ..optimizers import OptimizationFunction as optimizer
 
-class Conv2d(Layer):
+class Conv2D(Layer):
 
     def __init__(self, filters = 32, kernel_size = (3, 3), activation = 'relu', input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
         self.filters = filters

@@ -138,7 +138,7 @@ class Flatten(Layer):
         return np.reshape(grad, self.prev_shape)
 
 
-class Upsampling2d(Layer):
+class Upsampling2D(Layer):
 
     def __init__(self, size = (2,2), input_shape = None):
         self.size = size
@@ -154,7 +154,7 @@ class Upsampling2d(Layer):
 
     def pass_backward(self, grad):
         grad = grad[:, :, ::self.size[0], ::self.size[1]]
-        assert grad.shape == self.prev_shape, 'grad shape incorect'
+        assert grad.shape == self.prev_shape, 'grad shape incorrect'
         return grad
 
     @property

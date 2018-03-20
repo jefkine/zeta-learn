@@ -58,7 +58,7 @@ class Pool(Layer):
         return d_input.reshape(self.inputs.shape)
 
 
-class MaxPooling2d(Pool):
+class MaxPooling2D(Pool):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super().__init__(pool_size, strides, padding)
@@ -73,7 +73,7 @@ class MaxPooling2d(Pool):
         return d_input_col
 
 
-class AveragePool2d(Pool):
+class AveragePool2D(Pool):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super().__init__(pool_size, strides, padding)

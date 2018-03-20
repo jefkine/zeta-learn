@@ -20,17 +20,17 @@ from .core import Dropout
 from .core import Flatten
 from .core import Reshape
 from .core import Activation
-from .core import Upsampling2d
+from .core import Upsampling2D
 
 # embedding layer(s)
 from .embedding import Embedding
 
 # pooling layer(s)
-from .pooling import MaxPooling2d
-from .pooling import AveragePool2d
+from .pooling import MaxPooling2D
+from .pooling import AveragePool2D
 
 # convolutional layer(s)
-from .convolutional import Conv2d
+from .convolutional import Conv2D
 
 # normalization layer(s)
 from .normalization import BatchNomalization
@@ -39,4 +39,3 @@ from .normalization import BatchNomalization
 from .recurrent import RNN
 from .recurrent import GRU
 from .recurrent import LSTM
-

@@ -5,8 +5,8 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import BatchNomalization, Conv2d
-from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2d
+from ztlearn.dl.layers import BatchNomalization, Conv2D
+from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 data = datasets.load_digits()
 plot_mnist_img_samples(data)
@@ -19,11 +19,11 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
 model = Sequential(init_method = 'he_uniform')
-model.add(Conv2d(filters = 32, kernel_size = (3,3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
+model.add(Conv2D(filters = 32, kernel_size = (3,3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
 model.add(Dropout(0.25))
 model.add(BatchNomalization())
-model.add(Conv2d(filters = 64, kernel_size = (3,3), activation = 'relu', padding = 'same'))
-model.add(MaxPooling2d(pool_size = (2,2)))
+model.add(Conv2D(filters = 64, kernel_size = (3,3), activation = 'relu', padding = 'same'))
+model.add(MaxPooling2D(pool_size = (2,2)))
 model.add(Dropout(0.25))
 model.add(BatchNomalization())
 model.add(Flatten())
