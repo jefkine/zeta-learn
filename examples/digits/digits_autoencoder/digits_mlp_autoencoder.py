@@ -15,12 +15,12 @@ plot_digits_img_samples(data)
 img_rows = 8
 img_cols = 8
 img_dim = 64  # img_rows * img_cols
-latent_dim = 16
+latent_dim = 4
 init_type = 'he_normal'
 
 def stack_encoder_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(256, activation = 'relu', input_shape=(img_dim,)))
+    model.add(Dense(256, activation = 'relu', input_shape = (img_dim,)))
     model.add(BatchNomalization())
     model.add(Dense(128, activation = 'relu'))
     model.add(BatchNomalization())
@@ -30,7 +30,7 @@ def stack_encoder_layers(init):
 
 def stack_decoder_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(128, activation = 'relu', input_shape=(latent_dim,)))
+    model.add(Dense(128, activation = 'relu', input_shape = (latent_dim,)))
     model.add(BatchNomalization())
     model.add(Dense(256, activation = 'relu'))
     model.add(BatchNomalization())
@@ -55,7 +55,7 @@ train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   test_size = 0.2,
                                                                   random_seed = 5)
 
-model_epochs = 500
+model_epochs = 200
 fit_stats = autoencoder.fit(train_data,
                             train_label,
                             batch_size = 64,
