@@ -10,9 +10,9 @@ from ztlearn.dl.optimizers import OptimizationFunction as optimizer
 
 class GRU(Layer):
 
-    def __init__(self, h_units, activation = 'tanh', input_shape = None, gate_activation = 'sigmoid'):
+    def __init__(self, h_units, activation = None, input_shape = None, gate_activation = 'sigmoid'):
         self.h_units = h_units # number of hidden states
-        self.activation = activation
+        self.activation = activation # should be tanh by default
         self.input_shape = input_shape
         self.gate_activation = gate_activation
 

@@ -30,7 +30,7 @@ class Activation(Layer):
 
 class Dense(Layer):
 
-    def __init__(self, units, activation = 'relu', input_shape = None):
+    def __init__(self, units, activation = None, input_shape = None):
         self.units = units
         self.activation = activation
         self.input_shape = input_shape

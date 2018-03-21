@@ -22,7 +22,7 @@ class Sequential:
         if hasattr(layer, 'weight_initializer'):
             layer.weight_initializer = self.init_method
         self.append_layer(layer)
-        if hasattr(layer, 'layer_activation'):
+        if hasattr(layer, 'layer_activation') and layer.layer_activation is not None:
             self.append_layer(Activation(layer.layer_activation, input_shape = self.layers[-1].output_shape))
 
     def append_layer(self, layer):

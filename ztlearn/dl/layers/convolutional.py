@@ -10,7 +10,7 @@ from ..optimizers import OptimizationFunction as optimizer
 
 class Conv2D(Layer):
 
-    def __init__(self, filters = 32, kernel_size = (3, 3), activation = 'relu', input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
         self.filters = filters
         self.strides = strides
         self.padding = padding

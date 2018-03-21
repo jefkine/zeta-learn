@@ -10,9 +10,9 @@ from ztlearn.dl.optimizers import OptimizationFunction as optimizer
 
 class RNN(Layer):
 
-    def __init__(self, h_units, activation = 'tanh', bptt_truncate = 5, input_shape = None):
+    def __init__(self, h_units, activation = None, bptt_truncate = 5, input_shape = None):
         self.h_units = h_units # number of hidden states
-        self.activation = activation
+        self.activation = activation # should be tanh by default
         self.bptt_truncate = bptt_truncate
         self.input_shape = input_shape
 
