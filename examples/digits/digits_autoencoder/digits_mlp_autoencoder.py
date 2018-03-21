@@ -48,7 +48,8 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-images = (data.data.astype(np.float32)) / 255 # rescale to range [0, 1]
+# images = (data.data.astype(np.float32)) / 100 # rescale to range [0, 1]
+images = min_max(data.data.astype(np.float32)) # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,
@@ -62,8 +63,9 @@ fit_stats = autoencoder.fit(train_data,
                             validation_data = (test_data, test_label),
                             shuffle_data = True)
 
+_, _, _, test_label = train_test_split(data.data, data.target,test_size = 0.2, random_seed = 5)
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
-plot_generated_digits_samples(predictions)
 
+plot_generated_digits_samples(unhot(one_hot(test_label)), predictions)
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
