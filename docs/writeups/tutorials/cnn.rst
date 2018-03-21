@@ -9,9 +9,9 @@ reducing the overall number of trainable weights hence introducing sparsity.
 zeta-learn utilizes the ``Sequential`` model api to help you build up a convolutional
 neural network with ease as we will demonstrate below.
 
-We shall use DIGITS, a dataset of handwritten digits with 1724 training samples,
-and 10,000 test samples. Each image is represented by 8x8 pixels, with each
-containing a value 0 - 255 with its grayscale value.
+We shall use DIGITS, a dataset of handwritten digits with 1797 images. Each image 
+is represented by 8x8 pixels, with each containing a value 0 - 100 as its
+grayscale value.
 
 zeta-learn has a function which enables us to visualize samples of the DIGITS dataset
 
