@@ -59,8 +59,8 @@ class BatchNomalization(Layer):
         dbeta = np.sum(grad, axis = 0)
         dgamma = np.sum(grad * self.input_norm, axis=0)
 
-        self.gamma = optimizer(self.weight_optimizer)._update(self.gamma, dgamma)
-        self.beta = optimizer(self.weight_optimizer)._update(self.beta, dbeta)
+        self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
+        self.beta = optimizer(self.weight_optimizer).update(self.beta, dbeta)
 
         dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
 

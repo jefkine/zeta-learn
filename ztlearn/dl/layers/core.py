@@ -22,10 +22,10 @@ class Activation(Layer):
 
     def pass_forward(self, input_signal, train_mode = True, **kwargs):
         self.input_signal = input_signal
-        return self.activation_func._forward(input_signal)
+        return self.activation_func.forward(input_signal)
 
     def pass_backward(self, grad):
-        return grad * self.activation_func._backward(self.input_signal)
+        return grad * self.activation_func.backward(self.input_signal)
 
 
 class Dense(Layer):
@@ -83,8 +83,8 @@ class Dense(Layer):
         dweights = self.inputs.T @ grad
         dbias = np.sum(grad, axis = 0, keepdims = True)
 
-        self.weights = optimizer(self.weight_optimizer)._update(self.weights, dweights)
-        self.bias = optimizer(self.weight_optimizer)._update(self.bias, dbias)
+        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
 
         return grad @ prev_weights.T
 

@@ -349,11 +349,11 @@ class ObjectiveFunction:
     def name(self):
         return self.objective_func.objective_name
 
-    def _forward(self, predictions, targets, np_type = np.float32):
+    def forward(self, predictions, targets, np_type = np.float32):
         return self.objective_func.loss(predictions, targets, np_type)
 
-    def _backward(self, predictions, targets):
+    def backward(self, predictions, targets):
         return self.objective_func.derivative(predictions, targets)
 
-    def _accuracy(self, predictions, targets):
+    def accuracy(self, predictions, targets):
         return self.objective_func.accuracy(predictions, targets)

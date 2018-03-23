@@ -23,7 +23,7 @@ class GbOptimization(object):
         self.weights = np.zeros((self.epochs, 1, params))
 
         for i in np.arange(self.epochs):
-            self.inputs = optimize(self.optimizer)._update(self.inputs, self.df(self.inputs))
+            self.inputs = optimize(self.optimizer).update(self.inputs, self.df(self.inputs))
             self.weights[i,:,:] = self.inputs.T
 
             f_solution = f(self.inputs)

@@ -99,17 +99,17 @@ class GRU(Layer):
         self.z_tilde = np.zeros_like(self.z)
 
         for t in range(time_steps):
-            self.update[:, t] = activate(self.gate_activation)._forward(np.dot(self.z[:, t], self.W_update) + self.b_update)
-            self.reset[:, t] = activate(self.gate_activation)._forward(np.dot(self.z[:, t], self.W_reset) + self.b_reset)
+            self.update[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_update) + self.b_update)
+            self.reset[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_reset) + self.b_reset)
             self.z_tilde[:, t] = np.concatenate((self.reset[:, t] * self.states[:, t-1], self.inputs[:, t]), axis = 1)
-            self.cell[:, t] = activate(self.activation)._forward(np.dot(self.z_tilde[:, t-1], self.W_cell) + self.b_cell)
+            self.cell[:, t] = activate(self.activation).forward(np.dot(self.z_tilde[:, t-1], self.W_cell) + self.b_cell)
             self.states[:, t] = (1. - self.update[:, t]) * self.states[:, t-1]  + self.update[:, t] * self.cell[:, t]
 
             # logits
             self.final[:, t] = np.dot(self.states[:, t], self.W_final) + self.b_final
 
         if not train_mode:
-            return activate('softmax')._forward(self.final) # if mode is not training
+            return activate('softmax').forward(self.final) # if mode is not training
 
         return self.final
 
@@ -157,7 +157,7 @@ class GRU(Layer):
             dstate_a[:, t] = (1. - self.update[:, t]) * dstates[:, t]
             dupdate[:, t] = self.cell[:, t] * dstates[:, t] - self.states[:, t-1] * dstates[:, t]
 
-            dcell[:, t] = activate(self.activation)._backward(self.cell[:, t]) * dcell[:, t]
+            dcell[:, t] = activate(self.activation).backward(self.cell[:, t]) * dcell[:, t]
             dW_cell += np.dot(self.z_tilde[:, t-1].T, dcell[:, t])
             db_cell += np.sum(dcell[:, t], axis = 0)
             dz_cell = np.dot(dcell[:, t], self.W_cell.T)
@@ -166,12 +166,12 @@ class GRU(Layer):
             dstate_b[:, t] = self.reset[:, t] * dstates_prime[:, t]
 
             dreset[:, t] = self.states[:, t-1] * dstates_prime[:, t]
-            dreset[:, t] = activate(self.gate_activation)._backward(self.reset[:, t]) * dreset[:, t]
+            dreset[:, t] = activate(self.gate_activation).backward(self.reset[:, t]) * dreset[:, t]
             dW_reset += np.dot(self.z[:, t].T, dreset[:, t])
             db_reset += np.sum(dreset[:, t], axis = 0)
             dz_reset = np.dot(dreset[:, t], self.W_reset.T)
 
-            dupdate[:, t] = activate(self.gate_activation)._backward(self.update[:, t]) * dupdate[:, t]
+            dupdate[:, t] = activate(self.gate_activation).backward(self.update[:, t]) * dupdate[:, t]
             dW_update += np.dot(self.z[:, t].T, dupdate[:, t])
             db_update += np.sum(dupdate[:, t], axis = 0)
             dz_update = np.dot(dupdate[:, t], self.W_update.T)
@@ -182,16 +182,16 @@ class GRU(Layer):
             dstates_next = dstate_a + dstate_b + dstate_c
 
         # optimize weights and bias
-        self.W_final = optimizer(self.optimizer_kwargs)._update(self.W_final, cg(dW_final))
-        self.b_final = optimizer(self.optimizer_kwargs)._update(self.b_final, cg(db_final))
+        self.W_final = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
+        self.b_final = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
 
-        self.W_cell = optimizer(self.optimizer_kwargs)._update(self.W_cell, cg(dW_cell))
-        self.b_cell = optimizer(self.optimizer_kwargs)._update(self.b_cell, cg(db_cell))
+        self.W_cell = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
+        self.b_cell = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
 
-        self.W_reset = optimizer(self.optimizer_kwargs)._update(self.W_reset, cg(dW_reset))
-        self.b_reset = optimizer(self.optimizer_kwargs)._update(self.b_reset, cg(db_reset))
+        self.W_reset = optimizer(self.optimizer_kwargs).update(self.W_reset, cg(dW_reset))
+        self.b_reset = optimizer(self.optimizer_kwargs).update(self.b_reset, cg(db_reset))
 
-        self.W_update = optimizer(self.optimizer_kwargs)._update(self.W_update, cg(dW_update))
-        self.b_update = optimizer(self.optimizer_kwargs)._update(self.b_update, cg(db_update))
+        self.W_update = optimizer(self.optimizer_kwargs).update(self.W_update, cg(dW_update))
+        self.b_update = optimizer(self.optimizer_kwargs).update(self.b_update, cg(db_update))
 
         return next_grad

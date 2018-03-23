@@ -75,11 +75,11 @@ class RNN(Layer):
         self.states[:, -1] = np.zeros((batch_size, self.h_units)) # last column containing the final state set to zero
         for t in range(time_steps):
             self.state_input[:, t] = (np.dot(inputs[:, t], self.W_input.T) + np.dot(self.states[:, t-1], self.W_recur.T)) + self.b_input
-            self.states[:, t] = activate(self.activation)._forward(self.state_input[:, t])
+            self.states[:, t] = activate(self.activation).forward(self.state_input[:, t])
             self.outputs[:, t] = np.dot(self.states[:, t], self.W_output.T) + self.b_output
 
         if not train_mode:
-            return activate('softmax')._forward(self.outputs) # if mode is not training
+            return activate('softmax').forward(self.outputs) # if mode is not training
 
         return self.outputs
 
@@ -98,21 +98,21 @@ class RNN(Layer):
         for t in np.arange(time_steps)[::-1]: # reversed
             dW_output += np.dot(grad[:, t].T, self.states[:, t])
             db_output += np.sum(grad[:, t], axis = 0)
-            dstate = np.dot(grad[:, t], self.W_output) * activate(self.activation)._backward(self.state_input[:, t])
+            dstate = np.dot(grad[:, t], self.W_output) * activate(self.activation).backward(self.state_input[:, t])
             next_grad[:, t] = np.dot(dstate, self.W_input)
 
             for tt in np.arange(max(0, t - self.bptt_truncate), t + 1)[::-1]: # reversed
                 dW_input += np.dot(dstate.T, self.inputs[:, tt])
                 dW_recur += np.dot(dstate.T, self.states[:, tt-1])
                 db_input += np.sum(dstate, axis = 0)
-                dstate = dstate.dot(self.W_recur) * activate(self.activation)._backward(self.state_input[:, tt-1])
+                dstate = dstate.dot(self.W_recur) * activate(self.activation).backward(self.state_input[:, tt-1])
 
         # optimize weights and bias
-        self.W_input = optimizer(self.optimizer_kwargs)._update(self.W_input, cg(dW_input))
-        self.W_output = optimizer(self.optimizer_kwargs)._update(self.W_output, cg(dW_output))
-        self.W_recur = optimizer(self.optimizer_kwargs)._update(self.W_recur, cg(dW_recur))
+        self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
+        self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
+        self.W_recur = optimizer(self.optimizer_kwargs).update(self.W_recur, cg(dW_recur))
 
-        self.b_input = optimizer(self.optimizer_kwargs)._update(self.b_input, cg(db_input))
-        self.b_output = optimizer(self.optimizer_kwargs)._update(self.b_output, cg(db_output))
+        self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
+        self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
 
         return next_grad

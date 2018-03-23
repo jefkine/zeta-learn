@@ -131,8 +131,8 @@ class RegularizationFunction:
     def name(self):
         return self.regularization_func.regularization_name
 
-    def _regulate(self, weights):
+    def regulate(self, weights):
         return self.regularization_func.regulate(weights)
 
-    def _derivative(self, weights):
+    def derivative(self, weights):
         return self.regularization_func.derivative(weights)

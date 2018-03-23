@@ -62,15 +62,15 @@ class Sequential:
 
     def train_batches(self, train_batch_data, train_batch_label):
         predictions = self.foward_pass(train_batch_data, train_mode = True)
-        loss = np.mean(objective(self.loss)._forward(predictions, train_batch_label))
-        acc = objective(self.loss)._accuracy(predictions, train_batch_label)
-        self.backward_pass(objective(self.loss)._backward(predictions, train_batch_label))
+        loss = np.mean(objective(self.loss).forward(predictions, train_batch_label))
+        acc = objective(self.loss).accuracy(predictions, train_batch_label)
+        self.backward_pass(objective(self.loss).backward(predictions, train_batch_label))
         return loss, acc
 
     def test_batches(self, test_batch_data, test_batch_label, train_mode = False):
         predictions = self.foward_pass(test_batch_data, train_mode = train_mode)
-        loss = np.mean(objective(self.loss)._forward(predictions, test_batch_label))
-        acc = objective(self.loss)._accuracy(predictions, test_batch_label)
+        loss = np.mean(objective(self.loss).forward(predictions, test_batch_label))
+        acc = objective(self.loss).accuracy(predictions, test_batch_label)
         return loss, acc
 
     @LogIfBusy

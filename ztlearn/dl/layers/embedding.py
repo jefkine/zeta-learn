@@ -62,4 +62,4 @@ class Embedding(Layer):
     def pass_backward(self, grad):
         d_inputs = np.matmul(grad, self.one_hot_inputs)
         d_embeddings = np.sum(d_inputs, axis = 0)
-        self.weights = optimizer(self.weight_optimizer)._update(self.weights, d_embeddings.T)
+        self.weights = optimizer(self.weight_optimizer).update(self.weights, d_embeddings.T)

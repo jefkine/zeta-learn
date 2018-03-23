@@ -99,8 +99,8 @@ class Conv2D(Layer):
         dweights = dweights.reshape(self.weights.shape)
 
         # optimize the weights and bias
-        self.weights = optimizer(self.weight_optimizer)._update(self.weights, dweights)
-        self.bias = optimizer(self.weight_optimizer)._update(self.bias, dbias)
+        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
 
         weight_reshape = self.weights.reshape(self.filter_num, -1)
         dinput_col = weight_reshape.T @ doutput_reshaped

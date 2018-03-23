@@ -32,8 +32,8 @@ class Regression(object):
 
         for i in range(self.epochs):
             predictions = inputs.dot(self.weights)
-            mse = self.loss._forward(np.expand_dims(predictions, axis = 1), np.expand_dims(targets, axis = 1)) + self.regularization._regulate(self.weights)
-            acc = self.loss._accuracy(predictions, targets)
+            mse = self.loss.forward(np.expand_dims(predictions, axis = 1), np.expand_dims(targets, axis = 1)) + self.regularization.regulate(self.weights)
+            acc = self.loss.accuracy(predictions, targets)
 
             fit_stats["train_loss"].append(np.mean(mse))
             fit_stats["train_acc"].append(np.mean(acc))
@@ -41,9 +41,9 @@ class Regression(object):
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, mse, acc))
 
-            cost_gradient = self.loss._backward(predictions, targets)
-            d_weights = cost_gradient.dot(inputs) + self.regularization._derivative(self.weights)
-            self.weights = self.optimizer._update(self.weights, d_weights)
+            cost_gradient = self.loss.backward(predictions, targets)
+            d_weights = cost_gradient.dot(inputs) + self.regularization.derivative(self.weights)
+            self.weights = self.optimizer.update(self.weights, d_weights)
 
         return fit_stats
 

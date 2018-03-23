@@ -24,11 +24,11 @@ class Optimizer(object):
                                                               self.epoch,
                                                               self.min_lrate,
                                                               self.max_lrate,
-                                                              self.step_size)._decompose
+                                                              self.step_size).decompose
         return decay(self.learning_rate, self.decay_func, self.decay,
                                                           self.epoch,
                                                           self.min_lrate,
-                                                          self.max_lrate)._decompose
+                                                          self.max_lrate).decompose
 
 
 class GD:
@@ -485,7 +485,7 @@ class OptimizationFunction:
     def name(self):
         return self.optimization_func.optimization_name
 
-    def _update(self, weights, grads):
+    def update(self, weights, grads):
         return self.optimization_func.update(weights, grads)
 
 

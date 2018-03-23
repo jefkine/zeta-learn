@@ -36,10 +36,10 @@ class Perceptron:
 
         for i in range(self.epochs):
             linear_predictions = inputs.dot(self.weights) + self.bias
-            predictions = self.activate._forward(linear_predictions)
+            predictions = self.activate.forward(linear_predictions)
 
-            loss = self.loss._forward(predictions, targets) + self.regularization._regulate(self.weights)
-            acc = self.loss._accuracy(predictions, targets)
+            loss = self.loss.forward(predictions, targets) + self.regularization.regulate(self.weights)
+            acc = self.loss.accuracy(predictions, targets)
 
             fit_stats["train_loss"].append(np.mean(loss))
             fit_stats["train_acc"].append(np.mean(acc))
@@ -47,17 +47,17 @@ class Perceptron:
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, loss, acc))
 
-            grad = self.loss._backward(predictions, targets) * self.activate._backward(linear_predictions)
-            d_weights = inputs.T.dot(grad) + self.regularization._derivative(self.weights)
+            grad = self.loss.backward(predictions, targets) * self.activate.backward(linear_predictions)
+            d_weights = inputs.T.dot(grad) + self.regularization.derivative(self.weights)
             d_bias = np.sum(grad, axis = 0, keepdims = True)
 
-            self.weights = optimize(self.optimizer)._update(self.weights, d_weights)
-            self.bias = optimize(self.optimizer)._update(self.bias, d_bias)
+            self.weights = optimize(self.optimizer).update(self.weights, d_weights)
+            self.bias = optimize(self.optimizer).update(self.bias, d_bias)
 
         return fit_stats
 
     def predict(self, inputs):
-        # return self.activate._forward(inputs.dot(self.weights) + self.bias)
+        # return self.activate.forward(inputs.dot(self.weights) + self.bias)
         return inputs.dot(self.weights) + self.bias
 
     @property

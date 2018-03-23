@@ -547,8 +547,8 @@ class ActivationFunction:
     def name(self):
         return self.activation_func.activation_name
 
-    def _forward(self, input_signal):
+    def forward(self, input_signal):
         return self.activation_func.activation(input_signal) # returns tuples
 
-    def _backward(self, input_signal):
+    def backward(self, input_signal):
         return self.activation_func.derivative(input_signal)

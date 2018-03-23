@@ -113,18 +113,18 @@ class LSTM(Layer):
         self.z = np.concatenate((self.inputs, self.states), axis=2)
 
         for t in range(time_steps):
-            self.forget[:, t] = activate(self.gate_activation)._forward(np.dot(self.z[:, t], self.W_forget) + self.b_forget)
-            self.input[:, t] = activate(self.gate_activation)._forward(np.dot(self.z[:, t], self.W_input) + self.b_input)
-            self.cell_tilde[:, t] = activate(self.activation)._forward(np.dot(self.z[:, t], self.W_cell) + self.b_cell)
+            self.forget[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_forget) + self.b_forget)
+            self.input[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_input) + self.b_input)
+            self.cell_tilde[:, t] = activate(self.activation).forward(np.dot(self.z[:, t], self.W_cell) + self.b_cell)
             self.cell[:, t] = self.forget[:, t] * self.cell[:, t-1] + self.input[:, t] * self.cell_tilde[:, t]
-            self.output[:, t] = activate(self.gate_activation)._forward(np.dot(self.z[:, t], self.W_output) + self.b_output)
-            self.states[:, t] = self.output[:, t] * activate(self.activation)._forward(self.cell[:, t])
+            self.output[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_output) + self.b_output)
+            self.states[:, t] = self.output[:, t] * activate(self.activation).forward(self.cell[:, t])
 
             # logits
             self.final[:, t] = np.dot(self.states[:, t], self.W_final) + self.b_final
 
         if not train_mode:
-            return activate('softmax')._forward(self.final) # if mode is not training
+            return activate('softmax').forward(self.final) # if mode is not training
 
         return self.final
 
@@ -164,25 +164,25 @@ class LSTM(Layer):
             dstates[:, t] += dstates_next[:, t]
             next_grad = np.dot(dstates, self.W_final)
 
-            doutput[:,t] = activate(self.activation)._forward(self.cell[:, t]) * dstates[:, t]
-            doutput[:,t] = activate(self.gate_activation)._backward(self.output[:, t]) * doutput[:,t]
+            doutput[:,t] = activate(self.activation).forward(self.cell[:, t]) * dstates[:, t]
+            doutput[:,t] = activate(self.gate_activation).backward(self.output[:, t]) * doutput[:,t]
             dW_output += np.dot(self.z[:, t].T, doutput[:, t])
             db_output += np.sum(doutput[:, t], axis = 0)
 
-            dcell[:, t] += self.output[:, t] * dstates[:, t] * activate(self.activation)._backward(self.cell[:, t])
+            dcell[:, t] += self.output[:, t] * dstates[:, t] * activate(self.activation).backward(self.cell[:, t])
             dcell[:, t] += dcell_next[:, t]
             dcell_tilde[:, t] = dcell[:, t] * self.input[:, t]
-            dcell_tilde[:, t] = dcell_tilde[:, t] * activate(self.activation)._backward(dcell_tilde[:, t])
+            dcell_tilde[:, t] = dcell_tilde[:, t] * activate(self.activation).backward(dcell_tilde[:, t])
             dW_cell += np.dot(self.z[:, t].T, dcell[:, t])
             db_cell += np.sum(dcell[:, t], axis = 0)
 
             dinput[:, t] = self.cell_tilde[:, t] * dcell[:, t]
-            dinput[:, t] = activate(self.gate_activation)._backward(self.input[:, t]) * dinput[:, t]
+            dinput[:, t] = activate(self.gate_activation).backward(self.input[:, t]) * dinput[:, t]
             dW_input += np.dot(self.z[:, t].T, dinput[:, t])
             db_input += np.sum(dinput[:, t], axis = 0)
 
             dforget[:, t] = self.cell[:, t-1] * dcell[:, t]
-            dforget[:, t] = activate(self.gate_activation)._backward(self.forget[:, t]) * dforget[:, t]
+            dforget[:, t] = activate(self.gate_activation).backward(self.forget[:, t]) * dforget[:, t]
             dW_forget += np.dot(self.z[:, t].T, dforget[:, t])
             db_forget += np.sum(dforget[:, t], axis = 0)
 
@@ -196,19 +196,19 @@ class LSTM(Layer):
             dcell_next = self.forget * dcell
 
         # optimize weights and bias
-        self.W_final = optimizer(self.optimizer_kwargs)._update(self.W_final, cg(dW_final))
-        self.b_final = optimizer(self.optimizer_kwargs)._update(self.b_final, cg(db_final))
+        self.W_final = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
+        self.b_final = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
 
-        self.W_forget = optimizer(self.optimizer_kwargs)._update(self.W_forget, cg(dW_forget))
-        self.b_forget = optimizer(self.optimizer_kwargs)._update(self.b_forget, cg(db_forget))
+        self.W_forget = optimizer(self.optimizer_kwargs).update(self.W_forget, cg(dW_forget))
+        self.b_forget = optimizer(self.optimizer_kwargs).update(self.b_forget, cg(db_forget))
 
-        self.W_input = optimizer(self.optimizer_kwargs)._update(self.W_input, cg(dW_input))
-        self.b_input = optimizer(self.optimizer_kwargs)._update(self.b_input, cg(db_input))
+        self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
+        self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
 
-        self.W_output = optimizer(self.optimizer_kwargs)._update(self.W_output, cg(dW_output))
-        self.b_output = optimizer(self.optimizer_kwargs)._update(self.b_output, cg(db_output))
+        self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
+        self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
 
-        self.W_cell = optimizer(self.optimizer_kwargs)._update(self.W_cell, cg(dW_cell))
-        self.b_cell = optimizer(self.optimizer_kwargs)._update(self.b_cell, cg(db_cell))
+        self.W_cell = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
+        self.b_cell = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
 
         return next_grad
