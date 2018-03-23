@@ -14,7 +14,7 @@ class Optimizer(object):
         self.decay = self.decay if hasattr(self, 'decay') else 1e-6
         self.min_lrate = self.min_lrate if hasattr(self, 'min_lrate') else 0
         self.max_lrate = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
-        self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse-time-decay'
+        self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse_time_decay'
 
         self.epoch += 1
         if self.epoch == 1:

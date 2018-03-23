@@ -61,7 +61,8 @@ fit_stats = autoencoder.fit(train_data,
                             batch_size = 64,
                             epochs = model_epochs,
                             validation_data = (test_data, test_label),
-                            shuffle_data = True)
+                            shuffle_data = True,
+                            verbose = True)
 
 _, _, _, test_label = train_test_split(data.data, data.target,test_size = 0.2, random_seed = 5)
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))

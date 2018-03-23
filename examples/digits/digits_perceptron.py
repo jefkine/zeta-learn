@@ -25,5 +25,4 @@ fit_stats = model.fit(train_data, train_label, verbose = False)
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))
 plot_digits_img_results(test_data, unhot(test_label), predictions)
-
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])

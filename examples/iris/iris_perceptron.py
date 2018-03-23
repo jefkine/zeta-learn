@@ -13,9 +13,9 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   random_seed = 5)
 
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
-model = Perceptron(epochs = 500, activation = 'leaky-relu',
+model = Perceptron(epochs = 500, activation = 'leaky_relu',
                                  loss = 'categorical_crossentropy',
-                                 init_method = 'he-normal',
+                                 init_method = 'he_normal',
                                  optimizer = opt)
 
 fit_stats = model.fit(train_data, train_label, False)

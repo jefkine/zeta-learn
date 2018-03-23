@@ -40,7 +40,6 @@ predictions = unhot(model.predict(test_data, True))
 
 print_results(predictions, test_label)
 plot_digits_img_results(test_data, test_label, predictions)
-
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
 

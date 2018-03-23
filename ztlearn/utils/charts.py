@@ -65,7 +65,7 @@ def plot_generated_digits_samples(test_label, predictions, fig_dims = (6, 6)):
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
         digit.imshow(predictions[i], cmap = plt.cm.binary, interpolation = 'nearest')
-        digit.text(0, 7, str(test_label[i]), color = 'red')
+        digit.text(0, 7, str(test_label[i]), color = 'blue')
         
     plt.show()
 
