@@ -38,6 +38,6 @@ plot_regression_results(train_data, train_label, test_data, test_label,
                                                             input_data,
                                                             model.predict(input_data),
                                                             mse,
-                                                            'Elastic Regression',
-                                                            'Median House Price',
-                                                            'Average Number of Rooms')
+                                                           'Elastic Regression',
+                                                           'Median House Price',
+                                                           'Average Number of Rooms')

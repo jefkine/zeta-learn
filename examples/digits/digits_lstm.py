@@ -15,7 +15,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   test_size = 0.3,
                                                                   random_seed = 15)
 
-opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.001, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
 # Model definition
 model = Sequential()

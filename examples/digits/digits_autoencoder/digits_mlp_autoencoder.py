@@ -6,7 +6,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import BatchNomalization, Dropout, Dense
+from ztlearn.dl.layers import BatchNomalization, Dense
 
 
 data = datasets.load_digits()
@@ -53,9 +53,9 @@ images = min_max(data.data.astype(np.float32)) # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,
-                                                                  random_seed = 5)
+                                                                  random_seed = 15)
 
-model_epochs = 200
+model_epochs = 1000
 fit_stats = autoencoder.fit(train_data,
                             train_label,
                             batch_size = 64,
@@ -64,7 +64,7 @@ fit_stats = autoencoder.fit(train_data,
                             shuffle_data = True,
                             verbose = True)
 
-_, _, _, test_label = train_test_split(data.data, data.target,test_size = 0.2, random_seed = 5)
+_, _, _, test_label = train_test_split(data.data, data.target,test_size = 0.2, random_seed = 15)
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 plot_generated_digits_samples(unhot(one_hot(test_label)), predictions)

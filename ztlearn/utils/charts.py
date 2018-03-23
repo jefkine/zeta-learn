@@ -2,45 +2,135 @@
 
 import matplotlib.pyplot as plt
 
+FONT_SIZE = 10
+FIG_SIZE = (7, 5)
 
-def plot_accuracy(epoch, train_acc, valid_acc, fig_dims = (7, 5), font_size = 10):
-    plt.figure(figsize = fig_dims)
-    plt.plot(range(epoch), train_acc, linewidth = 0.8)
-    plt.plot(range(epoch), valid_acc, linewidth = 0.8)
-    plt.xticks(size = font_size)
-    plt.yticks(size = font_size)
-    plt.title("Model Accuracy", size = font_size)
-    plt.ylabel('Accuracy', size = font_size)
-    plt.xlabel('Iterations', fontsize = font_size)
-    plt.legend(['train', 'valid'], loc = 'upper right')
-    plt.show()
-    # plt.clf()
+def plotter(x,
+            y = [],
+            plot_dict = {},
+            fig_dims = (7, 5),
+            xticks_dict = {},
+            yticks_dict = {},
+            title = 'Model',
+            title_dict = {},
+            ylabel = 'y',
+            ylabel_dict = {},
+            xlabel = 'x',
+            xlabel_dict = {},
+            legend = ['train', 'valid'],
+            legend_dict = {}):
 
-def plot_loss(epoch, train_loss, valid_loss, fig_dims = (7, 5), font_size = 10):
     plt.figure(figsize = fig_dims)
-    plt.plot(range(epoch), train_loss, linewidth = 0.8)
-    plt.plot(range(epoch), valid_loss, linewidth = 0.8)
-    plt.xticks(size = font_size)
-    plt.yticks(size = font_size)
-    plt.title("Model Loss", size = font_size)
-    plt.ylabel('Loss', size = font_size)
-    plt.xlabel('Iterations', fontsize = font_size)
-    plt.legend(['train', 'valid'], loc = 'upper right')
-    plt.show()
-    # plt.clf()
+    for i in range(len(y)):
+        plt.plot(x, y[i], **plot_dict)
+    plt.xticks(**xticks_dict)
+    plt.yticks(**yticks_dict)
+    plt.title(title, **title_dict)
+    plt.xlabel(xlabel, **xlabel_dict)
+    plt.ylabel(ylabel, **ylabel_dict)
+    plt.legend(legend, **legend_dict)
 
-def plot_acc_loss(epoch, acc, loss, fig_dims = (7, 5), font_size = 10):
-    plt.figure(figsize = fig_dims)
-    plt.plot(range(epoch), acc, linewidth = 0.8)
-    plt.plot(range(epoch), loss, linewidth = 0.8)
-    plt.xticks(size = font_size)
-    plt.yticks(size = font_size)
-    plt.title("Model Loss Accuracy", size = font_size)
-    plt.ylabel('Loss Accuracy', size = font_size)
-    plt.xlabel('Iterations', fontsize = font_size)
-    plt.legend(['loss', 'acc'], loc = 'upper right')
+    return plt
+
+
+def plot_accuracy(epoch,
+                  train,
+                  valid,
+                  plot_dict = {'linewidth' : 0.8},
+                  fig_dims = FIG_SIZE,
+                  xticks_dict = {'size' : FONT_SIZE},
+                  yticks_dict = {'size' : FONT_SIZE},
+                  title = 'Model Accuracy',
+                  title_dict = {'size' : FONT_SIZE},
+                  ylabel = 'Accuracy',
+                  ylabel_dict = {'size' : FONT_SIZE},
+                  xlabel = 'Iterations',
+                  xlabel_dict = {'size' : FONT_SIZE},
+                  legend = ['train', 'valid'],
+                  legend_dict = {'loc' : 'upper right'}):
+
+    plt = plotter(range(epoch), [train, valid],
+                                plot_dict = plot_dict,
+                                fig_dims = fig_dims,
+                                xticks_dict = xticks_dict,
+                                yticks_dict = yticks_dict,
+                                title = title,
+                                title_dict = title_dict,
+                                ylabel = ylabel,
+                                ylabel_dict = ylabel_dict,
+                                xlabel = xlabel,
+                                xlabel_dict = xlabel_dict,
+                                legend = legend,
+                                legend_dict = legend_dict)
+
     plt.show()
-    # plt.clf()
+
+
+def plot_loss(epoch,
+              train,
+              valid,
+              plot_dict = {'linewidth' : 0.8},
+              fig_dims = FIG_SIZE,
+              xticks_dict = {'size' : FONT_SIZE},
+              yticks_dict = {'size' : FONT_SIZE},
+              title = 'Model Loss',
+              title_dict = {'size' : FONT_SIZE},
+              ylabel = 'Loss',
+              ylabel_dict = {'size' : FONT_SIZE},
+              xlabel = 'Iterations',
+              xlabel_dict = {'size' : FONT_SIZE},
+              legend = ['train', 'valid'],
+              legend_dict = {'loc' : 'upper right'}):
+
+    plt = plotter(range(epoch), [train, valid],
+                                plot_dict = plot_dict,
+                                fig_dims = fig_dims,
+                                xticks_dict = xticks_dict,
+                                yticks_dict = yticks_dict,
+                                title = title,
+                                title_dict = title_dict,
+                                ylabel = ylabel,
+                                ylabel_dict = ylabel_dict,
+                                xlabel = xlabel,
+                                xlabel_dict = xlabel_dict,
+                                legend = legend,
+                                legend_dict = legend_dict)
+
+    plt.show()
+
+
+def plot_acc_loss(epoch,
+                  acc,
+                  loss,
+                  plot_dict = {'linewidth' : 0.8},
+                  fig_dims = FIG_SIZE,
+                  xticks_dict = {'size' : FONT_SIZE},
+                  yticks_dict = {'size' : FONT_SIZE},
+                  title = 'Model Loss Accuracy',
+                  title_dict = {'size' : FONT_SIZE},
+                  ylabel = 'Loss Accuracy',
+                  ylabel_dict = {'size' : FONT_SIZE},
+                  xlabel = 'Iterations',
+                  xlabel_dict = {'size' : FONT_SIZE},
+                  legend = ['train', 'valid'],
+                  legend_dict = {'loc' : 'upper right'}):
+
+    plt = plotter(range(epoch), [acc, loss],
+                                plot_dict = plot_dict,
+                                fig_dims = fig_dims,
+                                xticks_dict = xticks_dict,
+                                yticks_dict = yticks_dict,
+                                title = title,
+                                title_dict = title_dict,
+                                ylabel = ylabel,
+                                ylabel_dict = ylabel_dict,
+                                xlabel = xlabel,
+                                xlabel_dict = xlabel_dict,
+                                legend = legend,
+                                legend_dict = legend_dict)
+
+    plt.show()
+
 
 def plot_digits_img_results(test_data, test_label, predictions, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
@@ -56,7 +146,7 @@ def plot_digits_img_results(test_data, test_label, predictions, fig_dims = (6, 6
             digit.text(0, 7, str(predictions[i]), color = 'red')
 
     plt.show()
-    # plt.clf()
+
 
 def plot_generated_digits_samples(test_label, predictions, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
@@ -66,8 +156,9 @@ def plot_generated_digits_samples(test_label, predictions, fig_dims = (6, 6)):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
         digit.imshow(predictions[i], cmap = plt.cm.binary, interpolation = 'nearest')
         digit.text(0, 7, str(test_label[i]), color = 'blue')
-        
+
     plt.show()
+
 
 def plot_digits_img_samples(data, fig_dims = (6, 6)):
     fig = plt.figure(figsize = fig_dims)
@@ -79,9 +170,20 @@ def plot_digits_img_samples(data, fig_dims = (6, 6)):
         digit.text(0, 7, str(data.target[i]))
 
     plt.show()
-    # plt.clf()
 
-def plot_regression_results(train_data, train_label, test_data, test_label, input_data, pred_line, mse, super_title, y_label, x_label, fig_dims = (7, 5), font_size = 10):
+
+def plot_regression_results(train_data,
+                            train_label,
+                            test_data,
+                            test_label,
+                            input_data, 
+                            pred_line,
+                            mse, super_title,
+                            y_label,
+                            x_label,
+                            fig_dims = FIG_SIZE,
+                            font_size = 10):
+    
     plt.figure(figsize = fig_dims)
     cmap = plt.get_cmap('summer')
     train = plt.scatter(train_data, train_label, color = cmap(0.8), s = 12)
@@ -90,10 +192,10 @@ def plot_regression_results(train_data, train_label, test_data, test_label, inpu
     plt.suptitle(super_title)
 
     if mse is not None:
-        plt.title("MSE: {:4.2f}".format(mse), fontsize = font_size)
+        plt.title("MSE: {:4.2f}".format(mse), size = font_size)
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
+    
     plt.show()
-    # plt.clf()

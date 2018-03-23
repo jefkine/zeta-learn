@@ -43,9 +43,7 @@ plot_digits_img_results(test_data, test_label, predictions)
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
 
-
 '''
-
 NOTES:
 
 # Even with dropout removed altogether, still adam 20 epochs get to 98.15% accuracy
@@ -56,5 +54,4 @@ opt = register_opt(optimizer_name = 'sgd-momentum', momentum = 0.01, learning_ra
 
 # for adadelta with batchnorm and dropout only 20 epochs get it to 98.15% accuracy
 opt = register_opt(optimizer_name = 'adadelta', momentum = 0.01, learning_rate = 0.1)
-
 '''

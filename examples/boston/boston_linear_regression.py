@@ -34,9 +34,9 @@ plot_regression_results(train_data, train_label, test_data, test_label,
                                                             input_data,
                                                             model.predict(input_data),
                                                             mse,
-                                                            'Linear Regression',
-                                                            'Median House Price',
-                                                            'Average Number of Rooms')
+                                                           'Linear Regression',
+                                                           'Median House Price',
+                                                           'Average Number of Rooms')
 
 
 '''
