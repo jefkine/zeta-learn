@@ -55,7 +55,7 @@ train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   test_size = 0.2,
                                                                   random_seed = 15)
 
-model_epochs = 1000
+model_epochs = 500
 fit_stats = autoencoder.fit(train_data,
                             train_label,
                             batch_size = 64,

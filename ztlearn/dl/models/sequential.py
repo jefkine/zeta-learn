@@ -41,17 +41,22 @@ class Sequential:
 
         for epoch_idx in np.arange(epochs):
             batch_stats = {"batch_loss": [], "batch_acc": []}
+
             for train_batch_data, train_batch_label in minibatches(train_data, train_label, batch_size, shuffle_data):
                 loss, acc = self.train_batches(train_batch_data, train_batch_label)
+
                 batch_stats["batch_loss"].append(loss)
+                batch_stats["batch_acc"].append(acc)
 
                 if verbose:
                     print('TRAINING: Epoch-{} loss: {:.2f} accuracy: {:.2f}'.format(epoch_idx+1, loss, acc))
 
             fit_stats["train_loss"].append(np.mean(batch_stats["batch_loss"]))
-            fit_stats["train_acc"].append(np.mean(acc))
+            fit_stats["train_acc"].append(np.mean(batch_stats["batch_acc"]))
+
             if validation_data:
                 val_loss, val_acc = self.test_batches(validation_data[0], validation_data[1])
+
                 fit_stats["valid_loss"].append(val_loss)
                 fit_stats["valid_acc"].append(val_acc)
 
@@ -79,6 +84,7 @@ class Sequential:
 
         for test_data_batch_data, test_batch_label in minibatches(test_data, test_label, batch_size, shuffle_data):
             loss, acc = self.test_batches(test_data_batch_data, test_batch_label)
+
             eval_stats["loss"].append(loss)
             eval_stats["acc"].append(acc)
 
