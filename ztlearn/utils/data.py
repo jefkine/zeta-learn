@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import numpy as np
 
 #-----------------------------------------------------------------------------#
@@ -82,3 +83,15 @@ def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval
         print('Predicted : {} \n'.format(predictions[i]))
         
     print ('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
+     
+def computebar(total, curr, size = 40, sign = "#", prefix = "Computing"):
+    progress = float((curr + 1) / total)        
+    update = int(round(size * progress))  
+    
+    bar = "\r{}: [{}] {:.0f}% {}".format(prefix, 
+                                         sign * update + "-" * (size - update), 
+                                         round(progress * 100, 0), 
+                                         "" if progress < 1. else '\r\n')
+   
+    sys.stdout.write(bar)
+    sys.stdout.flush()

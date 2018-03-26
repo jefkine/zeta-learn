@@ -3,6 +3,7 @@
 import numpy as np
 
 from ztlearn.utils import LogIfBusy
+from ztlearn.utils import computebar
 from ztlearn.dl.initializers import InitializeWeights as init
 from ztlearn.dl.objectives import ObjectiveFunction as objective
 from ztlearn.dl.optimizers import OptimizationFunction as optimize
@@ -31,6 +32,7 @@ class Perceptron:
     @LogIfBusy
     def fit(self, inputs, targets, verbose = True):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
+        
         self.weights = self.init_method.initialize_weights((inputs.shape[1], targets.shape[1]))
         self.bias = np.zeros((1, targets.shape[1]))
 
@@ -53,6 +55,9 @@ class Perceptron:
 
             self.weights = optimize(self.optimizer).update(self.weights, d_weights)
             self.bias = optimize(self.optimizer).update(self.bias, d_bias)
+        
+            if not verbose:
+                computebar(self.epochs, i)
 
         return fit_stats
 

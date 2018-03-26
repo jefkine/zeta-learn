@@ -9,11 +9,13 @@ from . import decorate
 from . import sequences
 
 # import from data.py
+
 from .data import unhot
 from .data import one_hot
 from .data import min_max
 from .data import z_score
 from .data import normalize
+from .data import computebar
 from .data import minibatches
 from .data import shuffle_data
 from .data import print_results

@@ -3,6 +3,7 @@
 import numpy as np
 
 from ztlearn.utils import LogIfBusy
+from ztlearn.utils import computebar
 from ztlearn.dl.initializers import InitializeWeights as init
 from ztlearn.dl.objectives import ObjectiveFunction as objective
 from ztlearn.dl.optimizers import OptimizationFunction as optimize
@@ -46,6 +47,9 @@ class LogisticRegression:
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = inputs.T.dot(cost_gradient) + self.regularization.derivative(self.weights)
             self.weights = self.optimizer.update(self.weights, d_weights)
+            
+            if not verbose:
+                computebar(self.epochs, i)
 
         return fit_stats
 

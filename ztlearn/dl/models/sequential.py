@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
+
 from ztlearn.utils import LogIfBusy
+from ztlearn.utils import computebar
 from ztlearn.utils import minibatches
 from ztlearn.dl.layers import Activation
 from ..objectives import ObjectiveFunction as objective
@@ -64,7 +67,10 @@ class Sequential:
 
                 if verbose:
                     print('VALIDATION: Epoch-{} loss: {:.2f} accuracy: {:.2f}'.format(epoch_idx+1, val_loss, val_acc))
-
+            
+            if not verbose:
+                computebar(epochs, epoch_idx)
+            
         return fit_stats
 
     def train_batches(self, train_batch_data, train_batch_label):
