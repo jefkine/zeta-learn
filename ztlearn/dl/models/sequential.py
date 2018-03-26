@@ -19,9 +19,11 @@ class Sequential:
     def add(self, layer):
         if self.layers:
             layer.input_shape = self.layers[-1].output_shape
+
         if hasattr(layer, 'weight_initializer'):
             layer.weight_initializer = self.init_method
         self.append_layer(layer)
+
         if hasattr(layer, 'layer_activation') and layer.layer_activation is not None:
             self.append_layer(Activation(layer.layer_activation, input_shape = self.layers[-1].output_shape))
 
@@ -67,15 +69,20 @@ class Sequential:
 
     def train_batches(self, train_batch_data, train_batch_label):
         predictions = self.foward_pass(train_batch_data, train_mode = True)
+
         loss = np.mean(objective(self.loss).forward(predictions, train_batch_label))
         acc = objective(self.loss).accuracy(predictions, train_batch_label)
+
         self.backward_pass(objective(self.loss).backward(predictions, train_batch_label))
+
         return loss, acc
 
     def test_batches(self, test_batch_data, test_batch_label, train_mode = False):
         predictions = self.foward_pass(test_batch_data, train_mode = train_mode)
+
         loss = np.mean(objective(self.loss).forward(predictions, test_batch_label))
         acc = objective(self.loss).accuracy(predictions, test_batch_label)
+
         return loss, acc
 
     @LogIfBusy
@@ -99,9 +106,10 @@ class Sequential:
     def summary(self): pass
 
     def foward_pass(self, inputs, train_mode = False):
-        layer_output = inputs
+        layer_output = inputs        
         for layer in self.layers:
             layer_output = layer.pass_forward(layer_output, train_mode)
+
         return layer_output
 
     def backward_pass(self, loss_grad):
