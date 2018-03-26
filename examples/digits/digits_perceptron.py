@@ -20,7 +20,7 @@ model = Perceptron(epochs = 300, activation = 'selu',
                                  init_method = 'he_normal',
                                  optimizer = opt)
 
-fit_stats = model.fit(train_data, train_label, verbose = False)
+fit_stats = model.fit(train_data, train_label)
 
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))

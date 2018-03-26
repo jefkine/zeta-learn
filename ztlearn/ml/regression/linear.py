@@ -23,7 +23,7 @@ class LinearRegression(Regression):
                                                penalty_weight = penalty_weight,
                                                l1_ratio = l1_ratio)
 
-    def fit(self, inputs, targets, verbose =  True):
+    def fit(self, inputs, targets, verbose =  False):
         fit_stats = super(LinearRegression, self).fit(inputs, targets, verbose)
         return fit_stats
 

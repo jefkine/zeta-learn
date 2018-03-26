@@ -29,7 +29,7 @@ class LogisticRegression:
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
-    def fit(self, inputs, targets, verbose = True):
+    def fit(self, inputs, targets, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         self.weights = self.init_method.initialize_weights((inputs.shape[1], ))
 
@@ -54,7 +54,7 @@ class LogisticRegression:
         return fit_stats
 
     @LogIfBusy
-    def fit_NR(self, inputs, targets, verbose = True):
+    def fit_NR(self, inputs, targets, verbose = False):
         ''' Newton-Raphson Method '''
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         self.weights = self.init_method.initialize_weights((inputs.shape[1], ))
@@ -71,9 +71,12 @@ class LogisticRegression:
                 print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, cost, acc))
 
             diag_grad = np.diag(self.activate.backward(inputs.dot(self.weights)))
-            # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization._derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
-            self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization._derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
-
+            # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
+            self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
+            
+            if not verbose:
+                computebar(self.epochs, i)
+            
         return fit_stats
 
     def predict(self, inputs):

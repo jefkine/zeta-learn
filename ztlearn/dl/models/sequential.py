@@ -41,7 +41,7 @@ class Sequential:
                 layer.weight_optimizer = optimizer
 
     @LogIfBusy
-    def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = True):
+    def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
 
         for epoch_idx in np.arange(epochs):

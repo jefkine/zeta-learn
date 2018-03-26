@@ -30,7 +30,7 @@ class Perceptron:
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
-    def fit(self, inputs, targets, verbose = True):
+    def fit(self, inputs, targets, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         
         self.weights = self.init_method.initialize_weights((inputs.shape[1], targets.shape[1]))

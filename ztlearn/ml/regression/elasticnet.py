@@ -24,7 +24,7 @@ class ElasticNetRegression(Regression):
                                                    penalty_weight = penalty_weight,
                                                    l1_ratio = l1_ratio)
 
-    def fit(self, inputs, targets, verbose = True, normalized = True):
+    def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)

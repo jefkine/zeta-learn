@@ -26,7 +26,7 @@ model = ElasticNetRegression(degree = 3, epochs = 100, optimizer = opt,
                                                        penalty_weight = 0.01,
                                                        l1_ratio = 0.5)
 
-fit_stats = model.fit(train_data, train_label, verbose = False)
+fit_stats = model.fit(train_data, train_label)
 
 targets = np.expand_dims(test_label, axis = 1)
 predictions = np.expand_dims(model.predict(test_data), axis = 1)

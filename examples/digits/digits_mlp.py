@@ -31,8 +31,7 @@ fit_stats = model.fit(train_data,
                       batch_size = 128,
                       epochs = model_epochs,
                       validation_data = (test_data, one_hot(test_label)),
-                      shuffle_data = True,
-                      verbose = False)
+                      shuffle_data = True)
 
 # eval_stats = model.evaluate(test_data, one_hot(test_label))
 
