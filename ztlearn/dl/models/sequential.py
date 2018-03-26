@@ -106,10 +106,9 @@ class Sequential:
     def summary(self): pass
 
     def foward_pass(self, inputs, train_mode = False):
-        layer_output = inputs        
+        layer_output = inputs
         for layer in self.layers:
             layer_output = layer.pass_forward(layer_output, train_mode)
-
         return layer_output
 
     def backward_pass(self, loss_grad):
