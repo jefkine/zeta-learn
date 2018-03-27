@@ -66,7 +66,7 @@ def z_score(input_data, axis = None):
 
 def print_results(predictions, test_labels, num_samples = 20):
     print('Targeted  : {}'.format(test_labels[:num_samples]))
-    print('Predicted : {}'.format(predictions[:num_samples]))
+    print('Predicted : {}\n'.format(predictions[:num_samples]))
     print ('Model Accuracy : {:2.2f}% \n'.format(accuracy_score(predictions, test_labels)*100))
     
 def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):
@@ -88,10 +88,10 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
     progress = float((curr + 1) / total)        
     update = int(round(size * progress))  
     
-    bar = "\r{}: [{}] {:.0f}% {}".format(prefix, 
-                                         sign * update + "-" * (size - update), 
-                                         round(progress * 100, 0), 
-                                         "" if progress < 1. else '\r\n')
+    bar = "\r{}: [{}] {:d}% {}".format(prefix, 
+                                       sign * update + "-" * (size - update), 
+                                       int(round(progress * 100)), 
+                                       "" if progress < 1. else '\r\n')
    
     sys.stdout.write(bar)
     sys.stdout.flush()
