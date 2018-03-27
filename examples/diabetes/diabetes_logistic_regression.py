@@ -37,6 +37,7 @@ plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['t
 
 '''
 # if you used only one feature
+
 plot_regression_results(train_data, train_label, test_data, test_label,
                                                             input_data,
                                                             model.predict(input_data),
@@ -45,4 +46,3 @@ plot_regression_results(train_data, train_label, test_data, test_label,
                                                             'Age',
                                                             'Outcome')
 '''
-

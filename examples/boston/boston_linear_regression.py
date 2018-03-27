@@ -37,15 +37,3 @@ plot_regression_results(train_data, train_label, test_data, test_label,
                                                            'Linear Regression',
                                                            'Median House Price',
                                                            'Average Number of Rooms')
-
-
-'''
-for adam
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
-model = LinearRegression(epochs = 10000, optimizer = opt, penalty = 'l1', penalty_weight = 0.0)
-
-
-for sgd
-opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)
-model = LinearRegression(epochs = 100, optimizer = opt, penalty = 'l1', penalty_weight = 0.0)
-'''
