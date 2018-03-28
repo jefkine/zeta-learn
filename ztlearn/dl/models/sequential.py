@@ -14,7 +14,6 @@ class Sequential:
     def __init__(self, init_method = 'he_normal'):
         self.layers = []
         self.init_method = init_method
-        self.model_epochs = None
 
     @property
     def get_layers(self):
@@ -43,10 +42,9 @@ class Sequential:
 
     @LogIfBusy
     def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
-        self.model_epochs = epochs
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
 
-        for epoch_idx in np.arange(self.model_epochs):
+        for epoch_idx in np.arange(epochs):
             batch_stats = {"batch_loss": [], "batch_acc": []}
 
             for train_batch_data, train_batch_label in minibatches(train_data, train_label, batch_size, shuffle_data):
@@ -71,7 +69,7 @@ class Sequential:
                     print('VALIDATION: Epoch-{} loss: {:.2f} accuracy: {:.2f}'.format(epoch_idx+1, val_loss, val_acc))
 
             if not verbose:
-                computebar(self.model_epochs, epoch_idx)
+                computebar(epochs, epoch_idx)
 
         return fit_stats
 
@@ -96,10 +94,10 @@ class Sequential:
     @LogIfBusy
     def evaluate(self, test_data, test_label, batch_size = 128, shuffle_data = True, verbose = False):
         eval_stats = {"valid_batches" : 0, "valid_loss": [], "valid_acc": []}
-        
+
         batches = minibatches(test_data, test_label, batch_size, shuffle_data)
         eval_stats["valid_batches"] = len(batches)
-        
+
         for idx, (test_data_batch_data, test_batch_label) in enumerate(batches):
             loss, acc = self.test_batches(test_data_batch_data, test_batch_label)
 
@@ -109,7 +107,7 @@ class Sequential:
             if verbose:
                 print('VALIDATION: loss: {:.2f} accuracy: {:.2f}'.format(eval_stats["valid_loss"], eval_stats["valid_acc"]))
 
-            if not verbose: 
+            if not verbose:
                 computebar(eval_stats["valid_batches"], idx)
 
         return eval_stats

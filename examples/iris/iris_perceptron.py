@@ -20,5 +20,7 @@ model = Perceptron(epochs = 500, activation = 'leaky_relu',
 
 fit_stats = model.fit(train_data, train_label)
 
+
+
 print_results(unhot(model.predict(test_data)), unhot(test_label))
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
