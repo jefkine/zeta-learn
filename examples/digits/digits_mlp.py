@@ -33,7 +33,7 @@ fit_stats = model.fit(train_data,
                       validation_data = (test_data, one_hot(test_label)),
                       shuffle_data = True)
 
-# eval_stats = model.evaluate(test_data, one_hot(test_label))
+eval_stats = model.evaluate(test_data, one_hot(test_label))
 
 predictions = unhot(model.predict(test_data, True))
 
@@ -41,3 +41,7 @@ print_results(predictions, test_label)
 plot_digits_img_results(test_data, test_label, predictions)
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
+plot_acc_loss(eval_stats["valid_batches"], 
+              eval_stats['valid_loss'], 
+              eval_stats['valid_acc'],
+              title = 'Evaluation Accuracy vs Loss')
