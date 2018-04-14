@@ -61,6 +61,7 @@ class Conv(Layer):
         output_width = (self.input_width + np.sum(pad_width) - self.kernel_width) / self.stride_width + 1
         return self.filters, int(output_height), int(output_width)
 
+
 class Conv2D(Conv):
 
     def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
@@ -149,7 +150,6 @@ class ConvLoop2D(Conv):
                         output[b, f, h, w] = np.sum(x_patch * self.weights[f]) + self.bias[f]
 
         return output
-
 
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
