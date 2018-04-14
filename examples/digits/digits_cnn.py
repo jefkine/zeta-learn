@@ -8,6 +8,7 @@ from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import BatchNomalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
+
 data = datasets.load_digits()
 plot_digits_img_samples(data)
 

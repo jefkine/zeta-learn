@@ -61,7 +61,7 @@ class Pool(Layer):
 class MaxPooling2D(Pool):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
-        super().__init__(pool_size, strides, padding)
+        super(MaxPooling2D, self).__init__(pool_size, strides, padding)
 
     def pool_forward(self, input_col):
         max_id = np.argmax(input_col, axis = 0)
@@ -76,7 +76,7 @@ class MaxPooling2D(Pool):
 class AveragePool2D(Pool):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
-        super().__init__(pool_size, strides, padding)
+        super(AveragePool2D, self).__init__(pool_size, strides, padding)
 
     def pool_forward(self, input_col):
         out = np.mean(input_col, axis = 0)

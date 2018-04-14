@@ -8,7 +8,7 @@ from ztlearn.utils import col2im_indices
 from ..initializers import InitializeWeights as init
 from ..optimizers import OptimizationFunction as optimizer
 
-class Conv2D(Layer):
+class Conv(Layer):
 
     def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
         self.filters = filters
@@ -61,6 +61,11 @@ class Conv2D(Layer):
         output_width = (self.input_width + np.sum(pad_width) - self.kernel_width) / self.stride_width + 1
         return self.filters, int(output_height), int(output_width)
 
+class Conv2D(Conv):
+
+    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+        super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
+
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, self.filter_depth, self.filter_height, self.filter_width = self.weights.shape
         input_num, input_depth, input_height, input_width = inputs.shape
@@ -107,5 +112,88 @@ class Conv2D(Layer):
 
         pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
         dinputs = col2im_indices(dinput_col, self.input_shape, self.filter_height, self.filter_width, padding = (pad_height, pad_width), stride = self.stride_height)
+
+        return dinputs
+
+
+class ConvLoop2D(Conv):
+
+    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+        super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
+
+    def pass_forward(self, inputs, train_mode = True, **kwargs):
+        self.filter_num, self.filter_depth, self.filter_height, self.filter_width = self.weights.shape
+        input_num, input_depth, input_height, input_width = inputs.shape
+        self.input_shape = inputs.shape
+        self.inputs = inputs
+
+        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+        x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
+
+        # confirm dimensions
+        assert (input_height + np.sum(pad_height) - self.filter_height) % self.stride_height == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.filter_width) %  self.stride_width == 0, 'width does not work'
+
+        output_height = (input_height + np.sum(pad_height) - self.filter_height) / self.stride_height + 1
+        output_width = (input_width + np.sum(pad_width) - self.filter_width) / self.stride_width + 1
+
+        output = np.zeros((input_num, self.filter_num, output_height, output_width))
+
+        # convolutions
+        for b in np.arange(input_num): # batch number
+            for f in np.arange(self.filter_num): # filter number
+                for h in np.arange(output_height): # output height
+                    for w in np.arange(output_width): # output width
+                        h_stride, w_stride = h * self.stride_height, w * self.stride_width
+                        x_patch = x_padded[b, :, h_stride: h_stride + self.kernel_height, w_stride: w_stride + self.kernel_width]
+                        output[b, f, h, w] = np.sum(x_patch * self.weights[f]) + self.bias[f]
+
+        return output
+
+
+    def pass_backward(self, grad):
+        input_num, input_depth, input_height, input_width = self.inputs.shape
+
+        # initialize the gradients
+        dweights = np.zeros(self.weights.shape)
+        dbias = np.zeros(self.bias.shape)
+        dinputs = np.zeros(self.inputs.shape)
+
+        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+        pad_size = np.sum(pad_height)/2
+        if pad_size != 0:
+            grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
+
+        # dweights
+        for f in np.arange(self.filter_num): # filter number
+            for c in np.arange(input_depth): # input depth (channels)
+                for h in np.arange(self.kernel_height): # kernel height
+                    for w in np.arange(self.kernel_width): # kernel width
+                        input_patch = self.inputs[:,
+                                                  c,
+                                                  h: input_height - self.kernel_height + h + 1: self.stride_height,
+                                                  w: input_width - self.kernel_width + w + 1: self.stride_width]
+                        grad_patch = grad[:, f]
+                        dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
+
+        # dbias
+        for f in np.arange(self.filter_num): # filter number
+            dbias[f] = np.sum(grad[:, f]) / input_num
+
+        # optimize the weights and bias
+        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+
+        # dinputs
+        for b in np.arange(input_num): # batch number
+            for f in np.arange(self.filter_num): # filter number
+                for c in np.arange(input_depth): # input depth (channels)
+                    for h in np.arange(self.kernel_height): # kernel height
+                        for w in np.arange(self.kernel_width): # kernel width
+                            h_stride, w_stride = h * self.stride_height, w * self.stride_width
+                            dinputs[b,
+                                    c,
+                                    h_stride: h_stride + self.kernel_height,
+                                    w_stride: w_stride + self.kernel_width] += self.weights[f, c] * grad[b, f, h, w]
 
         return dinputs
