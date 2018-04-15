@@ -48,7 +48,7 @@ class GD:
             * [PDF] https://arxiv.org/pdf/1609.04747.pdf
     """
 
-    def __init(self): pass
+    def __init__(self): pass
 
 
 class SGD(Optimizer):
