@@ -14,11 +14,21 @@ class Activation(Layer):
         self.activation_name = function_name
         self.activation_func = activation(self.activation_name)
 
-    def prep_layer(self): pass
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def output_shape(self):
         return self.input_shape
+
+    def prep_layer(self): pass
 
     def pass_forward(self, input_signal, train_mode = True, **kwargs):
         self.input_signal = input_signal
@@ -40,10 +50,15 @@ class Dense(Layer):
         self.init_method = None
         self.optimizer_kwargs = None
 
-    def prep_layer(self):
-        self.kernel_shape = (self.input_shape[0], self.units)
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
-        self.bias = np.zeros((1, self.units))
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_initializer(self):
@@ -73,6 +88,11 @@ class Dense(Layer):
     def output_shape(self):
         return (self.units,)
 
+    def prep_layer(self):
+        self.kernel_shape = (self.input_shape[0], self.units)
+        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.bias = np.zeros((1, self.units))
+
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
         return inputs @ self.weights + self.bias
@@ -80,11 +100,15 @@ class Dense(Layer):
     def pass_backward(self, grad):
         prev_weights = self.weights
 
-        dweights = self.inputs.T @ grad
-        dbias = np.sum(grad, axis = 0, keepdims = True)
+        if self.is_trainable:
+            
+            dweights = self.inputs.T @ grad
+            dbias = np.sum(grad, axis = 0, keepdims = True)
 
-        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            
+        # endif self.is_trainable
 
         return grad @ prev_weights.T
 
@@ -95,11 +119,21 @@ class Dropout(Layer):
         self.drop = drop
         self.mask = None
 
-    def prep_layer(self): pass
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def output_shape(self):
         return self.input_shape
+
+    def prep_layer(self): pass
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         if 0. < self.drop < 1.:
@@ -124,11 +158,21 @@ class Flatten(Layer):
         self.input_shape = input_shape
         self.prev_shape = None
 
-    def prep_layer(self): pass
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def output_shape(self):
         return (np.prod(self.input_shape),)
+
+    def prep_layer(self): pass
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
@@ -145,6 +189,21 @@ class Upsampling2D(Layer):
         self.input_shape = input_shape
         self.prev_shape = None
 
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
+
+    @property
+    def output_shape(self):
+        input_depth, input_height, input_width = self.input_shape
+        return input_depth, self.size[0] * input_height, self.size[1] * input_width
+
     def prep_layer(self): pass
 
     def pass_forward(self, inputs):
@@ -157,11 +216,6 @@ class Upsampling2D(Layer):
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
         return grad
 
-    @property
-    def output_shape(self):
-        input_depth, input_height, input_width = self.input_shape
-        return input_depth, self.size[0] * input_height, self.size[1] * input_width
-
 
 class Reshape(Layer):
 
@@ -169,6 +223,20 @@ class Reshape(Layer):
         self.target_shape = target_shape
         self.input_shape = input_shape
         self.prev_shape = None
+
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
+
+    @property
+    def output_shape(self):
+        return self.target_shape
 
     def prep_layer(self): pass
 
@@ -178,7 +246,3 @@ class Reshape(Layer):
 
     def pass_backward(self, grad):
         return np.reshape(grad, self.prev_shape)
-
-    @property
-    def output_shape(self):
-        return self.target_shape

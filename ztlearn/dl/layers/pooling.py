@@ -12,11 +12,18 @@ class Pool(Layer):
         self.strides = strides
         self.padding = padding
 
-        # unpack to enhance clarity
         self.pool_height, self.pool_width = self.pool_size
         self.stride_height, self.stride_width = self.strides
 
-    def prep_layer(self): pass
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def output_shape(self):
@@ -26,6 +33,8 @@ class Pool(Layer):
         assert out_height % 1 == 0
         assert out_width % 1 == 0
         return input_channels, int(out_height), int(out_width)
+
+    def prep_layer(self): pass
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         input_num, input_depth, input_height, input_width = inputs.shape

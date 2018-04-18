@@ -25,10 +25,15 @@ class Conv(Layer):
         self.kernel_height, self.kernel_width = self.kernel_size
         self.input_channels, self.input_height, self.input_width = self.input_shape
 
-    def prep_layer(self):
-        self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
-        self.bias = np.zeros((self.kernel_shape[0], 1))
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_initializer(self):
@@ -60,6 +65,11 @@ class Conv(Layer):
         output_height = (self.input_height + np.sum(pad_height) - self.kernel_height) / self.stride_height + 1
         output_width = (self.input_width + np.sum(pad_width) - self.kernel_width) / self.stride_width + 1
         return self.filters, int(output_height), int(output_width)
+
+    def prep_layer(self):
+        self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
+        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.bias = np.zeros((self.kernel_shape[0], 1))
 
 
 class Conv2D(Conv):
@@ -96,17 +106,21 @@ class Conv2D(Conv):
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.input_shape
 
-        dbias = np.sum(grad, axis = (0, 2, 3))
-        dbias = dbias.reshape(self.filter_num, -1)
+        if self.is_trainable:
 
-        doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
+            dbias = np.sum(grad, axis = (0, 2, 3))
+            dbias = dbias.reshape(self.filter_num, -1)
 
-        dweights = doutput_reshaped @ self.input_col.T
-        dweights = dweights.reshape(self.weights.shape)
+            doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
 
-        # optimize the weights and bias
-        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            dweights = doutput_reshaped @ self.input_col.T
+            dweights = dweights.reshape(self.weights.shape)
+
+            # optimize the weights and bias
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+
+        # endif self.is_trainable
 
         weight_reshape = self.weights.reshape(self.filter_num, -1)
         dinput_col = weight_reshape.T @ doutput_reshaped
@@ -154,35 +168,41 @@ class ConvLoop2D(Conv):
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
-        # initialize the gradients
-        dweights = np.zeros(self.weights.shape)
-        dbias = np.zeros(self.bias.shape)
+        # initialize the gradient(s)
         dinputs = np.zeros(self.inputs.shape)
 
-        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
-        pad_size = np.sum(pad_height)/2
-        if pad_size != 0:
-            grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
+        if self.is_trainable:
 
-        # dweights
-        for f in np.arange(self.filter_num): # filter number
-            for c in np.arange(input_depth): # input depth (channels)
-                for h in np.arange(self.kernel_height): # kernel height
-                    for w in np.arange(self.kernel_width): # kernel width
-                        input_patch = self.inputs[:,
-                                                  c,
-                                                  h: input_height - self.kernel_height + h + 1: self.stride_height,
-                                                  w: input_width - self.kernel_width + w + 1: self.stride_width]
-                        grad_patch = grad[:, f]
-                        dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
+            # initialize the gradient(s)
+            dweights = np.zeros(self.weights.shape)
+            dbias = np.zeros(self.bias.shape)
 
-        # dbias
-        for f in np.arange(self.filter_num): # filter number
-            dbias[f] = np.sum(grad[:, f]) / input_num
+            pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+            pad_size = np.sum(pad_height)/2
+            if pad_size != 0:
+                grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
 
-        # optimize the weights and bias
-        self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-        self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            # dweights
+            for f in np.arange(self.filter_num): # filter number
+                for c in np.arange(input_depth): # input depth (channels)
+                    for h in np.arange(self.kernel_height): # kernel height
+                        for w in np.arange(self.kernel_width): # kernel width
+                            input_patch = self.inputs[:,
+                                                      c,
+                                                      h: input_height - self.kernel_height + h + 1: self.stride_height,
+                                                      w: input_width - self.kernel_width + w + 1: self.stride_width]
+                            grad_patch = grad[:, f]
+                            dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
+
+            # dbias
+            for f in np.arange(self.filter_num): # filter number
+                dbias[f] = np.sum(grad[:, f]) / input_num
+
+            # optimize the weights and bias
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
+            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+
+        # endif self.is_trainable
 
         # dinputs
         for b in np.arange(input_num): # batch number

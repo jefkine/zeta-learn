@@ -17,9 +17,15 @@ class Embedding(Layer):
         self.init_method = None
         self.optimizer_kwargs = None
 
-    def prep_layer(self):
-        self.kernel_shape = (self.input_dim, self.output_dim)
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_initializer(self):
@@ -48,6 +54,10 @@ class Embedding(Layer):
     @property
     def output_shape(self):
         return self.input_shape
+
+    def prep_layer(self):
+        self.kernel_shape = (self.input_dim, self.output_dim)
+        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.inputs = inputs

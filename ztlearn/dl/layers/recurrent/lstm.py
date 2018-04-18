@@ -44,31 +44,15 @@ class LSTM(Layer):
         # final output bias
         self.b_final = None
 
-    def prep_layer(self):
-        _, input_dim = self.input_shape
-        z_dim = self.h_units + input_dim # concatenate (h_units, vocabulary_size) vector
+        self.is_trainable = True
 
-        # gate weights
-        self.W_input = init(self.init_method).initialize_weights((z_dim, self.h_units))
-        self.W_forget = init(self.init_method).initialize_weights((z_dim, self.h_units))
-        self.W_output = init(self.init_method).initialize_weights((z_dim, self.h_units))
+    @property
+    def trainable(self):
+        return self.is_trainable
 
-        # gate bias
-        self.b_input = np.zeros((self.h_units,))
-        self.b_forget = np.zeros((self.h_units,))
-        self.b_output = np.zeros((self.h_units,))
-
-        # cell weights
-        self.W_cell = init(self.init_method).initialize_weights((z_dim, self.h_units))
-
-        # cell bias
-        self.b_cell = np.zeros((self.h_units,))
-
-        # final output weights
-        self.W_final = init(self.init_method).initialize_weights((self.h_units, input_dim))
-
-        # final output bias
-        self.b_final = np.zeros((input_dim,))
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_initializer(self):
@@ -97,6 +81,32 @@ class LSTM(Layer):
     @property
     def output_shape(self):
         return self.input_shape
+
+    def prep_layer(self):
+        _, input_dim = self.input_shape
+        z_dim = self.h_units + input_dim # concatenate (h_units, vocabulary_size) vector
+
+        # gate weights
+        self.W_input = init(self.init_method).initialize_weights((z_dim, self.h_units))
+        self.W_forget = init(self.init_method).initialize_weights((z_dim, self.h_units))
+        self.W_output = init(self.init_method).initialize_weights((z_dim, self.h_units))
+
+        # gate bias
+        self.b_input = np.zeros((self.h_units,))
+        self.b_forget = np.zeros((self.h_units,))
+        self.b_output = np.zeros((self.h_units,))
+
+        # cell weights
+        self.W_cell = init(self.init_method).initialize_weights((z_dim, self.h_units))
+
+        # cell bias
+        self.b_cell = np.zeros((self.h_units,))
+
+        # final output weights
+        self.W_final = init(self.init_method).initialize_weights((self.h_units, input_dim))
+
+        # final output bias
+        self.b_final = np.zeros((input_dim,))
 
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
@@ -130,85 +140,88 @@ class LSTM(Layer):
 
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
-
-        dW_forget = np.zeros_like(self.W_forget)
-        dW_input = np.zeros_like(self.W_input)
-        dW_output = np.zeros_like(self.W_output)
-        dW_cell = np.zeros_like(self.W_cell)
-        dW_final = np.zeros_like(self.W_final)
-
-        db_forget = np.zeros_like(self.b_forget)
-        db_input = np.zeros_like(self.b_input)
-        db_output = np.zeros_like(self.b_output)
-        db_cell = np.zeros_like(self.b_cell)
-        db_final = np.zeros_like(self.b_final)
-
-        dstates = np.zeros_like(self.states)
-        dcell = np.zeros_like(self.cell)
-        dcell_tilde = np.zeros_like(self.cell_tilde)
-        dforget = np.zeros_like(self.forget)
-        dinput = np.zeros_like(self.input)
-        doutput = np.zeros_like(self.output)
-
-        dcell_next = np.zeros_like(self.cell)
-        dstates_next = np.zeros_like(self.states)
-
         next_grad = np.zeros_like(grad)
 
-        for t in np.arange(time_steps)[::-1]: # reversed
+        if self.is_trainable:
 
-            dW_final += np.dot(self.states[:, t].T, grad[:, t])
-            db_final += np.sum(grad[:, t], axis = 0)
+            dW_forget = np.zeros_like(self.W_forget)
+            dW_input = np.zeros_like(self.W_input)
+            dW_output = np.zeros_like(self.W_output)
+            dW_cell = np.zeros_like(self.W_cell)
+            dW_final = np.zeros_like(self.W_final)
 
-            dstates[:, t] = np.dot(grad[:, t], self.W_final.T)
-            dstates[:, t] += dstates_next[:, t]
-            next_grad = np.dot(dstates, self.W_final)
+            db_forget = np.zeros_like(self.b_forget)
+            db_input = np.zeros_like(self.b_input)
+            db_output = np.zeros_like(self.b_output)
+            db_cell = np.zeros_like(self.b_cell)
+            db_final = np.zeros_like(self.b_final)
 
-            doutput[:,t] = activate(self.activation).forward(self.cell[:, t]) * dstates[:, t]
-            doutput[:,t] = activate(self.gate_activation).backward(self.output[:, t]) * doutput[:,t]
-            dW_output += np.dot(self.z[:, t].T, doutput[:, t])
-            db_output += np.sum(doutput[:, t], axis = 0)
+            dstates = np.zeros_like(self.states)
+            dcell = np.zeros_like(self.cell)
+            dcell_tilde = np.zeros_like(self.cell_tilde)
+            dforget = np.zeros_like(self.forget)
+            dinput = np.zeros_like(self.input)
+            doutput = np.zeros_like(self.output)
 
-            dcell[:, t] += self.output[:, t] * dstates[:, t] * activate(self.activation).backward(self.cell[:, t])
-            dcell[:, t] += dcell_next[:, t]
-            dcell_tilde[:, t] = dcell[:, t] * self.input[:, t]
-            dcell_tilde[:, t] = dcell_tilde[:, t] * activate(self.activation).backward(dcell_tilde[:, t])
-            dW_cell += np.dot(self.z[:, t].T, dcell[:, t])
-            db_cell += np.sum(dcell[:, t], axis = 0)
+            dcell_next = np.zeros_like(self.cell)
+            dstates_next = np.zeros_like(self.states)
 
-            dinput[:, t] = self.cell_tilde[:, t] * dcell[:, t]
-            dinput[:, t] = activate(self.gate_activation).backward(self.input[:, t]) * dinput[:, t]
-            dW_input += np.dot(self.z[:, t].T, dinput[:, t])
-            db_input += np.sum(dinput[:, t], axis = 0)
+            for t in np.arange(time_steps)[::-1]: # reversed
 
-            dforget[:, t] = self.cell[:, t-1] * dcell[:, t]
-            dforget[:, t] = activate(self.gate_activation).backward(self.forget[:, t]) * dforget[:, t]
-            dW_forget += np.dot(self.z[:, t].T, dforget[:, t])
-            db_forget += np.sum(dforget[:, t], axis = 0)
+                dW_final += np.dot(self.states[:, t].T, grad[:, t])
+                db_final += np.sum(grad[:, t], axis = 0)
 
-            dz_forget = np.dot(dforget[:, t], self.W_forget.T)
-            dz_input = np.dot(dinput[:, t], self.W_input.T)
-            dz_output = np.dot(doutput[:, t], self.W_output.T)
-            dz_cell = np.dot(dcell[:, t], self.W_cell.T)
+                dstates[:, t] = np.dot(grad[:, t], self.W_final.T)
+                dstates[:, t] += dstates_next[:, t]
+                next_grad = np.dot(dstates, self.W_final)
 
-            dz = dz_forget + dz_input + dz_output + dz_cell
-            dstates_next[:, t] = dz[:,:self.h_units]
-            dcell_next = self.forget * dcell
+                doutput[:,t] = activate(self.activation).forward(self.cell[:, t]) * dstates[:, t]
+                doutput[:,t] = activate(self.gate_activation).backward(self.output[:, t]) * doutput[:,t]
+                dW_output += np.dot(self.z[:, t].T, doutput[:, t])
+                db_output += np.sum(doutput[:, t], axis = 0)
 
-        # optimize weights and bias
-        self.W_final = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
-        self.b_final = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
+                dcell[:, t] += self.output[:, t] * dstates[:, t] * activate(self.activation).backward(self.cell[:, t])
+                dcell[:, t] += dcell_next[:, t]
+                dcell_tilde[:, t] = dcell[:, t] * self.input[:, t]
+                dcell_tilde[:, t] = dcell_tilde[:, t] * activate(self.activation).backward(dcell_tilde[:, t])
+                dW_cell += np.dot(self.z[:, t].T, dcell[:, t])
+                db_cell += np.sum(dcell[:, t], axis = 0)
 
-        self.W_forget = optimizer(self.optimizer_kwargs).update(self.W_forget, cg(dW_forget))
-        self.b_forget = optimizer(self.optimizer_kwargs).update(self.b_forget, cg(db_forget))
+                dinput[:, t] = self.cell_tilde[:, t] * dcell[:, t]
+                dinput[:, t] = activate(self.gate_activation).backward(self.input[:, t]) * dinput[:, t]
+                dW_input += np.dot(self.z[:, t].T, dinput[:, t])
+                db_input += np.sum(dinput[:, t], axis = 0)
 
-        self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
-        self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
+                dforget[:, t] = self.cell[:, t-1] * dcell[:, t]
+                dforget[:, t] = activate(self.gate_activation).backward(self.forget[:, t]) * dforget[:, t]
+                dW_forget += np.dot(self.z[:, t].T, dforget[:, t])
+                db_forget += np.sum(dforget[:, t], axis = 0)
 
-        self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
-        self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
+                dz_forget = np.dot(dforget[:, t], self.W_forget.T)
+                dz_input = np.dot(dinput[:, t], self.W_input.T)
+                dz_output = np.dot(doutput[:, t], self.W_output.T)
+                dz_cell = np.dot(dcell[:, t], self.W_cell.T)
 
-        self.W_cell = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
-        self.b_cell = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
+                dz = dz_forget + dz_input + dz_output + dz_cell
+                dstates_next[:, t] = dz[:,:self.h_units]
+                dcell_next = self.forget * dcell
+
+            # optimize weights and bias
+            self.W_final = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
+            self.b_final = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
+
+            self.W_forget = optimizer(self.optimizer_kwargs).update(self.W_forget, cg(dW_forget))
+            self.b_forget = optimizer(self.optimizer_kwargs).update(self.b_forget, cg(db_forget))
+
+            self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
+            self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
+
+            self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
+            self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
+
+            self.W_cell = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
+            self.b_cell = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
+
+        # endif self.is_trainable
 
         return next_grad

@@ -15,9 +15,15 @@ class BatchNomalization(Layer):
         self.running_mean = None
         self.optimizer_kwargs = None
 
-    def prep_layer(self):
-        self.gamma = np.ones(self.input_shape)
-        self.beta = np.zeros(self.input_shape)
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_optimizer(self):
@@ -31,6 +37,10 @@ class BatchNomalization(Layer):
     def output_shape(self):
         return self.input_shape
 
+    def prep_layer(self):
+        self.gamma = np.ones(self.input_shape)
+        self.beta = np.zeros(self.input_shape)
+
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         if self.running_var is None:
             self.running_var = np.var(inputs, axis = 0)
@@ -38,7 +48,7 @@ class BatchNomalization(Layer):
         if self.running_mean is None:
             self.running_mean = np.mean(inputs, axis = 0)
 
-        if train_mode:
+        if train_mode and self.is_trainable:
             self.var = np.var(inputs, axis = 0)
             self.mean = np.mean(inputs, axis = 0)
 
@@ -56,11 +66,16 @@ class BatchNomalization(Layer):
 
     def pass_backward(self, grad):
         dinput_norm = grad * self.gamma
-        dbeta = np.sum(grad, axis = 0)
-        dgamma = np.sum(grad * self.input_norm, axis=0)
 
-        self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
-        self.beta = optimizer(self.weight_optimizer).update(self.beta, dbeta)
+        if self.is_trainable:
+
+            dbeta = np.sum(grad, axis = 0)
+            dgamma = np.sum(grad * self.input_norm, axis=0)
+
+            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
+            self.beta = optimizer(self.weight_optimizer).update(self.beta, dbeta)
+
+        # endif self.is_trainable
 
         dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
 

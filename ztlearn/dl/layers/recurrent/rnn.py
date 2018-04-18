@@ -26,15 +26,15 @@ class RNN(Layer):
         self.b_output = None
         self.b_input = None
 
-    def prep_layer(self):
-        _, input_dim = self.input_shape
+        self.is_trainable = True
 
-        self.W_input = init(self.init_method).initialize_weights((self.h_units, input_dim))
-        self.W_output = init(self.init_method).initialize_weights((input_dim, self.h_units))
-        self.W_recur = init(self.init_method).initialize_weights((self.h_units, self.h_units))
+    @property
+    def trainable(self):
+        return self.is_trainable
 
-        self.b_output = np.zeros((input_dim,))
-        self.b_input = np.zeros((self.h_units,))
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
 
     @property
     def weight_initializer(self):
@@ -64,6 +64,16 @@ class RNN(Layer):
     def output_shape(self):
         return self.input_shape
 
+    def prep_layer(self):
+        _, input_dim = self.input_shape
+
+        self.W_input = init(self.init_method).initialize_weights((self.h_units, input_dim))
+        self.W_output = init(self.init_method).initialize_weights((input_dim, self.h_units))
+        self.W_recur = init(self.init_method).initialize_weights((self.h_units, self.h_units))
+
+        self.b_output = np.zeros((input_dim,))
+        self.b_input = np.zeros((self.h_units,))
+
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
         batch_size, time_steps, input_dim = inputs.shape
@@ -85,34 +95,37 @@ class RNN(Layer):
 
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
-
-        dW_input = np.zeros_like(self.W_input)
-        dW_recur = np.zeros_like(self.W_recur)
-        dW_output = np.zeros_like(self.W_output)
-
-        db_input = np.zeros_like(self.b_input)
-        db_output = np.zeros_like(self.b_output)
-
         next_grad = np.zeros_like(grad)
 
-        for t in np.arange(time_steps)[::-1]: # reversed
-            dW_output += np.dot(grad[:, t].T, self.states[:, t])
-            db_output += np.sum(grad[:, t], axis = 0)
-            dstate = np.dot(grad[:, t], self.W_output) * activate(self.activation).backward(self.state_input[:, t])
-            next_grad[:, t] = np.dot(dstate, self.W_input)
+        if self.is_trainable:
 
-            for tt in np.arange(max(0, t - self.bptt_truncate), t + 1)[::-1]: # reversed
-                dW_input += np.dot(dstate.T, self.inputs[:, tt])
-                dW_recur += np.dot(dstate.T, self.states[:, tt-1])
-                db_input += np.sum(dstate, axis = 0)
-                dstate = dstate.dot(self.W_recur) * activate(self.activation).backward(self.state_input[:, tt-1])
+            dW_input = np.zeros_like(self.W_input)
+            dW_recur = np.zeros_like(self.W_recur)
+            dW_output = np.zeros_like(self.W_output)
 
-        # optimize weights and bias
-        self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
-        self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
-        self.W_recur = optimizer(self.optimizer_kwargs).update(self.W_recur, cg(dW_recur))
+            db_input = np.zeros_like(self.b_input)
+            db_output = np.zeros_like(self.b_output)
 
-        self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
-        self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
+            for t in np.arange(time_steps)[::-1]: # reversed
+                dW_output += np.dot(grad[:, t].T, self.states[:, t])
+                db_output += np.sum(grad[:, t], axis = 0)
+                dstate = np.dot(grad[:, t], self.W_output) * activate(self.activation).backward(self.state_input[:, t])
+                next_grad[:, t] = np.dot(dstate, self.W_input)
+
+                for tt in np.arange(max(0, t - self.bptt_truncate), t + 1)[::-1]: # reversed
+                    dW_input += np.dot(dstate.T, self.inputs[:, tt])
+                    dW_recur += np.dot(dstate.T, self.states[:, tt-1])
+                    db_input += np.sum(dstate, axis = 0)
+                    dstate = dstate.dot(self.W_recur) * activate(self.activation).backward(self.state_input[:, tt-1])
+
+            # optimize weights and bias
+            self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
+            self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
+            self.W_recur = optimizer(self.optimizer_kwargs).update(self.W_recur, cg(dW_recur))
+
+            self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
+            self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
+
+        # endif self.is_trainable
 
         return next_grad

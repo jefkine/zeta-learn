@@ -15,8 +15,20 @@ class Sequential:
         self.layers = []
         self.init_method = init_method
 
+        self.is_trainable = True
+
     @property
-    def get_layers(self):
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
+        for layer in self.layers:
+            layer.trainable = self.is_trainable
+
+    @property
+    def added_layers(self):
         return self.layers
 
     def add(self, layer):
