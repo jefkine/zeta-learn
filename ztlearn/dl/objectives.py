@@ -156,7 +156,8 @@ class BinaryCrossEntropy(Objective):
         """
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
-        return np.mean(-np.sum(targets * np.log( clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
+        return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
+        # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
 
     def derivative(self, predictions, targets):
 
@@ -173,6 +174,7 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, clipped_divisor = super(BinaryCrossEntropy, self).clip(predictions)
         return (clipped_predictions - targets) / clipped_divisor
+        # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
 
     def accuracy(self, predictions, targets, threshold = 0.5):
 
@@ -333,6 +335,8 @@ class ObjectiveFunction:
     _functions = {
         'kld': KLDivergence,
         'mse': MeanSquaredError,
+        'bce': BinaryCrossEntropy,
+        'cce': CategoricalCrossEntropy,
         'mean_squared_error': MeanSquaredError,
         'hellinger_distance': HellingerDistance,
         'binary_crossentropy': BinaryCrossEntropy,

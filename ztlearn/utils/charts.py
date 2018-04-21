@@ -33,71 +33,36 @@ def plotter(x,
     return plt
 
 
-def plot_accuracy(epoch,
-                  train,
-                  valid,
-                  plot_dict = {'linewidth' : 0.8},
-                  fig_dims = FIG_SIZE,
-                  xticks_dict = {'size' : FONT_SIZE},
-                  yticks_dict = {'size' : FONT_SIZE},
-                  title = 'Model Accuracy',
-                  title_dict = {'size' : FONT_SIZE},
-                  ylabel = 'Accuracy',
-                  ylabel_dict = {'size' : FONT_SIZE},
-                  xlabel = 'Iterations',
-                  xlabel_dict = {'size' : FONT_SIZE},
-                  legend = ['train', 'valid'],
-                  legend_dict = {'loc' : 'upper right'}):
-
+def plot_metric(metric,
+                epoch,
+                train,
+                valid,
+                plot_dict = {'linewidth' : 0.8},
+                fig_dims = FIG_SIZE,
+                xticks_dict = {'size' : FONT_SIZE},
+                yticks_dict = {'size' : FONT_SIZE},
+                title_dict = {'size' : FONT_SIZE},
+                ylabel_dict = {'size' : FONT_SIZE},
+                xlabel_dict = {'size' : FONT_SIZE},
+                legend = ['train', 'valid'],
+                legend_dict = {'loc' : 'upper right'}):
+    
     plt = plotter(range(epoch), [train, valid],
                                 plot_dict = plot_dict,
                                 fig_dims = fig_dims,
                                 xticks_dict = xticks_dict,
                                 yticks_dict = yticks_dict,
-                                title = title,
+                                title = 'Model {}'.format(metric.title()),
                                 title_dict = title_dict,
-                                ylabel = ylabel,
+                                ylabel = metric.title(),
                                 ylabel_dict = ylabel_dict,
-                                xlabel = xlabel,
+                                xlabel = 'Iterations',
                                 xlabel_dict = xlabel_dict,
                                 legend = legend,
                                 legend_dict = legend_dict)
 
     plt.show()
-
-
-def plot_loss(epoch,
-              train,
-              valid,
-              plot_dict = {'linewidth' : 0.8},
-              fig_dims = FIG_SIZE,
-              xticks_dict = {'size' : FONT_SIZE},
-              yticks_dict = {'size' : FONT_SIZE},
-              title = 'Model Loss',
-              title_dict = {'size' : FONT_SIZE},
-              ylabel = 'Loss',
-              ylabel_dict = {'size' : FONT_SIZE},
-              xlabel = 'Iterations',
-              xlabel_dict = {'size' : FONT_SIZE},
-              legend = ['train', 'valid'],
-              legend_dict = {'loc' : 'upper right'}):
-
-    plt = plotter(range(epoch), [train, valid],
-                                plot_dict = plot_dict,
-                                fig_dims = fig_dims,
-                                xticks_dict = xticks_dict,
-                                yticks_dict = yticks_dict,
-                                title = title,
-                                title_dict = title_dict,
-                                ylabel = ylabel,
-                                ylabel_dict = ylabel_dict,
-                                xlabel = xlabel,
-                                xlabel_dict = xlabel_dict,
-                                legend = legend,
-                                legend_dict = legend_dict)
-
-    plt.show()
-
+    
 
 def plot_acc_loss(epoch,
                   acc,

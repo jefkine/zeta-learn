@@ -27,5 +27,5 @@ fit_stats = model.fit(train_data,
                       epochs = model_epochs,
                       validation_data = (test_data, test_label))
 
-plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
-plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
+plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
+plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])

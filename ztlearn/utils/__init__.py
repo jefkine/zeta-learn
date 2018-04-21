@@ -30,8 +30,7 @@ from .text import gen_char_sequence_xtym
 from .text import gen_char_sequence_xtyt
 
 # import from charts.py
-from .charts import plot_loss
-from .charts import plot_accuracy
+from .charts import plot_metric
 from .charts import plot_acc_loss
 from .charts import plot_digits_img_results
 from .charts import plot_digits_img_samples
@@ -55,14 +54,14 @@ __all__ = [
             'unhot','one_hot','min_max','z_score','normalize','minibatches',
             'shuffle_data','print_results','clip_gradients','range_normalize',
             'accuracy_score','train_test_split','print_seq_samples',
-            'print_seq_results',
+            'print_seq_results', 'computebar',
 
             # From text.py
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From charts.py
-            'plot_loss','plot_accuracy','plot_acc_loss','plot_digits_img_results',
-            'plot_digits_img_samples','plot_regression_results',
+            'plot_metric','plot_acc_loss','plot_digits_img_results', 
+            'plot_digits_img_samples','plot_regression_results',  
             'plot_generated_digits_samples',
 
             # From sequences.py

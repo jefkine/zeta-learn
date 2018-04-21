@@ -68,5 +68,5 @@ _, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, 
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 plot_generated_digits_samples(unhot(one_hot(test_label)), predictions)
-plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
-plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
+plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
+plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])

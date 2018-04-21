@@ -128,8 +128,7 @@ class Sequential:
 
             if verbose:
                 print('VALIDATION: loss: {:.2f} accuracy: {:.2f}'.format(eval_stats["valid_loss"], eval_stats["valid_acc"]))
-
-            if not verbose:
+            else:
                 computebar(eval_stats["valid_batches"], idx)
 
         return eval_stats
