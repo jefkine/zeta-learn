@@ -6,7 +6,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import BatchNomalization, Dense
+from ztlearn.dl.layers import BatchNormalization, Dense
 
 
 data = datasets.load_digits()
@@ -21,9 +21,9 @@ init_type = 'he_normal'
 def stack_encoder_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(256, activation = 'relu', input_shape = (img_dim,)))
-    model.add(BatchNomalization())
+    model.add(BatchNormalization())
     model.add(Dense(128, activation = 'relu'))
-    model.add(BatchNomalization())
+    model.add(BatchNormalization())
     model.add(Dense(latent_dim, activation = 'relu'))
 
     return model
@@ -31,9 +31,9 @@ def stack_encoder_layers(init):
 def stack_decoder_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(128, activation = 'relu', input_shape = (latent_dim,)))
-    model.add(BatchNomalization())
+    model.add(BatchNormalization())
     model.add(Dense(256, activation = 'relu'))
-    model.add(BatchNomalization())
+    model.add(BatchNormalization())
     model.add(Dense(img_dim, activation = 'sigmoid'))
 
     return model
@@ -63,7 +63,8 @@ fit_stats = autoencoder.fit(train_data,
                             validation_data = (test_data, test_label),
                             shuffle_data = True)
 
-_, _, _, test_label = train_test_split(data.data, data.target,test_size = 0.2, random_seed = 15)
+# generate non rescaled test labels for use in generated digits plot
+_, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, random_seed = 15)
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 plot_generated_digits_samples(unhot(one_hot(test_label)), predictions)

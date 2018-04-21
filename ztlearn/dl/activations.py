@@ -20,8 +20,8 @@ class ELU:
         alpha (float32): controls the value to which an ELU saturates for negative net inputs
     """
 
-    def __init__(self, alpha = 0.1):
-        self.alpha = alpha
+    def __init__(self, activation_dict):
+        self.alpha = activation_dict['alpha'] if 'alpha' in activation_dict else 0.1
 
     def activation(self, input_signal):
 
@@ -78,6 +78,8 @@ class SELU:
     ALPHA = 1.6732632423543772848170429916717
     _LAMBDA = 1.6732632423543772848170429916717
 
+    def __init__(self, activation_dict): pass
+
     def activation(self, input_signal):
 
         """
@@ -132,6 +134,8 @@ class ReLU:
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
     """
 
+    def __init__(self, activation_dict): pass
+
     def activation(self, input_signal):
 
         """
@@ -181,6 +185,8 @@ class TanH:
             * [PDF] https://goo.gl/xPSnif
     """
 
+    def __init__(self, activation_dict): pass
+
     def activation(self, input_signal):
 
         """
@@ -228,6 +234,8 @@ class Sigmoid:
         [1] The influence of the sigmoid function parameters on the speed of
             backpropagation learning https://goo.gl/MavJjj
     """
+
+    def __init__(self, activation_dict): pass
 
     def activation(self, input_signal):
 
@@ -277,6 +285,8 @@ class SoftPlus:
             * [Charles Dugas, et. al., 2001] https://goo.gl/z3jeYc
             * [PDF] https://goo.gl/z3jeYc
     """
+
+    def __init__(self, activation_dict): pass
 
     def activation(self, input_signal):
 
@@ -333,6 +343,8 @@ class Softmax:
             [Mario Costa, 1989] [PDF] https://goo.gl/ZhBY4r
     """
 
+    def __init__(self, activation_dict): pass
+
     def activation(self, input_signal):
 
         """
@@ -387,11 +399,11 @@ class LeakyReLU:
             * [PDF] https://arxiv.org/pdf/1505.00853.pdf
 
     Args:
-        leakage (float32): provides for a small non-zero gradient (e.g. 0.01) when the unit is not active.
+        alpha (float32): provides for a small non-zero gradient (e.g. 0.01) when the unit is not active.
     """
 
-    def __init__(self, leakage = 0.01):
-        self.leakage = leakage
+    def __init__(self, activation_dict):
+        self.alpha = activation_dict['alpha'] if 'alpha' in activation_dict else 0.01
 
     def activation(self, input_signal):
 
@@ -405,7 +417,7 @@ class LeakyReLU:
             numpy.array: the output of the LeakyReLU function applied to the input
         """
 
-        return np.where(input_signal >= 0, input_signal, np.multiply(input_signal, self.leakage))
+        return np.where(input_signal >= 0, input_signal, np.multiply(input_signal, self.alpha))
 
     def derivative(self, input_signal):
 
@@ -419,7 +431,7 @@ class LeakyReLU:
             numpy.array: the output of the LeakyReLU derivative applied to the input
         """
 
-        return np.where(input_signal >= 0, 1, self.leakage)
+        return np.where(input_signal >= 0, 1, self.alpha)
 
     @property
     def activation_name(self):
@@ -441,6 +453,8 @@ class ElliotSigmoid:
             * [David L. Elliott, et. al., 1993] https://goo.gl/qqBdne
             * [PDF] https://goo.gl/fPLPcr
     """
+
+    def __init__(self, activation_dict): pass
 
     def activation(self, input_signal):
 
@@ -488,6 +502,8 @@ class Linear:
         [1] Identity Function
             [Wikipedia Article] https://en.wikipedia.org/wiki/Identity_function
     """
+
+    def __init__(self, activation_dict): pass
 
     def activation(self, input_signal):
 
@@ -538,10 +554,10 @@ class ActivationFunction:
         'elliot_sigmoid': ElliotSigmoid
     }
 
-    def __init__(self, name):
+    def __init__(self, name, activation_dict = {}):
         if name not in self._functions.keys():
             raise Exception('Activation function must be either one of the following: {}.'.format(', '.join(self._functions.keys())))
-        self.activation_func = self._functions[name]()
+        self.activation_func = self._functions[name](activation_dict)
 
     @property
     def name(self):

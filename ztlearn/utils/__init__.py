@@ -9,7 +9,6 @@ from . import decorate
 from . import sequences
 
 # import from data.py
-
 from .data import unhot
 from .data import one_hot
 from .data import min_max
@@ -21,6 +20,7 @@ from .data import shuffle_data
 from .data import print_results
 from .data import clip_gradients
 from .data import accuracy_score
+from .data import range_normalize
 from .data import train_test_split
 from .data import print_seq_samples
 from .data import print_seq_results
@@ -53,8 +53,9 @@ from .im2col import col2im_indices
 __all__ = [
             # From data.py
             'unhot','one_hot','min_max','z_score','normalize','minibatches',
-            'shuffle_data','print_results','clip_gradients','accuracy_score',
-            'train_test_split','print_seq_samples','print_seq_results' ,
+            'shuffle_data','print_results','clip_gradients','range_normalize',
+            'accuracy_score','train_test_split','print_seq_samples',
+            'print_seq_results',
 
             # From text.py
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',

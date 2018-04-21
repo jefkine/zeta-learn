@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
 from .base import Layer
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
 from .base import Layer
 from ztlearn.utils import one_hot
 from ..initializers import InitializeWeights as init

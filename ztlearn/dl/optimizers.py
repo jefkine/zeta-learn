@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
 from .decayers import DecayFunction as decay
 
 class Optimizer(object):

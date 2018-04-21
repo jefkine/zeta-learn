@@ -34,7 +34,7 @@ from .convolutional import Conv2D
 from .convolutional import ConvLoop2D
 
 # normalization layer(s)
-from .normalization import BatchNomalization
+from .normalization import BatchNormalization
 
 # recurrent layer(s)
 from .recurrent import RNN

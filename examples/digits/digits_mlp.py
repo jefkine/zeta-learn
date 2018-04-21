@@ -5,7 +5,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import Dropout, Dense, BatchNomalization
+from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 # NOTE: Check the random_seed seeding for improperly shuffled data.
 data = datasets.load_digits()
@@ -21,7 +21,7 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 model = Sequential()
 model.add(Dense(256, activation = 'relu', input_shape=(64,)))
 model.add(Dropout(0.25))
-model.add(BatchNomalization())
+model.add(BatchNormalization())
 model.add(Dense(10, activation = 'relu')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
@@ -39,9 +39,10 @@ predictions = unhot(model.predict(test_data, True))
 
 print_results(predictions, test_label)
 plot_digits_img_results(test_data, test_label, predictions)
+
 plot_loss(model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_accuracy(model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-plot_acc_loss(eval_stats['valid_batches'], 
-              eval_stats['valid_loss'], 
+plot_acc_loss(eval_stats['valid_batches'],
+              eval_stats['valid_loss'],
               eval_stats['valid_acc'],
               title = 'Evaluation Accuracy vs Loss')

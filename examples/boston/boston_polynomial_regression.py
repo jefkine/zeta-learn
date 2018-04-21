@@ -34,10 +34,9 @@ mse = objective('mean_squared_error').forward(predictions, targets)
 
 print('Mean Squared Error: {:.2f}'.format(mse))
 plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
-plot_regression_results(train_data, train_label, test_data, test_label,
-                                                            input_data,
-                                                            model.predict(input_data),
-                                                            mse,
-                                                           'Polynomial Regression',
-                                                           'Median House Price',
-                                                           'Average Number of Rooms')
+plot_regression_results(train_data, train_label, test_data, test_label, input_data,
+                                                                        model.predict(input_data),
+                                                                        mse,
+                                                                       'Polynomial Regression',
+                                                                       'Median House Price',
+                                                                       'Average Number of Rooms')

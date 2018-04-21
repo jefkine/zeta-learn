@@ -54,10 +54,11 @@ def normalize(input_data, axis = -1, order = 2):
     l2[l2 == 0] = 1
     return input_data / l2
 
+def range_normalize(input_data, a = -1, b = 1, axis = None):
+    return (((b - a) * ((input_data - input_data.min(axis = axis, keepdims = True)) / np.ptp(input_data, axis = axis))) + a)
+
 def min_max(input_data, axis = None):
-    min_input = input_data.min(axis = axis, keepdims = True)
-    max_input = input_data.max(axis = axis, keepdims = True)
-    return (input_data - min_input)/(max_input - min_input)
+    return (input_data - input_data.min(axis = axis, keepdims = True))/np.ptp(input_data, axis = axis)
 
 def z_score(input_data, axis = None):
     input_mean = input_data.mean(axis = axis, keepdims = True)
@@ -68,30 +69,30 @@ def print_results(predictions, test_labels, num_samples = 20):
     print('Targeted  : {}'.format(test_labels[:num_samples]))
     print('Predicted : {}\n'.format(predictions[:num_samples]))
     print ('Model Accuracy : {:2.2f}% \n'.format(accuracy_score(predictions, test_labels)*100))
-    
+
 def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):
     print('Sample Sequence : {}'.format(unhot(train_data[sample_num])))
     print('Next Entry      : {} \n'.format(unhot(train_label[sample_num], unhot_axis)))
-    
+
 def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval = 5):
     predictions = unhot(predicted, unhot_axis)
     targets = unhot(test_label, unhot_axis)
-    
+
     for i in range(interval):
         print('Sequence  : {}'.format(unhot(test_data[i])))
         print('Targeted  : {}'.format(targets[i]))
         print('Predicted : {} \n'.format(predictions[i]))
-        
+
     print ('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
-     
+
 def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
-    progress = float((curr + 1) / total)        
-    update = int(round(size * progress))  
-    
-    bar = "\r{}: [{}] {:d}% {}".format(prefix, 
-                                       sign * update + "-" * (size - update), 
-                                       int(round(progress * 100)), 
+    progress = float((curr + 1) / total)
+    update = int(round(size * progress))
+
+    bar = "\r{}: [{}] {:d}% {}".format(prefix,
+                                       sign * update + "-" * (size - update),
+                                       int(round(progress * 100)),
                                        "" if progress < 1. else '\r\n')
-   
+
     sys.stdout.write(bar)
     sys.stdout.flush()

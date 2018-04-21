@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+
 from .base import Layer
 from ..optimizers import OptimizationFunction as optimizer
 
 
-class BatchNomalization(Layer):
+class BatchNormalization(Layer):
 
     def __init__(self, eps = 0.01, momentum = 0.99):
         self.eps = eps

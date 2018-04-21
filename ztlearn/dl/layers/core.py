@@ -9,10 +9,16 @@ from ..activations import ActivationFunction as activation
 
 class Activation(Layer):
 
-    def __init__(self, function_name, input_shape = None):
+    def __init__(self, function_name, input_shape = None, **kwargs):
         self.input_shape = input_shape
         self.activation_name = function_name
-        self.activation_func = activation(self.activation_name)
+
+        allowed_kwargs = {'alpha'}
+        for kwrd in kwargs:
+            if kwrd not in allowed_kwargs:
+                raise TypeError('Unexpected keyword argument passed to activation: ' + str(kwrd))
+
+        self.activation_func = activation(self.activation_name, kwargs)
 
         self.is_trainable = True
 
@@ -101,13 +107,13 @@ class Dense(Layer):
         prev_weights = self.weights
 
         if self.is_trainable:
-            
+
             dweights = self.inputs.T @ grad
             dbias = np.sum(grad, axis = 0, keepdims = True)
 
             self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
             self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
-            
+
         # endif self.is_trainable
 
         return grad @ prev_weights.T

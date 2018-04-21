@@ -5,7 +5,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import BatchNomalization, Conv2D
+from ztlearn.dl.layers import BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
@@ -22,15 +22,15 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 model = Sequential(init_method = 'he_uniform')
 model.add(Conv2D(filters = 32, kernel_size = (3,3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
 model.add(Dropout(0.25))
-model.add(BatchNomalization())
+model.add(BatchNormalization())
 model.add(Conv2D(filters = 64, kernel_size = (3,3), activation = 'relu', padding = 'same'))
 model.add(MaxPooling2D(pool_size = (2,2)))
 model.add(Dropout(0.25))
-model.add(BatchNomalization())
+model.add(BatchNormalization())
 model.add(Flatten())
 model.add(Dense(256, activation = 'relu'))
 model.add(Dropout(0.5))
-model.add(BatchNomalization())
+model.add(BatchNormalization())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
