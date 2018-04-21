@@ -10,7 +10,7 @@ from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 
 data = datasets.load_digits()
-# plot_digits_img_samples(data)
+plot_digits_img_samples(data)
 
 img_rows = 8
 img_cols = 8
@@ -20,7 +20,7 @@ batch_size = 32
 half_batch = int(batch_size * 0.5)
 
 latent_dim = 100
-model_epochs = 50
+model_epochs = 10000
 init_type = 'he_normal'
 
 def stack_generator_layers(init):
@@ -144,7 +144,4 @@ plot_metric('Accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g
 _, _, train_label, _ = train_test_split(data.data, data.target, test_size = 0., random_seed = 15)
 noise = np.random.normal(0, 1, (36, latent_dim))
 gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))
-
-# gen_imgs = range_normalize(gen_imgs.astype(np.float32), 0, 1)
-
 plot_generated_digits_samples(unhot(one_hot(train_label)), gen_imgs)
