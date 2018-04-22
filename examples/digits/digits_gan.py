@@ -10,29 +10,35 @@ from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 
 data = datasets.load_digits()
-plot_digits_img_samples(data)
+# plot_digits_img_samples(data)
 
 img_rows = 8
 img_cols = 8
 img_dim = 64  # is the product (img_rows * img_cols)
 
-batch_size = 32
+latent_dim = 100
+batch_size = 128
 half_batch = int(batch_size * 0.5)
 
-latent_dim = 100
-model_epochs = 10000
-init_type = 'he_normal'
+verbose = False
+init_type = 'he_uniform'
+
+model_epochs = 3000
+model_stats = {"d_train_loss": [], "d_train_acc": [], "g_train_loss": [], "g_train_acc": []}
+
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00005)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00005)
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(128, input_shape = (latent_dim,)))
-    model.add(Activation('leaky_relu', alpha = 0.2))
+    model.add(Activation('relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(256))
-    model.add(Activation('leaky_relu', alpha = 0.2))
+    model.add(Activation('relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(512))
-    model.add(Activation('leaky_relu', alpha = 0.2))
+    model.add(Activation('relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(img_dim, activation = 'tanh'))
 
@@ -49,9 +55,6 @@ def stack_discriminator_layers(init):
     model.add(Dense(2, activation = 'sigmoid'))
 
     return model
-
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0002)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00002)
 
 # stack and compile the generator
 generator = stack_generator_layers(init = init_type)
@@ -71,77 +74,68 @@ generator_discriminator.compile(loss = 'categorical_crossentropy', optimizer = g
 images = range_normalize(data.data.astype(np.float32))
 
 # get all data into the training set
-train_data, _, train_label, _ = train_test_split(images, images, test_size = 0., random_seed = 15)
+train_data, _, train_label, _ = train_test_split(images, images, test_size = 0., random_seed = 5)
 
-def train_model(verbose = True):
+for epoch_idx in range(model_epochs):
 
-    # initialize model_stats dict
-    model_stats = {"d_train_loss": [], "d_train_acc": [], "g_train_loss": [], "g_train_acc": []}
+    # set the discriminator to trainable
+    discriminator.trainable = True
 
-    for epoch_idx in range(model_epochs):
+    for epoch_k in range(5):
 
-        # set the discriminator to trainable
-        discriminator.trainable = True
+        # draw random samples from real images
+        # index = np.random.choice(len(train_data), half_batch, replace = False)
+        index = np.random.randint(0, train_data.shape[0], half_batch)
+        imgs = train_data[index]
 
-        for epoch_k in range(5):
+        d_noise = np.random.normal(0, 1, (half_batch, latent_dim))
 
-            # draw random samples from real images
-            # index = np.random.choice(len(train_data), half_batch, replace = False)
-            index = np.random.randint(0, train_data.shape[0], half_batch)
-            imgs = train_data[index]
+        # generate a batch of new images
+        gen_imgs = generator.predict(d_noise)
 
-            d_noise = np.random.normal(0, 1, (half_batch, latent_dim))
-
-            # generate a batch of new images
-            gen_imgs = generator.predict(d_noise)
-
-            # valid = [1, 0], fake = [0, 1]
-            d_valid = np.concatenate((np.ones((half_batch, 1)), np.zeros((half_batch, 1))), axis = 1)
-            d_fake = np.concatenate((np.zeros((half_batch, 1)), np.ones((half_batch, 1))), axis = 1)
-
-            # discriminator training
-            d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid)
-            d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake)
-
-        # end of for epoch_k in range(1):
-
-        d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
-        d_acc = 0.5 * np.add(d_acc_real, d_acc_fake)
-
-        model_stats["d_train_loss"].append(d_loss)
-        model_stats["d_train_acc"].append(d_acc)
-
-        # set the discriminator to not trainable
-        discriminator.trainable = False
+        # valid = [1, 0], fake = [0, 1]
+        d_valid = np.concatenate((np.ones((half_batch, 1)), np.zeros((half_batch, 1))), axis = 1)
+        d_fake = np.concatenate((np.zeros((half_batch, 1)), np.ones((half_batch, 1))), axis = 1)
 
         # discriminator training
-        g_noise = np.random.normal(0, 1, (batch_size, latent_dim))
+        d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid)
+        d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake)
 
-        # g_valid = [1, 0]
-        g_valid = np.concatenate((np.ones((batch_size, 1)), np.zeros((batch_size, 1))), axis = 1)
+    # end of for epoch_k in range(1):
 
-        # train the generator
-        g_loss, g_acc = generator_discriminator.train_on_batch(g_noise, g_valid)
+    d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
+    d_acc = 0.5 * np.add(d_acc_real, d_acc_fake)
 
-        model_stats["g_train_loss"].append(g_loss)
-        model_stats["g_train_acc"].append(g_acc)
+    model_stats["d_train_loss"].append(d_loss)
+    model_stats["d_train_acc"].append(d_acc)
 
-        if not verbose:
-            computebar(model_epochs, epoch_idx)
-        else:
-            # print the progress
-            print('Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(epoch_idx, d_loss, d_acc))
-            print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(epoch_idx, g_loss, g_acc))
+    # set the discriminator to not trainable
+    discriminator.trainable = False
 
-    return model_stats
+    # discriminator training
+    g_noise = np.random.normal(0, 1, (batch_size, latent_dim))
 
-model_stats = train_model(verbose = False)
+    # g_valid = [1, 0]
+    g_valid = np.concatenate((np.ones((batch_size, 1)), np.zeros((batch_size, 1))), axis = 1)
+
+    # train the generator
+    g_loss, g_acc = generator_discriminator.train_on_batch(g_noise, g_valid)
+
+    model_stats["g_train_loss"].append(g_loss)
+    model_stats["g_train_acc"].append(g_acc)
+
+    if not verbose:
+        computebar(model_epochs, epoch_idx)
+    else:
+        # print the progress
+        print('Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(epoch_idx, d_loss, d_acc))
+        print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(epoch_idx, g_loss, g_acc))
 
 plot_metric('Loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'])
 plot_metric('Accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'])
 
 # generate non rescaled test labels for use in generated digits plot
-_, _, train_label, _ = train_test_split(data.data, data.target, test_size = 0., random_seed = 15)
+_, _, train_label, _ = train_test_split(data.data, data.target, test_size = 0., random_seed = 5)
 noise = np.random.normal(0, 1, (36, latent_dim))
 gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))
 plot_generated_digits_samples(unhot(one_hot(train_label)), gen_imgs)
