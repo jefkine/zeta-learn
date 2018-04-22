@@ -20,25 +20,25 @@ latent_dim = 100
 batch_size = 128
 half_batch = int(batch_size * 0.5)
 
-verbose = False
+verbose = True
 init_type = 'he_uniform'
 
-model_epochs = 3000
+model_epochs = 5000
 model_stats = {"d_train_loss": [], "d_train_acc": [], "g_train_loss": [], "g_train_acc": []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00005)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00005)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(128, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu', alpha = 0.2))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(256))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu', alpha = 0.2))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(512))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu', alpha = 0.2))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(img_dim, activation = 'tanh'))
 
@@ -58,23 +58,20 @@ def stack_discriminator_layers(init):
 
 # stack and compile the generator
 generator = stack_generator_layers(init = init_type)
-generator.compile(loss = 'categorical_crossentropy', optimizer = g_opt)
+generator.compile(loss = 'bce', optimizer = g_opt)
 
 # stack and compile the discriminator
 discriminator = stack_discriminator_layers(init = init_type)
-discriminator.compile(loss = 'categorical_crossentropy', optimizer = d_opt)
+discriminator.compile(loss = 'bce', optimizer = d_opt)
 
 # stack and compile the generator_discriminator
 generator_discriminator = Sequential(init_method = init_type)
 generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
-generator_discriminator.compile(loss = 'categorical_crossentropy', optimizer = g_opt)
+generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
 images = range_normalize(data.data.astype(np.float32))
-
-# get all data into the training set
-train_data, _, train_label, _ = train_test_split(images, images, test_size = 0., random_seed = 5)
 
 for epoch_idx in range(model_epochs):
 
@@ -84,9 +81,9 @@ for epoch_idx in range(model_epochs):
     for epoch_k in range(5):
 
         # draw random samples from real images
-        # index = np.random.choice(len(train_data), half_batch, replace = False)
-        index = np.random.randint(0, train_data.shape[0], half_batch)
-        imgs = train_data[index]
+        index = np.random.choice(images.shape[0], half_batch, replace = False)
+        # index = np.random.randint(0, images.shape[0], half_batch)
+        imgs = images[index]
 
         d_noise = np.random.normal(0, 1, (half_batch, latent_dim))
 
@@ -134,8 +131,6 @@ for epoch_idx in range(model_epochs):
 plot_metric('Loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'])
 plot_metric('Accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'])
 
-# generate non rescaled test labels for use in generated digits plot
-_, _, train_label, _ = train_test_split(data.data, data.target, test_size = 0., random_seed = 5)
 noise = np.random.normal(0, 1, (36, latent_dim))
 gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))
-plot_generated_digits_samples(unhot(one_hot(train_label)), gen_imgs)
+plot_generated_digits_samples(unhot(one_hot(data.target)), gen_imgs)
