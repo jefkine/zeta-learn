@@ -104,7 +104,7 @@ def plot_digits_img_results(test_data, test_label, predictions, fig_dims = (6, 6
     for i in range(36):
         digit = fig.add_subplot(6, 6, i + 1, xticks = [], yticks = [])
         digit.imshow(test_data.reshape(-1, 8, 8)[i], cmap = plt.cm.binary, interpolation = 'nearest')
-
+        
         if predictions[i] == test_label[i]:
             digit.text(0, 7, str(predictions[i]), color = 'green')
         else:
@@ -120,7 +120,8 @@ def plot_generated_digits_samples(test_label, predictions, fig_dims = (6, 6)):
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
         digit.imshow(predictions[i], cmap = plt.cm.binary, interpolation = 'nearest')
-        digit.text(0, 7, str(test_label[i]), color = 'blue')
+        if test_label is not None:
+            digit.text(0, 7, str(test_label[i]), color = 'blue')
 
     plt.show()
 

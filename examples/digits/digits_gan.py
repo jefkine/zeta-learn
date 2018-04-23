@@ -133,4 +133,4 @@ plot_metric('Accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g
 
 noise = np.random.normal(0, 1, (36, latent_dim))
 gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))
-plot_generated_digits_samples(unhot(one_hot(data.target)), gen_imgs)
+plot_generated_digits_samples(None, gen_imgs)
