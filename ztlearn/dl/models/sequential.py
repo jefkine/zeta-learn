@@ -65,7 +65,7 @@ class Sequential:
                 batch_stats["batch_acc"].append(acc)
 
                 if verbose:
-                    print('TRAINING: Epoch-{} loss: {:.2f} accuracy: {:.2f}'.format(epoch_idx+1, loss, acc))
+                    print('TRAINING: Epoch-{} loss: {:2.4f} accuracy: {:2.4f}'.format(epoch_idx+1, loss, acc))
 
             fit_stats["train_loss"].append(np.mean(batch_stats["batch_loss"]))
             fit_stats["train_acc"].append(np.mean(batch_stats["batch_acc"]))
@@ -77,7 +77,7 @@ class Sequential:
                 fit_stats["valid_acc"].append(val_acc)
 
                 if verbose:
-                    print('VALIDATION: Epoch-{} loss: {:.2f} accuracy: {:.2f}'.format(epoch_idx+1, val_loss, val_acc))
+                    print('VALIDATION: Epoch-{} loss: {:2.4f} accuracy: {:2.4f}'.format(epoch_idx+1, val_loss, val_acc))
 
             if not verbose:
                 computebar(epochs, epoch_idx)
@@ -127,7 +127,7 @@ class Sequential:
             eval_stats["valid_acc"].append(np.mean(acc))
 
             if verbose:
-                print('VALIDATION: loss: {:.2f} accuracy: {:.2f}'.format(eval_stats["valid_loss"], eval_stats["valid_acc"]))
+                print('VALIDATION: loss: {:2.4f} accuracy: {:2.4f}'.format(eval_stats["valid_loss"], eval_stats["valid_acc"]))
             else:
                 computebar(eval_stats["valid_batches"], idx)
 
