@@ -33,7 +33,11 @@ predictions = np.expand_dims(model.predict(test_data), axis = 1)
 mse = objective('mean_squared_error').forward(predictions, targets)
 
 print('Mean Squared Error: {:.2f}'.format(mse))
-plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
+
+plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), fit_stats['train_acc'], 
+                                                              fit_stats['train_loss'], 
+                                                              legend = ['acc', 'loss'])
+
 plot_regression_results(train_data, train_label, test_data, test_label, input_data,
                                                                         model.predict(input_data),
                                                                         mse,

@@ -31,7 +31,6 @@ from .text import gen_char_sequence_xtyt
 
 # import from charts.py
 from .charts import plot_metric
-from .charts import plot_acc_loss
 from .charts import plot_digits_img_results
 from .charts import plot_digits_img_samples
 from .charts import plot_regression_results
@@ -60,9 +59,8 @@ __all__ = [
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From charts.py
-            'plot_metric','plot_acc_loss','plot_digits_img_results', 
-            'plot_digits_img_samples','plot_regression_results',  
-            'plot_generated_digits_samples',
+            'plot_metric','plot_digits_img_results','plot_digits_img_samples',
+            'plot_regression_results','plot_generated_digits_samples',
 
             # From sequences.py
             'gen_mult_sequence_xtyt','gen_mult_sequence_xtym'

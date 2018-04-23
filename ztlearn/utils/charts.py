@@ -62,39 +62,6 @@ def plot_metric(metric,
                                 legend_dict = legend_dict)
 
     plt.show()
-    
-
-def plot_acc_loss(epoch,
-                  acc,
-                  loss,
-                  plot_dict = {'linewidth' : 0.8},
-                  fig_dims = FIG_SIZE,
-                  xticks_dict = {'size' : FONT_SIZE},
-                  yticks_dict = {'size' : FONT_SIZE},
-                  title = 'Model Accuracy vs Loss',
-                  title_dict = {'size' : FONT_SIZE},
-                  ylabel = 'Accuracy vs Loss',
-                  ylabel_dict = {'size' : FONT_SIZE},
-                  xlabel = 'Iterations',
-                  xlabel_dict = {'size' : FONT_SIZE},
-                  legend = ['acc', 'loss'],
-                  legend_dict = {'loc' : 'upper right'}):
-
-    plt = plotter(range(epoch), [acc, loss],
-                                plot_dict = plot_dict,
-                                fig_dims = fig_dims,
-                                xticks_dict = xticks_dict,
-                                yticks_dict = yticks_dict,
-                                title = title,
-                                title_dict = title_dict,
-                                ylabel = ylabel,
-                                ylabel_dict = ylabel_dict,
-                                xlabel = xlabel,
-                                xlabel_dict = xlabel_dict,
-                                legend = legend,
-                                legend_dict = legend_dict)
-
-    plt.show()
 
 
 def plot_digits_img_results(test_data, test_label, predictions, fig_dims = (6, 6)):

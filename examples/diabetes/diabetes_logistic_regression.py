@@ -33,7 +33,10 @@ fit_stats = model.fit(train_data, train_label)
 # fit_stats = model.fit_NR(train_data, train_label) # --- Newton-Raphson Method
 
 print_results(model.predict(test_data), np.round(test_label).astype(int))
-plot_acc_loss(len(fit_stats["train_loss"]), fit_stats['train_acc'], fit_stats['train_loss'])
+
+plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), fit_stats['train_acc'], 
+                                                              fit_stats['train_loss'], 
+                                                              legend = ['acc', 'loss'])
 
 '''
 
