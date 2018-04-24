@@ -15,7 +15,7 @@ opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, learning_rate = 0
 
 # Model definition
 model = Sequential()
-model.add(LSTM(128, activation = "tanh", input_shape = (30, len_chars)))
+model.add(LSTM(128, activation = 'tanh', input_shape = (30, len_chars)))
 model.add(Flatten())
 model.add(Dense(len_chars,  activation = 'softmax'))
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)

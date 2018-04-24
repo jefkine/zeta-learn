@@ -15,7 +15,7 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(data
                                                                   random_seed = 5)
 
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
-model = Perceptron(epochs = 300, 
+model = Perceptron(epochs = 300,
                    activation = 'selu',
                    loss = 'categorical_crossentropy',
                    init_method = 'he_normal',
@@ -26,6 +26,8 @@ fit_stats = model.fit(train_data, train_label)
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))
 plot_digits_img_results(test_data, unhot(test_label), predictions)
-plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), fit_stats['train_acc'], 
-                                                              fit_stats['train_loss'], 
-                                                              legend = ['acc', 'loss'])
+plot_metric('Accuracy vs Loss',
+                                len(fit_stats["train_loss"]),
+                                fit_stats['train_acc'],
+                                fit_stats['train_loss'],
+                                legend = ['acc', 'loss'])
