@@ -22,10 +22,6 @@ class Conv(Layer):
         self.init_method = None
         self.optimizer_kwargs = None
 
-        self.stride_height, self.stride_width = self.strides
-        self.kernel_height, self.kernel_width = self.kernel_size
-        self.input_channels, self.input_height, self.input_width = self.input_shape
-
         self.is_trainable = True
 
     @property
@@ -62,9 +58,26 @@ class Conv(Layer):
 
     @property
     def output_shape(self):
-        pad_height, pad_width = get_pad(self.padding, self.input_height, self.input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
-        output_height = (self.input_height + np.sum(pad_height) - self.kernel_height) / self.stride_height + 1
-        output_width = (self.input_width + np.sum(pad_width) - self.kernel_width) / self.stride_width + 1
+        pad_height, pad_width = get_pad(self.padding,
+                                                     self.input_shape[1],
+                                                     self.input_shape[2],
+                                                     self.strides[0],
+                                                     self.strides[1],
+                                                     self.kernel_size[0],
+                                                     self.kernel_size[1])
+
+        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelW + 2P) / Sh) + 1]
+        # output_height = ((self.input_shape[1] - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
+        # output_width = ((self.input_shape[2] - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
+
+        if self.padding == 'same':
+            output_height = np.ceil(float(self.input_shape[1]) / float(self.strides[0]))
+            output_width  = np.ceil(float(self.input_shape[2]) / float(self.strides[1]))
+
+        if self.padding == 'valid':
+            output_height = np.ceil(float(self.input_shape[1] - self.kernel_size[0] + 1) / float(self.strides[0]))
+            output_width  = np.ceil(float(self.input_shape[2] - self.kernel_size[1] + 1) / float(self.strides[1]))
+
         return self.filters, int(output_height), int(output_width)
 
     def prep_layer(self):
@@ -79,23 +92,41 @@ class Conv2D(Conv):
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.filter_num, self.filter_depth, self.filter_height, self.filter_width = self.weights.shape
+        self.filter_num, _, _, _ = self.weights.shape
         input_num, input_depth, input_height, input_width = inputs.shape
         self.input_shape = inputs.shape
         self.inputs = inputs
 
-        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+        pad_height, pad_width = get_pad(self.padding,
+                                                      input_height,
+                                                      input_width,
+                                                      self.strides[0],
+                                                      self.strides[1],
+                                                      self.kernel_size[0],
+                                                      self.kernel_size[1])
 
         # confirm dimensions
-        assert (input_height + np.sum(pad_height) - self.filter_height) % self.stride_height == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.filter_width) %  self.stride_width == 0, 'width does not work'
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
 
-        # generate output
-        output_height = (input_height + np.sum(pad_height) - self.filter_height) / self.stride_height + 1
-        output_width = (input_width + np.sum(pad_width) - self.filter_width) / self.stride_width + 1
+        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelW + 2P) / Sh) + 1]
+        # output_height = ((input_height + np.sum(pad_height) - self.kernel_size[0]) / self.strides[0]) + 1
+        # output_width = ((input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1]) + 1
+
+        if self.padding == 'same':
+            output_height = np.ceil(float(input_height) / float(self.strides[0]))
+            output_width  = np.ceil(float(input_width) / float(self.strides[1]))
+
+        if self.padding == 'valid':
+            output_height = np.ceil(float(input_height - self.kernel_size[0] + 1) / float(self.strides[0]))
+            output_width  = np.ceil(float(input_width - self.kernel_size[1] + 1) / float(self.strides[1]))
 
         # convert to columns
-        self.input_col = im2col_indices(inputs, self.filter_height, self.filter_width, padding = (pad_height, pad_width), stride = 1)
+        self.input_col = im2col_indices(inputs,
+                                                self.kernel_size[0],
+                                                self.kernel_size[1],
+                                                padding = (pad_height, pad_width),
+                                                stride = 1)
         self.weight_col =  self.weights.reshape(self.filter_num, -1)
 
         # calculate ouput
@@ -126,8 +157,20 @@ class Conv2D(Conv):
         weight_reshape = self.weights.reshape(self.filter_num, -1)
         dinput_col = weight_reshape.T @ doutput_reshaped
 
-        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
-        dinputs = col2im_indices(dinput_col, self.input_shape, self.filter_height, self.filter_width, padding = (pad_height, pad_width), stride = self.stride_height)
+        pad_height, pad_width = get_pad(self.padding,
+                                                      input_height,
+                                                      input_width,
+                                                      self.strides[0],
+                                                      self.strides[1],
+                                                      self.kernel_size[0],
+                                                      self.kernel_size[1])
+
+        dinputs = col2im_indices(dinput_col,
+                                             self.input_shape,
+                                             self.kernel_size[0],
+                                             self.kernel_size[1],
+                                             padding = (pad_height, pad_width),
+                                             stride = self.strides[0])
 
         return dinputs
 
@@ -138,20 +181,36 @@ class ConvLoop2D(Conv):
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.filter_num, self.filter_depth, self.filter_height, self.filter_width = self.weights.shape
+        self.filter_num, _, _, _ = self.weights.shape
         input_num, input_depth, input_height, input_width = inputs.shape
         self.input_shape = inputs.shape
         self.inputs = inputs
 
-        pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+        pad_height, pad_width = get_pad(self.padding,
+                                                      input_height,
+                                                      input_width,
+                                                      self.strides[0],
+                                                      self.strides[1],
+                                                      self.kernel_size[0],
+                                                      self.kernel_size[1])
+
         x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
 
         # confirm dimensions
-        assert (input_height + np.sum(pad_height) - self.filter_height) % self.stride_height == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.filter_width) %  self.stride_width == 0, 'width does not work'
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
 
-        output_height = (input_height + np.sum(pad_height) - self.filter_height) / self.stride_height + 1
-        output_width = (input_width + np.sum(pad_width) - self.filter_width) / self.stride_width + 1
+        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelW + 2P) / Sh) + 1]
+        # output_height = (input_height + np.sum(pad_height) - self.kernel_size[0]) / self.strides[0] + 1
+        # output_width = (input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1] + 1
+
+        if self.padding == 'same':
+            output_height = np.ceil(float(input_height) / float(self.strides[0]))
+            output_width  = np.ceil(float(input_width) / float(self.strides[1]))
+
+        if self.padding == 'valid':
+            output_height = np.ceil(float(input_height - self.kernel_size[0] + 1) / float(self.strides[0]))
+            output_width  = np.ceil(float(input_width - self.kernel_size[1] + 1) / float(self.strides[1]))
 
         output = np.zeros((input_num, self.filter_num, output_height, output_width))
 
@@ -160,8 +219,8 @@ class ConvLoop2D(Conv):
             for f in np.arange(self.filter_num): # filter number
                 for h in np.arange(output_height): # output height
                     for w in np.arange(output_width): # output width
-                        h_stride, w_stride = h * self.stride_height, w * self.stride_width
-                        x_patch = x_padded[b, :, h_stride: h_stride + self.kernel_height, w_stride: w_stride + self.kernel_width]
+                        h_stride, w_stride = h * self.strides[0], w * self.strides[1]
+                        x_patch = x_padded[b, :, h_stride: h_stride + self.kernel_size[0], w_stride: w_stride + self.kernel_size[1]]
                         output[b, f, h, w] = np.sum(x_patch * self.weights[f]) + self.bias[f]
 
         return output
@@ -178,7 +237,14 @@ class ConvLoop2D(Conv):
             dweights = np.zeros(self.weights.shape)
             dbias = np.zeros(self.bias.shape)
 
-            pad_height, pad_width = get_pad(self.padding, input_height, input_width, self.stride_height, self.stride_width, self.kernel_height, self.kernel_width)
+            pad_height, pad_width = get_pad(self.padding,
+                                                          input_height,
+                                                          input_width,
+                                                          self.strides[0],
+                                                          self.strides[1],
+                                                          self.kernel_size[0],
+                                                          self.kernel_size[1])
+                                                          
             pad_size = np.sum(pad_height)/2
             if pad_size != 0:
                 grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
@@ -186,12 +252,12 @@ class ConvLoop2D(Conv):
             # dweights
             for f in np.arange(self.filter_num): # filter number
                 for c in np.arange(input_depth): # input depth (channels)
-                    for h in np.arange(self.kernel_height): # kernel height
-                        for w in np.arange(self.kernel_width): # kernel width
+                    for h in np.arange(self.kernel_size[0]): # kernel height
+                        for w in np.arange(self.kernel_size[1]): # kernel width
                             input_patch = self.inputs[:,
                                                       c,
-                                                      h: input_height - self.kernel_height + h + 1: self.stride_height,
-                                                      w: input_width - self.kernel_width + w + 1: self.stride_width]
+                                                      h: input_height - self.kernel_size[0] + h + 1: self.strides[0],
+                                                      w: input_width - self.kernel_size[1] + w + 1: self.strides[1]]
                             grad_patch = grad[:, f]
                             dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
 
@@ -209,12 +275,12 @@ class ConvLoop2D(Conv):
         for b in np.arange(input_num): # batch number
             for f in np.arange(self.filter_num): # filter number
                 for c in np.arange(input_depth): # input depth (channels)
-                    for h in np.arange(self.kernel_height): # kernel height
-                        for w in np.arange(self.kernel_width): # kernel width
-                            h_stride, w_stride = h * self.stride_height, w * self.stride_width
+                    for h in np.arange(self.kernel_size[0]): # kernel height
+                        for w in np.arange(self.kernel_size[1]): # kernel width
+                            h_stride, w_stride = h * self.strides[0], w * self.strides[1]
                             dinputs[b,
                                     c,
-                                    h_stride: h_stride + self.kernel_height,
-                                    w_stride: w_stride + self.kernel_width] += self.weights[f, c] * grad[b, f, h, w]
+                                    h_stride: h_stride + self.kernel_size[0],
+                                    w_stride: w_stride + self.kernel_size[1]] += self.weights[f, c] * grad[b, f, h, w]
 
         return dinputs

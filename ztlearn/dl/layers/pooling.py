@@ -3,6 +3,7 @@
 import numpy as np
 
 from .base import Layer
+from ztlearn.utils import get_pad
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
 
@@ -12,9 +13,6 @@ class Pool(Layer):
         self.pool_size = pool_size
         self.strides = strides
         self.padding = padding
-
-        self.pool_height, self.pool_width = self.pool_size
-        self.stride_height, self.stride_width = self.strides
 
         self.is_trainable = True
 
@@ -29,10 +27,30 @@ class Pool(Layer):
     @property
     def output_shape(self):
         input_channels, input_height, input_width = self.input_shape
-        out_height = (input_height - self.pool_height) / self.stride_height + 1
-        out_width = (input_width - self.pool_width) / self.stride_width + 1
+
+        self.pad_height, self.pad_width = get_pad(self.padding,
+                                                                input_height,
+                                                                input_width,
+                                                                self.strides[0],
+                                                                self.strides[1],
+                                                                self.pool_size[0],
+                                                                self.pool_size[1])
+
+        # alternate formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
+        # out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
+        # out_width = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
+
+        if self.padding == 'same':
+            out_height = np.ceil(float(input_height) / float(self.strides[0]))
+            out_width  = np.ceil(float(input_width) / float(self.strides[1]))
+
+        if self.padding == 'valid':
+            out_height = np.ceil(float(input_height - self.pool_size[0] + 1) / float(self.strides[0]))
+            out_width  = np.ceil(float(input_width - self.pool_size[1] + 1) / float(self.strides[1]))
+
         assert out_height % 1 == 0
         assert out_width % 1 == 0
+
         return input_channels, int(out_height), int(out_width)
 
     def prep_layer(self): pass
@@ -41,14 +59,18 @@ class Pool(Layer):
         input_num, input_depth, input_height, input_width = inputs.shape
         self.inputs = inputs
 
-        assert (input_height - self.pool_height) % self.stride_height == 0, 'Invalid height'
-        assert (input_width - self.pool_width) % self.stride_width == 0, 'Invalid width'
+        assert (input_height - self.pool_size[0]) % self.strides[0] == 0, 'Invalid height'
+        assert (input_width - self.pool_size[1]) % self.strides[1] == 0, 'Invalid width'
 
-        output_height = (input_height - self.pool_height) / self.stride_height + 1
-        output_width = (input_width - self.pool_width) / self.stride_width + 1
+        output_height = (input_height - self.pool_size[0]) / self.strides[0] + 1
+        output_width = (input_width - self.pool_size[1]) / self.strides[1] + 1
 
         input_reshaped = inputs.reshape(input_num * input_depth, 1, input_height, input_width)
-        self.input_col = im2col_indices(input_reshaped, self.pool_height, self.pool_width, padding = ((0, 0), (0, 0)), stride = self.stride_height)
+        self.input_col = im2col_indices(input_reshaped,
+                                                        self.pool_size[0],
+                                                        self.pool_size[1],
+                                                        padding = (self.pad_height, self.pad_width),
+                                                        stride = self.strides[0])
 
         output, self.pool_cache = self.pool_forward(self.input_col)
 
@@ -57,14 +79,18 @@ class Pool(Layer):
 
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
-        self.pool_height, self.pool_width = self.pool_size
 
         d_input_col = np.zeros_like(self.input_col)
         grad_col = grad.transpose(2, 3, 0, 1).ravel()
 
         d_input = self.pool_backward(d_input_col, grad_col, self.pool_cache)
+        d_input = col2im_indices(d_input_col,
+                                              (input_num * input_depth, 1, input_height, input_width),
+                                              self.pool_size[0],
+                                              self.pool_size[1],
+                                              padding = (self.pad_height, self.pad_width),
+                                              stride = self.strides[0])
 
-        d_input = col2im_indices(d_input_col, (input_num * input_depth, 1, input_height, input_width), self.pool_height, self.pool_width, padding = ((0, 0), (0, 0)), stride = self.stride_height)
         return d_input.reshape(self.inputs.shape)
 
 
