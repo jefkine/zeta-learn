@@ -19,7 +19,7 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 
 # Model definition
 model = Sequential()
-model.add(LSTM(128, activation = "tanh", input_shape = (8, 8)))
+model.add(LSTM(128, activation = 'tanh', input_shape = (8, 8)))
 model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
@@ -38,4 +38,3 @@ print_results(predictions, test_label)
 plot_digits_img_results(test_data, test_label, predictions)
 plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-

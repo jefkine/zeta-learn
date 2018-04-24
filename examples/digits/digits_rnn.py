@@ -19,7 +19,7 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 
 # Model definition
 model = Sequential()
-model.add(RNN(128, activation = "tanh", bptt_truncate = 5, input_shape = (8, 8)))
+model.add(RNN(128, activation = 'tanh', bptt_truncate = 5, input_shape = (8, 8)))
 model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)

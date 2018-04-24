@@ -15,7 +15,7 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 
 # Model definition
 model = Sequential()
-model.add(RNN(5, activation = "tanh", bptt_truncate = 5, input_shape = (9, seq_len)))
+model.add(RNN(5, activation = 'tanh', bptt_truncate = 5, input_shape = (9, seq_len)))
 model.add(Flatten())
 model.add(Dense(seq_len, activation = 'softmax'))
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
@@ -30,4 +30,3 @@ fit_stats = model.fit(train_data,
 print_seq_results(model.predict(test_data), test_label, test_data)
 plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-

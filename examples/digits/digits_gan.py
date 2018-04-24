@@ -97,17 +97,17 @@ for epoch_idx in range(model_epochs):
         # discriminator training
         d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid)
         d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake)
-        
+
         d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
         d_acc = 0.5 * np.add(d_acc_real, d_acc_fake)
-        
+
         if verbose:
             print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(epoch_idx+1, epoch_k+1, d_loss, d_acc))
 
     # end of for epoch_k in range(1):
 
-    model_stats["d_train_loss"].append(d_loss)
-    model_stats["d_train_acc"].append(d_acc)
+    model_stats['d_train_loss'].append(d_loss)
+    model_stats['d_train_acc'].append(d_acc)
 
     # set the discriminator to not trainable
     discriminator.trainable = False
@@ -121,8 +121,8 @@ for epoch_idx in range(model_epochs):
     # train the generator
     g_loss, g_acc = generator_discriminator.train_on_batch(g_noise, g_valid)
 
-    model_stats["g_train_loss"].append(g_loss)
-    model_stats["g_train_acc"].append(g_acc)
+    model_stats['g_train_loss'].append(g_loss)
+    model_stats['g_train_acc'].append(g_acc)
 
     if not verbose:
         computebar(model_epochs, epoch_idx)
