@@ -23,11 +23,11 @@ half_batch = int(batch_size * 0.5)
 verbose = True
 init_type = 'he_uniform'
 
-model_epochs = 7000
+model_epochs = 7500
 model_stats = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.001)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
