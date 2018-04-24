@@ -42,7 +42,7 @@ plot_digits_img_results(test_data, test_label, predictions)
 
 plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
 plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-plot_acc_loss(eval_stats['valid_batches'],
-              eval_stats['valid_loss'],
-              eval_stats['valid_acc'],
-              title = 'Evaluation Accuracy vs Loss')
+plot_metric('Evaluation', eval_stats['valid_batches'], 
+                                                       eval_stats['valid_loss'],  
+                                                       eval_stats['valid_acc'], 
+                                                       legend = ['loss', 'acc'])
