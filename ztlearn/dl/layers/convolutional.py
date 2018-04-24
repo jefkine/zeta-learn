@@ -59,12 +59,12 @@ class Conv(Layer):
     @property
     def output_shape(self):
         pad_height, pad_width = get_pad(self.padding,
-                                                     self.input_shape[1],
-                                                     self.input_shape[2],
-                                                     self.strides[0],
-                                                     self.strides[1],
-                                                     self.kernel_size[0],
-                                                     self.kernel_size[1])
+                                                      self.input_shape[1],
+                                                      self.input_shape[2],
+                                                      self.strides[0],
+                                                      self.strides[1],
+                                                      self.kernel_size[0],
+                                                      self.kernel_size[1])
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelW + 2P) / Sh) + 1]
         # output_height = ((self.input_shape[1] - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
@@ -244,7 +244,7 @@ class ConvLoop2D(Conv):
                                                           self.strides[1],
                                                           self.kernel_size[0],
                                                           self.kernel_size[1])
-                                                          
+
             pad_size = np.sum(pad_height)/2
             if pad_size != 0:
                 grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
