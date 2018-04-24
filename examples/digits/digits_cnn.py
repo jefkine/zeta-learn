@@ -10,7 +10,7 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
 data = datasets.load_digits()
-# plot_digits_img_samples(data)
+plot_digits_img_samples(data)
 
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
@@ -33,11 +33,6 @@ model.add(Dropout(0.5))
 model.add(BatchNormalization())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
-
-# print(model.added_layers)
-
-for layer in model.added_layers:
-    print(layer.output_shape)
 
 model_epochs = 12
 fit_stats = model.fit(train_data.reshape(-1,1,8,8),
