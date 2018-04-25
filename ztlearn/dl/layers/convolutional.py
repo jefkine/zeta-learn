@@ -124,8 +124,8 @@ class Conv2D(Conv):
         assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-        # output_height = ((input_height + np.sum(pad_height) - self.kernel_size[0]) / self.strides[0]) + 1
-        # output_width = ((input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1]) + 1
+        # output_height = ((input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
+        # output_width = ((input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
 
         if self.padding == 'same':
             output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
@@ -223,8 +223,8 @@ class ConvLoop2D(Conv):
         assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-        # output_height = (input_height + np.sum(pad_height) - self.kernel_size[0]) / self.strides[0] + 1
-        # output_width = (input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1] + 1
+        # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
+        # output_width = (input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1] + 1
 
         if self.padding == 'same':
             output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
