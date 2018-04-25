@@ -11,7 +11,13 @@ from ..optimizers import OptimizationFunction as optimizer
 
 class Conv(Layer):
 
-    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+    def __init__(self,
+                       filters = 32,
+                       kernel_size = (3, 3),
+                       activation = None,
+                       input_shape = (1, 8, 8),
+                       strides = (1, 1),
+                       padding = 'valid'):
         self.filters = filters
         self.strides = strides
         self.padding = padding
@@ -71,12 +77,12 @@ class Conv(Layer):
         # output_width = ((self.input_shape[2] - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
 
         if self.padding == 'same':
-            output_height = np.ceil(float(self.input_shape[1]) / float(self.strides[0]))
-            output_width  = np.ceil(float(self.input_shape[2]) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(self.input_shape[1]) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(self.input_shape[2]) / np.float32(self.strides[1]))
 
         if self.padding == 'valid':
-            output_height = np.ceil(float(self.input_shape[1] - self.kernel_size[0] + 1) / float(self.strides[0]))
-            output_width  = np.ceil(float(self.input_shape[2] - self.kernel_size[1] + 1) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(self.input_shape[1] - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(self.input_shape[2] - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
 
         return self.filters, int(output_height), int(output_width)
 
@@ -88,7 +94,13 @@ class Conv(Layer):
 
 class Conv2D(Conv):
 
-    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+    def __init__(self,
+                       filters = 32,
+                       kernel_size = (3, 3),
+                       activation = None,
+                       input_shape = (1, 8, 8),
+                       strides = (1, 1),
+                       padding = 'valid'):
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
@@ -114,12 +126,12 @@ class Conv2D(Conv):
         # output_width = ((input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1]) + 1
 
         if self.padding == 'same':
-            output_height = np.ceil(float(input_height) / float(self.strides[0]))
-            output_width  = np.ceil(float(input_width) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
 
         if self.padding == 'valid':
-            output_height = np.ceil(float(input_height - self.kernel_size[0] + 1) / float(self.strides[0]))
-            output_width  = np.ceil(float(input_width - self.kernel_size[1] + 1) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(input_height - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
 
         # convert to columns
         self.input_col = im2col_indices(inputs,
@@ -177,7 +189,13 @@ class Conv2D(Conv):
 
 class ConvLoop2D(Conv):
 
-    def __init__(self, filters = 32, kernel_size = (3, 3), activation = None, input_shape = (1, 8, 8), strides = (1, 1), padding = 'valid'):
+    def __init__(self,
+                       filters = 32,
+                       kernel_size = (3, 3),
+                       activation = None,
+                       input_shape = (1, 8, 8),
+                       strides = (1, 1),
+                       padding = 'valid'):
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
@@ -205,12 +223,12 @@ class ConvLoop2D(Conv):
         # output_width = (input_width + np.sum(pad_width) - self.kernel_size[1]) / self.strides[1] + 1
 
         if self.padding == 'same':
-            output_height = np.ceil(float(input_height) / float(self.strides[0]))
-            output_width  = np.ceil(float(input_width) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
 
         if self.padding == 'valid':
-            output_height = np.ceil(float(input_height - self.kernel_size[0] + 1) / float(self.strides[0]))
-            output_width  = np.ceil(float(input_width - self.kernel_size[1] + 1) / float(self.strides[1]))
+            output_height = np.ceil(np.float32(input_height - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
 
         output = np.zeros((input_num, self.filter_num, output_height, output_width))
 

@@ -41,12 +41,12 @@ class Pool(Layer):
         # out_width = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
 
         if self.padding == 'same':
-            out_height = np.ceil(float(input_height) / float(self.strides[0]))
-            out_width  = np.ceil(float(input_width) / float(self.strides[1]))
+            out_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
+            out_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
 
         if self.padding == 'valid':
-            out_height = np.ceil(float(input_height - self.pool_size[0] + 1) / float(self.strides[0]))
-            out_width  = np.ceil(float(input_width - self.pool_size[1] + 1) / float(self.strides[1]))
+            out_height = np.ceil(np.float32(input_height - self.pool_size[0] + 1) / np.float32(self.strides[0]))
+            out_width  = np.ceil(np.float32(input_width - self.pool_size[1] + 1) / np.float32(self.strides[1]))
 
         assert out_height % 1 == 0
         assert out_width % 1 == 0
