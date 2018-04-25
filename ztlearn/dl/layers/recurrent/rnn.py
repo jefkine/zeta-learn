@@ -83,6 +83,7 @@ class RNN(Layer):
         self.outputs = np.zeros((batch_size, time_steps, input_dim))
 
         self.states[:, -1] = np.zeros((batch_size, self.h_units)) # last column containing the final state set to zero
+        
         for t in range(time_steps):
             self.state_input[:, t] = (np.dot(inputs[:, t], self.W_input.T) + np.dot(self.states[:, t-1], self.W_recur.T)) + self.b_input
             self.states[:, t] = activate(self.activation).forward(self.state_input[:, t])
