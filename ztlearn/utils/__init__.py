@@ -5,7 +5,7 @@ from . import data
 from . import text
 from . import charts
 from . import im2col
-from . import decorate
+from . import time_deco
 from . import sequences
 
 # import from data.py
@@ -36,8 +36,8 @@ from .charts import plot_digits_img_samples
 from .charts import plot_regression_results
 from .charts import plot_generated_digits_samples
 
-# import from decorate.py
-from .decorate import LogIfBusy
+# import from time_deco.py
+from .time_deco import LogIfBusy
 
 # import from sequences.py
 from .sequences import gen_mult_sequence_xtyt

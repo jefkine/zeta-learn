@@ -3,6 +3,7 @@
 import time
 import types
 from functools import wraps
+from datetime import timedelta
 
 class LogIfBusy:
 
@@ -15,9 +16,11 @@ class LogIfBusy:
         result = self.__wrapped__(*args, **kwargs)
         stop = time.time()
         print('\nFINISH: {}\n'.format(time.strftime("%a, %d %b %Y %H:%M:%S")))
-        print('TIMER: {} operation took: {:2.4f} seconds to complete.\n'.format(self.__wrapped__.__name__, stop-start))
+        print('TIMER: {} operation took: {} (h:mm:ss) to complete.\n'.format(self.__wrapped__.__name__,
+                                                                timedelta(seconds = timedelta(seconds = (stop-start)).seconds)))
+
         return result
-    
+
     def __get__(self, instance, cls):
         if instance is None:
             return self
