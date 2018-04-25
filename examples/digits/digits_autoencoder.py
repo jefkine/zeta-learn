@@ -48,8 +48,7 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-# images = (data.data.astype(np.float32)) / 100 # rescale to range [0, 1]
-images = min_max(data.data.astype(np.float32)) # rescale to range [0, 1]
+images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,
