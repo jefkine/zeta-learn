@@ -14,13 +14,15 @@ from ..regularizers import RegularizationFunction as regularize
 
 class LogisticRegression:
 
-    def __init__(self, epochs,
+    def __init__(self,
+                       epochs,
                        loss = 'binary_crossentropy',
                        init_method = 'he_normal',
                        optimizer = {},
                        penalty = 'lasso',
                        penalty_weight = 0,
                        l1_ratio = 0.5):
+                       
         self.epochs = epochs
         self.loss = objective(loss)
         self.init_method = init(init_method)
@@ -47,7 +49,7 @@ class LogisticRegression:
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = inputs.T.dot(cost_gradient) + self.regularization.derivative(self.weights)
             self.weights = self.optimizer.update(self.weights, d_weights)
-            
+
             if not verbose:
                 computebar(self.epochs, i)
 
@@ -73,10 +75,10 @@ class LogisticRegression:
             diag_grad = np.diag(self.activate.backward(inputs.dot(self.weights)))
             # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
             self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
-            
+
             if not verbose:
                 computebar(self.epochs, i)
-            
+
         return fit_stats
 
     def predict(self, inputs):

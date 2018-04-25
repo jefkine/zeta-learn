@@ -87,7 +87,15 @@ class DecayFunction:
         'natural_exponential_decay': NaturalExponentialDecay
     }
 
-    def __init__(self, lrate = 0.001, name = 'inverse_time_decay', decay = 1e-6, epoch = 1, min_lrate = 0., max_lrate = np.inf, step_size = 10.0):
+    def __init__(self,
+                       lrate = 0.001,
+                       name = 'inverse_time_decay',
+                       decay = 1e-6,
+                       epoch = 1,
+                       min_lrate = 0.,
+                       max_lrate = np.inf,
+                       step_size = 10.0):
+                       
         if name not in self._functions.keys():
             raise Exception('Decay function must be either one of the following: {}.'.format(', '.join(self._functions.keys())))
         self.decay_func = self._functions[name](lrate, decay, epoch, min_lrate, max_lrate, step_size)

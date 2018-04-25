@@ -14,7 +14,8 @@ from ..regularizers import RegularizationFunction as regularize
 
 class Perceptron:
 
-    def __init__(self, epochs,
+    def __init__(self,
+                       epochs,
                        activation = 'sigmoid',
                        loss = 'categorical_crossentropy',
                        init_method = 'he_normal',
@@ -22,6 +23,7 @@ class Perceptron:
                        penalty = 'lasso',
                        penalty_weight = 0,
                        l1_ratio = 0.5):
+                       
         self.epochs = epochs
         self.activate = activate(activation)
         self.loss = objective(loss)
@@ -32,7 +34,7 @@ class Perceptron:
     @LogIfBusy
     def fit(self, inputs, targets, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
-        
+
         self.weights = self.init_method.initialize_weights((inputs.shape[1], targets.shape[1]))
         self.bias = np.zeros((1, targets.shape[1]))
 
@@ -55,7 +57,7 @@ class Perceptron:
 
             self.weights = optimize(self.optimizer).update(self.weights, d_weights)
             self.bias = optimize(self.optimizer).update(self.bias, d_bias)
-        
+
             if not verbose:
                 computebar(self.epochs, i)
 

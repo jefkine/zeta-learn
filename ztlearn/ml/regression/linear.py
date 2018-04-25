@@ -8,13 +8,15 @@ from ztlearn.utils import LogIfBusy
 
 class LinearRegression(Regression):
 
-    def __init__(self, epochs = 100,
+    def __init__(self,
+                       epochs = 100,
                        loss = 'mean_squared_error',
                        init_method = 'random_normal',
                        optimizer = {},
                        penalty = 'ridge',
                        penalty_weight = 0.5,
                        l1_ratio = 0.5):
+                       
         super(LinearRegression, self).__init__(epochs = epochs,
                                                loss = loss,
                                                init_method = init_method,

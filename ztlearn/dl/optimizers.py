@@ -491,7 +491,22 @@ class OptimizationFunction:
 
 
 def register_opt(**kwargs):
-    allowed_kwargs = {'optimizer_name', 'learning_rate', 'decay', 'decay_func', 'step_size', 'velocity', 'momentum', 'epsilon', 'rho', 'epsilon', 'beta1', 'beta2'}
+    
+    allowed_kwargs = {
+        'optimizer_name',
+        'learning_rate',
+        'decay',
+        'decay_func',
+        'step_size',
+        'velocity',
+        'momentum',
+        'epsilon',
+        'rho',
+        'epsilon',
+        'beta1',
+        'beta2'
+    }
+
     for kwrd in kwargs:
         if kwrd not in allowed_kwargs:
             raise TypeError('Unexpected keyword argument passed to optimizer: ' + str(kwrd))

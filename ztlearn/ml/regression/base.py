@@ -12,13 +12,15 @@ from ..regularizers import RegularizationFunction as regularize
 
 class Regression(object):
 
-    def __init__(self, epochs,
+    def __init__(self,
+                       epochs,
                        loss = 'mean_squared_error',
                        init_method = 'he_uniform',
                        optimizer = {},
                        penalty = 'ridge',
                        penalty_weight = 0.5,
                        l1_ratio = 0.5):
+                       
         self.epochs = epochs
         self.loss = objective(loss)
         self.init_method = init(init_method)
@@ -45,7 +47,7 @@ class Regression(object):
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = cost_gradient.dot(inputs) + self.regularization.derivative(self.weights)
             self.weights = self.optimizer.update(self.weights, d_weights)
-            
+
             if not verbose:
                 computebar(self.epochs, i)
 

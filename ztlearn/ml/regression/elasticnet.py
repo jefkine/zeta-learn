@@ -7,7 +7,8 @@ from sklearn.preprocessing import PolynomialFeatures
 
 class ElasticNetRegression(Regression):
 
-    def __init__(self, degree = 2,
+    def __init__(self,
+                       degree = 2,
                        epochs = 100,
                        loss = 'mean_squared_error',
                        init_method = 'random_normal',
@@ -15,6 +16,7 @@ class ElasticNetRegression(Regression):
                        penalty = 'elastic',
                        penalty_weight = 0.5,
                        l1_ratio = 0.5):
+                       
         self.degree = degree
         super(ElasticNetRegression, self).__init__(epochs = epochs,
                                                    loss = loss,
