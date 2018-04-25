@@ -18,6 +18,7 @@ class Conv(Layer):
                        input_shape = (1, 8, 8),
                        strides = (1, 1),
                        padding = 'valid'):
+
         self.filters = filters
         self.strides = strides
         self.padding = padding
@@ -101,6 +102,7 @@ class Conv2D(Conv):
                        input_shape = (1, 8, 8),
                        strides = (1, 1),
                        padding = 'valid'):
+
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
@@ -196,6 +198,7 @@ class ConvLoop2D(Conv):
                        input_shape = (1, 8, 8),
                        strides = (1, 1),
                        padding = 'valid'):
+                       
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
