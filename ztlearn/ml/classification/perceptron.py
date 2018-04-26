@@ -23,7 +23,7 @@ class Perceptron:
                        penalty = 'lasso',
                        penalty_weight = 0,
                        l1_ratio = 0.5):
-                       
+
         self.epochs = epochs
         self.activate = activate(activation)
         self.loss = objective(loss)
@@ -49,7 +49,7 @@ class Perceptron:
             fit_stats["train_acc"].append(np.mean(acc))
 
             if verbose:
-                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, loss, acc))
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, loss, acc))
 
             grad = self.loss.backward(predictions, targets) * self.activate.backward(linear_predictions)
             d_weights = inputs.T.dot(grad) + self.regularization.derivative(self.weights)

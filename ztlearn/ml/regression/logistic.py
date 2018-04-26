@@ -22,7 +22,7 @@ class LogisticRegression:
                        penalty = 'lasso',
                        penalty_weight = 0,
                        l1_ratio = 0.5):
-                       
+
         self.epochs = epochs
         self.loss = objective(loss)
         self.init_method = init(init_method)
@@ -70,7 +70,7 @@ class LogisticRegression:
             fit_stats["train_acc"].append(np.mean(acc))
 
             if verbose:
-                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, cost, acc))
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, cost, acc))
 
             diag_grad = np.diag(self.activate.backward(inputs.dot(self.weights)))
             # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))

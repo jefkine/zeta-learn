@@ -20,7 +20,7 @@ class Regression(object):
                        penalty = 'ridge',
                        penalty_weight = 0.5,
                        l1_ratio = 0.5):
-                       
+
         self.epochs = epochs
         self.loss = objective(loss)
         self.init_method = init(init_method)
@@ -42,7 +42,7 @@ class Regression(object):
             fit_stats["train_acc"].append(np.mean(acc))
 
             if verbose:
-                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, mse, acc))
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, mse, acc))
 
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = cost_gradient.dot(inputs) + self.regularization.derivative(self.weights)
