@@ -19,6 +19,6 @@ Dependencies
 
 Features
 --------
- - Keras like Sequential api for building models.
- - Built on NumPy and matplotlib.
+ - Keras like Sequential API for building models.
+ - Built on NumPy and Matplotlib.
  - Examples folder with readily implemented machine learning models.
