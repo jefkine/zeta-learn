@@ -20,16 +20,22 @@ class Optimizer(object):
         self.epoch += 1
         if self.epoch == 1:
             return self.learning_rate
+            
         if hasattr(self, 'step_size') and isinstance(self.step_size, (int, np.integer)):
-            return decay(self.learning_rate, self.decay_func, self.decay,
-                                                              self.epoch,
-                                                              self.min_lrate,
-                                                              self.max_lrate,
-                                                              self.step_size).decompose
-        return decay(self.learning_rate, self.decay_func, self.decay,
-                                                          self.epoch,
-                                                          self.min_lrate,
-                                                          self.max_lrate).decompose
+
+            return decay(self.learning_rate,
+                                             self.decay_func, self.decay,
+                                             self.epoch,
+                                             self.min_lrate,
+                                             self.max_lrate,
+                                             self.step_size).decompose
+
+        return decay(self.learning_rate,
+                                         self.decay_func,
+                                         self.decay,
+                                         self.epoch,
+                                         self.min_lrate,
+                                         self.max_lrate).decompose
 
 
 class GD:
@@ -491,7 +497,7 @@ class OptimizationFunction:
 
 
 def register_opt(**kwargs):
-    
+
     allowed_kwargs = {
         'optimizer_name',
         'learning_rate',
