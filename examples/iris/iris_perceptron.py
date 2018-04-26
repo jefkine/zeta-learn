@@ -21,9 +21,8 @@ model = Perceptron(epochs = 500,
 
 fit_stats = model.fit(train_data, train_label)
 
-
-
 print_results(unhot(model.predict(test_data)), unhot(test_label))
-plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), fit_stats['train_acc'], 
+plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), 
+                                                              fit_stats['train_acc'], 
                                                               fit_stats['train_loss'], 
                                                               legend = ['acc', 'loss'])
