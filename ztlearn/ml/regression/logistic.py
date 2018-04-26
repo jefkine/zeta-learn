@@ -43,14 +43,13 @@ class LogisticRegression:
             fit_stats["train_loss"].append(np.mean(cost))
             fit_stats["train_acc"].append(np.mean(acc))
 
-            if verbose:
-                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, cost, acc))
-
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = inputs.T.dot(cost_gradient) + self.regularization.derivative(self.weights)
             self.weights = self.optimizer.update(self.weights, d_weights)
 
-            if not verbose:
+            if verbose:
+                print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, cost, acc))
+            else:
                 computebar(self.epochs, i)
 
         return fit_stats
@@ -69,14 +68,13 @@ class LogisticRegression:
             fit_stats["train_loss"].append(np.mean(cost))
             fit_stats["train_acc"].append(np.mean(acc))
 
-            if verbose:
-                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, cost, acc))
-
             diag_grad = np.diag(self.activate.backward(inputs.dot(self.weights)))
             # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
             self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
 
-            if not verbose:
+            if verbose:
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, cost, acc))
+            else:
                 computebar(self.epochs, i)
 
         return fit_stats

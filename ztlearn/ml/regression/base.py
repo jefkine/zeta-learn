@@ -41,14 +41,13 @@ class Regression(object):
             fit_stats["train_loss"].append(np.mean(mse))
             fit_stats["train_acc"].append(np.mean(acc))
 
-            if verbose:
-                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, mse, acc))
-
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights = cost_gradient.dot(inputs) + self.regularization.derivative(self.weights)
             self.weights = self.optimizer.update(self.weights, d_weights)
 
-            if not verbose:
+            if verbose:
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, mse, acc))
+            else:
                 computebar(self.epochs, i)
 
         return fit_stats

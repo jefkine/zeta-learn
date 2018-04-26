@@ -48,9 +48,6 @@ class Perceptron:
             fit_stats["train_loss"].append(np.mean(loss))
             fit_stats["train_acc"].append(np.mean(acc))
 
-            if verbose:
-                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, loss, acc))
-
             grad = self.loss.backward(predictions, targets) * self.activate.backward(linear_predictions)
             d_weights = inputs.T.dot(grad) + self.regularization.derivative(self.weights)
             d_bias = np.sum(grad, axis = 0, keepdims = True)
@@ -58,7 +55,9 @@ class Perceptron:
             self.weights = optimize(self.optimizer).update(self.weights, d_weights)
             self.bias = optimize(self.optimizer).update(self.bias, d_bias)
 
-            if not verbose:
+            if verbose:
+                print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, loss, acc))
+            else:
                 computebar(self.epochs, i)
 
         return fit_stats
