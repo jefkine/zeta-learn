@@ -16,10 +16,10 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(data
 
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
 model = Perceptron(epochs = 300,
-                   activation = 'selu',
-                   loss = 'categorical_crossentropy',
-                   init_method = 'he_normal',
-                   optimizer = opt)
+                                 activation = 'selu',
+                                 loss = 'categorical_crossentropy',
+                                 init_method = 'he_normal',
+                                 optimizer = opt)
 
 fit_stats = model.fit(train_data, train_label)
 

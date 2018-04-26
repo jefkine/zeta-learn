@@ -26,8 +26,8 @@ fit_stats = model.fit(train_data, train_label)
 
 targets = np.expand_dims(test_label, axis = 1)
 predictions = np.expand_dims(model.predict(test_data), axis = 1)
-mse = objective('mean_squared_error').forward(predictions, targets)
 
+mse = objective('mean_squared_error').forward(predictions, targets)
 print('Mean Squared Error: {:.2f}'.format(mse))
 
 plot_metric('Accuracy vs Loss',
@@ -42,6 +42,6 @@ plot_regression_results(train_data, train_label,
                                                  input_data,
                                                  model.predict(input_data),
                                                  mse,
-                                                 'Linear Regression',
-                                                 'Median House Price',
-                                                 'Average Number of Rooms')
+                                                'Linear Regression',
+                                                'Median House Price',
+                                                'Average Number of Rooms')
