@@ -83,7 +83,7 @@ class Pool(Layer):
         d_input_col = np.zeros_like(self.input_col)
         grad_col = grad.transpose(2, 3, 0, 1).ravel()
 
-        d_input = self.pool_backward(d_input_col, grad_col, self.pool_cache)
+        d_input_col = self.pool_backward(d_input_col, grad_col, self.pool_cache)
         d_input = col2im_indices(d_input_col,
                                               (input_num * input_depth, 1, input_height, input_width),
                                               self.pool_size[0],
