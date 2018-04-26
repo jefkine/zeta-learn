@@ -357,9 +357,7 @@ class Adadelta(Optimizer):
         RMSE_delta = np.sqrt(self.delta + self.epsilon)
 
         update = self.grads * (RMSE_delta / RMSE_grad)
-
         self.weights -= super(Adadelta, self).get_learning_rate * update
-
         self.delta = self.rho * self.delta + (1 - self.rho) * np.power(update, 2)
 
         return self.weights
