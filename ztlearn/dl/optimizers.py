@@ -498,18 +498,18 @@ class OptimizationFunction:
 def register_opt(**kwargs):
 
     allowed_kwargs = {
-        'optimizer_name',
-        'learning_rate',
-        'decay',
-        'decay_func',
-        'step_size',
-        'velocity',
-        'momentum',
-        'epsilon',
         'rho',
-        'epsilon',
+        'decay',
+        'beta2',
         'beta1',
-        'beta2'
+        'epsilon',
+        'epsilon',
+        'momentum',
+        'velocity',
+        'step_size',
+        'decay_func',
+        'learning_rate',
+        'optimizer_name'
     }
 
     for kwrd in kwargs:
