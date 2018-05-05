@@ -32,6 +32,7 @@ from .pooling import AveragePool2D
 # convolutional layer(s)
 from .convolutional import Conv2D
 from .convolutional import ConvLoop2D
+from .convolutional import ConvToeplitzMat
 
 # normalization layer(s)
 from .normalization import BatchNormalization

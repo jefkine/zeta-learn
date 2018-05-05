@@ -4,6 +4,7 @@ import numpy as np
 
 from .base import Layer
 from ztlearn.utils import get_pad
+from ztlearn.utils import unroll_inputs
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
 from ..initializers import InitializeWeights as init
@@ -306,3 +307,69 @@ class ConvLoop2D(Conv):
                                     w_stride: w_stride + self.kernel_size[1]] += self.weights[f, c] * grad[b, f, h, w]
 
         return dinputs
+
+
+class ConvToeplitzMat(Conv):
+
+    def __init__(self,
+                       filters = 32,
+                       kernel_size = (3, 3),
+                       activation = None,
+                       input_shape = (1, 8, 8),
+                       strides = (1, 1),
+                       padding = 'valid'):
+
+        super(ConvToeplitzMat, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
+
+    def pass_forward(self, inputs, train_mode = True, **kwargs):
+        self.filter_num, _, _, _ = self.weights.shape
+        input_num, input_depth, input_height, input_width = inputs.shape
+        self.input_shape = inputs.shape
+        self.inputs = inputs
+
+        pad_height, pad_width = get_pad(self.padding,
+                                                      input_height,
+                                                      input_width,
+                                                      self.strides[0],
+                                                      self.strides[1],
+                                                      self.kernel_size[0],
+                                                      self.kernel_size[1])
+
+        x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
+
+        # confirm dimensions
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+
+        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
+        # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
+        # output_width = (input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1] + 1
+
+        if self.padding == 'same':
+            output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
+
+        if self.padding == 'valid':
+            output_height = np.ceil(np.float32(input_height - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
+            output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
+
+        output = np.zeros((input_num, self.filter_num, output_height, output_width))
+        
+        self.input_col = unroll_inputs(x_padded,
+                                                 x_padded.shape[0],
+                                                 x_padded.shape[1],
+                                                 output_height,
+                                                 output_width,
+                                                 self.kernel_size[0])
+        #TODO: weights need to be rearraged in a way to have a matrix 
+        #      multiplication with the generated toeplitz matrix         
+        self.weight_col = self.weights.reshape(self.filter_num, -1)
+       
+        # calculate ouput
+        output = self.weight_col @ self.input_col + self.bias        
+        # output = np.matmul(self.weight_col, self.input_col) + self.bias
+        output = output.reshape(self.filter_num, int(output_height), int(output_width), input_num)
+       
+        return output.transpose(3, 0, 1, 2)
+
+    def pass_backward(self, grad): pass       

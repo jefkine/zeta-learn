@@ -5,6 +5,7 @@ from . import data
 from . import text
 from . import charts
 from . import im2col
+from . import toeplitz
 from . import time_deco
 from . import sequences
 
@@ -47,6 +48,9 @@ from .sequences import gen_mult_sequence_xtym
 from .im2col import get_pad
 from .im2col import im2col_indices
 from .im2col import col2im_indices
+
+# import from toeplitz.py
+from .toeplitz import unroll_inputs
 
 __all__ = [
             # From data.py
