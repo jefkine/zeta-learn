@@ -32,6 +32,7 @@ from .text import gen_char_sequence_xtyt
 
 # import from charts.py
 from .charts import plot_metric
+from .charts import plot_opt_viz
 from .charts import plot_digits_img_results
 from .charts import plot_digits_img_samples
 from .charts import plot_regression_results

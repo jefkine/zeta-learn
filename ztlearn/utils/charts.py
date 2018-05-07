@@ -2,7 +2,8 @@
 
 import matplotlib.pyplot as plt
 
-FONT_SIZE = 10
+SMALL_FONT = 10
+LARGE_FONT = 14
 FIG_SIZE = (7, 5)
 
 def plotter(x,
@@ -39,11 +40,11 @@ def plot_metric(metric,
                         valid,
                         plot_dict = {'linewidth' : 0.8},
                         fig_dims = FIG_SIZE,
-                        xticks_dict = {'size' : FONT_SIZE},
-                        yticks_dict = {'size' : FONT_SIZE},
-                        title_dict = {'size' : FONT_SIZE},
-                        ylabel_dict = {'size' : FONT_SIZE},
-                        xlabel_dict = {'size' : FONT_SIZE},
+                        xticks_dict = {'size' : SMALL_FONT},
+                        yticks_dict = {'size' : SMALL_FONT},
+                        title_dict = {'size' : SMALL_FONT},
+                        ylabel_dict = {'size' : SMALL_FONT},
+                        xlabel_dict = {'size' : SMALL_FONT},
                         legend = ['train', 'valid'],
                         legend_dict = {'loc' : 'upper right'}):
 
@@ -61,6 +62,65 @@ def plot_metric(metric,
                                 xlabel_dict = xlabel_dict,
                                 legend = legend,
                                 legend_dict = legend_dict)
+
+    plt.show()
+
+
+def plot_opt_viz(dims,
+                        x,
+                        y,
+                        z,
+                        f_solution,
+                        overlay = 'plot',
+                        to_save = True,
+
+                        title = 'Optimization',
+                        title_dict = {'size' : LARGE_FONT},
+
+                        fig_dims = (7, 5),
+
+                        xticks_dict = {'size' : LARGE_FONT},
+                        yticks_dict = {'size' : LARGE_FONT},
+
+                        xlabel = r'$\theta^1$',
+                        xlabel_dict = {'size' : LARGE_FONT},
+
+                        ylabel = r'$\theta^2$',
+                        ylabel_dict = {'size' : LARGE_FONT},
+
+                        legend = ['train', 'valid'],
+                        legend_dict = {}):
+
+    if dims == 3:
+
+        fig = plt.figure(figsize = fig_dims)
+
+        if overlay == 'wireframe':
+            ax = fig.add_subplot(111, projection = '3d')
+            plt.scatter(y[:,0], y[:,1], s = f_solution, c = 'r')
+            ax.plot_wireframe(x[0], x[1], z, rstride = 5, cstride = 5, linewidth = 0.5)
+
+        elif overlay == 'contour':
+            ax = fig.add_subplot(111)
+            plt.scatter(y[:,0], y[:,1], s = f_solution, c = 'r')
+            ax.contour(x[0], x[1], z, 20, cmap = plt.cm.jet)
+
+        ax.set_xlabel(xlabel, **xlabel_dict)
+        ax.set_ylabel(ylabel, **ylabel_dict)
+
+    elif dims == 2:
+        plt.figure(figsize = fig_dims)
+        plt.xticks(**xticks_dict)
+        plt.yticks(**yticks_dict)
+        plt.plot(x, y)
+        plt.scatter(z, f_solution, color = 'r')
+        plt.xlabel(xlabel, **xlabel_dict)
+        plt.ylabel(ylabel, **ylabel_dict)
+
+    if to_save:
+        plt.suptitle(('{}{}'.format(dims, 'D Surfaces')), fontsize = 14)
+        plt.savefig('../plots/'+('{}{}{}{}'.format(overlay, '_', dims, 'd.png')))
+        plt.show()
 
     plt.show()
 

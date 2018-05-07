@@ -1,8 +1,6 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.pyplot as pylab
-from mpl_toolkits.mplot3d import Axes3D
 
+from ztlearn.utils import plot_opt_viz
 from ztlearn.dl.initializers import InitializeWeights as init
 from ztlearn.dl.optimizers import OptimizationFunction as optimize
 
@@ -34,7 +32,7 @@ class GbOptimization(object):
                 if i%5 == 0:
                     print('Epoch-{} weights: {:.20}'.format(i+1, self.npstring(self.inputs.T)))
                     print('Epoch-{} eps: {:.20}'.format(i+1, self.npstring(eps)))
-    #            if np.linalg.norm(self.inputs, axis = 0) > self.tol: break
+                # if np.linalg.norm(self.inputs, axis = 0) > self.tol: break
 
     def npstring(self, np_array):
         return np.array2string(np_array, formatter = {'float_kind':'{0:.4f}'.format})
@@ -42,25 +40,22 @@ class GbOptimization(object):
     def plot_3d(self, f):
         theta = np.arange(-4.0, 4.0, 0.1)
         x_grid = np.meshgrid(theta, theta)
-        z = f(x_grid)
         weights = self.weights.reshape(self.epochs, -1)
+        z = f(x_grid)
 
-        pylab.clf()
-        fig = pylab.figure(figsize = (5, 7))
+        plot_opt_viz(3,
+                         x_grid,
+                         weights,
+                         z,
+                         self.fsolve,
+                         overlay = 'wireframe')
 
-        ax1 = fig.add_subplot(211, projection = '3d')
-        ax1.scatter(weights[:,0], weights[:,1], self.fsolve, color = 'r')
-        ax1.plot_wireframe(x_grid[0], x_grid[1], z, rstride = 5, cstride = 5, linewidth = 0.5)
-        ax1.set_xlabel(r'$\theta^1$',fontsize = 14)
-        ax1.set_ylabel(r'$\theta^2$',fontsize = 14)
-
-        ax2 = fig.add_subplot(212)
-        ax2.scatter(weights[:,0], weights[:,1], self.fsolve, color = 'r')
-        ax2.contour(x_grid[0], x_grid[1], z, 20, cmap = plt.cm.jet)
-
-        pylab.suptitle('3D Surface',fontsize = 14)
-        pylab.savefig('../plots/3d.png')
-        pylab.show()
+        plot_opt_viz(3,
+                         x_grid,
+                         weights,
+                         z,
+                         self.fsolve,
+                         overlay = 'contour')
 
     def plot_2d(self, f):
         theta = np.arange(-5.0, 6.0, 1.0)
@@ -71,14 +66,9 @@ class GbOptimization(object):
 
         weights = self.weights.reshape(self.epochs, -1)
 
-        pylab.clf()
-        pylab.plot(theta, y)
-        weights = self.weights.reshape(self.epochs, -1)
-        pylab.scatter(weights, self.fsolve, color = 'r')
-
-        pylab.xlabel(r'$\theta$',fontsize = 14)
-        pylab.ylabel(r'$y$',fontsize = 14)
-
-        pylab.title('2D Surface',fontsize = 14)
-        pylab.savefig('../plots/2d.png')
-        pylab.show()
+        plot_opt_viz(2,
+                         theta,
+                         y,
+                         weights,
+                         self.fsolve,
+                         overlay = 'plot')
