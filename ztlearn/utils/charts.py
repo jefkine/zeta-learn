@@ -73,21 +73,15 @@ def plot_opt_viz(dims,
                         f_solution,
                         overlay = 'plot',
                         to_save = True,
-
                         title = 'Optimization',
                         title_dict = {'size' : LARGE_FONT},
-
-                        fig_dims = (7, 5),
-
+                        fig_dims = FIG_SIZE,
                         xticks_dict = {'size' : LARGE_FONT},
                         yticks_dict = {'size' : LARGE_FONT},
-
                         xlabel = r'$\theta^1$',
                         xlabel_dict = {'size' : LARGE_FONT},
-
                         ylabel = r'$\theta^2$',
                         ylabel_dict = {'size' : LARGE_FONT},
-
                         legend = ['train', 'valid'],
                         legend_dict = {}):
 
