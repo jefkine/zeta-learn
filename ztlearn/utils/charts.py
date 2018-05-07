@@ -86,7 +86,6 @@ def plot_opt_viz(dims,
                         legend_dict = {}):
 
     if dims == 3:
-
         fig = plt.figure(figsize = fig_dims)
 
         if overlay == 'wireframe':
