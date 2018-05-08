@@ -20,14 +20,6 @@ ztlearn.utils.data module
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.decorate module
------------------------------
-
-.. automodule:: ztlearn.utils.decorate
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 ztlearn.utils.im2col module
 ---------------------------
 
@@ -48,6 +40,22 @@ ztlearn.utils.text module
 -------------------------
 
 .. automodule:: ztlearn.utils.text
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ztlearn.utils.time\_deco module
+-------------------------------
+
+.. automodule:: ztlearn.utils.time_deco
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+ztlearn.utils.toeplitz module
+-----------------------------
+
+.. automodule:: ztlearn.utils.toeplitz
     :members:
     :undoc-members:
     :show-inheritance:
