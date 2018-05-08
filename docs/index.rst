@@ -16,7 +16,7 @@ zeta-learn aims to provide an extensive understanding of machine learning throug
 the use of straightforward algorithms and readily implemented examples making
 it a useful resource for researchers and students.
 
-Find this project on `GitHub`_
+Find this project on `Github`_
 
 * **Python versions:** 3.5 and above
 * **Free software:** MIT license
