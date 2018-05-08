@@ -43,23 +43,19 @@ class GbOptimization(object):
         weights = self.weights.reshape(self.epochs, -1)
         z = f(x_grid)
 
-        plot_opt_viz(3,
-                         x_grid,
-                         weights,
-                         z,
-                         self.fsolve,
-                         overlay = 'wireframe')
+        vis_type = ['wireframe', 'contour']
 
-        plot_opt_viz(3,
-                         x_grid,
-                         weights,
-                         z,
-                         self.fsolve,
-                         overlay = 'contour')
+        for vis in vis_type:
+
+            plot_opt_viz(3,
+                            x_grid,
+                            weights,
+                            z,
+                            self.fsolve,
+                            overlay = vis)
 
     def plot_2d(self, f):
-        theta = np.arange(-5.0, 6.0, 1.0)
-        theta = np.expand_dims(theta, axis = 1)
+        theta = np.expand_dims(np.arange(-5.0, 6.0, 1.0), axis = 1)
         y = np.zeros_like(theta)
         for i in np.arange(theta.shape[0]):
             y[i,:] = f(theta[i,:])
