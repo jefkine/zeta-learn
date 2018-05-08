@@ -44,9 +44,8 @@ class GbOptimization(object):
         z = f(x_grid)
 
         vis_type = ['wireframe', 'contour']
-
+        
         for vis in vis_type:
-
             plot_opt_viz(3,
                             x_grid,
                             weights,
