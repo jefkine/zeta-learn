@@ -40,11 +40,11 @@ class GbOptimization(object):
     def plot_3d(self, f):
         theta = np.arange(-4.0, 4.0, 0.1)
         x_grid = np.meshgrid(theta, theta)
-        weights = self.weights.reshape(self.epochs, -1)
         z = f(x_grid)
+        weights = self.weights.reshape(self.epochs, -1)
 
         vis_type = ['wireframe', 'contour']
-        
+
         for vis in vis_type:
             plot_opt_viz(3,
                             x_grid,
