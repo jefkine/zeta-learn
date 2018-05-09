@@ -26,11 +26,9 @@ class GbOptimization(object):
             self.fsolve[i,:] = f_solution
 
             if verbose:
-                eps = self.f0 - f_solution
-
                 if i%5 == 0:
                     print('Epoch-{} weights: {:.20}'.format(i+1, self.npstring(self.inputs.T)))
-                    print('Epoch-{} eps: {:.20}'.format(i+1, self.npstring(eps)))
+                    print('Epoch-{} eps: {:.20}'.format(i+1, self.npstring(self.f0 - f_solution)))
                 # if np.linalg.norm(self.inputs, axis = 0) > tol: break
 
     def npstring(self, np_array):
