@@ -37,11 +37,13 @@ predictions = np.expand_dims(model.predict(test_data), axis = 1)
 mse = objective('mean_squared_error').forward(predictions, targets)
 print('Mean Squared Error: {:.2f}'.format(mse))
 
-plot_metric('Accuracy vs Loss',
-                                len(fit_stats['train_loss']),
-                                fit_stats['train_acc'],
-                                fit_stats['train_loss'],
-                                legend = ['acc', 'loss'])
+model_name = 'boston_elastic_regression'
+plot_metric('accuracy_loss',
+                             len(fit_stats['train_loss']),
+                             fit_stats['train_acc'],
+                             fit_stats['train_loss'],
+                             model_name = model_name,
+                             legend = ['acc', 'loss'])
 
 plot_regression_results(train_data, train_label,
                                                  test_data,
@@ -51,4 +53,5 @@ plot_regression_results(train_data, train_label,
                                                  mse,
                                                 'Elastic Regression',
                                                 'Median House Price',
-                                                'Average Number of Rooms')
+                                                'Average Number of Rooms',
+                                                 model_name = model_name)

@@ -40,10 +40,12 @@ predictions = unhot(model.predict(test_data, True))
 print_results(predictions, test_label)
 plot_digits_img_results(test_data, test_label, predictions)
 
-plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
-plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
-plot_metric('Evaluation',
+model_name = 'digits_mlp'
+plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
+plot_metric('evaluation',
                           eval_stats['valid_batches'],
                           eval_stats['valid_loss'],
                           eval_stats['valid_acc'],
+                          model_name = model_name,
                           legend = ['loss', 'acc'])

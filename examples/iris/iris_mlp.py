@@ -35,5 +35,7 @@ fit_stats = model.fit(train_data,
 predictions = unhot(model.predict(test_data))
 
 print_results(predictions, test_label)
-plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
-plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
+
+model_name = 'iris_mlp'
+plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

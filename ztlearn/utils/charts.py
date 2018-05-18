@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import time
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import axes3d
 
 SMALL_FONT = 10
 LARGE_FONT = 14
@@ -39,6 +39,7 @@ def plot_metric(metric,
                         epoch,
                         train,
                         valid,
+                        model_name = '',
                         plot_dict = {'linewidth' : 0.8},
                         fig_dims = FIG_SIZE,
                         xticks_dict = {'size' : SMALL_FONT},
@@ -64,6 +65,7 @@ def plot_metric(metric,
                                 legend = legend,
                                 legend_dict = legend_dict)
 
+    plt.savefig('../plots/metrics/'+('{}{}{}{}{}'.format(model_name,'_',metric,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png')))
     plt.show()
 
 
@@ -90,6 +92,7 @@ def plot_opt_viz(dims,
         fig = plt.figure(figsize = fig_dims)
 
         if overlay == 'wireframe':
+            from mpl_toolkits.mplot3d import axes3d # for 3d projections
             ax = fig.add_subplot(111, projection = '3d')
             plt.scatter(y[:,0], y[:,1], s = f_solution, c = 'r')
             ax.plot_wireframe(x[0], x[1], z, rstride = 5, cstride = 5, linewidth = 0.5)
@@ -169,6 +172,7 @@ def plot_regression_results(train_data,
                                         mse, super_title,
                                         y_label,
                                         x_label,
+                                        model_name = '',
                                         fig_dims = FIG_SIZE,
                                         font_size = 10):
 
@@ -186,4 +190,5 @@ def plot_regression_results(train_data,
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
 
+    plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,'_mse_',mse,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png')))
     plt.show()

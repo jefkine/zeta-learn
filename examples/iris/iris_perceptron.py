@@ -13,7 +13,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   random_seed = 5)
 
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
-model = Perceptron(epochs = 500, 
+model = Perceptron(epochs = 500,
                                  activation = 'leaky_relu',
                                  loss = 'categorical_crossentropy',
                                  init_method = 'he_normal',
@@ -22,7 +22,8 @@ model = Perceptron(epochs = 500,
 fit_stats = model.fit(train_data, train_label)
 
 print_results(unhot(model.predict(test_data)), unhot(test_label))
-plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), 
-                                                              fit_stats['train_acc'], 
-                                                              fit_stats['train_loss'], 
-                                                              legend = ['acc', 'loss'])
+plot_metric('accuracy_loss', len(fit_stats["train_loss"]),
+                                                           fit_stats['train_acc'],
+                                                           fit_stats['train_loss'],
+                                                           model_name = 'iris_perceptron',
+                                                           legend = ['acc', 'loss'])

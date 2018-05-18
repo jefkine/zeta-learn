@@ -10,7 +10,7 @@ class GbOptimization(object):
         self.optimizer = optimizer
         self.init_method = init_method
 
-    def run(self, f, df, params = 1, epochs = 10, tol = 1e-4, scale_factor = 3, verbose = False):
+    def run(self, f, df, params = 1, epochs = 10, tol = 1e-4, scale_factor = 5, verbose = False):
         self.inputs = init(self.init_method).initialize_weights((params, 1)) * scale_factor
         self.f0 = f(self.inputs) # initial function value (fsolve)
         self.epochs = epochs

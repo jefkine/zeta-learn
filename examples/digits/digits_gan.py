@@ -132,8 +132,9 @@ for epoch_idx in range(model_epochs):
         print('\nEpoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, d_loss, d_acc))
         print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(print_epoch, g_loss, g_acc))
 
-plot_metric('Loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'])
-plot_metric('Accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'])
+model_name = 'digits_gan'
+plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
+plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
 
 noise = np.random.normal(0, 1, (36, latent_dim))
 gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))

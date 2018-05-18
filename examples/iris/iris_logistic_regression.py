@@ -22,7 +22,8 @@ fit_stats = model.fit(train_data, train_label)
 # fit_stats = model.fit_NR(train_data, train_label) # --- Newton-Raphson Method
 
 print_results(model.predict(test_data), test_label)
-plot_metric('Accuracy vs Loss', len(fit_stats["train_loss"]), 
-                                                              fit_stats['train_acc'], 
-                                                              fit_stats['train_loss'], 
-                                                              legend = ['acc', 'loss'])
+plot_metric('accuracy_loss', len(fit_stats["train_loss"]),
+                                                           fit_stats['train_acc'],
+                                                           fit_stats['train_loss'],
+                                                           model_name = 'iris_logistic_regression',
+                                                           legend = ['acc', 'loss'])

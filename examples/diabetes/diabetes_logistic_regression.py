@@ -34,11 +34,12 @@ fit_stats = model.fit(train_data, train_label)
 
 print_results(model.predict(test_data), np.round(test_label).astype(int))
 
-plot_metric('Accuracy vs Loss',
-                                len(fit_stats["train_loss"]),
-                                fit_stats['train_acc'],
-                                fit_stats['train_loss'],
-                                legend = ['acc', 'loss'])
+plot_metric('accuracy_loss',
+                             len(fit_stats["train_loss"]),
+                             fit_stats['train_acc'],
+                             fit_stats['train_loss'],
+                             model_name = 'diabetes_logistic_regression',
+                             legend = ['acc', 'loss'])
 
 '''
 
