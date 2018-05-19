@@ -26,5 +26,6 @@ fit_stats = model.fit(train_data,
                       validation_data = (test_data, test_label),
                       verbose = False)
 
-plot_metric('Loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'])
-plot_metric('Accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'])
+model_name = 'nietzsche_gru'
+plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
