@@ -7,22 +7,24 @@ SMALL_FONT = 10
 LARGE_FONT = 14
 FIG_SIZE = (7, 5)
 
-def plotter(x,
-               y = [],
-               plot_dict = {},
-               fig_dims = (7, 5),
-               xticks_dict = {},
-               yticks_dict = {},
-               title = 'Model',
-               title_dict = {},
-               ylabel = 'y',
-               ylabel_dict = {},
-               xlabel = 'x',
-               xlabel_dict = {},
-               legend = ['train', 'valid'],
-               legend_dict = {}):
+def plt_plotter(x,
+                   y = [],
+                   plot_dict = {},
+                   fig_dims = (7, 5),
+                   xticks_dict = {},
+                   yticks_dict = {},
+                   title = 'Model',
+                   title_dict = {},
+                   ylabel = 'y',
+                   ylabel_dict = {},
+                   xlabel = 'x',
+                   xlabel_dict = {},
+                   legend = ['train', 'valid'],
+                   legend_dict = {},
+                   file_path = ''):
 
     plt.figure(figsize = fig_dims)
+
     for i in range(len(y)):
         plt.plot(x, y[i], **plot_dict)
     plt.xticks(**xticks_dict)
@@ -31,24 +33,26 @@ def plotter(x,
     plt.xlabel(xlabel, **xlabel_dict)
     plt.ylabel(ylabel, **ylabel_dict)
     plt.legend(legend, **legend_dict)
+    plt.savefig(file_path)
 
     return plt
 
+def plt_plotterplot_metric(metric,
+                                    epoch,
+                                    train,
+                                    valid,
+                                    model_name = '',
+                                    plot_dict = {'linewidth' : 0.8},
+                                    fig_dims = FIG_SIZE,
+                                    xticks_dict = {'size' : SMALL_FONT},
+                                    yticks_dict = {'size' : SMALL_FONT},
+                                    title_dict = {'size' : SMALL_FONT},
+                                    ylabel_dict = {'size' : SMALL_FONT},
+                                    xlabel_dict = {'size' : SMALL_FONT},
+                                    legend = ['train', 'valid'],
+                                    legend_dict = {'loc' : 'upper right'}):
 
-def plot_metric(metric,
-                        epoch,
-                        train,
-                        valid,
-                        model_name = '',
-                        plot_dict = {'linewidth' : 0.8},
-                        fig_dims = FIG_SIZE,
-                        xticks_dict = {'size' : SMALL_FONT},
-                        yticks_dict = {'size' : SMALL_FONT},
-                        title_dict = {'size' : SMALL_FONT},
-                        ylabel_dict = {'size' : SMALL_FONT},
-                        xlabel_dict = {'size' : SMALL_FONT},
-                        legend = ['train', 'valid'],
-                        legend_dict = {'loc' : 'upper right'}):
+    file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,'_',metric,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png'))
 
     plt = plotter(range(epoch),
                                 [train, valid],
@@ -63,9 +67,75 @@ def plot_metric(metric,
                                 xlabel = 'Iterations',
                                 xlabel_dict = xlabel_dict,
                                 legend = legend,
-                                legend_dict = legend_dict)
+                                legend_dict = legend_dict,
+                                file_path = file_path)
 
-    plt.savefig('../plots/metrics/'+('{}{}{}{}{}'.format(model_name,'_',metric,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png')))
+    plt.show()
+
+
+def ax_plotter(x,
+                   y = [],
+                   plot_dict = {},
+                   fig_dims = (7, 5),
+                   title = 'Model',
+                   title_dict = {},
+                   ylabel = 'y',
+                   ylabel_dict = {},
+                   xlabel = 'x',
+                   xlabel_dict = {},
+                   legend = ['train', 'valid'],
+                   legend_dict = {},
+                   file_path = ''):
+
+    fig, ax = plt.subplots()
+
+    fig.set_size_inches(fig_dims)
+
+    ax.set_axisbelow(True)
+    ax.minorticks_on()
+    ax.grid(which='major', linestyle='-', linewidth='0.5', color='grey')
+    ax.grid(which='minor', linestyle=':', linewidth='0.5', color='red')
+
+    for i in range(len(y)):
+        ax.plot(x, y[i], **plot_dict)
+    ax.set_title(title, **title_dict)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.legend(legend, **legend_dict)
+    fig.savefig(file_path)
+
+    return plt
+
+
+def plot_metric(metric,
+                        epoch,
+                        train,
+                        valid,
+                        model_name = '',
+                        plot_dict = {'linewidth' : 0.8},
+                        fig_dims = FIG_SIZE,
+                        title_dict = {'size' : SMALL_FONT},
+                        ylabel_dict = {'size' : SMALL_FONT},
+                        xlabel_dict = {'size' : SMALL_FONT},
+                        legend = ['train', 'valid'],
+                        legend_dict = {'loc' : 'upper right'}):
+
+    file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,'_',metric,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png'))
+
+    plt = ax_plotter(range(epoch),
+                                    [train, valid],
+                                    plot_dict = plot_dict,
+                                    fig_dims = fig_dims,
+                                    title = 'Model {}'.format(metric.title()),
+                                    title_dict = title_dict,
+                                    ylabel = metric.title(),
+                                    ylabel_dict = ylabel_dict,
+                                    xlabel = 'Iterations',
+                                    xlabel_dict = xlabel_dict,
+                                    legend = legend,
+                                    legend_dict = legend_dict,
+                                    file_path = file_path)
+
     plt.show()
 
 
