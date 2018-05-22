@@ -35,11 +35,8 @@ from .charts import plot_metric
 from .charts import plot_opt_viz
 from .charts import plot_img_samples
 from .charts import plot_img_results
-from .charts import plot_digits_img_results #@@DEPRECATED
-from .charts import plot_digits_img_samples #@@DEPRECATED
 from .charts import plot_regression_results
 from .charts import plot_generated_img_samples
-from .charts import plot_generated_digits_samples #@@DEPRECATED
 
 # import from time_deco.py
 from .time_deco import LogIfBusy
@@ -67,10 +64,8 @@ __all__ = [
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From charts.py
-            'plot_metric','plot_digits_img_results','plot_digits_img_samples',
-            'plot_regression_results','plot_generated_digits_samples',
-            'plot_img_samples', 'plot_img_results',
-            'plot_generated_img_samples',
+            'plot_metric','plot_regression_results','plot_img_samples',
+            'plot_img_results','plot_generated_img_samples',
 
             # From sequences.py
             'gen_mult_sequence_xtyt','gen_mult_sequence_xtym'
