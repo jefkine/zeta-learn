@@ -8,7 +8,7 @@ LARGE_FONT = 14
 FIG_SIZE = (7, 5)
 
 img_specs = {
-              'mnist' :  {
+              'mnist'  : {
                            'pix_row' : 1,
                            'pix_col' : 26,
                            'img_width' : 28,
@@ -19,7 +19,7 @@ img_specs = {
                            'pix_col' : 7,
                            'img_width' : 8,
                            'img_height' : 8
-                          }
+                         }
             }
 
 def plotter(x,
