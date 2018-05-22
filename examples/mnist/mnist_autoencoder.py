@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
+from sklearn.datasets import fetch_mldata
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import BatchNormalization, Dense
 
-img_rows = 8
-img_cols = 8
-img_dim = 64  # img_rows * img_cols
-latent_dim = 4
+img_rows = 28
+img_cols = 28
+img_dim = 784  # img_rows * img_cols
+latent_dim = 8
 init_type = 'he_normal'
 
 def stack_encoder_layers(init):
@@ -44,13 +44,13 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-data = datasets.load_digits()
-images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
+mnist = fetch_mldata('MNIST original')
+images = range_normalize(mnist.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,
                                                                   random_seed = 15)
-plot_img_samples(train_data, None)
+plot_img_samples(train_data, None, dataset = 'mnist')
 
 model_epochs = 500
 fit_stats = autoencoder.fit(train_data,
@@ -61,10 +61,10 @@ fit_stats = autoencoder.fit(train_data,
                             shuffle_data = True)
 
 # generate non rescaled test labels for use in generated digits plot
-_, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, random_seed = 15)
+_, _, _, test_label = train_test_split(mnist.data, mnist.target.astype('int'), test_size = 0.2, random_seed = 15)
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
-model_name = 'digits_autoencoder'
+model_name = 'mnist_autoencoder'
 plot_generated_img_samples(unhot(one_hot(test_label)), predictions)
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

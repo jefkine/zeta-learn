@@ -1,42 +1,42 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from sklearn.datasets import fetch_mldata
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.dl.optimizers import register_opt
-from ztlearn.dl.layers import LSTM, Dense, Flatten
+from ztlearn.dl.layers import GRU, Dense, Flatten
 
-data = datasets.load_digits()
-train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
+mnist = fetch_mldata('MNIST original')
+train_data, test_data, train_label, test_label = train_test_split(mnist.data,
+                                                                  mnist.target.astype('int'),
                                                                   test_size = 0.3,
                                                                   random_seed = 15)
 
-plot_img_samples(train_data, train_label)
+plot_img_samples(train_data, train_label, dataset = 'mnist')
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 0.001)
 
 # Model definition
 model = Sequential()
-model.add(LSTM(128, activation = 'tanh', input_shape = (8, 8)))
+model.add(GRU(128, activation = 'tanh', input_shape = (28, 28)))
 model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 100
-fit_stats = model.fit(train_data.reshape(-1, 8, 8),
+fit_stats = model.fit(train_data.reshape(-1, 28, 28),
                       one_hot(train_label),
                       batch_size = 128,
                       epochs = model_epochs,
-                      validation_data = (test_data.reshape(-1, 8, 8), one_hot(test_label)),
+                      validation_data = (test_data.reshape(-1, 28, 28), one_hot(test_label)),
                       shuffle_data = True)
 
-predictions = unhot(model.predict(test_data.reshape(-1, 8, 8), True))
+predictions = unhot(model.predict(test_data.reshape(-1, 28, 28), True))
 
 print_results(predictions, test_label)
-plot_img_results(test_data, test_label, predictions)
+plot_img_results(test_data, test_label, predictions, dataset = 'mnist')
 
-model_name = 'digits_lstm'
+model_name = 'mnist_gru'
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

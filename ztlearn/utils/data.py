@@ -14,9 +14,9 @@ def accuracy_score(predictions, targets):
     return np.mean(predictions == targets)
 
 def one_hot(labels, num_classes = None):
-    num_classes = np.max(labels) + 1 if not num_classes else num_classes
+    num_classes = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
     one_hot_labels = np.zeros([labels.size, num_classes])
-    one_hot_labels[np.arange(labels.size), labels] = 1.
+    one_hot_labels[np.arange(labels.size), labels.astype('int')] = 1.
     return one_hot_labels
 
 def unhot(one_hot, unhot_axis = 1):

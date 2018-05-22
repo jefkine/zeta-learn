@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
+from sklearn.datasets import fetch_mldata
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -9,12 +9,12 @@ from ztlearn.dl.optimizers import register_opt
 from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 
-data = datasets.load_digits()
-plot_img_samples(data.data, None)
+mnist = fetch_mldata('MNIST original')
+plot_img_samples(mnist.data, None, dataset = 'mnist')
 
-img_rows = 8
-img_cols = 8
-img_dim = 64  # is the product (img_rows * img_cols)
+img_rows = 28
+img_cols = 28
+img_dim = 784  # is the product (img_rows * img_cols)
 
 latent_dim = 100
 batch_size = 128
@@ -71,7 +71,7 @@ generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
-images = range_normalize(data.data.astype(np.float32))
+images = range_normalize(mnist.data.astype(np.float32))
 
 for epoch_idx in range(model_epochs):
 
@@ -132,7 +132,7 @@ for epoch_idx in range(model_epochs):
         print('\nEpoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, d_loss, d_acc))
         print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(print_epoch, g_loss, g_acc))
 
-model_name = 'digits_gan'
+model_name = 'mnist_gan'
 plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
 plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
 
