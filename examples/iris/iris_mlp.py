@@ -23,7 +23,7 @@ model.add(Dense(10, activation = 'sigmoid', input_shape=(train_data.shape[1],)))
 model.add(Dense(3, activation = 'sigmoid')) # 3 iris_classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-model_epochs = 15
+model_epochs = 25
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
                       batch_size = 10,
