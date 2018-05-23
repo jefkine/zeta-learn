@@ -24,7 +24,7 @@ model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-model_epochs = 2
+model_epochs = 100
 fit_stats = model.fit(train_data.reshape(-1, 28, 28),
                       one_hot(train_label),
                       batch_size = 128,
