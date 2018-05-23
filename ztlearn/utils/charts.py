@@ -8,7 +8,7 @@ LARGE_FONT = 14
 FIG_SIZE = (7, 5)
 
 img_specs = {
-              'mnist'  : {
+              'mnist' :  {
                            'pix_row' : 1,
                            'pix_col' : 26,
                            'img_width' : 28,
@@ -34,7 +34,8 @@ def plotter(x,
                xlabel_dict = {},
                legend = ['train', 'valid'],
                legend_dict = {},
-               file_path = ''):
+               file_path = '',
+               to_save = False):
 
     fig, ax = plt.subplots()
 
@@ -51,7 +52,9 @@ def plotter(x,
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.legend(legend, **legend_dict)
-    fig.savefig(file_path)
+    
+    if to_save:
+        fig.savefig(file_path)
 
     return plt
 
@@ -61,6 +64,7 @@ def plot_metric(metric,
                         train,
                         valid,
                         model_name = '',
+                        to_save = False,
                         plot_dict = {'linewidth' : 0.8},
                         fig_dims = FIG_SIZE,
                         title_dict = {'size' : SMALL_FONT},
@@ -83,7 +87,8 @@ def plot_metric(metric,
                                 xlabel_dict = xlabel_dict,
                                 legend = legend,
                                 legend_dict = legend_dict,
-                                file_path = file_path)
+                                file_path = file_path,
+                                to_save = to_save)
 
     plt.show()
 
@@ -94,7 +99,7 @@ def plot_opt_viz(dims,
                         z,
                         f_solution,
                         overlay = 'plot',
-                        to_save = True,
+                        to_save = False,
                         title = 'Optimization',
                         title_dict = {'size' : LARGE_FONT},
                         fig_dims = FIG_SIZE,
