@@ -16,7 +16,7 @@ from ztlearn.ml.regression import LogisticRegression
 # Outcome                                                     #
 #-------------------------------------------------------------#
 
-dataset = pd.read_csv('../data/diabetes/pima-indians-diabetes.csv', sep = ',').values
+dataset = pd.read_csv('../../datasets/diabetes/pima-indians-diabetes.csv', sep = ',').values
 input_data = z_score(dataset[:, 0:8]) # ----- all the features
 # input_data = z_score(dataset[:, 5:6]) # ----- one of the features
 input_label = dataset[:, 8]
