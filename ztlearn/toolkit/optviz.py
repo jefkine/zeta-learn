@@ -42,15 +42,10 @@ class GbOptimization(object):
         z = f(x_grid)
 
         weights = self.weights.reshape(self.epochs, -1)
-
+        
         vis_type = ['wireframe', 'contour']
         for vis in vis_type:
-            plot_opt_viz(3,
-                            x_grid,
-                            weights,
-                            z,
-                            self.fsolve,
-                            overlay = vis)
+            plot_opt_viz(3, x_grid, weights, z, self.fsolve, overlay = vis)
 
     def plot_2d(self, f):
         """ plot a 2d visualization """
@@ -62,9 +57,4 @@ class GbOptimization(object):
 
         weights = self.weights.reshape(self.epochs, -1)
 
-        plot_opt_viz(2,
-                         theta,
-                         y,
-                         weights,
-                         self.fsolve,
-                         overlay = 'plot')
+        plot_opt_viz(2, theta, y, weights, self.fsolve, overlay = 'plot')
