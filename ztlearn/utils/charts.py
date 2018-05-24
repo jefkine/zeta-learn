@@ -155,7 +155,7 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
         digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
 
         if train_target is not None:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_data.astype('int')[i]))
+            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_target.astype('int')[i]))
 
     plt.show()
 
