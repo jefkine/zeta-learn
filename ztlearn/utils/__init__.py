@@ -54,16 +54,18 @@ from .im2col import col2im_indices
 from .toeplitz import unroll_inputs
 
 __all__ = [
-            # From charts.py
-            'plot_metric','plot_regression_results','plot_img_samples','plot_img_results','plot_generated_img_samples',
 
             # From data.py
             'unhot','one_hot','min_max','z_score','normalize','minibatches','shuffle_data','computebar','clip_gradients',
             'range_normalize','accuracy_score','train_test_split','print_seq_samples','print_seq_results','print_results',
-            
+
+            # From charts.py
+            'plot_metric','plot_regression_results','plot_img_samples','plot_img_results','plot_generated_img_samples',
+
             # From text.py
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From sequences.py
             'gen_mult_sequence_xtyt','gen_mult_sequence_xtym'
+
           ]
