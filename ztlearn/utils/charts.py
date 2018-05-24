@@ -52,7 +52,7 @@ def plotter(x,
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.legend(legend, **legend_dict)
-    
+
     if to_save:
         fig.savefig(file_path)
 
@@ -146,15 +146,16 @@ def plot_opt_viz(dims,
     plt.show()
 
 
-def plot_img_samples(data_data, data_target = None, fig_dims = (6, 6), dataset = 'digits'):
+def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits'):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
-        digit.imshow(data_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
-        if data_target is not None:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(data_target.astype('int')[i]))
+        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
+
+        if train_target is not None:
+            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_data.astype('int')[i]))
 
     plt.show()
 
@@ -182,6 +183,7 @@ def plot_generated_img_samples(test_label, predictions, fig_dims = (6, 6), datas
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
         digit.imshow(predictions.reshape(-1, img_specs[dataset]['img_height'], img_specs[dataset]['img_width'])[i], cmap = plt.cm.binary, interpolation = 'nearest')
+
         if test_label is not None:
             digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(test_label[i]), color = 'blue')
 
