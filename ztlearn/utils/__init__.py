@@ -35,6 +35,7 @@ from .charts import plot_metric
 from .charts import plot_opt_viz
 from .charts import plot_img_samples
 from .charts import plot_img_results
+from .charts import plot_tiled_img_samples
 from .charts import plot_regression_results
 from .charts import plot_generated_img_samples
 
@@ -62,10 +63,13 @@ __all__ = [
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From charts.py
-            'plot_metric','plot_regression_results','plot_img_samples','plot_img_results','plot_generated_img_samples',
+            'plot_metric','plot_regression_results','plot_img_samples'
+            ,'plot_img_results','plot_generated_img_samples','plot_tiled_img_samples',
+
 
             # From data.py
-            'unhot','one_hot','min_max','z_score','normalize','minibatches','shuffle_data','computebar','clip_gradients',
-            'range_normalize','accuracy_score','train_test_split','print_seq_samples','print_seq_results','print_results'
+            'unhot','one_hot','min_max','z_score','normalize',
+            'minibatches','shuffle_data','computebar','clip_gradients','range_normalize',
+            'accuracy_score','train_test_split','print_seq_samples','print_seq_results','print_results'
 
           ]

@@ -160,6 +160,26 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
     plt.show()
 
 
+def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits'):
+    fig = plt.figure(figsize = fig_dims)
+    fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
+
+    for i in range(36):
+        digit = fig.add_subplot(6, 6, i+1)
+
+        digit.grid(color='blue', linestyle='-', linewidth= 0.1)
+        digit.xaxis.set_ticklabels([])
+        digit.yaxis.set_ticklabels([])
+        digit.minorticks_off()
+
+        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
+
+        if train_target is not None:
+            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_target.astype('int')[i]))
+
+    plt.show()
+
+
 def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), dataset = 'digits'):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
