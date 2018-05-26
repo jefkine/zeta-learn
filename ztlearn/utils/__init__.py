@@ -66,7 +66,6 @@ __all__ = [
             'plot_metric','plot_regression_results','plot_img_samples'
             ,'plot_img_results','plot_generated_img_samples','plot_tiled_img_samples',
 
-
             # From data.py
             'unhot','one_hot','min_max','z_score','normalize',
             'minibatches','shuffle_data','computebar','clip_gradients','range_normalize',
