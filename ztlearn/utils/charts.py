@@ -22,6 +22,7 @@ img_specs = {
                          }
             }
 
+
 def plotter(x,
                y = [],
                plot_dict = {},
@@ -73,7 +74,11 @@ def plot_metric(metric,
                         legend = ['train', 'valid'],
                         legend_dict = {'loc' : 'upper right'}):
 
-    file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,'_',metric,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png'))
+    file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,
+                                                         '_',
+                                                         metric,
+                                                         '_',
+                                                         time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt = plotter(range(epoch),
                                 [train, valid],
@@ -152,10 +157,15 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
-        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
+        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
+                                           img_specs[dataset]['img_width']),
+                                           cmap = plt.cm.binary,
+                                           interpolation = 'nearest')
 
         if train_target is not None:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_target.astype('int')[i]))
+            digit.text(img_specs[dataset]['pix_row'],
+                       img_specs[dataset]['pix_col'],
+                       str(train_target.astype('int')[i]))
 
     plt.show()
 
@@ -172,10 +182,15 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
         digit.yaxis.set_ticklabels([])
         digit.minorticks_off()
 
-        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'], img_specs[dataset]['img_width']), cmap = plt.cm.binary, interpolation = 'nearest')
+        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
+                                           img_specs[dataset]['img_width']),
+                                           cmap = plt.cm.binary,
+                                           interpolation = 'nearest')
 
         if train_target is not None:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(train_target.astype('int')[i]))
+            digit.text(img_specs[dataset]['pix_row'],
+                       img_specs[dataset]['pix_col'],
+                       str(train_target.astype('int')[i]))
 
     plt.show()
 
@@ -186,12 +201,21 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i + 1, xticks = [], yticks = [])
-        digit.imshow(test_data.reshape(-1, img_specs[dataset]['img_height'], img_specs[dataset]['img_width'])[i], cmap = plt.cm.binary, interpolation = 'nearest')
+        digit.imshow(test_data.reshape(-1,
+                                       img_specs[dataset]['img_height'],
+                                       img_specs[dataset]['img_width'])[i],
+                                       cmap = plt.cm.binary,
+                                       interpolation = 'nearest')
 
         if predictions[i] == test_label[i]:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(predictions[i]), color = 'green')
+            digit.text(img_specs[dataset]['pix_row'],
+                       img_specs[dataset]['pix_col'],
+                       str(predictions[i]), color = 'green')
+
         else:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(predictions[i]), color = 'red')
+            digit.text(img_specs[dataset]['pix_row'],
+                       img_specs[dataset]['pix_col'],
+                       str(predictions[i]), color = 'red')
 
     plt.show()
 
@@ -202,10 +226,16 @@ def plot_generated_img_samples(test_label, predictions, fig_dims = (6, 6), datas
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
-        digit.imshow(predictions.reshape(-1, img_specs[dataset]['img_height'], img_specs[dataset]['img_width'])[i], cmap = plt.cm.binary, interpolation = 'nearest')
+        digit.imshow(predictions.reshape(-1,
+                                         img_specs[dataset]['img_height'],
+                                         img_specs[dataset]['img_width'])[i],
+                                         cmap = plt.cm.binary,
+                                         interpolation = 'nearest')
 
         if test_label is not None:
-            digit.text(img_specs[dataset]['pix_row'], img_specs[dataset]['pix_col'], str(test_label[i]), color = 'blue')
+            digit.text(img_specs[dataset]['pix_row'],
+                       img_specs[dataset]['pix_col'],
+                       str(test_label[i]), color = 'blue')
 
     plt.show()
 
@@ -237,5 +267,9 @@ def plot_regression_results(train_data,
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
 
-    plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,'_mse_',mse,'_',time.strftime("%Y-%m-%d_%H-%M-%S"), '.png')))
+    plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,
+                                                                '_mse_',
+                                                                mse,
+                                                                '_',
+                                                                time.strftime("%Y-%m-%d_%H-%M-%S"),'.png')))
     plt.show()
