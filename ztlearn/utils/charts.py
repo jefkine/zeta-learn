@@ -22,21 +22,20 @@ img_specs = {
                          }
             }
 
-
 def plotter(x,
-               y = [],
-               plot_dict = {},
-               fig_dims = (7, 5),
-               title = 'Model',
-               title_dict = {},
-               ylabel = 'y',
-               ylabel_dict = {},
-               xlabel = 'x',
-               xlabel_dict = {},
-               legend = ['train', 'valid'],
-               legend_dict = {},
-               file_path = '',
-               to_save = False):
+                y = [],
+                plot_dict = {},
+                fig_dims = (7, 5),
+                title = 'Model',
+                title_dict = {},
+                ylabel = 'y',
+                ylabel_dict = {},
+                xlabel = 'x',
+                xlabel_dict = {},
+                legend = ['train', 'valid'],
+                legend_dict = {},
+                file_path = '',
+                to_save = False):
 
     fig, ax = plt.subplots()
 
@@ -61,18 +60,18 @@ def plotter(x,
 
 
 def plot_metric(metric,
-                        epoch,
-                        train,
-                        valid,
-                        model_name = '',
-                        to_save = False,
-                        plot_dict = {'linewidth' : 0.8},
-                        fig_dims = FIG_SIZE,
-                        title_dict = {'size' : SMALL_FONT},
-                        ylabel_dict = {'size' : SMALL_FONT},
-                        xlabel_dict = {'size' : SMALL_FONT},
-                        legend = ['train', 'valid'],
-                        legend_dict = {'loc' : 'upper right'}):
+                         epoch,
+                         train,
+                         valid,
+                         model_name = '',
+                         to_save = False,
+                         plot_dict = {'linewidth' : 0.8},
+                         fig_dims = FIG_SIZE,
+                         title_dict = {'size' : SMALL_FONT},
+                         ylabel_dict = {'size' : SMALL_FONT},
+                         xlabel_dict = {'size' : SMALL_FONT},
+                         legend = ['train', 'valid'],
+                         legend_dict = {'loc' : 'upper right'}):
 
     file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,
                                                          '_',
@@ -81,19 +80,19 @@ def plot_metric(metric,
                                                          time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt = plotter(range(epoch),
-                                [train, valid],
-                                plot_dict = plot_dict,
-                                fig_dims = fig_dims,
-                                title = 'Model {}'.format(metric.title()),
-                                title_dict = title_dict,
-                                ylabel = metric.title(),
-                                ylabel_dict = ylabel_dict,
-                                xlabel = 'Iterations',
-                                xlabel_dict = xlabel_dict,
-                                legend = legend,
-                                legend_dict = legend_dict,
-                                file_path = file_path,
-                                to_save = to_save)
+                                 [train, valid],
+                                 plot_dict = plot_dict,
+                                 fig_dims = fig_dims,
+                                 title = 'Model {}'.format(metric.title()),
+                                 title_dict = title_dict,
+                                 ylabel = metric.title(),
+                                 ylabel_dict = ylabel_dict,
+                                 xlabel = 'Iterations',
+                                 xlabel_dict = xlabel_dict,
+                                 legend = legend,
+                                 legend_dict = legend_dict,
+                                 file_path = file_path,
+                                 to_save = to_save)
 
     plt.show()
 
@@ -241,17 +240,17 @@ def plot_generated_img_samples(test_label, predictions, fig_dims = (6, 6), datas
 
 
 def plot_regression_results(train_data,
-                                        train_label,
-                                        test_data,
-                                        test_label,
-                                        input_data,
-                                        pred_line,
-                                        mse, super_title,
-                                        y_label,
-                                        x_label,
-                                        model_name = '',
-                                        fig_dims = FIG_SIZE,
-                                        font_size = 10):
+                                         train_label,
+                                         test_data,
+                                         test_label,
+                                         input_data,
+                                         pred_line,
+                                         mse, super_title,
+                                         y_label,
+                                         x_label,
+                                         model_name = '',
+                                         fig_dims = FIG_SIZE,
+                                         font_size = 10):
 
     plt.figure(figsize = fig_dims)
     cmap = plt.get_cmap('summer')
