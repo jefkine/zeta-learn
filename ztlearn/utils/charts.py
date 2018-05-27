@@ -117,7 +117,6 @@ def plot_opt_viz(dims,
 
     if dims == 3:
         fig = plt.figure(figsize = fig_dims)
-
         if overlay == 'wireframe':
             from mpl_toolkits.mplot3d import axes3d # for 3d projections
             ax = fig.add_subplot(111, projection = '3d')
@@ -132,7 +131,7 @@ def plot_opt_viz(dims,
         ax.set_xlabel(xlabel, **xlabel_dict)
         ax.set_ylabel(ylabel, **ylabel_dict)
 
-    elif dims == 2:
+    elif dims == 2:        
         plt.figure(figsize = fig_dims)
         plt.xticks(**xticks_dict)
         plt.yticks(**yticks_dict)
