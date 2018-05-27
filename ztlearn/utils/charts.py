@@ -38,7 +38,6 @@ def plotter(x,
                 to_save = False):
 
     fig, ax = plt.subplots()
-
     fig.set_size_inches(fig_dims)
 
     ax.set_axisbelow(True)
