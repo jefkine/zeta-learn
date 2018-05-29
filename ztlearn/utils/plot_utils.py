@@ -131,7 +131,7 @@ def plot_opt_viz(dims,
         ax.set_xlabel(xlabel, **xlabel_dict)
         ax.set_ylabel(ylabel, **ylabel_dict)
 
-    elif dims == 2:        
+    elif dims == 2:
         plt.figure(figsize = fig_dims)
         plt.xticks(**xticks_dict)
         plt.yticks(**yticks_dict)

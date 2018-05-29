@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from .data import one_hot
+from .data_utils import one_hot
 
 #-----------------------------------------------------------------------------#
 #                     GENERATE SYNTHETIC SEQUENCES DATA                       #
