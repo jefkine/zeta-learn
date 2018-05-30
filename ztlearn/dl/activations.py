@@ -92,7 +92,9 @@ class SELU:
             numpy.array: the output of the SELU function applied to the input
         """
 
-        return SELU._LAMBDA * np.where(input_signal >= 0.0, input_signal, np.multiply(SELU.ALPHA, np.exp(input_signal)) - SELU.ALPHA)
+        return SELU._LAMBDA * np.where(input_signal >= 0.0, input_signal,
+                                                            np.multiply(SELU.ALPHA,
+                                                            np.exp(input_signal)) - SELU.ALPHA)
 
     def derivative(self, input_signal):
 
