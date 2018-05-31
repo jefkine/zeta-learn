@@ -4,7 +4,7 @@ import numpy as np
 from sklearn import datasets
 
 from ztlearn.utils import *
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.ml.regression import ElasticNetRegression
 from ztlearn.objectives import ObjectiveFunction as objective
 
