@@ -4,7 +4,7 @@ from sklearn import datasets
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 

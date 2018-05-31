@@ -2,5 +2,4 @@
 
 # import packages(s)
 from . import regression
-from . import regularizers
 from . import classification

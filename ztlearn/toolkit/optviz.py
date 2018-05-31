@@ -1,8 +1,8 @@
 import numpy as np
 
 from ztlearn.utils import plot_opt_viz
-from ztlearn.dl.initializers import InitializeWeights as init
-from ztlearn.dl.optimizers import OptimizationFunction as optimize
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.optimizers import OptimizationFunction as optimize
 
 class GbOptimization(object):
 
@@ -42,7 +42,7 @@ class GbOptimization(object):
         z = f(x_grid)
 
         weights = self.weights.reshape(self.epochs, -1)
-        
+
         vis_type = ['wireframe', 'contour']
         for vis in vis_type:
             plot_opt_viz(3, x_grid, weights, z, self.fsolve, overlay = vis)

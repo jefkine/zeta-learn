@@ -6,7 +6,8 @@ from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
 from ztlearn.utils import minibatches
 from ztlearn.dl.layers import Activation
-from ..objectives import ObjectiveFunction as objective
+from ztlearn.objectives import ObjectiveFunction as objective
+
 
 class Sequential:
 

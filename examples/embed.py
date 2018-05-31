@@ -5,7 +5,7 @@ import numpy as np
 from ztlearn.dl.layers import Embedding
 from ztlearn.dl.models import Sequential
 from ztlearn.utils import train_test_split
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 
 
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)

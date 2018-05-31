@@ -7,6 +7,7 @@ from ztlearn.utils import get_pad
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
 
+
 class Pool(Layer):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):

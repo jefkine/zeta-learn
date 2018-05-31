@@ -5,7 +5,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.layers import Dense
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 
 
 data = datasets.load_iris()

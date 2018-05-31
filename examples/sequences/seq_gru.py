@@ -3,7 +3,7 @@
 from ztlearn.utils import *
 from ztlearn.dl.layers import GRU
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 
 x, y, seq_len = gen_mult_sequence_xtyt(1000, 10, 10)
 train_data, test_data, train_label, test_label = train_test_split(x, y, test_size = 0.4)

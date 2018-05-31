@@ -2,7 +2,7 @@
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import RNN, Flatten, Dense
 
 

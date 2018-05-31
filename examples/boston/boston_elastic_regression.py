@@ -6,7 +6,7 @@ from sklearn import datasets
 from ztlearn.utils import *
 from ztlearn.dl.optimizers import register_opt
 from ztlearn.ml.regression import ElasticNetRegression
-from ztlearn.dl.objectives import ObjectiveFunction as objective
+from ztlearn.objectives import ObjectiveFunction as objective
 
 data = datasets.load_boston()
 # print(data['DESCR'])

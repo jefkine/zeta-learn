@@ -3,7 +3,7 @@
 from sklearn.datasets import fetch_mldata
 
 from ztlearn.utils import *
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
 mnist = fetch_mldata('MNIST original')

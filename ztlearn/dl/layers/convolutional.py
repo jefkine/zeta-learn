@@ -7,8 +7,8 @@ from ztlearn.utils import get_pad
 from ztlearn.utils import unroll_inputs
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
-from ..initializers import InitializeWeights as init
-from ..optimizers import OptimizationFunction as optimizer
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.optimizers import OptimizationFunction as optimizer
 
 class Conv(Layer):
 
@@ -354,22 +354,22 @@ class ConvToeplitzMat(Conv):
             output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
 
         output = np.zeros((input_num, self.filter_num, output_height, output_width))
-        
+
         self.input_col = unroll_inputs(x_padded,
                                                  x_padded.shape[0],
                                                  x_padded.shape[1],
                                                  output_height,
                                                  output_width,
                                                  self.kernel_size[0])
-        #TODO: weights need to be rearraged in a way to have a matrix 
-        #      multiplication with the generated toeplitz matrix         
+        #TODO: weights need to be rearraged in a way to have a matrix
+        #      multiplication with the generated toeplitz matrix
         self.weight_col = self.weights.reshape(self.filter_num, -1)
-       
+
         # calculate ouput
-        output = self.weight_col @ self.input_col + self.bias        
+        output = self.weight_col @ self.input_col + self.bias
         # output = np.matmul(self.weight_col, self.input_col) + self.bias
         output = output.reshape(self.filter_num, int(output_height), int(output_width), input_num)
-       
+
         return output.transpose(3, 0, 1, 2)
 
-    def pass_backward(self, grad): pass       
+    def pass_backward(self, grad): pass

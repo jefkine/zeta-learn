@@ -3,7 +3,7 @@
 import numpy as np
 
 from .base import Layer
-from ..optimizers import OptimizationFunction as optimizer
+from ztlearn.optimizers import OptimizationFunction as optimizer
 
 
 class BatchNormalization(Layer):

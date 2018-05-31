@@ -4,7 +4,7 @@ from sklearn.datasets import fetch_mldata
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 mnist = fetch_mldata('MNIST original')
@@ -47,5 +47,3 @@ plot_metric('evaluation',
                           eval_stats['valid_acc'],
                           model_name = model_name,
                           legend = ['loss', 'acc'])
-
-

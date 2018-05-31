@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.toolkit import GbOptimization as gbopt
 
 

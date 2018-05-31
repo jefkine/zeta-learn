@@ -4,10 +4,10 @@ import numpy as np
 
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
-from ztlearn.dl.initializers import InitializeWeights as init
-from ztlearn.dl.objectives import ObjectiveFunction as objective
-from ztlearn.dl.optimizers import OptimizationFunction as optimize
-from ..regularizers import RegularizationFunction as regularize
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.objectives import ObjectiveFunction as objective
+from ztlearn.optimizers import OptimizationFunction as optimize
+from ztlearn.regularizers import RegularizationFunction as regularize
 
 
 class Regression(object):

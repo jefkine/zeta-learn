@@ -3,9 +3,9 @@
 import numpy as np
 from ..base import Layer
 from ztlearn.utils import clip_gradients as cg
-from ztlearn.dl.initializers import InitializeWeights as init
-from ztlearn.dl.activations import ActivationFunction as activate
-from ztlearn.dl.optimizers import OptimizationFunction as optimizer
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.activations import ActivationFunction as activate
+from ztlearn.optimizers import OptimizationFunction as optimizer
 
 
 class RNN(Layer):
@@ -83,7 +83,7 @@ class RNN(Layer):
         self.outputs = np.zeros((batch_size, time_steps, input_dim))
 
         self.states[:, -1] = np.zeros((batch_size, self.h_units)) # last column containing the final state set to zero
-        
+
         for t in range(time_steps):
             self.state_input[:, t] = (np.dot(inputs[:, t], self.W_input.T) + np.dot(self.states[:, t-1], self.W_recur.T)) + self.b_input
             self.states[:, t] = activate(self.activation).forward(self.state_input[:, t])

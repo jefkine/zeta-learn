@@ -3,9 +3,9 @@
 import numpy as np
 from ..base import Layer
 from ztlearn.utils import clip_gradients as cg
-from ztlearn.dl.initializers import InitializeWeights as init
-from ztlearn.dl.activations import ActivationFunction as activate
-from ztlearn.dl.optimizers import OptimizationFunction as optimizer
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.activations import ActivationFunction as activate
+from ztlearn.optimizers import OptimizationFunction as optimizer
 
 
 class LSTM(Layer):

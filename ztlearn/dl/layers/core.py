@@ -2,9 +2,9 @@
 
 import numpy as np
 from .base import Layer
-from ..initializers import InitializeWeights as init
-from ..optimizers import OptimizationFunction as optimizer
-from ..activations import ActivationFunction as activation
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.optimizers import OptimizationFunction as optimizer
+from ztlearn.activations import ActivationFunction as activation
 
 
 class Activation(Layer):

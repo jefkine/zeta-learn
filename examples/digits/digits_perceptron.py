@@ -3,7 +3,7 @@
 from sklearn import datasets
 
 from ztlearn.utils import *
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_digits()

@@ -4,7 +4,7 @@ from sklearn import datasets
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 # NOTE: Check the random_seed seeding for improperly shuffled data.

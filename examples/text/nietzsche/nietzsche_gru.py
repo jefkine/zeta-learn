@@ -3,7 +3,7 @@
 from ztlearn.utils import *
 from ztlearn.dl.layers import GRU
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 
 
 text = open('../../../datasets/text/nietzsche_short.txt').read().lower()

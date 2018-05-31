@@ -4,8 +4,8 @@ import numpy as np
 
 from .base import Layer
 from ztlearn.utils import one_hot
-from ..initializers import InitializeWeights as init
-from ..optimizers import OptimizationFunction as optimizer
+from ztlearn.initializers import InitializeWeights as init
+from ztlearn.optimizers import OptimizationFunction as optimizer
 
 class Embedding(Layer):
 
