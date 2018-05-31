@@ -1,7 +1,7 @@
 Regularization Functions
 ========================
 
-.. automodule:: ztlearn.ml.regularizers
+.. automodule:: ztlearn.regularizers
   :noindex:
 
 The regularization functions are used to prevent overfitting by modifying the models
@@ -19,7 +19,7 @@ Featured Regularizers
 Function Descriptions
 ---------------------
 
-.. automodule:: ztlearn.ml.regularizers
+.. automodule:: ztlearn.regularizers
   :members:
   :undoc-members:
   :show-inheritance:

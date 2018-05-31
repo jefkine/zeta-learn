@@ -4,58 +4,58 @@ ztlearn.utils package
 Submodules
 ----------
 
-ztlearn.utils.charts module
----------------------------
+ztlearn.utils.data\_utils module
+--------------------------------
 
-.. automodule:: ztlearn.utils.charts
+.. automodule:: ztlearn.utils.data_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.data module
--------------------------
+ztlearn.utils.im2col\_utils module
+----------------------------------
 
-.. automodule:: ztlearn.utils.data
+.. automodule:: ztlearn.utils.im2col_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.im2col module
----------------------------
+ztlearn.utils.plot\_utils module
+--------------------------------
 
-.. automodule:: ztlearn.utils.im2col
+.. automodule:: ztlearn.utils.plot_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.sequences module
-------------------------------
+ztlearn.utils.sequence\_utils module
+------------------------------------
 
-.. automodule:: ztlearn.utils.sequences
+.. automodule:: ztlearn.utils.sequence_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.text module
--------------------------
+ztlearn.utils.text\_utils module
+--------------------------------
 
-.. automodule:: ztlearn.utils.text
+.. automodule:: ztlearn.utils.text_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.time\_deco module
--------------------------------
+ztlearn.utils.time\_deco\_utils module
+--------------------------------------
 
-.. automodule:: ztlearn.utils.time_deco
+.. automodule:: ztlearn.utils.time_deco_utils
     :members:
     :undoc-members:
     :show-inheritance:
 
-ztlearn.utils.toeplitz module
------------------------------
+ztlearn.utils.toeplitz\_utils module
+------------------------------------
 
-.. automodule:: ztlearn.utils.toeplitz
+.. automodule:: ztlearn.utils.toeplitz_utils
     :members:
     :undoc-members:
     :show-inheritance:

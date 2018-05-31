@@ -9,23 +9,11 @@ Subpackages
     ztlearn.ml.classification
     ztlearn.ml.regression
 
-Submodules
-----------
-
-ztlearn.ml.regularizers module
-------------------------------
-
-.. automodule:: ztlearn.ml.regularizers
-    :noindex:
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-
 Module contents
 ---------------
 
 .. automodule:: ztlearn.ml
+    :noindex:
     :members:
     :undoc-members:
     :show-inheritance:

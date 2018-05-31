@@ -1,7 +1,7 @@
 Optimization Functions
 ======================
 
-.. automodule:: ztlearn.dl.optimizers
+.. automodule:: ztlearn.optimizers
   :noindex:
 
 The optimization functions helps us to minimize (or maximize) an Objective function
@@ -24,7 +24,7 @@ Featured Optimizers
 Optimization Descriptions
 -------------------------
 
-.. automodule:: ztlearn.dl.optimizers
+.. automodule:: ztlearn.optimizers
   :members:
   :undoc-members:
   :show-inheritance:

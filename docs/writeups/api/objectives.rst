@@ -1,7 +1,7 @@
 Objective Functions
 ===================
 
-.. automodule:: ztlearn.dl.objectives
+.. automodule:: ztlearn.objectives
   :noindex:
 
 Objective functions are used measure the performance of a model.
@@ -19,7 +19,7 @@ Featured Objectives
 Function Descriptions
 ---------------------
 
-.. automodule:: ztlearn.dl.objectives
+.. automodule:: ztlearn.objectives
   :members:
   :undoc-members:
   :show-inheritance:

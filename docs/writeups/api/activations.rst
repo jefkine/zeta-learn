@@ -1,7 +1,7 @@
 Activation Functions
 ====================
 
-.. automodule:: ztlearn.dl.activations
+.. automodule:: ztlearn.activations
   :noindex:
 
 The activation functions introduce the required non-linearities in the neural networks.
@@ -26,7 +26,7 @@ Featured Activations
 Function Descriptions
 ---------------------
 
-.. automodule:: ztlearn.dl.activations
+.. automodule:: ztlearn.activations
   :members:
   :undoc-members:
   :show-inheritance:
