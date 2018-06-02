@@ -247,6 +247,7 @@ def plot_regression_results(train_data,
                                          y_label,
                                          x_label,
                                          model_name = '',
+                                         to_save = False,
                                          fig_dims = FIG_SIZE,
                                          font_size = 10):
 
@@ -264,9 +265,11 @@ def plot_regression_results(train_data,
     plt.ylabel(y_label)
     plt.legend((train, test), ("Train", "Test"), loc='upper left')
 
-    plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,
-                                                                '_mse_',
-                                                                mse,
-                                                                '_',
-                                                                time.strftime("%Y-%m-%d_%H-%M-%S"),'.png')))
+    if to_save:
+        plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,
+                                                                    '_mse_',
+                                                                    mse,
+                                                                    '_',
+                                                                    time.strftime("%Y-%m-%d_%H-%M-%S"),'.png')))
+
     plt.show()
