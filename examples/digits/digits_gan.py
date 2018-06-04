@@ -26,7 +26,7 @@ init_type = 'he_uniform'
 gen_epoch = 500
 gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
 
-model_epochs = 7500
+model_epochs = 7000
 model_name   = 'digits_gan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 

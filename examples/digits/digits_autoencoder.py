@@ -5,7 +5,7 @@ from sklearn import datasets
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
-from ztlearn.dl.optimizers import register_opt
+from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import BatchNormalization, Dense
 
 img_rows = 8
@@ -65,6 +65,11 @@ _, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, 
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 model_name = 'digits_autoencoder'
-plot_generated_img_samples(unhot(one_hot(test_label)), predictions)
+plot_generated_img_samples(unhot(one_hot(test_label)),
+                                                       predictions,
+                                                       to_save = False,
+                                                       iteration = model_epochs,
+                                                       model_name = model_name)
+                                                       
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

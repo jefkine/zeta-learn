@@ -65,6 +65,11 @@ _, _, _, test_label = train_test_split(mnist.data, mnist.target.astype('int'), t
 predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 model_name = 'mnist_autoencoder'
-plot_generated_img_samples(unhot(one_hot(test_label)), predictions)
+plot_generated_img_samples(unhot(one_hot(test_label)),
+                                                       predictions,
+                                                       to_save = False,
+                                                       iteration = model_epochs,
+                                                       model_name = model_name)
+                                                       
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
