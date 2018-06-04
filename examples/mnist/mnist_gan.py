@@ -16,28 +16,28 @@ img_rows = 28
 img_cols = 28
 img_dim = 784  # is the product (img_rows * img_cols)
 
-latent_dim = 100
+latent_dim = 200
 batch_size = 128
 half_batch = int(batch_size * 0.5)
 
 verbose = True
 init_type = 'he_uniform'
 
-model_epochs = 7500
+model_epochs = 2500
 model_stats = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.001)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(128, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
-    model.add(BatchNormalization(momentum = 0.8))
-    model.add(Dense(256))
+    model.add(Dense(256, input_shape = (latent_dim,)))
     model.add(Activation('relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(512))
+    model.add(Activation('relu'))
+    model.add(BatchNormalization(momentum = 0.8))
+    model.add(Dense(1024))
     model.add(Activation('relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(img_dim, activation = 'tanh'))
@@ -46,10 +46,10 @@ def stack_generator_layers(init):
 
 def stack_discriminator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(256, input_shape = (img_dim,)))
+    model.add(Dense(512, input_shape = (img_dim,)))
     model.add(Activation('leaky_relu', alpha = 0.2))
     model.add(Dropout(0.25))
-    model.add(Dense(128))
+    model.add(Dense(256))
     model.add(Activation('leaky_relu', alpha = 0.2))
     model.add(Dropout(0.25))
     model.add(Dense(2, activation = 'sigmoid'))
@@ -74,6 +74,9 @@ generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 images = range_normalize(mnist.data.astype(np.float32))
 
 for epoch_idx in range(model_epochs):
+
+    # set the epoch id for print out
+    print_epoch = epoch_idx + 1
 
     # set the discriminator to trainable
     discriminator.trainable = True
@@ -102,7 +105,7 @@ for epoch_idx in range(model_epochs):
         d_acc = 0.5 * np.add(d_acc_real, d_acc_fake)
 
         if verbose:
-            print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(epoch_idx+1, epoch_k+1, d_loss, d_acc))
+            print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, epoch_k+1, d_loss, d_acc))
 
     # end of for epoch_k in range(1):
 
@@ -124,13 +127,11 @@ for epoch_idx in range(model_epochs):
     model_stats['g_train_loss'].append(g_loss)
     model_stats['g_train_acc'].append(g_acc)
 
-    if not verbose:
-        computebar(model_epochs, epoch_idx)
-    else:
-        # print the progress
-        print_epoch = epoch_idx + 1
+    if verbose:
         print('\nEpoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, d_loss, d_acc))
         print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(print_epoch, g_loss, g_acc))
+    else:
+        computebar(model_epochs, epoch_idx)
 
 model_name = 'mnist_gan'
 plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
