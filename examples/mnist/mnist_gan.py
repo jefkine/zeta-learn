@@ -23,8 +23,12 @@ half_batch = int(batch_size * 0.5)
 verbose = True
 init_type = 'he_uniform'
 
-model_epochs = 2500
-model_stats = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
+gen_epoch = 500
+gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
+
+model_epochs = 7500
+model_name   = 'mnist_gan'
+model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
 d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.001)
 g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
@@ -127,16 +131,25 @@ for epoch_idx in range(model_epochs):
     model_stats['g_train_loss'].append(g_loss)
     model_stats['g_train_acc'].append(g_acc)
 
+    if epoch_idx % gen_epoch == 0 and epoch_idx > 0:
+        plot_generated_img_samples(None,
+                                         generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
+                                         to_save = True,
+                                         iteration = epoch_idx,
+                                         model_name = model_name)
+
     if verbose:
         print('\nEpoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, d_loss, d_acc))
         print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(print_epoch, g_loss, g_acc))
     else:
         computebar(model_epochs, epoch_idx)
 
-model_name = 'mnist_gan'
 plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
 plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
 
-noise = np.random.normal(0, 1, (36, latent_dim))
-gen_imgs = generator.predict(noise).reshape((-1, img_rows, img_cols))
-plot_generated_img_samples(None, gen_imgs)
+plot_generated_img_samples(None,
+                                 generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
+                                 to_save = False,
+                                 iteration = model_epochs,
+                                 model_name = model_name)
+

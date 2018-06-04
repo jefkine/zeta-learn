@@ -143,7 +143,6 @@ def plot_opt_viz(dims,
     if to_save:
         plt.suptitle(('{}{}'.format(dims, 'D Surfaces')), fontsize = 14)
         plt.savefig('../plots/'+('{}{}{}{}'.format(overlay, '_', dims, 'd.png')))
-        plt.show()
 
     plt.show()
 
@@ -217,7 +216,14 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
     plt.show()
 
 
-def plot_generated_img_samples(test_label, predictions, fig_dims = (6, 6), dataset = 'digits'):
+def plot_generated_img_samples(test_label,
+                                           predictions,
+                                           fig_dims = (6, 6),
+                                           dataset = 'digits',
+                                           to_save = False,
+                                           iteration = 0,
+                                           model_name = ''):
+
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
@@ -234,7 +240,10 @@ def plot_generated_img_samples(test_label, predictions, fig_dims = (6, 6), datas
                        img_specs[dataset]['pix_col'],
                        str(test_label[i]), color = 'blue')
 
-    plt.show()
+    plt.suptitle(('{}{}'.format('Generator Epoch: ', iteration)), y = 1.05, fontsize = 12).set_color('blue')
+    plt.savefig('../plots/generated/'+('{}{}{}'.format(model_name, '_', iteration, '.png')))
+
+    plt.show(block = False) if to_save else plt.show(block = True)
 
 
 def plot_regression_results(train_data,
