@@ -85,7 +85,7 @@ for epoch_idx in range(model_epochs):
     # set the discriminator to trainable
     discriminator.trainable = True
 
-    for epoch_k in range(10):
+    for epoch_k in range(2):
 
         # draw random samples from real images
         index = np.random.choice(images.shape[0], half_batch, replace = False)
