@@ -70,7 +70,7 @@ def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = (
     cols_reshaped = cols_reshaped.transpose(2, 0, 1)
     np.add.at(x_padded, (slice(None), k, i, j), cols_reshaped)
 
-    pad_size = np.sum(pad_height)/2
+    pad_size = (np.sum(pad_height)/2).astype(int)
     if pad_size == 0:
         return x_padded
     return x_padded[:, :, pad_size:-pad_size, pad_size:-pad_size]
