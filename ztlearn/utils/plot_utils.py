@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 SMALL_FONT = 10
 LARGE_FONT = 14
-FIG_SIZE = (7, 5)
+FIG_SIZE = (8, 6)
 
 img_specs = {
               'mnist' :  {
@@ -42,8 +42,8 @@ def plotter(x,
 
     ax.set_axisbelow(True)
     ax.minorticks_on()
-    ax.grid(which='major', linestyle='-', linewidth='0.5', color='grey')
-    ax.grid(which='minor', linestyle=':', linewidth='0.5', color='red')
+    ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
+    ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
 
     for i in range(len(y)):
         ax.plot(x, y[i], **plot_dict)
@@ -173,7 +173,7 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1)
 
-        digit.grid(color='blue', linestyle='-', linewidth= 0.1)
+        digit.grid(color = 'blue', linestyle = '-', linewidth = 0.1)
         digit.xaxis.set_ticklabels([])
         digit.yaxis.set_ticklabels([])
         digit.minorticks_off()
@@ -272,7 +272,7 @@ def plot_regression_results(train_data,
 
     plt.xlabel(x_label)
     plt.ylabel(y_label)
-    plt.legend((train, test), ("Train", "Test"), loc='upper left')
+    plt.legend((train, test), ("Train", "Test"), loc = 'upper left')
 
     if to_save:
         plt.savefig('../plots/metrics/'+('{}{}{:4.2f}{}{}{}'.format(model_name,
