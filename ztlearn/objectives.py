@@ -181,7 +181,18 @@ class HingeLoss:
         return binary
 
     def accuracy(self, predictions, targets, threshold = 0.5):
-        return 0
+        """
+        Calculates the Hinge-Loss Accuracy Score given prediction and targets
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.float32: the output of Hinge-Loss Accuracy Score
+        """
+
+        return np.mean(np.argmax(predictions, axis=1) == np.argmax(targets, axis = 1))
 
     @property
     def objective_name(self):
@@ -404,7 +415,7 @@ class ObjectiveFunction:
         'hellinger_distance': HellingerDistance,
         'binary_crossentropy': BinaryCrossEntropy,
         'kullback_leibler_divergence': KLDivergence,
-        'categorical_crossentropy': CategoricalCrossEntropy        
+        'categorical_crossentropy': CategoricalCrossEntropy
     }
 
     def __init__(self, name):
