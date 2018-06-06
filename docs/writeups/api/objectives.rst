@@ -10,6 +10,7 @@ Featured Objectives
 -------------------
 
 .. autosummary::
+   HingeLoss
    KLDivergence
    MeanSquaredError
    HellingerDistance

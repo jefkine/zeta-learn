@@ -17,7 +17,7 @@ plot_img_samples(train_data, unhot(train_label))
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
 model = Perceptron(epochs = 300,
                                  activation = 'selu',
-                                 loss = 'categorical_crossentropy',
+                                 loss = 'cce',
                                  init_method = 'he_normal',
                                  optimizer = opt)
 

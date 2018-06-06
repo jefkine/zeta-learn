@@ -95,17 +95,6 @@ class Sequential:
 
         return loss, acc
 
-    def train_on_minibatch(self, train_data, train_label, batch_size = 128, shuffle_data = True):
-        batch_stats = {'batch_loss': [], 'batch_acc': []}
-
-        for train_batch_data, train_batch_label in minibatches(train_data, train_label, batch_size, True):
-            loss, acc = self.train_on_batch(train_batch_data, train_batch_label)
-
-            batch_stats['batch_loss'].append(loss)
-            batch_stats['batch_acc'].append(acc)
-
-        return np.mean(batch_stats['batch_loss']), np.mean(batch_stats['batch_acc'])
-
     def test_on_batch(self, test_batch_data, test_batch_label, train_mode = False):
         predictions = self.foward_pass(test_batch_data, train_mode = train_mode)
 

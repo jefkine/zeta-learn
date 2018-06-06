@@ -23,7 +23,7 @@ model.add(Dense(256, activation = 'relu', input_shape=(64,)))
 model.add(Dropout(0.25))
 model.add(BatchNormalization())
 model.add(Dense(10, activation = 'relu')) # 10 digits classes
-model.compile(loss = 'categorical_crossentropy', optimizer = opt)
+model.compile(loss = 'cce', optimizer = opt)
 
 model_epochs = 12
 fit_stats = model.fit(train_data,

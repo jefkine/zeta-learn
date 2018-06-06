@@ -31,7 +31,7 @@ class MeanSquaredError:
             [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error
     """
 
-    def loss(self, predictions, targets, np_type):
+    def loss(self, predictions, targets, **kwargs):
 
         """
         Applies the MeanSquaredError Loss to prediction and targets provided
@@ -46,7 +46,7 @@ class MeanSquaredError:
 
         return 0.5 * np.mean(np.sum(np.power(predictions - targets, 2), axis = 1))
 
-    def derivative(self, predictions, targets):
+    def derivative(self, predictions, targets, **kwargs):
 
         """
         Applies the MeanSquaredError Derivative to prediction and targets provided
@@ -87,7 +87,7 @@ class HellingerDistance:
     def sqrt_difference(self, predictions, targets):
         return np.sqrt(predictions) - np.sqrt(targets)
 
-    def loss(self, predictions, targets, np_type):
+    def loss(self, predictions, targets, **kwargs):
 
         """
         Applies the HellingerDistance Loss to prediction and targets provided
@@ -103,7 +103,7 @@ class HellingerDistance:
         root_difference = self.sqrt_difference(predictions, targets)
         return np.mean(np.sum(np.power(root_difference, 2), axis = 1) / HellingerDistance.SQRT_2)
 
-    def derivative(self, predictions, targets):
+    def derivative(self, predictions, targets, **kwargs):
 
         """
         Applies the HellingerDistance Derivative to prediction and targets provided
@@ -118,6 +118,67 @@ class HellingerDistance:
 
         root_difference = self.sqrt_difference(predictions, targets)
         return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
+
+    def accuracy(self, predictions, targets, threshold = 0.5):
+        return 0
+
+    @property
+    def objective_name(self):
+        return self.__class__.__name__
+
+
+class HingeLoss:
+
+    """
+    **Hinge Loss**
+
+    Hinge Loss also known as SVM Loss is used "maximum-margin" classification,
+    most notably for support vector machines (SVMs)
+
+    References:
+        [1] Hinge loss
+            [Wikipedia Article] https://en.wikipedia.org/wiki/Hinge_loss
+    """
+
+    def loss(self, predictions, targets, **kwargs):
+
+        """
+        Applies the Hinge-Loss to Loss prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of Hinge-Loss Loss to prediction and targets
+        """
+
+        correct_class = predictions[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)]
+        margins = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+        margins[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)] = 0
+
+        return np.mean(np.sum(margins, axis = 0))
+
+    def derivative(self, predictions, targets, **kwargs):
+
+        """
+        Applies the Hinge-Loss Derivative to prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of Hinge-Loss Derivative to prediction and targets
+        """
+
+        correct_class = predictions[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)]
+        binary = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+        binary[binary > 0] = 1
+        incorrect_class = np.sum(binary, axis = 1)
+        binary[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)] = -incorrect_class
+
+        return binary
 
     def accuracy(self, predictions, targets, threshold = 0.5):
         return 0
@@ -142,7 +203,7 @@ class BinaryCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    def loss(self, predictions, targets, np_type):
+    def loss(self, predictions, targets, **kwargs):
 
         """
         Applies the BinaryCrossEntropy Loss to prediction and targets provided
@@ -159,7 +220,7 @@ class BinaryCrossEntropy(Objective):
         return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
         # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
 
-    def derivative(self, predictions, targets):
+    def derivative(self, predictions, targets, **kwargs):
 
         """
         Applies the BinaryCrossEntropy Derivative to prediction and targets provided
@@ -211,7 +272,7 @@ class CategoricalCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    def loss(self, predictions, targets, np_type):
+    def loss(self, predictions, targets, **kwargs):
 
         """
         Applies the CategoricalCrossEntropy Loss to prediction and targets provided
@@ -227,7 +288,7 @@ class CategoricalCrossEntropy(Objective):
         clipped_predictions, _ = super(CategoricalCrossEntropy, self).clip(predictions)
         return np.mean(-np.sum(targets * np.log(clipped_predictions), axis = 1))
 
-    def derivative(self, predictions, targets):
+    def derivative(self, predictions, targets, **kwargs):
 
         """
         Applies the CategoricalCrossEntropy Derivative to prediction and targets provided
@@ -273,7 +334,7 @@ class KLDivergence(Objective):
 
     """
 
-    def loss(self, predictions, targets, np_type):
+    def loss(self, predictions, targets, **kwargs):
 
         """
         Applies the KLDivergence Loss to prediction and targets provided
@@ -291,7 +352,7 @@ class KLDivergence(Objective):
 
         return np.sum(targets * np.log(targets/predictions), axis = 1)
 
-    def derivative(self, predictions, targets):
+    def derivative(self, predictions, targets, **kwargs):
 
         """
         Applies the KLDivergence Derivative to prediction and targets provided
@@ -333,6 +394,9 @@ class KLDivergence(Objective):
 class ObjectiveFunction:
 
     _functions = {
+
+        'svm': HingeLoss,
+        'hinge': HingeLoss,
         'kld': KLDivergence,
         'mse': MeanSquaredError,
         'bce': BinaryCrossEntropy,
@@ -354,10 +418,10 @@ class ObjectiveFunction:
         return self.objective_func.objective_name
 
     def forward(self, predictions, targets, np_type = np.float32):
-        return self.objective_func.loss(predictions, targets, np_type)
+        return self.objective_func.loss(predictions, targets, np_type = np_type)
 
-    def backward(self, predictions, targets):
-        return self.objective_func.derivative(predictions, targets)
+    def backward(self, predictions, targets, np_type = np.float32):
+        return self.objective_func.derivative(predictions, targets, np_type = np_type)
 
     def accuracy(self, predictions, targets):
         return self.objective_func.accuracy(predictions, targets)
