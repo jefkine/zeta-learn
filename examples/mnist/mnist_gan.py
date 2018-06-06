@@ -14,35 +14,35 @@ plot_img_samples(mnist.data, None, dataset = 'mnist')
 
 img_rows = 28
 img_cols = 28
-img_dim = 784  # is the product (img_rows * img_cols)
+img_dim  = 784  # is the product (img_rows * img_cols)
 
-latent_dim = 200
+latent_dim = 100
 batch_size = 128
 half_batch = int(batch_size * 0.5)
 
-verbose = True
+verbose   = True
 init_type = 'he_uniform'
 
 gen_epoch = 500
 gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
 
-model_epochs = 7500
+model_epochs = 8500
 model_name   = 'mnist_gan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.001)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
 g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(256, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(512))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(1024))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(img_dim, activation = 'tanh'))
 
@@ -152,4 +152,3 @@ plot_generated_img_samples(None,
                                  to_save = False,
                                  iteration = model_epochs,
                                  model_name = model_name)
-

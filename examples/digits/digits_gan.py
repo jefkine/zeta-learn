@@ -20,7 +20,7 @@ latent_dim = 100
 batch_size = 128
 half_batch = int(batch_size * 0.5)
 
-verbose = True
+verbose   = True
 init_type = 'he_uniform'
 
 gen_epoch = 500
