@@ -173,10 +173,12 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1)
 
-        digit.grid(color = 'blue', linestyle = '-', linewidth = 0.1)
+        digit.grid(which = 'major', linestyle = ':', linewidth = 0.5, color = 'blue')
+        digit.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'blue')
+
         digit.xaxis.set_ticklabels([])
         digit.yaxis.set_ticklabels([])
-        digit.minorticks_off()
+        digit.minorticks_on()
 
         digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
                                            img_specs[dataset]['img_width']),
