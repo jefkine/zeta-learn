@@ -181,6 +181,7 @@ class HingeLoss:
         return binary
 
     def accuracy(self, predictions, targets, threshold = 0.5):
+        
         """
         Calculates the Hinge-Loss Accuracy Score given prediction and targets
 
