@@ -394,7 +394,6 @@ class KLDivergence(Objective):
 class ObjectiveFunction:
 
     _functions = {
-
         'svm': HingeLoss,
         'hinge': HingeLoss,
         'kld': KLDivergence,
@@ -405,7 +404,7 @@ class ObjectiveFunction:
         'hellinger_distance': HellingerDistance,
         'binary_crossentropy': BinaryCrossEntropy,
         'kullback_leibler_divergence': KLDivergence,
-        'categorical_crossentropy': CategoricalCrossEntropy
+        'categorical_crossentropy': CategoricalCrossEntropy        
     }
 
     def __init__(self, name):
