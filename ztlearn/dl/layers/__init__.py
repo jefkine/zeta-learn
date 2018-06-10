@@ -20,7 +20,7 @@ from .core import Dropout
 from .core import Flatten
 from .core import Reshape
 from .core import Activation
-from .core import Upsampling2D
+from .core import UpSampling2D
 
 # embedding layer(s)
 from .embedding import Embedding

@@ -1,20 +1,22 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn.datasets import fetch_mldata
+from sklearn import datasets
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
-from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
+from ztlearn.dl.layers import Activation, BatchNormalization, Conv2D
+from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 
 
-mnist = fetch_mldata('MNIST original')
-plot_img_samples(mnist.data, None, dataset = 'mnist')
+data = datasets.load_digits()
+plot_img_samples(data.data, None)
 
-img_rows = 28
-img_cols = 28
-img_dim  = 784  # is the product (img_rows * img_cols)
+img_rows = 8
+img_cols = 8
+img_channels = 1
+img_dims = (img_channels, img_rows, img_cols)
 
 latent_dim = 100
 batch_size = 128
@@ -23,42 +25,48 @@ half_batch = int(batch_size * 0.5)
 verbose   = True
 init_type = 'he_uniform'
 
-gen_epoch = 500
-gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
+gen_epoch = 50
+gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for tiles 6 by 6 i.e (36) image generation
 
-model_epochs = 8000
-model_name   = 'mnist_gan'
+model_epochs = 400
+model_name   = 'digits_dcgan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.001)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
+
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(256, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
+    model.add(Dense(128*2*2, input_shape = (latent_dim,)))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
-    model.add(Dense(512))
-    model.add(Activation('relu'))
+    model.add(Reshape((128, 2, 2)))
+    model.add(UpSampling2D())
+    model.add(Conv2D(64, kernel_size = (3, 3), padding = 'same'))
     model.add(BatchNormalization(momentum = 0.8))
-    model.add(Dense(1024))
-    model.add(Activation('relu'))
-    model.add(BatchNormalization(momentum = 0.8))
-    model.add(Dense(img_dim, activation = 'tanh'))
+    model.add(Activation('leaky_relu'))
+    model.add(UpSampling2D())
+    model.add(Conv2D(img_channels, kernel_size = (3, 3), padding = 'same'))
+    model.add(Activation('tanh'))
 
     return model
+
 
 def stack_discriminator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(512, input_shape = (img_dim,)))
-    model.add(Activation('leaky_relu', alpha = 0.2))
+    model.add(Conv2D(64, kernel_size = (3, 3), padding = 'same', input_shape = img_dims))
+    model.add(Activation('leaky_relu'))
     model.add(Dropout(0.25))
-    model.add(Dense(256))
-    model.add(Activation('leaky_relu', alpha = 0.2))
+    model.add(Conv2D(128, kernel_size = (3, 3), padding = 'same'))
+    model.add(Activation('leaky_relu'))
     model.add(Dropout(0.25))
-    model.add(Dense(2, activation = 'sigmoid'))
+    model.add(Flatten())
+    model.add(Dense(2))
+    model.add(Activation('sigmoid'))
 
     return model
+
 
 # stack and compile the generator
 generator = stack_generator_layers(init = init_type)
@@ -75,7 +83,7 @@ generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
-images = range_normalize(mnist.data.astype(np.float32))
+images = range_normalize(data.data.reshape((-1,) + img_dims).astype(np.float32))
 
 for epoch_idx in range(model_epochs):
 
@@ -89,7 +97,7 @@ for epoch_idx in range(model_epochs):
 
         # draw random samples from real images
         index = np.random.choice(images.shape[0], half_batch, replace = False)
-        # index = np.random.randint(0, images.shape[0], half_batch)
+
         imgs = images[index]
 
         d_noise = np.random.normal(0, 1, (half_batch, latent_dim))
@@ -146,6 +154,7 @@ for epoch_idx in range(model_epochs):
 
 plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
 plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
+
 
 plot_generated_img_samples(None,
                                  generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),

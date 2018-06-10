@@ -62,17 +62,17 @@ def stack_discriminator_layers(init):
 
 # stack and compile the generator
 generator = stack_generator_layers(init = init_type)
-generator.compile(loss = 'cce', optimizer = g_opt)
+generator.compile(loss = 'bce', optimizer = g_opt)
 
 # stack and compile the discriminator
 discriminator = stack_discriminator_layers(init = init_type)
-discriminator.compile(loss = 'cce', optimizer = d_opt)
+discriminator.compile(loss = 'bce', optimizer = d_opt)
 
 # stack and compile the generator_discriminator
 generator_discriminator = Sequential(init_method = init_type)
 generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
-generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
+generator_discriminator.compile(loss = 'bce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
 images = range_normalize(data.data.astype(np.float32))
@@ -89,7 +89,7 @@ for epoch_idx in range(model_epochs):
 
         # draw random samples from real images
         index = np.random.choice(images.shape[0], half_batch, replace = False)
-        # index = np.random.randint(0, images.shape[0], half_batch)
+
         imgs = images[index]
 
         d_noise = np.random.normal(0, 1, (half_batch, latent_dim))

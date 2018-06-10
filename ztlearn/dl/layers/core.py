@@ -188,9 +188,9 @@ class Flatten(Layer):
         return np.reshape(grad, self.prev_shape)
 
 
-class Upsampling2D(Layer):
+class UpSampling2D(Layer):
 
-    def __init__(self, size = (2,2), input_shape = None):
+    def __init__(self, size = (2, 2), input_shape = None):
         self.size = size
         self.input_shape = input_shape
         self.prev_shape = None
@@ -212,7 +212,7 @@ class Upsampling2D(Layer):
 
     def prep_layer(self): pass
 
-    def pass_forward(self, inputs):
+    def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
         upsampled = np.repeat(inputs, self.size[0], axis = 2)
         return np.repeat(upsampled, self.size[1], axis = 3)
@@ -246,7 +246,7 @@ class Reshape(Layer):
 
     def prep_layer(self): pass
 
-    def pass_forward(self, inputs):
+    def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
         return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
 

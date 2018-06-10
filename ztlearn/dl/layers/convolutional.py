@@ -153,13 +153,12 @@ class Conv2D(Conv):
 
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.input_shape
+        doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
 
         if self.is_trainable:
 
             dbias = np.sum(grad, axis = (0, 2, 3))
             dbias = dbias.reshape(self.filter_num, -1)
-
-            doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
 
             dweights = doutput_reshaped @ self.input_col.T
             dweights = dweights.reshape(self.weights.shape)
