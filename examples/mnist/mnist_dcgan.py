@@ -11,7 +11,8 @@ from ztlearn.dl.layers import Activation, Flatten, Conv2D, Reshape, UpSampling2D
 
 
 mnist = fetch_mldata('MNIST original')
-plot_img_samples(mnist.data, None, dataset = 'mnist')
+mnist_data, _, _, _ = train_test_split(mnist.data, mnist.target, test_size = 0.0)
+plot_img_samples(train_data[:40], None, dataset = 'mnist')
 
 img_rows = 28
 img_cols = 28
@@ -39,13 +40,13 @@ g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.000
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(128*7*7, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Reshape((128, 7, 7)))
     model.add(UpSampling2D())
     model.add(Conv2D(64, kernel_size = (5, 5), padding = 'same'))
     model.add(BatchNormalization(momentum = 0.8))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(UpSampling2D())
     model.add(Conv2D(img_channels, kernel_size = (5, 5), padding = 'same'))
     model.add(Activation('tanh'))
@@ -83,7 +84,7 @@ generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
-images = range_normalize(mnist.data.reshape((-1,) + img_dims).astype(np.float32))
+images = range_normalize(mnist_data.reshape((-1,) + img_dims).astype(np.float32))
 
 for epoch_idx in range(model_epochs):
 

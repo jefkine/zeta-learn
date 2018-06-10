@@ -10,7 +10,8 @@ from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 
 mnist = fetch_mldata('MNIST original')
-plot_img_samples(mnist.data, None, dataset = 'mnist')
+mnist_data, _, _, _ = train_test_split(mnist.data, mnist.target, test_size = 0.0)
+plot_img_samples(train_data[:40], None, dataset = 'mnist')
 
 img_rows = 28
 img_cols = 28
@@ -75,7 +76,7 @@ generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
-images = range_normalize(mnist.data.astype(np.float32))
+images = range_normalize(mnist_data.astype(np.float32))
 
 for epoch_idx in range(model_epochs):
 

@@ -50,7 +50,7 @@ train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size = 0.2,
                                                                   random_seed = 15)
-plot_img_samples(train_data, None, dataset = 'mnist')
+plot_img_samples(train_data[:40], None, dataset = 'mnist')
 
 model_epochs = 500
 fit_stats = autoencoder.fit(train_data,
@@ -70,6 +70,6 @@ plot_generated_img_samples(unhot(one_hot(test_label)),
                                                        to_save = False,
                                                        iteration = model_epochs,
                                                        model_name = model_name)
-                                                       
+
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
