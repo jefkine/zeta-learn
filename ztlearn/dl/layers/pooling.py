@@ -12,8 +12,8 @@ class Pool(Layer):
 
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         self.pool_size = pool_size
-        self.strides = strides
-        self.padding = padding
+        self.strides   = strides
+        self.padding   = padding
 
         self.is_trainable = True
 
@@ -50,7 +50,7 @@ class Pool(Layer):
             out_width  = np.ceil(np.float32(input_width - self.pool_size[1] + 1) / np.float32(self.strides[1]))
 
         assert out_height % 1 == 0
-        assert out_width % 1 == 0
+        assert out_width % 1  == 0
 
         return input_channels, int(out_height), int(out_width)
 
@@ -61,17 +61,17 @@ class Pool(Layer):
         self.inputs = inputs
 
         assert (input_height - self.pool_size[0]) % self.strides[0] == 0, 'Invalid height'
-        assert (input_width - self.pool_size[1]) % self.strides[1] == 0, 'Invalid width'
+        assert (input_width - self.pool_size[1]) % self.strides[1]  == 0, 'Invalid width'
 
         output_height = (input_height - self.pool_size[0]) / self.strides[0] + 1
-        output_width = (input_width - self.pool_size[1]) / self.strides[1] + 1
+        output_width  = (input_width - self.pool_size[1]) / self.strides[1] + 1
 
         input_reshaped = inputs.reshape(input_num * input_depth, 1, input_height, input_width)
         self.input_col = im2col_indices(input_reshaped,
                                                         self.pool_size[0],
                                                         self.pool_size[1],
                                                         padding = (self.pad_height, self.pad_width),
-                                                        stride = self.strides[0])
+                                                        stride  = self.strides[0])
 
         output, self.pool_cache = self.pool_forward(self.input_col)
 
@@ -90,7 +90,7 @@ class Pool(Layer):
                                               self.pool_size[0],
                                               self.pool_size[1],
                                               padding = (self.pad_height, self.pad_width),
-                                              stride = self.strides[0])
+                                              stride  = self.strides[0])
 
         return d_input.reshape(self.inputs.shape)
 
@@ -102,7 +102,7 @@ class MaxPooling2D(Pool):
 
     def pool_forward(self, input_col):
         max_id = np.argmax(input_col, axis = 0)
-        out = input_col[max_id, range(max_id.size)]
+        out    = input_col[max_id, range(max_id.size)]
         return out, max_id
 
     def pool_backward(self, d_input_col, grad_col, pool_cache):

@@ -14,7 +14,7 @@ def accuracy_score(predictions, targets):
     return np.mean(predictions == targets)
 
 def one_hot(labels, num_classes = None):
-    num_classes = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
+    num_classes    = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
     one_hot_labels = np.zeros([labels.size, num_classes])
     one_hot_labels[np.arange(labels.size), labels.astype('int')] = 1.
     return one_hot_labels
@@ -62,7 +62,7 @@ def min_max(input_data, axis = None):
 
 def z_score(input_data, axis = None):
     input_mean = input_data.mean(axis = axis, keepdims = True)
-    input_std = input_data.std(axis = axis, keepdims = True)
+    input_std  = input_data.std(axis = axis, keepdims = True)
     return (input_data - input_mean) / input_std
 
 def print_results(predictions, test_labels, num_samples = 20):

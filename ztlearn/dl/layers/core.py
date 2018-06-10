@@ -10,7 +10,7 @@ from ztlearn.activations import ActivationFunction as activation
 class Activation(Layer):
 
     def __init__(self, function_name, input_shape = None, **kwargs):
-        self.input_shape = input_shape
+        self.input_shape     = input_shape
         self.activation_name = function_name
 
         allowed_kwargs = {'alpha'}
@@ -47,13 +47,13 @@ class Activation(Layer):
 class Dense(Layer):
 
     def __init__(self, units, activation = None, input_shape = None):
-        self.units = units
-        self.activation = activation
+        self.units       = units
+        self.activation  = activation
         self.input_shape = input_shape
 
-        self.bias = None
-        self.weights = None
-        self.init_method = None
+        self.bias             = None
+        self.weights          = None
+        self.init_method      = None
         self.optimizer_kwargs = None
 
         self.is_trainable = True
@@ -96,8 +96,8 @@ class Dense(Layer):
 
     def prep_layer(self):
         self.kernel_shape = (self.input_shape[0], self.units)
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
-        self.bias = np.zeros((1, self.units))
+        self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.bias         = np.zeros((1, self.units))
 
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
@@ -109,10 +109,10 @@ class Dense(Layer):
         if self.is_trainable:
 
             dweights = self.inputs.T @ grad
-            dbias = np.sum(grad, axis = 0, keepdims = True)
+            dbias    = np.sum(grad, axis = 0, keepdims = True)
 
             self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
 
         # endif self.is_trainable
 
@@ -162,7 +162,7 @@ class Flatten(Layer):
 
     def __init__(self, input_shape = None):
         self.input_shape = input_shape
-        self.prev_shape = None
+        self.prev_shape  = None
 
         self.is_trainable = True
 
@@ -191,9 +191,9 @@ class Flatten(Layer):
 class UpSampling2D(Layer):
 
     def __init__(self, size = (2, 2), input_shape = None):
-        self.size = size
+        self.size        = size
         self.input_shape = input_shape
-        self.prev_shape = None
+        self.prev_shape  = None
 
         self.is_trainable = True
 
@@ -214,7 +214,7 @@ class UpSampling2D(Layer):
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
-        upsampled = np.repeat(inputs, self.size[0], axis = 2)
+        upsampled       = np.repeat(inputs, self.size[0], axis = 2)
         return np.repeat(upsampled, self.size[1], axis = 3)
 
     def pass_backward(self, grad):
@@ -227,8 +227,8 @@ class Reshape(Layer):
 
     def __init__(self, target_shape, input_shape = None):
         self.target_shape = target_shape
-        self.input_shape = input_shape
-        self.prev_shape = None
+        self.input_shape  = input_shape
+        self.prev_shape   = None
 
         self.is_trainable = True
 

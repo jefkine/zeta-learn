@@ -23,19 +23,19 @@ img_specs = {
             }
 
 def plotter(x,
-                y = [],
-                plot_dict = {},
-                fig_dims = (7, 5),
-                title = 'Model',
-                title_dict = {},
-                ylabel = 'y',
+                y           = [],
+                plot_dict   = {},
+                fig_dims    = (7, 5),
+                title       = 'Model',
+                title_dict  = {},
+                ylabel      = 'y',
                 ylabel_dict = {},
-                xlabel = 'x',
+                xlabel      = 'x',
                 xlabel_dict = {},
-                legend = ['train', 'valid'],
+                legend      = ['train', 'valid'],
                 legend_dict = {},
-                file_path = '',
-                to_save = False):
+                file_path   = '',
+                to_save     = False):
 
     fig, ax = plt.subplots()
     fig.set_size_inches(fig_dims)
@@ -62,14 +62,14 @@ def plot_metric(metric,
                          epoch,
                          train,
                          valid,
-                         model_name = '',
-                         to_save = False,
-                         plot_dict = {'linewidth' : 0.8},
-                         fig_dims = FIG_SIZE,
-                         title_dict = {'size' : SMALL_FONT},
+                         model_name  = '',
+                         to_save     = False,
+                         plot_dict   = {'linewidth' : 0.8},
+                         fig_dims    = FIG_SIZE,
+                         title_dict  = {'size' : SMALL_FONT},
                          ylabel_dict = {'size' : SMALL_FONT},
                          xlabel_dict = {'size' : SMALL_FONT},
-                         legend = ['train', 'valid'],
+                         legend      = ['train', 'valid'],
                          legend_dict = {'loc' : 'upper right'}):
 
     file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,
@@ -80,18 +80,18 @@ def plot_metric(metric,
 
     plt = plotter(range(epoch),
                                  [train, valid],
-                                 plot_dict = plot_dict,
-                                 fig_dims = fig_dims,
-                                 title = 'Model {}'.format(metric.title()),
-                                 title_dict = title_dict,
-                                 ylabel = metric.title(),
+                                 plot_dict   = plot_dict,
+                                 fig_dims    = fig_dims,
+                                 title       = 'Model {}'.format(metric.title()),
+                                 title_dict  = title_dict,
+                                 ylabel      = metric.title(),
                                  ylabel_dict = ylabel_dict,
-                                 xlabel = 'Iterations',
+                                 xlabel      = 'Iterations',
                                  xlabel_dict = xlabel_dict,
-                                 legend = legend,
+                                 legend      = legend,
                                  legend_dict = legend_dict,
-                                 file_path = file_path,
-                                 to_save = to_save)
+                                 file_path   = file_path,
+                                 to_save     = to_save)
 
     plt.show()
 
@@ -101,18 +101,18 @@ def plot_opt_viz(dims,
                         y,
                         z,
                         f_solution,
-                        overlay = 'plot',
-                        to_save = False,
-                        title = 'Optimization',
-                        title_dict = {'size' : LARGE_FONT},
-                        fig_dims = FIG_SIZE,
+                        overlay     = 'plot',
+                        to_save     = False,
+                        title       = 'Optimization',
+                        title_dict  = {'size' : LARGE_FONT},
+                        fig_dims    = FIG_SIZE,
                         xticks_dict = {'size' : LARGE_FONT},
                         yticks_dict = {'size' : LARGE_FONT},
-                        xlabel = r'$\theta^1$',
+                        xlabel      = r'$\theta^1$',
                         xlabel_dict = {'size' : LARGE_FONT},
-                        ylabel = r'$\theta^2$',
+                        ylabel      = r'$\theta^2$',
                         ylabel_dict = {'size' : LARGE_FONT},
-                        legend = ['train', 'valid'],
+                        legend      = ['train', 'valid'],
                         legend_dict = {}):
 
     if dims == 3:
@@ -220,10 +220,10 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
 
 def plot_generated_img_samples(test_label,
                                            predictions,
-                                           fig_dims = (6, 6),
-                                           dataset = 'digits',
-                                           to_save = False,
-                                           iteration = 0,
+                                           fig_dims   = (6, 6),
+                                           dataset    = 'digits',
+                                           to_save    = False,
+                                           iteration  = 0,
                                            model_name = ''):
 
     fig = plt.figure(figsize = fig_dims)
@@ -258,9 +258,9 @@ def plot_regression_results(train_data,
                                          y_label,
                                          x_label,
                                          model_name = '',
-                                         to_save = False,
-                                         fig_dims = FIG_SIZE,
-                                         font_size = 10):
+                                         to_save    = False,
+                                         fig_dims   = FIG_SIZE,
+                                         font_size  = 10):
 
     plt.figure(figsize = fig_dims)
     cmap = plt.get_cmap('summer')

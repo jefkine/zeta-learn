@@ -10,12 +10,12 @@ from ztlearn.optimizers import OptimizationFunction as optimizer
 class Embedding(Layer):
 
     def __init__(self, input_dim, output_dim, activation = 'relu', input_shape = (1,10)):
-        self.input_dim = input_dim
-        self.output_dim = output_dim
-        self.activation = activation
+        self.input_dim   = input_dim
+        self.output_dim  = output_dim
+        self.activation  = activation
         self.input_shape = input_shape
 
-        self.init_method = None
+        self.init_method      = None
         self.optimizer_kwargs = None
 
         self.is_trainable = True
@@ -71,6 +71,6 @@ class Embedding(Layer):
         return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis=2), axis = 1)
 
     def pass_backward(self, grad):
-        d_inputs = np.matmul(grad, self.one_hot_inputs)
+        d_inputs     = np.matmul(grad, self.one_hot_inputs)
         d_embeddings = np.sum(d_inputs, axis = 0)
         self.weights = optimizer(self.weight_optimizer).update(self.weights, d_embeddings.T)

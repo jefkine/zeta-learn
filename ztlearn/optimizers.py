@@ -12,9 +12,9 @@ class Optimizer(object):
 
     @property
     def get_learning_rate(self):
-        self.decay = self.decay if hasattr(self, 'decay') else 1e-6
-        self.min_lrate = self.min_lrate if hasattr(self, 'min_lrate') else 0
-        self.max_lrate = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
+        self.decay      = self.decay if hasattr(self, 'decay') else 1e-6
+        self.min_lrate  = self.min_lrate if hasattr(self, 'min_lrate') else 0
+        self.max_lrate  = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
         self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse_time_decay'
 
         self.epoch += 1
@@ -88,7 +88,7 @@ class SGD(Optimizer):
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         self.weights -= super(SGD, self).get_learning_rate * self.grads
         # self.weights -= np.multiply(super(SGD, self).get_learning_rate, self.grads, dtype=np.float128)
@@ -135,7 +135,7 @@ class SGDMomentum(Optimizer):
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
@@ -176,15 +176,15 @@ class Adam(Optimizer):
     def __init__(self, **kwargs):
         super(Adam, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
-        self.beta1 = kwargs['beta1'] if 'beta1' in kwargs else 0.9
-        self.beta2 = kwargs['beta2'] if 'beta2' in kwargs else 0.999
-        self.m = None
-        self.v = None
-        self.t = 0
+        self.beta1   = kwargs['beta1'] if 'beta1' in kwargs else 0.9
+        self.beta2   = kwargs['beta2'] if 'beta2' in kwargs else 0.999
+        self.m       = None
+        self.v       = None
+        self.t       = 0
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
@@ -195,10 +195,10 @@ class Adam(Optimizer):
         self.t += 1
 
         self.m = self.beta1 * self.m + (1 - self.beta1) * self.grads
-        m_hat = self.m / (1 - np.power(self.beta1, self.t))
+        m_hat  = self.m / (1 - np.power(self.beta1, self.t))
 
         self.v = self.beta2 * self.v + (1 - self.beta2) * np.power(self.grads, 2)
-        v_hat = self.v / (1 - np.power(self.beta2, self.t))
+        v_hat  = self.v / (1 - np.power(self.beta2, self.t))
 
         self.weights -= (super(Adam, self).get_learning_rate * m_hat / (np.sqrt(v_hat) + self.epsilon))
 
@@ -237,15 +237,15 @@ class Adamax(Optimizer):
     def __init__(self, **kwargs):
         super(Adamax, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
-        self.beta1 = kwargs['beta1'] if 'beta1' in kwargs else 0.9
-        self.beta2 = kwargs['beta2'] if 'beta2' in kwargs else 0.999
-        self.m = None
-        self.u = None
-        self.t = 0
+        self.beta1   = kwargs['beta1'] if 'beta1' in kwargs else 0.9
+        self.beta2   = kwargs['beta2'] if 'beta2' in kwargs else 0.999
+        self.m       = None
+        self.u       = None
+        self.t       = 0
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
@@ -292,16 +292,16 @@ class AdaGrad(Optimizer):
     def __init__(self, **kwargs):
         super(AdaGrad, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
-        self.cache = None
+        self.cache   = None
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.cache is None:
             self.cache = np.zeros_like(self.grads)
 
-        self.cache += np.power(self.grads, 2)
+        self.cache   += np.power(self.grads, 2)
         self.weights -= (super(AdaGrad, self).get_learning_rate * self.grads / (np.sqrt(self.cache) + self.epsilon))
 
         return self.weights
@@ -337,13 +337,13 @@ class Adadelta(Optimizer):
     def __init__(self, **kwargs):
         super(Adadelta, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
-        self.rho = kwargs['rho'] if 'rho' in kwargs else 0.9
-        self.cache = None
-        self.delta = None
+        self.rho     = kwargs['rho'] if 'rho' in kwargs else 0.9
+        self.cache   = None
+        self.delta   = None
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
@@ -353,12 +353,12 @@ class Adadelta(Optimizer):
 
         self.cache = self.rho * self.cache + (1 - self.rho) * np.power(self.grads, 2)
 
-        RMSE_grad = np.sqrt(self.cache + self.epsilon)
+        RMSE_grad  = np.sqrt(self.cache + self.epsilon)
         RMSE_delta = np.sqrt(self.delta + self.epsilon)
 
         update = self.grads * (RMSE_delta / RMSE_grad)
         self.weights -= super(Adadelta, self).get_learning_rate * update
-        self.delta = self.rho * self.delta + (1 - self.rho) * np.power(update, 2)
+        self.delta    = self.rho * self.delta + (1 - self.rho) * np.power(update, 2)
 
         return self.weights
 
@@ -391,19 +391,19 @@ class RMSprop(Optimizer):
 
     def __init__(self, **kwargs):
         super(RMSprop, self).__init__(**kwargs)
-        self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
-        self.rho = kwargs['rho'] if 'rho' in kwargs else 0.9
+        self.epsilon       = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
+        self.rho           = kwargs['rho'] if 'rho' in kwargs else 0.9
         self.learning_rate = 0.001 # preset and not decayed
-        self.cache = None
+        self.cache         = None
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
 
-        self.cache = self.rho * self.cache + (1 - self.rho) * np.power(self.grads, 2)
+        self.cache    = self.rho * self.cache + (1 - self.rho) * np.power(self.grads, 2)
         self.weights -= self.learning_rate * self.grads / (np.sqrt(self.cache) + self.epsilon)
 
         return self.weights
@@ -440,13 +440,13 @@ class NesterovAcceleratedGradient(Optimizer):
 
     def __init__(self, **kwargs):
         super(NesterovAcceleratedGradient, self).__init__(**kwargs)
-        self.momentum = kwargs['momentum'] if 'momemtum' in kwargs else 0.9
+        self.momentum      = kwargs['momentum'] if 'momemtum' in kwargs else 0.9
         self.velocity_prev = None
-        self.velocity = None
+        self.velocity      = None
 
     def update(self, weights, grads):
         self.weights = weights
-        self.grads = grads
+        self.grads   = grads
 
         if self.velocity_prev is None:
             self.velocity_prev = np.zeros_like(self.weights)
@@ -459,8 +459,8 @@ class NesterovAcceleratedGradient(Optimizer):
         # self.velocity_prev = self.velocity
 
         self.velocity_prev = self.velocity
-        self.velocity = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
-        self.weights += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
+        self.velocity      = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
+        self.weights      += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
 
         return self.weights
 

@@ -7,22 +7,22 @@ from ztlearn.optimizers import OptimizationFunction as optimize
 class GbOptimization(object):
 
     def __init__(self, optimizer, init_method = 'ones'):
-        self.optimizer = optimizer
+        self.optimizer   = optimizer
         self.init_method = init_method
 
     def run(self, f, df, params = 1, epochs = 10, tol = 1e-4, scale_factor = 5, verbose = False):
         self.inputs = init(self.init_method).initialize_weights((params, 1)) * scale_factor
-        self.f0 = f(self.inputs) # initial function value (fsolve)
+        self.f0     = f(self.inputs) # initial function value (fsolve)
         self.epochs = epochs
 
-        self.fsolve = np.zeros((self.epochs, 1))
+        self.fsolve  = np.zeros((self.epochs, 1))
         self.weights = np.zeros((self.epochs, 1, params))
 
         for i in np.arange(self.epochs):
-            self.inputs = optimize(self.optimizer).update(self.inputs, df(self.inputs))
+            self.inputs         = optimize(self.optimizer).update(self.inputs, df(self.inputs))
             self.weights[i,:,:] = self.inputs.T
 
-            f_solution = f(self.inputs)
+            f_solution       = f(self.inputs)
             self.fsolve[i,:] = f_solution
 
             if verbose:

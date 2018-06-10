@@ -97,7 +97,7 @@ class ElasticNetRegularization:
     """
 
     def __init__(self, _lambda, l1_ratio):
-        self._lambda = _lambda
+        self._lambda  = _lambda
         self.l1_ratio = l1_ratio
 
     def regulate(self, weights):

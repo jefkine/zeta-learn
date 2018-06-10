@@ -7,9 +7,9 @@ import numpy as np
 #-----------------------------------------------------------------------------#
 
 def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
-    chars = sorted(list(set(text)))
+    chars     = sorted(list(set(text)))
     len_chars = len(chars)
-    len_text = len(text)
+    len_text  = len(text)
 
     char_to_indices = {c: i for i, c in enumerate(chars)}
     # indices_to_char = {i: c for i, c in enumerate(chars)}
@@ -19,7 +19,7 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
         sentences.append(text[i: i + maxlen])
         next_chars.append(text[i + maxlen])
 
-    len_sentences  = len(sentences)
+    len_sentences = len(sentences)
 
     x = np.zeros((len_sentences, maxlen, len_chars), dtype = tensor_dtype)
     y = np.zeros((len_sentences, len_chars), dtype = tensor_dtype)
@@ -32,9 +32,9 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
     return x, y, len_chars
 
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
-    chars = sorted(list(set(text)))
+    chars     = sorted(list(set(text)))
     len_chars = len(chars)
-    len_text = len(text)
+    len_text  = len(text)
 
     char_to_indices = {c: i for i, c in enumerate(chars)}
     # indices_to_char = {i: c for i, c in enumerate(chars)}
@@ -44,7 +44,7 @@ def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
         sentences.append(text[i : i + maxlen])
         next_chars.append(text[i+1 : i+1 + maxlen])
 
-    len_sentences  = len(sentences)
+    len_sentences = len(sentences)
 
     x = np.zeros((len_sentences, maxlen, len_chars), dtype = tensor_dtype)
     y = np.zeros((len_sentences, maxlen, len_chars), dtype = tensor_dtype)

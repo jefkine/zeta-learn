@@ -13,21 +13,21 @@ from ztlearn.optimizers import OptimizationFunction as optimizer
 class Conv(Layer):
 
     def __init__(self,
-                       filters = 32,
+                       filters     = 32,
                        kernel_size = (3, 3),
-                       activation = None,
+                       activation  = None,
                        input_shape = (1, 8, 8),
-                       strides = (1, 1),
-                       padding = 'valid'):
+                       strides     = (1, 1),
+                       padding     = 'valid'):
 
-        self.filters = filters
-        self.strides = strides
-        self.padding = padding
-        self.activation = activation
+        self.filters     = filters
+        self.strides     = strides
+        self.padding     = padding
+        self.activation  = activation
         self.kernel_size = kernel_size
         self.input_shape = input_shape
 
-        self.init_method = None
+        self.init_method      = None
         self.optimizer_kwargs = None
 
         self.is_trainable = True
@@ -90,27 +90,28 @@ class Conv(Layer):
 
     def prep_layer(self):
         self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
-        self.bias = np.zeros((self.kernel_shape[0], 1))
+        self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.bias         = np.zeros((self.kernel_shape[0], 1))
 
 
 class Conv2D(Conv):
 
     def __init__(self,
-                       filters = 32,
+                       filters     = 32,
                        kernel_size = (3, 3),
-                       activation = None,
+                       activation  = None,
                        input_shape = (1, 8, 8),
-                       strides = (1, 1),
-                       padding = 'valid'):
+                       strides     = (1, 1),
+                       padding     = 'valid'):
 
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.filter_num, _, _, _ = self.weights.shape
+        self.filter_num, _, _, _  = self.weights.shape
+        self.input_shape          = inputs.shape
+        self.inputs               = inputs
+
         input_num, input_depth, input_height, input_width = inputs.shape
-        self.input_shape = inputs.shape
-        self.inputs = inputs
 
         pad_height, pad_width = get_pad(self.padding,
                                                       input_height,
@@ -122,7 +123,7 @@ class Conv2D(Conv):
 
         # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = ((input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
@@ -165,12 +166,12 @@ class Conv2D(Conv):
 
             # optimize the weights and bias
             self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
 
         # endif self.is_trainable
 
         weight_reshape = self.weights.reshape(self.filter_num, -1)
-        dinput_col = weight_reshape.T @ doutput_reshaped
+        dinput_col     = weight_reshape.T @ doutput_reshaped
 
         pad_height, pad_width = get_pad(self.padding,
                                                       input_height,
@@ -193,20 +194,21 @@ class Conv2D(Conv):
 class ConvLoop2D(Conv):
 
     def __init__(self,
-                       filters = 32,
+                       filters     = 32,
                        kernel_size = (3, 3),
-                       activation = None,
+                       activation  = None,
                        input_shape = (1, 8, 8),
-                       strides = (1, 1),
-                       padding = 'valid'):
+                       strides     = (1, 1),
+                       padding     = 'valid'):
 
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _ = self.weights.shape
+        self.input_shape         = inputs.shape
+        self.inputs              = inputs
+
         input_num, input_depth, input_height, input_width = inputs.shape
-        self.input_shape = inputs.shape
-        self.inputs = inputs
 
         pad_height, pad_width = get_pad(self.padding,
                                                       input_height,
@@ -220,7 +222,7 @@ class ConvLoop2D(Conv):
 
         # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
@@ -311,20 +313,21 @@ class ConvLoop2D(Conv):
 class ConvToeplitzMat(Conv):
 
     def __init__(self,
-                       filters = 32,
+                       filters     = 32,
                        kernel_size = (3, 3),
-                       activation = None,
+                       activation  = None,
                        input_shape = (1, 8, 8),
-                       strides = (1, 1),
-                       padding = 'valid'):
+                       strides     = (1, 1),
+                       padding     = 'valid'):
 
         super(ConvToeplitzMat, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _ = self.weights.shape
+        self.input_shape         = inputs.shape
+        self.inputs              = inputs
+
         input_num, input_depth, input_height, input_width = inputs.shape
-        self.input_shape = inputs.shape
-        self.inputs = inputs
 
         pad_height, pad_width = get_pad(self.padding,
                                                       input_height,
@@ -338,7 +341,7 @@ class ConvToeplitzMat(Conv):
 
         # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1

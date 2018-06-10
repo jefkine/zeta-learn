@@ -8,23 +8,23 @@ from sklearn.preprocessing import PolynomialFeatures
 class PolynomialRegression(Regression):
 
     def __init__(self,
-                       degree = 2,
-                       epochs = 100,
-                       loss = 'mean_squared_error',
-                       init_method = 'random_normal',
-                       optimizer = {},
-                       penalty = 'ridge',
+                       degree         = 2,
+                       epochs         = 100,
+                       loss           = 'mean_squared_error',
+                       init_method    = 'random_normal',
+                       optimizer      = {},
+                       penalty        = 'ridge',
                        penalty_weight = 0.5,
-                       l1_ratio = 0.5):
+                       l1_ratio       = 0.5):
                        
         self.degree = degree
-        super(PolynomialRegression, self).__init__(epochs = epochs,
-                                                   loss = loss,
-                                                   init_method = init_method,
-                                                   optimizer = optimizer,
-                                                   penalty = penalty,
+        super(PolynomialRegression, self).__init__(epochs         = epochs,
+                                                   loss           = loss,
+                                                   init_method    = init_method,
+                                                   optimizer      = optimizer,
+                                                   penalty        = penalty,
                                                    penalty_weight = penalty_weight,
-                                                   l1_ratio = l1_ratio)
+                                                   l1_ratio       = l1_ratio)
 
     def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)

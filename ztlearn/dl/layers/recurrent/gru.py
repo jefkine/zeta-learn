@@ -11,22 +11,22 @@ from ztlearn.optimizers import OptimizationFunction as optimizer
 class GRU(Layer):
 
     def __init__(self, h_units, activation = None, input_shape = None, gate_activation = 'sigmoid'):
-        self.h_units = h_units # number of hidden states
-        self.activation = activation # should be tanh by default
-        self.input_shape = input_shape
+        self.h_units         = h_units # number of hidden states
+        self.activation      = activation # should be tanh by default
+        self.input_shape     = input_shape
         self.gate_activation = gate_activation
 
-        self.init_method = None # just added
+        self.init_method      = None # just added
         self.optimizer_kwargs = None # just added
 
         # gate weights
         self.W_update = None
-        self.W_reset = None
+        self.W_reset  = None
         self.W_states = None
 
         # gate bias
         self.b_update = None
-        self.b_reset = None
+        self.b_reset  = None
         self.b_states = None
 
         # final output to nodes weights
@@ -79,14 +79,14 @@ class GRU(Layer):
 
         # gate weights
         self.W_update = init(self.init_method).initialize_weights((z_dim, self.h_units))
-        self.W_reset = init(self.init_method).initialize_weights((z_dim, self.h_units))
-        self.W_cell = init(self.init_method).initialize_weights((z_dim, self.h_units))
+        self.W_reset  = init(self.init_method).initialize_weights((z_dim, self.h_units))
+        self.W_cell   = init(self.init_method).initialize_weights((z_dim, self.h_units))
         self.W_states = init(self.init_method).initialize_weights((z_dim, self.h_units))
 
         # gate hidden bias
         self.b_update = np.zeros((self.h_units,))
-        self.b_reset = np.zeros((self.h_units,))
-        self.b_cell = np.zeros((self.h_units,))
+        self.b_reset  = np.zeros((self.h_units,))
+        self.b_cell   = np.zeros((self.h_units,))
         self.b_states = np.zeros((self.h_units,))
 
         # final output to nodes weights (input_dim is the vocab size and also the ouput size)
@@ -100,20 +100,20 @@ class GRU(Layer):
         batch_size, time_steps, input_dim = inputs.shape
 
         self.update = np.zeros((batch_size, time_steps, self.h_units))
-        self.reset = np.zeros((batch_size, time_steps, self.h_units))
-        self.cell = np.zeros((batch_size, time_steps, self.h_units))
+        self.reset  = np.zeros((batch_size, time_steps, self.h_units))
+        self.cell   = np.zeros((batch_size, time_steps, self.h_units))
         self.states = np.zeros((batch_size, time_steps, self.h_units))
-        self.final = np.zeros((batch_size, time_steps, input_dim))
+        self.final  = np.zeros((batch_size, time_steps, input_dim))
 
-        self.z = np.concatenate((self.inputs, self.states), axis = 2)
+        self.z       = np.concatenate((self.inputs, self.states), axis = 2)
         self.z_tilde = np.zeros_like(self.z)
 
         for t in range(time_steps):
-            self.update[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_update) + self.b_update)
-            self.reset[:, t] = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_reset) + self.b_reset)
+            self.update[:, t]  = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_update) + self.b_update)
+            self.reset[:, t]   = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_reset) + self.b_reset)
             self.z_tilde[:, t] = np.concatenate((self.reset[:, t] * self.states[:, t-1], self.inputs[:, t]), axis = 1)
-            self.cell[:, t] = activate(self.activation).forward(np.dot(self.z_tilde[:, t-1], self.W_cell) + self.b_cell)
-            self.states[:, t] = (1. - self.update[:, t]) * self.states[:, t-1]  + self.update[:, t] * self.cell[:, t]
+            self.cell[:, t]    = activate(self.activation).forward(np.dot(self.z_tilde[:, t-1], self.W_cell) + self.b_cell)
+            self.states[:, t]  = (1. - self.update[:, t]) * self.states[:, t-1]  + self.update[:, t] * self.cell[:, t]
 
             # logits
             self.final[:, t] = np.dot(self.states[:, t], self.W_final) + self.b_final
@@ -130,64 +130,64 @@ class GRU(Layer):
         if self.is_trainable:
 
             dW_update = np.zeros_like(self.W_update)
-            dW_reset = np.zeros_like(self.W_reset)
-            dW_cell = np.zeros_like(self.W_cell)
-            dW_final = np.zeros_like(self.W_final)
+            dW_reset  = np.zeros_like(self.W_reset)
+            dW_cell   = np.zeros_like(self.W_cell)
+            dW_final  = np.zeros_like(self.W_final)
 
             db_update = np.zeros_like(self.b_update)
-            db_reset = np.zeros_like(self.b_reset)
-            db_cell = np.zeros_like(self.b_cell)
-            db_final = np.zeros_like(self.b_final)
+            db_reset  = np.zeros_like(self.b_reset)
+            db_cell   = np.zeros_like(self.b_cell)
+            db_final  = np.zeros_like(self.b_final)
 
-            dstates = np.zeros_like(self.states)
-            dstate_a = np.zeros_like(self.states)
-            dstate_b = np.zeros_like(self.states)
-            dstate_c = np.zeros_like(self.states)
-            dstates_next = np.zeros_like(self.states)
+            dstates       = np.zeros_like(self.states)
+            dstate_a      = np.zeros_like(self.states)
+            dstate_b      = np.zeros_like(self.states)
+            dstate_c      = np.zeros_like(self.states)
+            dstates_next  = np.zeros_like(self.states)
             dstates_prime = np.zeros_like(self.states)
 
             dz_cell = np.zeros_like(self.cell)
-            dcell = np.zeros_like(self.cell)
+            dcell   = np.zeros_like(self.cell)
 
             dz_reset = np.zeros_like(self.reset)
-            dreset = np.zeros_like(self.reset)
+            dreset   = np.zeros_like(self.reset)
 
             dz_update = np.zeros_like(self.update)
-            dupdate = np.zeros_like(self.update)
+            dupdate   = np.zeros_like(self.update)
 
             for t in np.arange(time_steps)[::-1]: # reversed
 
                 dW_final += np.dot(self.states[:, t].T, grad[:, t])
                 db_final += np.sum(grad[:, t], axis = 0)
 
-                dstates[:, t] = np.dot(grad[:, t], self.W_final.T)
+                dstates[:, t]  = np.dot(grad[:, t], self.W_final.T)
                 dstates[:, t] += dstates_next[:, t]
-                next_grad = np.dot(dstates, self.W_final)
+                next_grad      = np.dot(dstates, self.W_final)
 
-                dcell[:, t] = self.update[:, t] * dstates[:, t]
+                dcell[:, t]    = self.update[:, t] * dstates[:, t]
                 dstate_a[:, t] = (1. - self.update[:, t]) * dstates[:, t]
-                dupdate[:, t] = self.cell[:, t] * dstates[:, t] - self.states[:, t-1] * dstates[:, t]
+                dupdate[:, t]  = self.cell[:, t] * dstates[:, t] - self.states[:, t-1] * dstates[:, t]
 
-                dcell[:, t] = activate(self.activation).backward(self.cell[:, t]) * dcell[:, t]
-                dW_cell += np.dot(self.z_tilde[:, t-1].T, dcell[:, t])
-                db_cell += np.sum(dcell[:, t], axis = 0)
-                dz_cell = np.dot(dcell[:, t], self.W_cell.T)
+                dcell[:, t]  = activate(self.activation).backward(self.cell[:, t]) * dcell[:, t]
+                dW_cell     += np.dot(self.z_tilde[:, t-1].T, dcell[:, t])
+                db_cell     += np.sum(dcell[:, t], axis = 0)
+                dz_cell      = np.dot(dcell[:, t], self.W_cell.T)
 
                 dstates_prime[:, t] = dz_cell[:, :self.h_units]
-                dstate_b[:, t] = self.reset[:, t] * dstates_prime[:, t]
+                dstate_b[:, t]      = self.reset[:, t] * dstates_prime[:, t]
 
                 dreset[:, t] = self.states[:, t-1] * dstates_prime[:, t]
                 dreset[:, t] = activate(self.gate_activation).backward(self.reset[:, t]) * dreset[:, t]
-                dW_reset += np.dot(self.z[:, t].T, dreset[:, t])
-                db_reset += np.sum(dreset[:, t], axis = 0)
-                dz_reset = np.dot(dreset[:, t], self.W_reset.T)
+                dW_reset    += np.dot(self.z[:, t].T, dreset[:, t])
+                db_reset    += np.sum(dreset[:, t], axis = 0)
+                dz_reset     = np.dot(dreset[:, t], self.W_reset.T)
 
-                dupdate[:, t] = activate(self.gate_activation).backward(self.update[:, t]) * dupdate[:, t]
-                dW_update += np.dot(self.z[:, t].T, dupdate[:, t])
-                db_update += np.sum(dupdate[:, t], axis = 0)
-                dz_update = np.dot(dupdate[:, t], self.W_update.T)
+                dupdate[:, t]  = activate(self.gate_activation).backward(self.update[:, t]) * dupdate[:, t]
+                dW_update     += np.dot(self.z[:, t].T, dupdate[:, t])
+                db_update     += np.sum(dupdate[:, t], axis = 0)
+                dz_update      = np.dot(dupdate[:, t], self.W_update.T)
 
-                dz = dz_reset + dz_update
+                dz             = dz_reset + dz_update
                 dstate_c[:, t] = dz[:, :self.h_units]
 
                 dstates_next = dstate_a + dstate_b + dstate_c

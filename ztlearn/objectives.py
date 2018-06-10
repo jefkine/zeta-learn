@@ -6,7 +6,7 @@ class Objective(object):
 
     def clip(self, predictions, epsilon = 1e-15):
         clipped_predictions = np.clip(predictions, epsilon, 1 - epsilon)
-        clipped_divisor = np.maximum(predictions * (1 - predictions), epsilon)
+        clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
         return clipped_predictions, clipped_divisor
 
     def add_fuzz_factor(self, np_array, epsilon = 1e-05):
@@ -154,7 +154,7 @@ class HingeLoss:
         """
 
         correct_class = predictions[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)]
-        margins = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+        margins       = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
         margins[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)] = 0
 
         return np.mean(np.sum(margins, axis = 0))
@@ -173,15 +173,17 @@ class HingeLoss:
         """
 
         correct_class = predictions[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)]
-        binary = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+        binary        = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+
         binary[binary > 0] = 1
-        incorrect_class = np.sum(binary, axis = 1)
+        incorrect_class    = np.sum(binary, axis = 1)
+
         binary[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)] = -incorrect_class
 
         return binary
 
     def accuracy(self, predictions, targets, threshold = 0.5):
-        
+
         """
         Calculates the Hinge-Loss Accuracy Score given prediction and targets
 
@@ -359,7 +361,7 @@ class KLDivergence(Objective):
             numpy.array: the output of KLDivergence Loss to prediction and targets
         """
 
-        targets = super(KLDivergence, self).add_fuzz_factor(targets)
+        targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
         return np.sum(targets * np.log(targets/predictions), axis = 1)
@@ -377,7 +379,7 @@ class KLDivergence(Objective):
             numpy.array: the output of KLDivergence Derivative to prediction and targets
         """
 
-        targets = super(KLDivergence, self).add_fuzz_factor(targets)
+        targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
         d_log_diff = np.multiply((predictions - targets), (np.log(targets/predictions)))

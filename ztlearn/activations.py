@@ -75,7 +75,7 @@ class SELU:
         _LAMBDA (float32): 1.6732632423543772848170429916717
     """
 
-    ALPHA = 1.6732632423543772848170429916717
+    ALPHA   = 1.6732632423543772848170429916717
     _LAMBDA = 1.6732632423543772848170429916717
 
     def __init__(self, activation_dict): pass
@@ -265,7 +265,7 @@ class Sigmoid:
             numpy.array: the output of the Sigmoid derivative applied to the input
         """
 
-        output_signal =  self.activation(input_signal)
+        output_signal = self.activation(input_signal)
         return np.multiply(output_signal, 1 - output_signal)
 
     @property
