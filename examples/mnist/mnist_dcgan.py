@@ -33,8 +33,8 @@ model_epochs = 400
 model_name   = 'mnist_dcgan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.00001)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0002)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0002)
 
 
 def stack_generator_layers(init):
@@ -120,7 +120,7 @@ for epoch_idx in range(model_epochs):
         if verbose:
             print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, epoch_k+1, d_loss, d_acc))
 
-    # end of for epoch_k in range(1):
+    # end of for epoch_k in range(2):
 
     model_stats['d_train_loss'].append(d_loss)
     model_stats['d_train_acc'].append(d_acc)
@@ -155,7 +155,6 @@ for epoch_idx in range(model_epochs):
 
 plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
 plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
-
 
 plot_generated_img_samples(None,
                                  generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),

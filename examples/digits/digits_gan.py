@@ -36,13 +36,13 @@ g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.000
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
     model.add(Dense(128, input_shape = (latent_dim,)))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(256))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(512))
-    model.add(Activation('relu'))
+    model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Dense(img_dim, activation = 'tanh'))
 
@@ -62,17 +62,17 @@ def stack_discriminator_layers(init):
 
 # stack and compile the generator
 generator = stack_generator_layers(init = init_type)
-generator.compile(loss = 'bce', optimizer = g_opt)
+generator.compile(loss = 'cce', optimizer = g_opt)
 
 # stack and compile the discriminator
 discriminator = stack_discriminator_layers(init = init_type)
-discriminator.compile(loss = 'bce', optimizer = d_opt)
+discriminator.compile(loss = 'cce', optimizer = d_opt)
 
 # stack and compile the generator_discriminator
 generator_discriminator = Sequential(init_method = init_type)
 generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
-generator_discriminator.compile(loss = 'bce', optimizer = g_opt)
+generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
 # rescale to range [-1, 1]
 images = range_normalize(data.data.astype(np.float32))
@@ -111,7 +111,7 @@ for epoch_idx in range(model_epochs):
         if verbose:
             print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, epoch_k+1, d_loss, d_acc))
 
-    # end of for epoch_k in range(1):
+    # end of for epoch_k in range(10):
 
     model_stats['d_train_loss'].append(d_loss)
     model_stats['d_train_acc'].append(d_acc)
