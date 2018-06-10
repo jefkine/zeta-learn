@@ -5,19 +5,19 @@ import matplotlib.pyplot as plt
 
 SMALL_FONT = 10
 LARGE_FONT = 14
-FIG_SIZE = (8, 6)
+FIG_SIZE   = (8, 6)
 
 img_specs = {
               'mnist' :  {
-                           'pix_row' : 1,
-                           'pix_col' : 26,
-                           'img_width' : 28,
+                           'pix_row'    : 1,
+                           'pix_col'    : 26,
+                           'img_width'  : 28,
                            'img_height' : 28
                          },
               'digits' : {
-                           'pix_row' : 0,
-                           'pix_col' : 7,
-                           'img_width' : 8,
+                           'pix_row'    : 0,
+                           'pix_col'    : 7,
+                           'img_width'  : 8,
                            'img_height' : 8
                          }
             }
