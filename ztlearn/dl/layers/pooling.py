@@ -76,6 +76,7 @@ class Pool(Layer):
         output, self.pool_cache = self.pool_forward(self.input_col)
 
         output = output.reshape(int(output_height), int(output_width), input_num, input_depth)
+        
         return output.transpose(2, 3, 0, 1)
 
     def pass_backward(self, grad):
@@ -103,10 +104,12 @@ class MaxPooling2D(Pool):
     def pool_forward(self, input_col):
         max_id = np.argmax(input_col, axis = 0)
         out    = input_col[max_id, range(max_id.size)]
+
         return out, max_id
 
     def pool_backward(self, d_input_col, grad_col, pool_cache):
         d_input_col[pool_cache, range(grad_col.size)] = grad_col
+
         return d_input_col
 
 
@@ -117,8 +120,10 @@ class AveragePool2D(Pool):
 
     def pool_forward(self, input_col):
         out = np.mean(input_col, axis = 0)
+
         return out, None
 
     def pool_backward(self, d_input_col, grad_col, pool_cache = None):
         d_input_col[:, range(grad_col.size)] = 1. / d_input_col.shape[0] * grad_col
+
         return d_input_col

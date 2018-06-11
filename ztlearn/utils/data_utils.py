@@ -17,6 +17,7 @@ def one_hot(labels, num_classes = None):
     num_classes    = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
     one_hot_labels = np.zeros([labels.size, num_classes])
     one_hot_labels[np.arange(labels.size), labels.astype('int')] = 1.
+
     return one_hot_labels
 
 def unhot(one_hot, unhot_axis = 1):
@@ -28,6 +29,7 @@ def shuffle_data(input_data, input_label, random_seed = None):
         np.random.seed(random_seed)
     indices = np.arange(input_data.shape[0])
     np.random.shuffle(indices)
+
     return input_data[indices], input_label[indices]
 
 def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_seed = None):
@@ -36,6 +38,7 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
     split_ratio = int((1.0 - test_size) * len(samples))
     samples_train, samples_test = samples[:split_ratio], samples[split_ratio:]
     labels_train, labels_test = labels[:split_ratio], labels[split_ratio:]
+
     return samples_train, samples_test, labels_train, labels_test
 
 def minibatches(input_data, input_label, batch_size, shuffle):
@@ -47,11 +50,13 @@ def minibatches(input_data, input_label, batch_size, shuffle):
     for idx in range(0, input_data.shape[0], batch_size):
         mini_batch = indices[idx:idx + batch_size]
         minibatches.append((input_data[mini_batch], input_label[mini_batch]))
+
     return minibatches
 
 def normalize(input_data, axis = -1, order = 2):
     l2 = np.linalg.norm(input_data, order, axis, keepdims = True)
     l2[l2 == 0] = 1
+
     return input_data / l2
 
 def range_normalize(input_data, a = -1, b = 1, axis = None):
@@ -63,6 +68,7 @@ def min_max(input_data, axis = None):
 def z_score(input_data, axis = None):
     input_mean = input_data.mean(axis = axis, keepdims = True)
     input_std  = input_data.std(axis = axis, keepdims = True)
+    
     return (input_data - input_mean) / input_std
 
 def print_results(predictions, test_labels, num_samples = 20):

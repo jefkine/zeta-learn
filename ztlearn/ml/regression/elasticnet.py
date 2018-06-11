@@ -16,7 +16,7 @@ class ElasticNetRegression(Regression):
                        penalty        = 'elastic',
                        penalty_weight = 0.5,
                        l1_ratio       = 0.5):
-                       
+
         self.degree = degree
         super(ElasticNetRegression, self).__init__(epochs         = epochs,
                                                    loss           = loss,
@@ -31,10 +31,12 @@ class ElasticNetRegression(Regression):
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
         fit_stats = super(ElasticNetRegression, self).fit(polynomial_inputs, targets, verbose)
+
         return fit_stats
 
     def predict(self, inputs, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
+            
         return super(ElasticNetRegression, self).predict(polynomial_inputs)

@@ -27,6 +27,7 @@ class LinearRegression(Regression):
 
     def fit(self, inputs, targets, verbose =  False):
         fit_stats = super(LinearRegression, self).fit(inputs, targets, verbose)
+        
         return fit_stats
 
     @LogIfBusy
@@ -34,4 +35,5 @@ class LinearRegression(Regression):
         fit_stats    = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         inputs       = np.column_stack((np.ones(inputs.shape[0]), inputs))
         self.weights = np.linalg.inv(inputs.T.dot(inputs)).dot(inputs.T).dot(targets)
+
         return fit_stats

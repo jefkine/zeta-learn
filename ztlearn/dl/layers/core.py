@@ -101,6 +101,7 @@ class Dense(Layer):
 
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
+
         return inputs @ self.weights + self.bias
 
     def pass_backward(self, grad):
@@ -208,6 +209,7 @@ class UpSampling2D(Layer):
     @property
     def output_shape(self):
         input_depth, input_height, input_width = self.input_shape
+
         return input_depth, self.size[0] * input_height, self.size[1] * input_width
 
     def prep_layer(self): pass
@@ -215,11 +217,13 @@ class UpSampling2D(Layer):
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
         upsampled       = np.repeat(inputs, self.size[0], axis = 2)
+
         return np.repeat(upsampled, self.size[1], axis = 3)
 
     def pass_backward(self, grad):
         grad = grad[:, :, ::self.size[0], ::self.size[1]]
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
+
         return grad
 
 
@@ -248,6 +252,7 @@ class Reshape(Layer):
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
+
         return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
 
     def pass_backward(self, grad):
