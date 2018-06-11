@@ -102,6 +102,7 @@ class HellingerDistance:
         """
 
         root_difference = self.sqrt_difference(predictions, targets)
+
         return np.mean(np.sum(np.power(root_difference, 2), axis = 1) / HellingerDistance.SQRT_2)
 
     def derivative(self, predictions, targets, **kwargs):
@@ -118,6 +119,7 @@ class HellingerDistance:
         """
 
         root_difference = self.sqrt_difference(predictions, targets)
+        
         return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
 
     def accuracy(self, predictions, targets, threshold = 0.5):
