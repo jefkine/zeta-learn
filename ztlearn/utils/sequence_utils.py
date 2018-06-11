@@ -19,6 +19,7 @@ def gen_mult_sequence_xtyt(nums, cols = 10, factor = 10, tensor_dtype = np.int):
         seq   = np.arange(start, (start*cols)+1, start)
         x[i]  = one_hot(seq, lookup)
         y[i]  = np.roll(x[i], -1, axis=0)
+
     y[:, -1, 1] = 1
 
     return x, y, lookup
@@ -40,4 +41,3 @@ def gen_mult_sequence_xtym(nums, cols = 10, factor = 10, tensor_dtype = np.int):
         y[i]   = x[i,cols_p,:]
 
     return x_p, y, lookup
-    
