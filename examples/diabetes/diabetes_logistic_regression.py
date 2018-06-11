@@ -21,14 +21,16 @@ input_data  = z_score(dataset[:, 0:8]) # -> all the features (e.g using only one
 input_label = dataset[:, 8]
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
-                                                                  input_label,
-                                                                  test_size   = 0.2,
-                                                                  random_seed = 2)
+                                                                              input_label,
+                                                                              test_size = 0.2, random_seed = 2)
 
-opt   = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
-model = LogisticRegression(epochs = 10000, optimizer = opt)
+# optimizer definition
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
 
+# model definition
+model     = LogisticRegression(epochs = 10000, optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
+
 # fit_stats = model.fit_NR(train_data, train_label) # --- Newton-Raphson Method
 
 print_results(model.predict(test_data), np.round(test_label).astype(int))
@@ -36,6 +38,4 @@ plot_metric('accuracy_loss',
                              len(fit_stats["train_loss"]),
                              fit_stats['train_acc'],
                              fit_stats['train_loss'],
-                             model_name = 'diabetes_logistic_regression',
-                             legend     = ['acc', 'loss'])
-                             
+                             model_name = 'diabetes_logistic_regression', legend = ['acc', 'loss'])

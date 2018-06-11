@@ -9,15 +9,16 @@ from ztlearn.dl.layers import GRU, Dense, Flatten
 
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
-                                                                  test_size   = 0.33,
-                                                                  random_seed = 15)
+                                                                             data.target,
+                                                                             test_size = 0.33, random_seed = 15)
 
+# plot samples of training data
 plot_img_samples(train_data, train_label)
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 0.001)
 
-# Model definition
+# model definition
 model = Sequential()
 model.add(GRU(128, activation = 'tanh', input_shape = (8, 8)))
 model.add(Flatten())

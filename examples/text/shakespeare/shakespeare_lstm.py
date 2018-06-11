@@ -11,9 +11,11 @@ x, y, len_chars = gen_char_sequence_xtym(text, maxlen = 30, step = 1)
 del text
 
 train_data, test_data, train_label, test_label = train_test_split(x, y, test_size = 0.4)
+
+# optimizer definition
 opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, learning_rate = 0.01)
 
-# Model definition
+# model definition
 model = Sequential()
 model.add(LSTM(128, activation = 'tanh', input_shape = (30, len_chars)))
 model.add(Flatten())

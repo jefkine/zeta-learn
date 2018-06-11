@@ -9,11 +9,13 @@ from ztlearn.dl.layers import RNN, Flatten, Dense
 x, y, seq_len = gen_mult_sequence_xtym(3000, 10, 10)
 train_data, test_data, train_label, test_label = train_test_split(x, y, test_size = 0.3)
 
+# plot samples of training data
 print_seq_samples(train_data, train_label, 0)
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
 
-# Model definition
+# model definition
 model = Sequential()
 model.add(RNN(5, activation = 'tanh', bptt_truncate = 5, input_shape = (9, seq_len)))
 model.add(Flatten())

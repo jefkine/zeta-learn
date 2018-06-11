@@ -9,15 +9,16 @@ from ztlearn.dl.layers import GRU, Dense, Flatten
 
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
-                                                                  mnist.target.astype('int'),
-                                                                  test_size   = 0.3,
-                                                                  random_seed = 15)
+                                                                              mnist.target.astype('int'),
+                                                                              test_size = 0.3, random_seed = 15)
 
+# plot samples of training data
 plot_img_samples(train_data, train_label, dataset = 'mnist')
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 0.001)
 
-# Model definition
+# model definition
 model = Sequential()
 model.add(GRU(128, activation = 'tanh', input_shape = (28, 28)))
 model.add(Flatten())

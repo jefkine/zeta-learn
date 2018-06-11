@@ -11,14 +11,15 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
-                                                                  test_size   = 0.33,
-                                                                  random_seed = 5)
+                                                                             data.target,
+                                                                             test_size = 0.33, random_seed = 5)
 
 plot_img_samples(train_data, train_label)
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
+# model definition
 model = Sequential(init_method = 'he_uniform')
 model.add(Conv2D(filters = 32, kernel_size = (3, 3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
 model.add(Dropout(0.25))

@@ -10,14 +10,15 @@ from ztlearn.dl.layers import RNN, Dense, Flatten
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
                                                                   mnist.target.astype('int'),
-                                                                  test_size   = 0.4,
-                                                                  random_seed = 5)
+                                                                  test_size = 0.4, random_seed = 5)
 
+# plot samples of training data
 plot_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
-# Model definition
+# model definition
 model = Sequential()
 model.add(RNN(128, activation = 'tanh', bptt_truncate = 5, input_shape = (28,28)))
 model.add(Flatten())

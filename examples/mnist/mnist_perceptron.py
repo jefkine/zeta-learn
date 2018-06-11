@@ -9,12 +9,15 @@ from ztlearn.ml.classification import Perceptron
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(normalize(mnist.data.astype('float32')),
                                                                   one_hot(mnist.target.astype('int')),
-                                                                  test_size   = 0.3,
-                                                                  random_seed = 5)
+                                                                  test_size = 0.3, random_seed = 5)
 
+# plot samples of training data
 plot_img_samples(train_data, unhot(train_label), dataset = 'mnist')
 
-opt         = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+# optimizer definition
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+
+# model definition
 model       = Perceptron(epochs = 600, activation = 'relu', loss = 'cce', init_method = 'he_normal', optimizer =  opt)
 fit_stats   = model.fit(train_data, train_label)
 
@@ -25,5 +28,4 @@ plot_metric('accuracy_loss',
                              len(fit_stats["train_loss"]),
                              fit_stats['train_acc'],
                              fit_stats['train_loss'],
-                             model_name = 'mnist_perceptron',
-                             legend     = ['acc', 'loss'])
+                             model_name = 'mnist_perceptron', legend = ['acc', 'loss'])

@@ -47,9 +47,9 @@ autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 data   = datasets.load_digits()
 images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
-                                                                  images,
-                                                                  test_size   = 0.2,
-                                                                  random_seed = 15)
+                                                                          images,
+                                                                          test_size = 0.2, random_seed = 15)
+# plot samples of training data
 plot_img_samples(train_data, None)
 
 model_epochs = 500

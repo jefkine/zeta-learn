@@ -9,14 +9,16 @@ from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
-                                                                  mnist.target.astype('int'),
-                                                                  test_size   = 0.3,
-                                                                  random_seed = 3)
+                                                                              mnist.target.astype('int'),
+                                                                              test_size = 0.3, random_seed = 3)
 
+# plot samples of training data
 plot_tiled_img_samples(train_data, train_label, dataset = 'mnist')
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
+# model definition
 model = Sequential()
 model.add(Dense(256, activation = 'relu', input_shape=(784,)))
 model.add(Dropout(0.25))
@@ -45,5 +47,4 @@ plot_metric('evaluation',
                           eval_stats['valid_batches'],
                           eval_stats['valid_loss'],
                           eval_stats['valid_acc'],
-                          model_name = model_name,
-                          legend     = ['loss', 'acc'])
+                          model_name = model_name, legend = ['loss', 'acc'])

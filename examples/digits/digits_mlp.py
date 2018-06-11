@@ -10,14 +10,16 @@ from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 # NOTE: Check the random_seed seeding for improperly shuffled data.
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
-                                                                  test_size   = 0.3,
-                                                                  random_seed = 3)
+                                                                             data.target,
+                                                                             test_size = 0.3, random_seed = 3)
 
+# plot samples of training data
 plot_tiled_img_samples(train_data, train_label)
 
+# optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
+# model definition
 model = Sequential()
 model.add(Dense(256, activation = 'relu', input_shape=(64,)))
 model.add(Dropout(0.25))
@@ -46,5 +48,4 @@ plot_metric('evaluation',
                           eval_stats['valid_batches'],
                           eval_stats['valid_loss'],
                           eval_stats['valid_acc'],
-                          model_name = model_name,
-                          legend     = ['loss', 'acc'])
+                          model_name = model_name, legend = ['loss', 'acc'])
