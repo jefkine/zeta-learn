@@ -36,7 +36,7 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
     if shuffle:
         samples, labels = shuffle_data(samples, labels, random_seed)
     split_ratio = int((1.0 - test_size) * len(samples))
-    
+
     samples_train, samples_test = samples[:split_ratio], samples[split_ratio:]
     labels_train, labels_test   = labels[:split_ratio], labels[split_ratio:]
 
@@ -103,3 +103,4 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
 
     sys.stdout.write(bar)
     sys.stdout.flush()
+    
