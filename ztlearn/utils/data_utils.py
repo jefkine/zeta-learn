@@ -36,15 +36,16 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
     if shuffle:
         samples, labels = shuffle_data(samples, labels, random_seed)
     split_ratio = int((1.0 - test_size) * len(samples))
+    
     samples_train, samples_test = samples[:split_ratio], samples[split_ratio:]
-    labels_train, labels_test = labels[:split_ratio], labels[split_ratio:]
+    labels_train, labels_test   = labels[:split_ratio], labels[split_ratio:]
 
     return samples_train, samples_test, labels_train, labels_test
 
 def minibatches(input_data, input_label, batch_size, shuffle):
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
     minibatches = []
-    indices = np.arange(input_data.shape[0])
+    indices     = np.arange(input_data.shape[0])
     if shuffle:
         np.random.shuffle(indices)
     for idx in range(0, input_data.shape[0], batch_size):
@@ -82,7 +83,7 @@ def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):
 
 def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval = 5):
     predictions = unhot(predicted, unhot_axis)
-    targets = unhot(test_label, unhot_axis)
+    targets     = unhot(test_label, unhot_axis)
 
     for i in range(interval):
         print('Sequence  : {}'.format(unhot(test_data[i])))
@@ -93,7 +94,7 @@ def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval
 
 def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
     progress = float((curr + 1) / total)
-    update = int(round(size * progress))
+    update   = int(round(size * progress))
 
     bar = "\r{}: [{}] {:d}% {}".format(prefix,
                                        sign * update + "-" * (size - update),
@@ -102,4 +103,3 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
 
     sys.stdout.write(bar)
     sys.stdout.flush()
-    
