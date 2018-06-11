@@ -71,7 +71,7 @@ class BatchNormalization(Layer):
         if self.is_trainable:
 
             dbeta  = np.sum(grad, axis = 0)
-            dgamma = np.sum(grad * self.input_norm, axis=0)
+            dgamma = np.sum(grad * self.input_norm, axis = 0)
 
             self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
             self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta)

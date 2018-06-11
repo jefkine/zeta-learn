@@ -7,6 +7,7 @@ from ztlearn.utils import one_hot
 from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
+# NOTE: Embedding Module is still experimental (does not work as expected)
 class Embedding(Layer):
 
     def __init__(self, input_dim, output_dim, activation = 'relu', input_shape = (1,10)):
@@ -68,7 +69,7 @@ class Embedding(Layer):
         for i in range(batch_size):
             self.one_hot_inputs[i,:,:] = one_hot(self.inputs[i,:,:], num_classes = self.input_dim)
 
-        return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis=2), axis = 1)
+        return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis = 2), axis = 1)
 
     def pass_backward(self, grad):
         d_inputs     = np.matmul(grad, self.one_hot_inputs)
