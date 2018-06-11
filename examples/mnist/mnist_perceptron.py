@@ -14,7 +14,7 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(mnis
 
 plot_img_samples(train_data, unhot(train_label), dataset = 'mnist')
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+opt   = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 model = Perceptron(epochs = 600,
                                  activation  = 'relu',
                                  loss        = 'categorical_crossentropy',

@@ -12,7 +12,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   test_size   = 0.33,
                                                                   random_seed = 5)
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+opt   = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 model = Perceptron(epochs = 500,
                                  activation  = 'leaky_relu',
                                  loss        = 'categorical_crossentropy',

@@ -20,7 +20,7 @@ train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   input_label,
                                                                   test_size = 0.3)
 
-opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)
+opt   = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)
 model = PolynomialRegression(degree = 5,
                                          epochs         = 100,
                                          optimizer      = opt,
@@ -30,7 +30,7 @@ model = PolynomialRegression(degree = 5,
 
 fit_stats = model.fit(train_data, train_label)
 
-targets = np.expand_dims(test_label, axis = 1)
+targets     = np.expand_dims(test_label, axis = 1)
 predictions = np.expand_dims(model.predict(test_data), axis = 1)
 
 mse = objective('mean_squared_error').forward(predictions, targets)

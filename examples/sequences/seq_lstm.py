@@ -25,7 +25,7 @@ fit_stats = model.fit(train_data,
                       epochs          = model_epochs,
                       validation_data = (test_data, test_label))
 
-print_seq_results(model.predict(test_data,(0,2,1)), test_label, test_data, unhot_axis = 2)
+print_seq_results(model.predict(test_data,(0, 2, 1)), test_label, test_data, unhot_axis = 2)
 
 model_name = 'seq_lstm'
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
