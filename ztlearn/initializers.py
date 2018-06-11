@@ -13,7 +13,7 @@ class WeightInitializer:
         receptive_field_size = np.prod(shape[:2])
         fan_out              = shape[0] * receptive_field_size # NF *receptive_field_size
         fan_in               = shape[1] * receptive_field_size # CF *receptive_field_size
-        
+
         return fan_in, fan_out
 
 
@@ -197,8 +197,8 @@ class RandomUniform(WeightInitializer):
     def weights(self, shape, seed = None):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
-        np.random.seed(seed)
 
+        np.random.seed(seed)
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -218,8 +218,8 @@ class RandomNormal(WeightInitializer):
     def weights(self, shape, seed = None):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
-        np.random.seed(seed)
 
+        np.random.seed(seed)
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
     @property
