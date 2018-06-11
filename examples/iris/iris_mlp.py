@@ -19,7 +19,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 opt = register_opt(optimizer_name = 'adam', momentum = 0.1, learning_rate = 0.01)
 
 model = Sequential()
-model.add(Dense(10, activation = 'sigmoid', input_shape=(train_data.shape[1],)))
+model.add(Dense(10, activation = 'sigmoid', input_shape = (train_data.shape[1],)))
 model.add(Dense(3, activation = 'sigmoid')) # 3 iris_classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 

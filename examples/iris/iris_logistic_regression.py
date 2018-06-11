@@ -15,9 +15,8 @@ train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   test_size   = 0.33,
                                                                   random_seed = 15)
 
-opt   = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.01)
-model = LogisticRegression(epochs = 1500, optimizer = opt)
-
+opt       = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.01)
+model     = LogisticRegression(epochs = 1500, optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
 # fit_stats = model.fit_NR(train_data, train_label) # --- Newton-Raphson Method
 
