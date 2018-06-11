@@ -71,7 +71,7 @@ class SELU:
             * [Klambauer, G., et. al., 2017] https://arxiv.org/abs/1706.02515
             * [PDF] https://arxiv.org/pdf/1706.02515.pdf
     Args:
-        ALPHA (float32): 1.6732632423543772848170429916717
+        ALPHA (float32)  : 1.6732632423543772848170429916717
         _LAMBDA (float32): 1.6732632423543772848170429916717
     """
 
@@ -573,4 +573,3 @@ class ActivationFunction:
 
     def backward(self, input_signal):
         return self.activation_func.derivative(input_signal)
-        
