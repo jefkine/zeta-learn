@@ -22,3 +22,8 @@ Features
  - Keras like Sequential API for building models.
  - Built on Numpy and Matplotlib.
  - Examples folder with readily implemented machine learning models.
+
+
+ Install
+ -------
+ - pip install ztlearn
