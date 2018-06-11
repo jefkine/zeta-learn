@@ -38,18 +38,4 @@ plot_metric('accuracy_loss',
                              fit_stats['train_loss'],
                              model_name = 'diabetes_logistic_regression',
                              legend     = ['acc', 'loss'])
-
-'''
-
-# if you used only one feature
-plot_regression_results(train_data, train_label,
-                                                 test_data,
-                                                 test_label,
-                                                 input_data,
-                                                 model.predict(input_data),
-                                                 float(fit_stats['train_loss'][-1] * 100),
-                                                 'Logistic Regression',
-                                                 'Age',
-                                                 'Outcome')
-
-'''
+                             
