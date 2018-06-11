@@ -176,11 +176,11 @@ class GRU(Layer):
                 dstates_prime[:, t] = dz_cell[:, :self.h_units]
                 dstate_b[:, t]      = self.reset[:, t] * dstates_prime[:, t]
 
-                dreset[:, t] = self.states[:, t-1] * dstates_prime[:, t]
-                dreset[:, t] = activate(self.gate_activation).backward(self.reset[:, t]) * dreset[:, t]
-                dW_reset    += np.dot(self.z[:, t].T, dreset[:, t])
-                db_reset    += np.sum(dreset[:, t], axis = 0)
-                dz_reset     = np.dot(dreset[:, t], self.W_reset.T)
+                dreset[:, t]  = self.states[:, t-1] * dstates_prime[:, t]
+                dreset[:, t]  = activate(self.gate_activation).backward(self.reset[:, t]) * dreset[:, t]
+                dW_reset     += np.dot(self.z[:, t].T, dreset[:, t])
+                db_reset     += np.sum(dreset[:, t], axis = 0)
+                dz_reset      = np.dot(dreset[:, t], self.W_reset.T)
 
                 dupdate[:, t]  = activate(self.gate_activation).backward(self.update[:, t]) * dupdate[:, t]
                 dW_update     += np.dot(self.z[:, t].T, dupdate[:, t])
