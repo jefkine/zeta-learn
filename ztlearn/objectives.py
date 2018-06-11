@@ -408,17 +408,17 @@ class KLDivergence(Objective):
 class ObjectiveFunction:
 
     _functions = {
-        'svm': HingeLoss,
-        'hinge': HingeLoss,
-        'kld': KLDivergence,
-        'mse': MeanSquaredError,
-        'bce': BinaryCrossEntropy,
-        'cce': CategoricalCrossEntropy,
-        'mean_squared_error': MeanSquaredError,
-        'hellinger_distance': HellingerDistance,
-        'binary_crossentropy': BinaryCrossEntropy,
-        'kullback_leibler_divergence': KLDivergence,
-        'categorical_crossentropy': CategoricalCrossEntropy
+        'svm'                         : HingeLoss,
+        'hinge'                       : HingeLoss,
+        'kld'                         : KLDivergence,
+        'mse'                         : MeanSquaredError,
+        'bce'                         : BinaryCrossEntropy,
+        'cce'                         : CategoricalCrossEntropy,
+        'mean_squared_error'          : MeanSquaredError,
+        'hellinger_distance'          : HellingerDistance,
+        'binary_crossentropy'         : BinaryCrossEntropy,
+        'kullback_leibler_divergence' : KLDivergence,
+        'categorical_crossentropy'    : CategoricalCrossEntropy
     }
 
     def __init__(self, name):

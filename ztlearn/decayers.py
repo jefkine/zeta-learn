@@ -81,10 +81,10 @@ class NaturalExponentialDecay(Decay):
 class DecayFunction:
 
     _functions = {
-        'step_decay': StepDecay,
-        'exponential_decay': ExponetialDecay,
-        'inverse_time_decay': InverseTimeDecay,
-        'natural_exponential_decay': NaturalExponentialDecay
+        'step_decay'                : StepDecay,
+        'exponential_decay'         : ExponetialDecay,
+        'inverse_time_decay'        : InverseTimeDecay,
+        'natural_exponential_decay' : NaturalExponentialDecay
     }
 
     def __init__(self,

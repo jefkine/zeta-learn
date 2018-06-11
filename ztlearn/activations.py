@@ -543,17 +543,17 @@ class Linear:
 class ActivationFunction:
 
     _functions = {
-        'elu': ELU,
-        'selu': SELU,
-        'relu': ReLU,
-        'tanh': TanH,
-        'linear': Linear,
-        'identity': Linear,
-        'sigmoid': Sigmoid,
-        'softmax': Softmax,
-        'softplus': SoftPlus,
-        'leaky_relu': LeakyReLU,
-        'elliot_sigmoid': ElliotSigmoid
+        'elu'            : ELU,
+        'selu'           : SELU,
+        'relu'           : ReLU,
+        'tanh'           : TanH,
+        'linear'         : Linear,
+        'identity'       : Linear,
+        'sigmoid'        : Sigmoid,
+        'softmax'        : Softmax,
+        'softplus'       : SoftPlus,
+        'leaky_relu'     : LeakyReLU,
+        'elliot_sigmoid' : ElliotSigmoid
     }
 
     def __init__(self, name, activation_dict = {}):

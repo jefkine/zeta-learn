@@ -472,14 +472,14 @@ class NesterovAcceleratedGradient(Optimizer):
 class OptimizationFunction:
 
     _optimizers = {
-        'sgd': SGD,
-        'adam': Adam,
-        'adamax': Adamax,
-        'adagrad': AdaGrad,
-        'rmsprop': RMSprop,
-        'adadelta': Adadelta,
-        'sgd_momentum': SGDMomentum,
-        'nestrov': NesterovAcceleratedGradient
+        'sgd'          : SGD,
+        'adam'         : Adam,
+        'adamax'       : Adamax,
+        'adagrad'      : AdaGrad,
+        'rmsprop'      : RMSprop,
+        'adadelta'     : Adadelta,
+        'sgd_momentum' : SGDMomentum,
+        'nestrov'      : NesterovAcceleratedGradient
     }
 
     def __init__(self, optimizer_kwargs):
