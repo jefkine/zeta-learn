@@ -7,7 +7,9 @@ from ztlearn.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_iris()
-train_data, test_data, train_label, test_label = train_test_split(data.data, one_hot(data.target), test_size = 0.33, random_seed = 5)
+train_data, test_data, train_label, test_label = train_test_split(data.data,
+                                                                             one_hot(data.target), 
+                                                                             test_size = 0.33, random_seed = 5)
 
 opt       = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 model     = Perceptron(epochs = 500, activation = 'leaky_relu', loss = 'cce', init_method = 'he_normal', optimizer = opt)
