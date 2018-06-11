@@ -16,9 +16,8 @@ from ztlearn.ml.regression import LogisticRegression
 # Outcome                                                     #
 #-------------------------------------------------------------#
 
-dataset = pd.read_csv('../../datasets/diabetes/pima-indians-diabetes.csv', sep = ',').values
-input_data = z_score(dataset[:, 0:8]) # ----- all the features
-# input_data = z_score(dataset[:, 5:6]) # ----- one of the features
+dataset     = pd.read_csv('../../datasets/diabetes/pima-indians-diabetes.csv', sep = ',').values
+input_data  = z_score(dataset[:, 0:8]) # -> all the features (e.g using only one feature dataset[:, 5:6])
 input_label = dataset[:, 8]
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
@@ -26,7 +25,7 @@ train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   test_size   = 0.2,
                                                                   random_seed = 2)
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
+opt   = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
 model = LogisticRegression(epochs = 10000, optimizer = opt)
 
 fit_stats = model.fit(train_data, train_label)
