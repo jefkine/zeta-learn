@@ -23,6 +23,6 @@ Features
  - Built on Numpy and Matplotlib.
  - Examples folder with readily implemented machine learning models.
 
- Install
- -------
+Install
+-------
   - pip install ztlearn
