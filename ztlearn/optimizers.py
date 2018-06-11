@@ -454,13 +454,13 @@ class NesterovAcceleratedGradient(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        # self.velocity = self.momentum * self.velocity_prev - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
-        # self.weights += (self.velocity + self.momentum * (self.velocity - self.velocity_prev))
-        # self.velocity_prev = self.velocity
+        # self.velocity       = self.momentum * self.velocity_prev - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
+        # self.weights       += (self.velocity + self.momentum * (self.velocity - self.velocity_prev))
+        # self.velocity_prev  = self.velocity
 
-        self.velocity_prev = self.velocity
-        self.velocity      = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
-        self.weights      += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
+        self.velocity_prev  = self.velocity
+        self.velocity       = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
+        self.weights       += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
 
         return self.weights
 
@@ -516,4 +516,3 @@ def register_opt(**kwargs):
         if kwrd not in allowed_kwargs:
             raise TypeError('Unexpected keyword argument passed to optimizer: ' + str(kwrd))
     return kwargs
-    
