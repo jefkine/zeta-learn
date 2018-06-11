@@ -24,6 +24,7 @@ class InverseTimeDecay(Decay):
     @property
     def decompose(self):
         self.lrate *= (1. / (1 + self.decay * self.epoch))
+        
         return super(InverseTimeDecay, self).clip_lrate
 
     @property
@@ -41,6 +42,7 @@ class StepDecay(Decay):
     @property
     def decompose(self):
         self.lrate *= np.power(self.decay, ((1 + self.epoch) // self.step_size))
+
         return super(StepDecay, self).clip_lrate
 
     @property
@@ -56,6 +58,7 @@ class ExponetialDecay(Decay):
     @property
     def decompose(self):
         self.lrate *= np.power(self.decay, self.epoch)
+
         return super(ExponetialDecay, self).clip_lrate
 
     @property
@@ -71,6 +74,7 @@ class NaturalExponentialDecay(Decay):
     @property
     def decompose(self):
         self.lrate *= np.exp(-self.decay * self.epoch)
+
         return super(NaturalExponentialDecay, self).clip_lrate
 
     @property

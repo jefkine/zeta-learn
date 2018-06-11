@@ -7,6 +7,7 @@ class Objective(object):
     def clip(self, predictions, epsilon = 1e-15):
         clipped_predictions = np.clip(predictions, epsilon, 1 - epsilon)
         clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
+
         return clipped_predictions, clipped_divisor
 
     def add_fuzz_factor(self, np_array, epsilon = 1e-05):
@@ -231,6 +232,7 @@ class BinaryCrossEntropy(Objective):
         """
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
+
         return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
         # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
 
@@ -248,6 +250,7 @@ class BinaryCrossEntropy(Objective):
         """
 
         clipped_predictions, clipped_divisor = super(BinaryCrossEntropy, self).clip(predictions)
+
         return (clipped_predictions - targets) / clipped_divisor
         # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
 
@@ -300,6 +303,7 @@ class CategoricalCrossEntropy(Objective):
         """
 
         clipped_predictions, _ = super(CategoricalCrossEntropy, self).clip(predictions)
+
         return np.mean(-np.sum(targets * np.log(clipped_predictions), axis = 1))
 
     def derivative(self, predictions, targets, **kwargs):
@@ -316,6 +320,7 @@ class CategoricalCrossEntropy(Objective):
         """
 
         clipped_predictions, _ = super(CategoricalCrossEntropy, self).clip(predictions)
+
         return clipped_predictions - targets
 
     def accuracy(self, predictions, targets):
@@ -383,6 +388,7 @@ class KLDivergence(Objective):
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
         d_log_diff = np.multiply((predictions - targets), (np.log(targets/predictions)))
+
         return (1 + np.log(targets/predictions)) * d_log_diff
 
     def accuracy(self, predictions, targets):

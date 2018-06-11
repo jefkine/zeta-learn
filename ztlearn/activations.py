@@ -266,6 +266,7 @@ class Sigmoid:
         """
 
         output_signal = self.activation(input_signal)
+        
         return np.multiply(output_signal, 1 - output_signal)
 
     @property
@@ -360,6 +361,7 @@ class Softmax:
         """
 
         probs = np.exp(input_signal - np.max(input_signal, axis = -1, keepdims = True))
+
         return probs / np.sum(probs, axis = -1, keepdims = True)
 
     def derivative(self, input_signal):
@@ -375,6 +377,7 @@ class Softmax:
         """
 
         output_signal = self.activation(input_signal)
+
         return np.multiply(output_signal, 1 - output_signal)
 
     @property
