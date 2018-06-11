@@ -14,7 +14,7 @@ from ztlearn.toolkit import GbOptimization as gbopt
 # def df(x):
 #    return np.array([2*x[0]])
 #
-# opt = register_opt(optimizer_name = 'sgd', momentum = 0.1, learning_rate = 0.1)
+# opt   = register_opt(optimizer_name = 'sgd', momentum = 0.1, learning_rate = 0.1)
 # optim = gbopt(optimizer = opt, init_method = 'he_normal')
 # optim.run(f, df, params = 1, epochs = 100)
 # optim.plot_2d(f)
@@ -35,7 +35,7 @@ def f2(x):
 def df2(x):
     return np.array([6*x[0]**2, 4*x[1]**3])
 
-opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
+opt   = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
 optim = gbopt(optimizer = opt, init_method = 'he_normal')
 optim.run(f2, df2, params = 2, epochs = 1500)
 optim.plot_3d(f2)

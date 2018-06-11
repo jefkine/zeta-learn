@@ -10,7 +10,7 @@ from ztlearn.dl.layers import LSTM, Dense, Flatten
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
                                                                   mnist.target.astype('int'),
-                                                                  test_size = 0.3,
+                                                                  test_size   = 0.3,
                                                                   random_seed = 15)
 
 plot_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
@@ -27,10 +27,10 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model_epochs = 2
 fit_stats = model.fit(train_data.reshape(-1, 28, 28),
                       one_hot(train_label),
-                      batch_size = 128,
-                      epochs = model_epochs,
+                      batch_size      = 128,
+                      epochs          = model_epochs,
                       validation_data = (test_data.reshape(-1, 28, 28), one_hot(test_label)),
-                      shuffle_data = True)
+                      shuffle_data    = True)
 
 predictions = unhot(model.predict(test_data.reshape(-1, 28, 28), True))
 

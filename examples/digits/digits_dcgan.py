@@ -13,10 +13,10 @@ from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 data = datasets.load_digits()
 plot_img_samples(data.data, None)
 
-img_rows = 8
-img_cols = 8
+img_rows     = 8
+img_cols     = 8
 img_channels = 1
-img_dims = (img_channels, img_rows, img_cols)
+img_dims     = (img_channels, img_rows, img_cols)
 
 latent_dim = 100
 batch_size = 128
@@ -107,14 +107,14 @@ for epoch_idx in range(model_epochs):
 
         # valid = [1, 0], fake = [0, 1]
         d_valid = np.concatenate((np.ones((half_batch, 1)), np.zeros((half_batch, 1))), axis = 1)
-        d_fake = np.concatenate((np.zeros((half_batch, 1)), np.ones((half_batch, 1))), axis = 1)
+        d_fake  = np.concatenate((np.zeros((half_batch, 1)), np.ones((half_batch, 1))), axis = 1)
 
         # discriminator training
         d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid)
         d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake)
 
         d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
-        d_acc = 0.5 * np.add(d_acc_real, d_acc_fake)
+        d_acc  = 0.5 * np.add(d_acc_real, d_acc_fake)
 
         if verbose:
             print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, epoch_k+1, d_loss, d_acc))
@@ -142,8 +142,8 @@ for epoch_idx in range(model_epochs):
     if epoch_idx % gen_epoch == 0 and epoch_idx > 0:
         plot_generated_img_samples(None,
                                          generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
-                                         to_save = True,
-                                         iteration = epoch_idx,
+                                         to_save    = True,
+                                         iteration  = epoch_idx,
                                          model_name = model_name)
 
     if verbose:
@@ -157,6 +157,6 @@ plot_metric('accuracy', model_epochs, model_stats['d_train_acc'], model_stats['g
 
 plot_generated_img_samples(None,
                                  generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
-                                 to_save = False,
-                                 iteration = model_epochs,
+                                 to_save    = False,
+                                 iteration  = model_epochs,
                                  model_name = model_name)

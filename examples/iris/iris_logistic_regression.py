@@ -12,7 +12,7 @@ input_label = data.target[data.target != 2]
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   input_label,
-                                                                  test_size = 0.33,
+                                                                  test_size   = 0.33,
                                                                   random_seed = 15)
 
 opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.01)
@@ -26,4 +26,4 @@ plot_metric('accuracy_loss', len(fit_stats["train_loss"]),
                                                            fit_stats['train_acc'],
                                                            fit_stats['train_loss'],
                                                            model_name = 'iris_logistic_regression',
-                                                           legend = ['acc', 'loss'])
+                                                           legend     = ['acc', 'loss'])

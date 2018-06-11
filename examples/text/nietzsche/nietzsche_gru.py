@@ -21,10 +21,10 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model_epochs = 20
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 128,
-                      epochs = model_epochs,
+                      batch_size      = 128,
+                      epochs          = model_epochs,
                       validation_data = (test_data, test_label),
-                      verbose = False)
+                      verbose         = False)
 
 model_name = 'nietzsche_gru'
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)

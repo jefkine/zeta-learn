@@ -21,8 +21,8 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model_epochs = 20
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 128,
-                      epochs = model_epochs,
+                      batch_size      = 128,
+                      epochs          = model_epochs,
                       validation_data = (test_data, test_label))
 
 model_name = 'shakespeare_gru'

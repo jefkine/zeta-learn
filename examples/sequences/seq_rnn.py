@@ -23,8 +23,8 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model_epochs = 15
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 100,
-                      epochs = model_epochs,
+                      batch_size      = 100,
+                      epochs          = model_epochs,
                       validation_data = (test_data, test_label))
 
 print_seq_results(model.predict(test_data), test_label, test_data)

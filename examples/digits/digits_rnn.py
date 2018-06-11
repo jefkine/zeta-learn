@@ -10,7 +10,7 @@ from ztlearn.dl.layers import RNN, Dense, Flatten
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
-                                                                  test_size = 0.4,
+                                                                  test_size   = 0.4,
                                                                   random_seed = 5)
 
 plot_img_samples(train_data, train_label)
@@ -27,10 +27,10 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model_epochs = 100
 fit_stats = model.fit(train_data.reshape(-1,8,8),
                       one_hot(train_label),
-                      batch_size = 128,
-                      epochs = model_epochs,
+                      batch_size      = 128,
+                      epochs          = model_epochs,
                       validation_data = (test_data.reshape(-1,8,8), one_hot(test_label)),
-                      shuffle_data = True)
+                      shuffle_data    = True)
 
 predictions = unhot(model.predict(test_data.reshape(-1,8,8), True))
 

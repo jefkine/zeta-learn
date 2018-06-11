@@ -17,14 +17,14 @@ opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, learning_rate = 0
 model = Sequential()
 model.add(RNN(128, activation = 'tanh', bptt_truncate = 24, input_shape = (30, len_chars)))
 model.add(Flatten())
-model.add(Dense(len_chars,  activation = 'softmax'))
+model.add(Dense(len_chars, activation = 'softmax'))
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 20
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 128,
-                      epochs = model_epochs,
+                      batch_size      = 128,
+                      epochs          = model_epochs,
                       validation_data = (test_data, test_label))
 
 model_name = 'nietzsche_rnn'
