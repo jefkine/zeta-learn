@@ -19,7 +19,7 @@ model = Perceptron(epochs = 300,
                                  activation  = 'selu',
                                  loss        = 'cce',
                                  init_method = 'he_normal',
-                                 optimizer   = opt)
+                                 optimizer   =  opt)
 
 fit_stats = model.fit(train_data, train_label)
 

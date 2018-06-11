@@ -19,7 +19,7 @@ model = Perceptron(epochs = 600,
                                  activation  = 'relu',
                                  loss        = 'categorical_crossentropy',
                                  init_method = 'he_normal',
-                                 optimizer   = opt)
+                                 optimizer   =  opt)
 
 fit_stats = model.fit(train_data, train_label)
 

@@ -17,7 +17,7 @@ model = Perceptron(epochs = 500,
                                  activation  = 'leaky_relu',
                                  loss        = 'categorical_crossentropy',
                                  init_method = 'he_normal',
-                                 optimizer   = opt)
+                                 optimizer   =  opt)
 
 fit_stats = model.fit(train_data, train_label)
 
