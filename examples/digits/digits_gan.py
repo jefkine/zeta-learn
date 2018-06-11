@@ -152,3 +152,4 @@ plot_generated_img_samples(None,
                                  to_save    = False,
                                  iteration  = model_epochs,
                                  model_name = model_name)
+                                 

@@ -38,5 +38,6 @@ class PolynomialRegression(Regression):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
-            
+
         return super(PolynomialRegression, self).predict(polynomial_inputs)
+        

@@ -80,3 +80,4 @@ class LogisticRegression:
 
     def predict(self, inputs):
         return np.round(self.activate.forward(inputs.dot(self.weights))).astype(int)
+        

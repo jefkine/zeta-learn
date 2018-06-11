@@ -58,3 +58,4 @@ def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
             y[i, t, char_to_indices[char]] = 1
 
     return x, y, len_chars
+    

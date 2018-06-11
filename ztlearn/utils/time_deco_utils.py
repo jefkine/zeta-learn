@@ -26,3 +26,4 @@ class LogIfBusy:
             return self
         else:
             return types.MethodType(self, instance)
+            

@@ -375,3 +375,4 @@ class ConvToeplitzMat(Conv):
         return output.transpose(3, 0, 1, 2)
 
     def pass_backward(self, grad): pass
+    

@@ -58,3 +58,4 @@ class GbOptimization(object):
         weights = self.weights.reshape(self.epochs, -1)
 
         plot_opt_viz(2, theta, y, weights, self.fsolve, overlay = 'plot')
+        

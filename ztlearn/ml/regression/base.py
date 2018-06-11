@@ -54,5 +54,6 @@ class Regression(object):
 
     def predict(self, inputs):
         inputs = np.column_stack((np.ones(inputs.shape[0]), inputs))
-        
+
         return inputs.dot(self.weights)
+        

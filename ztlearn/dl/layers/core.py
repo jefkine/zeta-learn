@@ -257,3 +257,4 @@ class Reshape(Layer):
 
     def pass_backward(self, grad):
         return np.reshape(grad, self.prev_shape)
+        

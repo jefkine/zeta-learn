@@ -130,3 +130,4 @@ class RNN(Layer):
         # endif self.is_trainable
 
         return next_grad
+        

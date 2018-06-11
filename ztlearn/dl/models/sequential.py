@@ -137,3 +137,4 @@ class Sequential:
     def backward_pass(self, loss_grad):
         for layer in reversed(self.layers):
             loss_grad = layer.pass_backward(loss_grad)
+            

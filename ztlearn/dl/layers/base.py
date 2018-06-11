@@ -6,7 +6,7 @@ class Layer(ABC):
 
     def __init__(self, layer_name = 'zeta_squential'):
         self.layer_name = layer_name
-            
+
     @property
     def input_shape(self):
         return self.__input_shape
@@ -28,3 +28,4 @@ class Layer(ABC):
 
     @abstractmethod
     def pass_backward(self): pass
+    

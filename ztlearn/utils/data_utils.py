@@ -68,7 +68,7 @@ def min_max(input_data, axis = None):
 def z_score(input_data, axis = None):
     input_mean = input_data.mean(axis = axis, keepdims = True)
     input_std  = input_data.std(axis = axis, keepdims = True)
-    
+
     return (input_data - input_mean) / input_std
 
 def print_results(predictions, test_labels, num_samples = 20):
@@ -102,3 +102,4 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
 
     sys.stdout.write(bar)
     sys.stdout.flush()
+    

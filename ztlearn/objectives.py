@@ -119,7 +119,7 @@ class HellingerDistance:
         """
 
         root_difference = self.sqrt_difference(predictions, targets)
-        
+
         return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
 
     def accuracy(self, predictions, targets, threshold = 0.5):
@@ -446,3 +446,4 @@ class ObjectiveFunction:
 
     def accuracy(self, predictions, targets):
         return self.objective_func.accuracy(predictions, targets)
+        

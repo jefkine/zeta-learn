@@ -68,3 +68,4 @@ class Perceptron:
     @property
     def model_weights(self):
         return self.weights
+        

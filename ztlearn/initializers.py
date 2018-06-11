@@ -285,3 +285,4 @@ class InitializeWeights:
 
     def initialize_weights(self, shape):
         return self.init_method.weights(shape)
+        

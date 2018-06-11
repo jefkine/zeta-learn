@@ -225,3 +225,4 @@ class LSTM(Layer):
         # endif self.is_trainable
 
         return next_grad
+        

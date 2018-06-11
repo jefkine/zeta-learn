@@ -40,3 +40,4 @@ def gen_mult_sequence_xtym(nums, cols = 10, factor = 10, tensor_dtype = np.int):
         y[i]   = x[i,cols_p,:]
 
     return x_p, y, lookup
+    

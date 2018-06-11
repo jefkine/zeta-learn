@@ -26,5 +26,4 @@ def unroll_inputs(padded_inputs,
             offset += 1
 
     return unrolled_inputs.reshape(filter_num * kernel_size**2, -1)
-  
     

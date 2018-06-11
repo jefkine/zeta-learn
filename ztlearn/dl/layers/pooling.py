@@ -76,7 +76,7 @@ class Pool(Layer):
         output, self.pool_cache = self.pool_forward(self.input_col)
 
         output = output.reshape(int(output_height), int(output_width), input_num, input_depth)
-        
+
         return output.transpose(2, 3, 0, 1)
 
     def pass_backward(self, grad):
@@ -127,3 +127,4 @@ class AveragePool2D(Pool):
         d_input_col[:, range(grad_col.size)] = 1. / d_input_col.shape[0] * grad_col
 
         return d_input_col
+        

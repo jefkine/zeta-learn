@@ -24,7 +24,7 @@ class InverseTimeDecay(Decay):
     @property
     def decompose(self):
         self.lrate *= (1. / (1 + self.decay * self.epoch))
-        
+
         return super(InverseTimeDecay, self).clip_lrate
 
     @property
@@ -111,3 +111,4 @@ class DecayFunction:
     @property
     def decompose(self):
         return self.decay_func.decompose
+        

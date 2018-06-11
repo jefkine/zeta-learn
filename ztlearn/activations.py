@@ -266,7 +266,7 @@ class Sigmoid:
         """
 
         output_signal = self.activation(input_signal)
-        
+
         return np.multiply(output_signal, 1 - output_signal)
 
     @property
@@ -573,3 +573,4 @@ class ActivationFunction:
 
     def backward(self, input_signal):
         return self.activation_func.derivative(input_signal)
+        

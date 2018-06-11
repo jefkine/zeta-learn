@@ -81,3 +81,4 @@ class BatchNormalization(Layer):
         dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
 
         return dinput
+        

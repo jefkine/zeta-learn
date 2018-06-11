@@ -516,3 +516,4 @@ def register_opt(**kwargs):
         if kwrd not in allowed_kwargs:
             raise TypeError('Unexpected keyword argument passed to optimizer: ' + str(kwrd))
     return kwargs
+    

@@ -136,3 +136,4 @@ class RegularizationFunction:
 
     def derivative(self, weights):
         return self.regularization_func.derivative(weights)
+        

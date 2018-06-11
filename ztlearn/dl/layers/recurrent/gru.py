@@ -208,3 +208,4 @@ class GRU(Layer):
         # endif self.is_trainable
 
         return next_grad
+        

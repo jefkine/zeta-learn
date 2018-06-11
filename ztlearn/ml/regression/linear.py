@@ -27,7 +27,7 @@ class LinearRegression(Regression):
 
     def fit(self, inputs, targets, verbose =  False):
         fit_stats = super(LinearRegression, self).fit(inputs, targets, verbose)
-        
+
         return fit_stats
 
     @LogIfBusy
@@ -37,3 +37,4 @@ class LinearRegression(Regression):
         self.weights = np.linalg.inv(inputs.T.dot(inputs)).dot(inputs.T).dot(targets)
 
         return fit_stats
+        
