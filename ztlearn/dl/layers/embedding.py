@@ -59,15 +59,16 @@ class Embedding(Layer):
 
     def prep_layer(self):
         self.kernel_shape = (self.input_dim, self.output_dim)
-        self.weights = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.inputs = inputs
-        batch_size, num_rows, num_cols = self.inputs.shape
+        self.inputs         = inputs
         self.one_hot_inputs = np.zeros((batch_size, num_cols, self.input_dim))
 
+        batch_size, num_rows, num_cols = self.inputs.shape
+
         for i in range(batch_size):
-            self.one_hot_inputs[i,:,:] = one_hot(self.inputs[i,:,:], num_classes = self.input_dim)
+            self.one_hot_inputs[i, :, :] = one_hot(self.inputs[i, :, :], num_classes = self.input_dim)
 
         return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis = 2), axis = 1)
 
