@@ -12,7 +12,7 @@ from ztlearn.objectives import ObjectiveFunction as objective
 class Sequential:
 
     def __init__(self, init_method = 'he_normal'):
-        self.layers = []
+        self.layers      = []
         self.init_method = init_method
 
         self.is_trainable = True
@@ -89,7 +89,7 @@ class Sequential:
         predictions = self.foward_pass(train_batch_data, train_mode = True)
 
         loss = np.mean(objective(self.loss).forward(predictions, train_batch_label))
-        acc = objective(self.loss).accuracy(predictions, train_batch_label)
+        acc  = objective(self.loss).accuracy(predictions, train_batch_label)
 
         self.backward_pass(objective(self.loss).backward(predictions, train_batch_label))
 
@@ -99,7 +99,7 @@ class Sequential:
         predictions = self.foward_pass(test_batch_data, train_mode = train_mode)
 
         loss = np.mean(objective(self.loss).forward(predictions, test_batch_label))
-        acc = objective(self.loss).accuracy(predictions, test_batch_label)
+        acc  = objective(self.loss).accuracy(predictions, test_batch_label)
 
         return loss, acc
 
