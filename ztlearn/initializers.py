@@ -13,6 +13,7 @@ class WeightInitializer:
         receptive_field_size = np.prod(shape[:2])
         fan_out              = shape[0] * receptive_field_size # NF *receptive_field_size
         fan_in               = shape[1] * receptive_field_size # CF *receptive_field_size
+        
         return fan_in, fan_out
 
 
@@ -37,6 +38,7 @@ class HeNormal(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / fan_in)
+
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
     @property
@@ -65,6 +67,7 @@ class HeUniform(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / fan_in)
+
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -94,6 +97,7 @@ class GlorotNormal(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / (fan_in + fan_out))
+
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
     @property
@@ -123,6 +127,7 @@ class GlorotUniform(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / (fan_in + fan_out))
+
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -147,6 +152,7 @@ class LeCunUniform(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(3. / fan_in)
+
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -171,6 +177,7 @@ class LeCunNormal(WeightInitializer):
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / fan_in)
+
         return np.random.normal(low = -scale, high = scale, size = shape)
 
     @property
@@ -191,6 +198,7 @@ class RandomUniform(WeightInitializer):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
         np.random.seed(seed)
+
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -211,6 +219,7 @@ class RandomNormal(WeightInitializer):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
         np.random.seed(seed)
+
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
     @property
