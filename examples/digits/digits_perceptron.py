@@ -14,17 +14,13 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(data
 
 plot_img_samples(train_data, unhot(train_label))
 
-opt   = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
-model = Perceptron(epochs = 300,
-                                 activation  = 'selu',
-                                 loss        = 'cce',
-                                 init_method = 'he_normal',
-                                 optimizer   =  opt)
-
+opt       = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
+model     = Perceptron(epochs = 300, activation = 'selu', loss = 'cce', init_method = 'he_normal', optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
 
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))
+
 plot_img_results(test_data, unhot(test_label), predictions)
 plot_metric('accuracy_loss',
                              len(fit_stats["train_loss"]),

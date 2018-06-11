@@ -63,7 +63,7 @@ fit_stats = autoencoder.fit(train_data,
 
 # generate non rescaled test labels for use in generated digits plot
 _, _, _, test_label = train_test_split(mnist.data, mnist.target.astype('int'), test_size = 0.2, random_seed = 15)
-predictions = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
+predictions         = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 model_name = 'mnist_autoencoder'
 plot_generated_img_samples(unhot(one_hot(test_label)),

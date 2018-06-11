@@ -12,7 +12,7 @@ data = datasets.load_boston()
 # print(data['DESCR'])
 
 boston_data = data['data']
-input_data = z_score(boston_data[:,[5]]) # normalize and work with only one of the features
+input_data  = z_score(boston_data[:,[5]]) # normalize and work with only one of the features
 input_label = data['target']
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
@@ -24,10 +24,9 @@ model     = LinearRegression(epochs = 100, optimizer = opt, penalty = 'l1', pena
 fit_stats = model.fit(train_data, train_label)
 # fit_stats = model.fit_OLS(train_data, train_label) # ---- Ordinary Least Squares Method
 
-targets = np.expand_dims(test_label, axis = 1)
+targets     = np.expand_dims(test_label, axis = 1)
 predictions = np.expand_dims(model.predict(test_data), axis = 1)
-
-mse = objective('mean_squared_error').forward(predictions, targets)
+mse         = objective('mean_squared_error').forward(predictions, targets)
 print('Mean Squared Error: {:.2f}'.format(mse))
 
 model_name = 'boston_linear_regression'
@@ -44,7 +43,7 @@ plot_regression_results(train_data, train_label,
                                                  input_data,
                                                  model.predict(input_data),
                                                  mse,
-                                                'Linear Regression',
-                                                'Median House Price',
-                                                'Average Number of Rooms',
+                                                 'Linear Regression',
+                                                 'Median House Price',
+                                                 'Average Number of Rooms',
                                                  model_name = model_name)

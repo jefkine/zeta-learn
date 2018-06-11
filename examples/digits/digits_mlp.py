@@ -33,10 +33,10 @@ fit_stats = model.fit(train_data,
                       validation_data = (test_data, one_hot(test_label)),
                       shuffle_data    = True)
 
-eval_stats = model.evaluate(test_data, one_hot(test_label))
-
+eval_stats  = model.evaluate(test_data, one_hot(test_label))
 predictions = unhot(model.predict(test_data, True))
 print_results(predictions, test_label)
+
 plot_img_results(test_data, test_label, predictions)
 
 model_name = 'digits_mlp'

@@ -13,7 +13,7 @@ data = datasets.load_boston()
 
 # take the boston data
 boston_data = data['data']
-input_data = z_score(boston_data[:,[5]]) # work with only one of the features: RM
+input_data  = z_score(boston_data[:,[5]]) # work with only one of the features: RM
 input_label = data['target']
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
@@ -28,12 +28,10 @@ model = PolynomialRegression(degree = 5,
                                          penalty_weight = 0.5,
                                          l1_ratio       = 0.3)
 
-fit_stats = model.fit(train_data, train_label)
-
+fit_stats   = model.fit(train_data, train_label)
 targets     = np.expand_dims(test_label, axis = 1)
 predictions = np.expand_dims(model.predict(test_data), axis = 1)
-
-mse = objective('mean_squared_error').forward(predictions, targets)
+mse         = objective('mean_squared_error').forward(predictions, targets)
 print('Mean Squared Error: {:.2f}'.format(mse))
 
 model_name = 'boston_polynomial_regression'
@@ -50,7 +48,7 @@ plot_regression_results(train_data, train_label,
                                                  input_data,
                                                  model.predict(input_data),
                                                  mse,
-                                                'Polynomial Regression',
-                                                'Median House Price',
-                                                'Average Number of Rooms',
+                                                 'Polynomial Regression',
+                                                 'Median House Price',
+                                                 'Average Number of Rooms',
                                                  model_name = model_name)

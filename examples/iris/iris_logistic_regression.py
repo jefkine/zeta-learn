@@ -6,8 +6,8 @@ from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
 
-data = datasets.load_iris()
-input_data = normalize(data.data[data.target != 2])
+data        = datasets.load_iris()
+input_data  = normalize(data.data[data.target != 2])
 input_label = data.target[data.target != 2]
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,

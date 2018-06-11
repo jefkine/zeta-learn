@@ -43,7 +43,6 @@ fit_stats = model.fit(train_data.reshape(-1,1,8,8),
                       shuffle_data    = True)
 
 predictions = unhot(model.predict(test_data.reshape(-1, 1, 8, 8), True))
-
 print_results(predictions, test_label)
 plot_img_results(test_data, test_label, predictions)
 

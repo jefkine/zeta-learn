@@ -33,7 +33,6 @@ fit_stats = model.fit(train_data,
 
 # eval_stats = model.evaluate(test_data, one_hot(train_label))
 predictions = unhot(model.predict(test_data))
-
 print_results(predictions, test_label)
 
 model_name = 'iris_mlp'
