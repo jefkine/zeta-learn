@@ -8,7 +8,7 @@ LARGE_FONT = 14
 FIG_SIZE   = (8, 6)
 
 img_specs = {
-              'mnist' :  {
+              'mnist'  : {
                            'pix_row'    : 1,
                            'pix_col'    : 26,
                            'img_width'  : 28,
@@ -284,4 +284,3 @@ def plot_regression_results(train_data,
                                                                     time.strftime("%Y-%m-%d_%H-%M-%S"),'.png')))
 
     plt.show()
-    
