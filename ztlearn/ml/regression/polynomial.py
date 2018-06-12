@@ -28,16 +28,18 @@ class PolynomialRegression(Regression):
 
     def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
+
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
+
         fit_stats = super(PolynomialRegression, self).fit(polynomial_inputs, targets, verbose)
 
         return fit_stats
 
     def predict(self, inputs, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
+        
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
 
         return super(PolynomialRegression, self).predict(polynomial_inputs)
-        
