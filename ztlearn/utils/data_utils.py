@@ -16,6 +16,7 @@ def accuracy_score(predictions, targets):
 def one_hot(labels, num_classes = None):
     num_classes    = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
     one_hot_labels = np.zeros([labels.size, num_classes])
+
     one_hot_labels[np.arange(labels.size), labels.astype('int')] = 1.
 
     return one_hot_labels
@@ -25,8 +26,10 @@ def unhot(one_hot, unhot_axis = 1):
 
 def shuffle_data(input_data, input_label, random_seed = None):
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
+
     if random_seed:
         np.random.seed(random_seed)
+
     indices = np.arange(input_data.shape[0])
     np.random.shuffle(indices)
 
@@ -35,6 +38,7 @@ def shuffle_data(input_data, input_label, random_seed = None):
 def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_seed = None):
     if shuffle:
         samples, labels = shuffle_data(samples, labels, random_seed)
+
     split_ratio = int((1.0 - test_size) * len(samples))
 
     samples_train, samples_test = samples[:split_ratio], samples[split_ratio:]
@@ -46,8 +50,10 @@ def minibatches(input_data, input_label, batch_size, shuffle):
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
     minibatches = []
     indices     = np.arange(input_data.shape[0])
+
     if shuffle:
         np.random.shuffle(indices)
+
     for idx in range(0, input_data.shape[0], batch_size):
         mini_batch = indices[idx:idx + batch_size]
         minibatches.append((input_data[mini_batch], input_label[mini_batch]))
@@ -103,4 +109,3 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
 
     sys.stdout.write(bar)
     sys.stdout.flush()
-    
