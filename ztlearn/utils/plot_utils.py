@@ -47,6 +47,7 @@ def plotter(x,
 
     for i in range(len(y)):
         ax.plot(x, y[i], **plot_dict)
+        
     ax.set_title(title, **title_dict)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
