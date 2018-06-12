@@ -28,7 +28,7 @@ init_type = 'he_uniform'
 gen_epoch = 50
 gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for tiles 6 by 6 i.e (36) image generation
 
-model_epochs = 400
+model_epochs = 600
 model_name   = 'digits_dcgan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
@@ -38,12 +38,12 @@ g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.000
 
 def stack_generator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Dense(128*2*2, input_shape = (latent_dim,)))
+    model.add(Dense(64*2*2, input_shape = (latent_dim,)))
     model.add(Activation('leaky_relu'))
     model.add(BatchNormalization(momentum = 0.8))
-    model.add(Reshape((128, 2, 2)))
+    model.add(Reshape((64, 2, 2)))
     model.add(UpSampling2D())
-    model.add(Conv2D(64, kernel_size = (3, 3), padding = 'same'))
+    model.add(Conv2D(32, kernel_size = (3, 3), padding = 'same'))
     model.add(BatchNormalization(momentum = 0.8))
     model.add(Activation('leaky_relu'))
     model.add(UpSampling2D())
@@ -55,10 +55,10 @@ def stack_generator_layers(init):
 
 def stack_discriminator_layers(init):
     model = Sequential(init_method = init)
-    model.add(Conv2D(64, kernel_size = (3, 3), padding = 'same', input_shape = img_dims))
+    model.add(Conv2D(32, kernel_size = (3, 3), padding = 'same', input_shape = img_dims))
     model.add(Activation('leaky_relu'))
     model.add(Dropout(0.25))
-    model.add(Conv2D(128, kernel_size = (3, 3), padding = 'same'))
+    model.add(Conv2D(64, kernel_size = (3, 3), padding = 'same'))
     model.add(Activation('leaky_relu'))
     model.add(Dropout(0.25))
     model.add(Flatten())
