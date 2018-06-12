@@ -117,6 +117,7 @@ def plot_opt_viz(dims,
 
     if dims == 3:
         fig = plt.figure(figsize = fig_dims)
+
         if overlay == 'wireframe':
             from mpl_toolkits.mplot3d import axes3d # for 3d projections
             ax = fig.add_subplot(111, projection = '3d')
@@ -254,7 +255,8 @@ def plot_regression_results(train_data,
                                          test_label,
                                          input_data,
                                          pred_line,
-                                         mse, super_title,
+                                         mse,
+                                         super_title,
                                          y_label,
                                          x_label,
                                          model_name = '',
@@ -263,9 +265,11 @@ def plot_regression_results(train_data,
                                          font_size  = 10):
 
     plt.figure(figsize = fig_dims)
-    cmap = plt.get_cmap('summer')
+
+    cmap  = plt.get_cmap('summer')
     train = plt.scatter(train_data, train_label, color = cmap(0.8), s = 12)
-    test = plt.scatter(test_data, test_label, color = cmap(0.4), s = 12)
+    test  = plt.scatter(test_data, test_label, color = cmap(0.4), s = 12)
+
     plt.plot(input_data, pred_line, '*', color = 'green', markersize = 4)
     plt.suptitle(super_title)
 
