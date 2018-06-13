@@ -262,8 +262,8 @@ class BinaryCrossEntropy(Objective):
         Calculates the BinaryCrossEntropy Accuracy Score given prediction and targets
 
         Args:
-            predictions (numpy.array): the predictions numpy array
-            targets     (numpy.array): the targets numpy array
+            predictions (numpy.array)  : the predictions numpy array
+            targets     (numpy.array)  : the targets numpy array
             threshold   (numpy.float32): the threshold value
 
         Returns:
@@ -446,4 +446,3 @@ class ObjectiveFunction:
 
     def accuracy(self, predictions, targets):
         return self.objective_func.accuracy(predictions, targets)
-        
