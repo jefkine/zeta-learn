@@ -6,13 +6,15 @@ from sklearn.datasets import fetch_mldata
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
-from ztlearn.dl.layers import Dense, Dropout, MaxPooling2D
-from ztlearn.dl.layers import Activation, Flatten, Conv2D, Reshape, UpSampling2D
+from ztlearn.dl.layers import Activation, BatchNormalization, Conv2D
+from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 
 
 mnist               = fetch_mldata('MNIST original')
 mnist_data, _, _, _ = train_test_split(mnist.data, mnist.target, test_size = 0.0)
-plot_img_samples(train_data[:40], None, dataset = 'mnist')
+
+# plot samples of training data
+plot_img_samples(mnist_data[:40], None, dataset = 'mnist')
 
 img_rows     = 28
 img_cols     = 28
@@ -94,7 +96,7 @@ for epoch_idx in range(model_epochs):
     # set the discriminator to trainable
     discriminator.trainable = True
 
-    for epoch_k in range(2):
+    for epoch_k in range(1):
 
         # draw random samples from real images
         index = np.random.choice(images.shape[0], half_batch, replace = False)

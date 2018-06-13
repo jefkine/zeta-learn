@@ -11,6 +11,8 @@ from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 
 
 data = datasets.load_digits()
+
+# plot samples of training data
 plot_img_samples(data.data, None)
 
 img_rows     = 8
