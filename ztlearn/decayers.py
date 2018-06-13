@@ -12,7 +12,7 @@ class Decay(object):
         self.min_lrate = min_lrate
         self.max_lrate = max_lrate
 
-    @property
+    @jit(nogil = True, cache = True)
     def clip_lrate(self):
         return np.clip(self.lrate, self.min_lrate, self.max_lrate)
 
