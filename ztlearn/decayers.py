@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 class Decay(object):
 
@@ -21,11 +22,11 @@ class InverseTimeDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(InverseTimeDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @property
+    @jit(nogil = True, cache = True)
     def decompose(self):
         self.lrate *= (1. / (1 + self.decay * self.epoch))
 
-        return super(InverseTimeDecay, self).clip_lrate
+        return super(InverseTimeDecay, self).clip_lrate()
 
     @property
     def decay_name(self):
@@ -39,11 +40,11 @@ class StepDecay(Decay):
         super(StepDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
         self.step_size = step_size
 
-    @property
+    @jit(nogil = True, cache = True)
     def decompose(self):
         self.lrate *= np.power(self.decay, ((1 + self.epoch) // self.step_size))
 
-        return super(StepDecay, self).clip_lrate
+        return super(StepDecay, self).clip_lrate()
 
     @property
     def decay_name(self):
@@ -55,11 +56,11 @@ class ExponetialDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(ExponetialDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @property
+    @jit(nogil = True, cache = True)
     def decompose(self):
         self.lrate *= np.power(self.decay, self.epoch)
 
-        return super(ExponetialDecay, self).clip_lrate
+        return super(ExponetialDecay, self).clip_lrate()
 
     @property
     def decay_name(self):
@@ -71,11 +72,11 @@ class NaturalExponentialDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(NaturalExponentialDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @property
+    @jit(nogil = True, cache = True)
     def decompose(self):
         self.lrate *= np.exp(-self.decay * self.epoch)
 
-        return super(NaturalExponentialDecay, self).clip_lrate
+        return super(NaturalExponentialDecay, self).clip_lrate()
 
     @property
     def decay_name(self):

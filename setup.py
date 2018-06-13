@@ -17,7 +17,7 @@ REQUIRES_PYTHON = '>=3.5.0'
 VERSION = None
 
 REQUIRED = [
-    'numpy', 'matplotlib',
+    'numpy', 'matplotlib', 'numba'
 ]
 
 here = os.path.abspath(os.path.dirname(__file__))
