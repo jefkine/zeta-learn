@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 class Objective(object):
 
+    @jit(nogil = True, cache = True)
     def clip(self, predictions, epsilon = 1e-15):
         clipped_predictions = np.clip(predictions, epsilon, 1 - epsilon)
         clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
 
         return clipped_predictions, clipped_divisor
 
+    @jit(nogil = True, cache = True)
     def add_fuzz_factor(self, np_array, epsilon = 1e-05):
         return np.add(np_array, epsilon)
 
@@ -32,7 +35,8 @@ class MeanSquaredError:
             [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error
     """
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the MeanSquaredError Loss to prediction and targets provided
@@ -47,7 +51,8 @@ class MeanSquaredError:
 
         return 0.5 * np.mean(np.sum(np.power(predictions - targets, 2), axis = 1))
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the MeanSquaredError Derivative to prediction and targets provided
@@ -62,6 +67,7 @@ class MeanSquaredError:
 
         return predictions - targets
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets, threshold = 0.5):
         return 0
 
@@ -85,10 +91,12 @@ class HellingerDistance:
 
     SQRT_2 = np.sqrt(2)
 
+    @jit(nogil = True, cache = True)
     def sqrt_difference(self, predictions, targets):
         return np.sqrt(predictions) - np.sqrt(targets)
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the HellingerDistance Loss to prediction and targets provided
@@ -105,7 +113,8 @@ class HellingerDistance:
 
         return np.mean(np.sum(np.power(root_difference, 2), axis = 1) / HellingerDistance.SQRT_2)
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the HellingerDistance Derivative to prediction and targets provided
@@ -122,6 +131,7 @@ class HellingerDistance:
 
         return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets, threshold = 0.5):
         return 0
 
@@ -143,7 +153,8 @@ class HingeLoss:
             [Wikipedia Article] https://en.wikipedia.org/wiki/Hinge_loss
     """
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the Hinge-Loss to Loss prediction and targets provided
@@ -162,7 +173,8 @@ class HingeLoss:
 
         return np.mean(np.sum(margins, axis = 0))
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the Hinge-Loss Derivative to prediction and targets provided
@@ -185,6 +197,7 @@ class HingeLoss:
 
         return binary
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets, threshold = 0.5):
 
         """
@@ -220,7 +233,8 @@ class BinaryCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the BinaryCrossEntropy Loss to prediction and targets provided
@@ -238,7 +252,8 @@ class BinaryCrossEntropy(Objective):
         return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
         # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the BinaryCrossEntropy Derivative to prediction and targets provided
@@ -256,6 +271,7 @@ class BinaryCrossEntropy(Objective):
         return (clipped_predictions - targets) / clipped_divisor
         # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets, threshold = 0.5):
 
         """
@@ -291,7 +307,8 @@ class CategoricalCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the CategoricalCrossEntropy Loss to prediction and targets provided
@@ -308,7 +325,8 @@ class CategoricalCrossEntropy(Objective):
 
         return np.mean(-np.sum(targets * np.log(clipped_predictions), axis = 1))
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the CategoricalCrossEntropy Derivative to prediction and targets provided
@@ -325,6 +343,7 @@ class CategoricalCrossEntropy(Objective):
 
         return clipped_predictions - targets
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets):
 
         """
@@ -355,7 +374,8 @@ class KLDivergence(Objective):
 
     """
 
-    def loss(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def loss(self, predictions, targets, np_type):
 
         """
         Applies the KLDivergence Loss to prediction and targets provided
@@ -373,7 +393,8 @@ class KLDivergence(Objective):
 
         return np.sum(targets * np.log(targets/predictions), axis = 1)
 
-    def derivative(self, predictions, targets, **kwargs):
+    @jit(nogil = True, cache = True)
+    def derivative(self, predictions, targets, np_type):
 
         """
         Applies the KLDivergence Derivative to prediction and targets provided
@@ -393,6 +414,7 @@ class KLDivergence(Objective):
 
         return (1 + np.log(targets/predictions)) * d_log_diff
 
+    @jit(nogil = True, cache = True)
     def accuracy(self, predictions, targets):
 
         """
@@ -439,10 +461,10 @@ class ObjectiveFunction:
         return self.objective_func.objective_name
 
     def forward(self, predictions, targets, np_type = np.float32):
-        return self.objective_func.loss(predictions, targets, np_type = np_type)
+        return self.objective_func.loss(predictions, targets, np_type)
 
     def backward(self, predictions, targets, np_type = np.float32):
-        return self.objective_func.derivative(predictions, targets, np_type = np_type)
+        return self.objective_func.derivative(predictions, targets, np_type)
 
     def accuracy(self, predictions, targets):
         return self.objective_func.accuracy(predictions, targets)

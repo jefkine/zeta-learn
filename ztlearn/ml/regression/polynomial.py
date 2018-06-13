@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from numba import jit
+
 from .base import Regression
 from ztlearn.utils import normalize
 from sklearn.preprocessing import PolynomialFeatures
@@ -26,6 +28,7 @@ class PolynomialRegression(Regression):
                                                    penalty_weight = penalty_weight,
                                                    l1_ratio       = l1_ratio)
 
+    @jit(nogil = True, cache = True)
     def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
 
@@ -36,9 +39,10 @@ class PolynomialRegression(Regression):
 
         return fit_stats
 
+    @jit(nogil = True, cache = True)
     def predict(self, inputs, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
-        
+
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
 

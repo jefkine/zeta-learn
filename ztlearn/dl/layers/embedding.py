@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from .base import Layer
 from ztlearn.utils import one_hot
@@ -57,10 +58,12 @@ class Embedding(Layer):
     def output_shape(self):
         return self.input_shape
 
+    @jit(nogil = True, cache = True)
     def prep_layer(self):
         self.kernel_shape = (self.input_dim, self.output_dim)
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.inputs         = inputs
         self.one_hot_inputs = np.zeros((batch_size, num_cols, self.input_dim))
@@ -72,8 +75,8 @@ class Embedding(Layer):
 
         return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis = 2), axis = 1)
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         d_inputs     = np.matmul(grad, self.one_hot_inputs)
         d_embeddings = np.sum(d_inputs, axis = 0)
         self.weights = optimizer(self.weight_optimizer).update(self.weights, d_embeddings.T)
-        

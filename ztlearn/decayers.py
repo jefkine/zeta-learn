@@ -111,4 +111,3 @@ class DecayFunction:
     @property
     def decompose(self):
         return self.decay_func.decompose
-        

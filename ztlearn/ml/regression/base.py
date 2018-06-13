@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
@@ -28,6 +29,7 @@ class Regression(object):
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
+    @jit(nogil = True, cache = True)
     def fit(self, inputs, targets, verbose = False):
         fit_stats    = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         inputs       = np.column_stack((np.ones(inputs.shape[0]), inputs))
@@ -52,8 +54,8 @@ class Regression(object):
 
         return fit_stats
 
+    @jit(nogil = True, cache = True)
     def predict(self, inputs):
         inputs = np.column_stack((np.ones(inputs.shape[0]), inputs))
 
         return inputs.dot(self.weights)
-        

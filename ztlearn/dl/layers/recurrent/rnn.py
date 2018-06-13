@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
+
 from ..base import Layer
 from ztlearn.utils import clip_gradients as cg
 from ztlearn.initializers import InitializeWeights as init
@@ -64,6 +66,7 @@ class RNN(Layer):
     def output_shape(self):
         return self.input_shape
 
+    @jit(nogil = True, cache = True)
     def prep_layer(self):
         _, input_dim = self.input_shape
 
@@ -74,6 +77,7 @@ class RNN(Layer):
         self.b_output = np.zeros((input_dim,))
         self.b_input  = np.zeros((self.h_units,))
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
         batch_size, time_steps, input_dim = inputs.shape
@@ -94,6 +98,7 @@ class RNN(Layer):
 
         return self.outputs
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
         next_grad        = np.zeros_like(grad)
@@ -130,4 +135,3 @@ class RNN(Layer):
         # endif self.is_trainable
 
         return next_grad
-        

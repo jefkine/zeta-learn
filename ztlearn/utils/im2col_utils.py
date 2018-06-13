@@ -2,7 +2,9 @@
 
 # Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
 import numpy as np
+from numba import jit
 
+@jit(nogil = True, cache = True)
 def get_pad(padding, input_height, input_width, stride_height, stride_width, kernel_height, kernel_width):
     if padding == 'valid':
         return (0, 0), (0, 0)
@@ -25,6 +27,7 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
 
         return (pad_top, pad_bottom), (pad_left, pad_right)
 
+@jit(nogil = True, cache = True)
 def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     # First figure out what the size of the output should be
     N, C, H, W = x_shape
@@ -48,6 +51,7 @@ def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0
 
     return (k, i, j)
 
+@jit(nogil = True, cache = True)
 def im2col_indices(x, field_height, field_width, padding, stride = 1):
     """ An implementation of im2col based on some fancy indexing """
     pad_height, pad_width = padding
@@ -59,6 +63,7 @@ def im2col_indices(x, field_height, field_width, padding, stride = 1):
 
     return cols
 
+@jit(nogil = True, cache = True)
 def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride=1):
     """ An implementation of col2im based on fancy indexing and np.add.at """
     N, C, H, W            = x_shape

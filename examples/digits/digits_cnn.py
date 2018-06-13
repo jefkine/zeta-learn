@@ -22,7 +22,7 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 
 # model definition
 model = Sequential(init_method = 'he_uniform')
-model.add(Conv2D(filters = 32, kernel_size = (3, 3), activation = 'relu', input_shape = (1,8,8), padding = 'same'))
+model.add(Conv2D(filters = 32, kernel_size = (3, 3), activation = 'relu', input_shape = (1, 8, 8), padding = 'same'))
 model.add(Dropout(0.25))
 model.add(BatchNormalization())
 model.add(Conv2D(filters = 64, kernel_size = (3, 3), activation = 'relu', padding = 'same'))
@@ -37,7 +37,7 @@ model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 12
-fit_stats = model.fit(train_data.reshape(-1,1,8,8),
+fit_stats = model.fit(train_data.reshape(-1, 1, 8, 8),
                       one_hot(train_label),
                       batch_size      = 128,
                       epochs          = model_epochs,

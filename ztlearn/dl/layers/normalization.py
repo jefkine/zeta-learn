@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from .base import Layer
 from ztlearn.optimizers import OptimizationFunction as optimizer
@@ -38,10 +39,12 @@ class BatchNormalization(Layer):
     def output_shape(self):
         return self.input_shape
 
+    @jit(nogil = True, cache = True)
     def prep_layer(self):
         self.gamma = np.ones(self.input_shape)
         self.beta  = np.zeros(self.input_shape)
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         if self.running_var is None:
             self.running_var = np.var(inputs, axis = 0)
@@ -65,6 +68,7 @@ class BatchNormalization(Layer):
 
         return self.gamma * self.input_norm + self.beta
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         dinput_norm = grad * self.gamma
 
@@ -81,4 +85,3 @@ class BatchNormalization(Layer):
         dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
 
         return dinput
-        

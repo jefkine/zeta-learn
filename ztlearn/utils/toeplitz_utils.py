@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
+@jit(nogil = True, cache = True)
 def unroll_inputs(padded_inputs,
                                  batch_num,
                                  filter_num,
@@ -26,4 +28,3 @@ def unroll_inputs(padded_inputs,
             offset += 1
 
     return unrolled_inputs.reshape(filter_num * kernel_size**2, -1)
-    

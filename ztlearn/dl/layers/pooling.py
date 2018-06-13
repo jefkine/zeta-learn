@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from .base import Layer
 from ztlearn.utils import get_pad
@@ -37,10 +38,11 @@ class Pool(Layer):
                                                                 self.pool_size[0],
                                                                 self.pool_size[1])
 
-        # alternate formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
-        # out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
-        # out_width = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
+        # formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
+        out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
+        out_width = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
 
+        ''' NOTE: alternate formula:
         if self.padding == 'same':
             out_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
             out_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
@@ -48,6 +50,7 @@ class Pool(Layer):
         if self.padding == 'valid':
             out_height = np.ceil(np.float32(input_height - self.pool_size[0] + 1) / np.float32(self.strides[0]))
             out_width  = np.ceil(np.float32(input_width - self.pool_size[1] + 1) / np.float32(self.strides[1]))
+        '''
 
         assert out_height % 1 == 0
         assert out_width % 1  == 0
@@ -56,6 +59,7 @@ class Pool(Layer):
 
     def prep_layer(self): pass
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         input_num, input_depth, input_height, input_width = inputs.shape
         self.inputs = inputs
@@ -79,6 +83,7 @@ class Pool(Layer):
 
         return output.transpose(2, 3, 0, 1)
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
@@ -101,12 +106,14 @@ class MaxPooling2D(Pool):
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super(MaxPooling2D, self).__init__(pool_size, strides, padding)
 
+    @jit(nogil = True, cache = True)
     def pool_forward(self, input_col):
         max_id = np.argmax(input_col, axis = 0)
         out    = input_col[max_id, range(max_id.size)]
 
         return out, max_id
 
+    @jit(nogil = True, cache = True)
     def pool_backward(self, d_input_col, grad_col, pool_cache):
         d_input_col[pool_cache, range(grad_col.size)] = grad_col
 
@@ -118,13 +125,14 @@ class AveragePool2D(Pool):
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super(AveragePool2D, self).__init__(pool_size, strides, padding)
 
+    @jit(nogil = True, cache = True)
     def pool_forward(self, input_col):
         out = np.mean(input_col, axis = 0)
 
         return out, None
 
+    @jit(nogil = True, cache = True)
     def pool_backward(self, d_input_col, grad_col, pool_cache = None):
         d_input_col[:, range(grad_col.size)] = 1. / d_input_col.shape[0] * grad_col
 
         return d_input_col
-        

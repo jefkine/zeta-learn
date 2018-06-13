@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 #-----------------------------------------------------------------------------#
 #                       TEXT UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
+@jit(nogil = True, cache = True)
 def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
@@ -31,6 +33,7 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
 
     return x, y, len_chars
 
+@jit(nogil = True, cache = True)
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
@@ -58,4 +61,3 @@ def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
             y[i, t, char_to_indices[char]] = 1
 
     return x, y, len_chars
-    

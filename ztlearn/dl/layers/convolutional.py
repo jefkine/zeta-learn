@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from .base import Layer
 from ztlearn.utils import get_pad
@@ -74,10 +75,11 @@ class Conv(Layer):
                                                       self.kernel_size[0],
                                                       self.kernel_size[1])
 
-        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-        # output_height = ((self.input_shape[1] - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
-        # output_width = ((self.input_shape[2] - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
+        # formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
+        output_height = ((self.input_shape[1] - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
+        output_width = ((self.input_shape[2] - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
 
+        ''' NOTE: alternate formula:
         if self.padding == 'same':
             output_height = np.ceil(np.float32(self.input_shape[1]) / np.float32(self.strides[0]))
             output_width  = np.ceil(np.float32(self.input_shape[2]) / np.float32(self.strides[1]))
@@ -85,9 +87,11 @@ class Conv(Layer):
         if self.padding == 'valid':
             output_height = np.ceil(np.float32(self.input_shape[1] - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
             output_width  = np.ceil(np.float32(self.input_shape[2] - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
+        '''
 
         return self.filters, int(output_height), int(output_width)
 
+    @jit(nogil = True, cache = True)
     def prep_layer(self):
         self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
@@ -106,6 +110,7 @@ class Conv2D(Conv):
 
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _  = self.weights.shape
         self.input_shape          = inputs.shape
@@ -121,14 +126,15 @@ class Conv2D(Conv):
                                                       self.kernel_size[0],
                                                       self.kernel_size[1])
 
-        # confirm dimensions
-        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
+        # confirm dimensions: TODO: implement with numba
+        #assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        #assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
-        # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-        # output_height = ((input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
-        # output_width = ((input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
+        # formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
+        output_height = ((input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
+        output_width = ((input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1]) + 1
 
+        ''' NOTE: alternate formula:
         if self.padding == 'same':
             output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
             output_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
@@ -136,6 +142,7 @@ class Conv2D(Conv):
         if self.padding == 'valid':
             output_height = np.ceil(np.float32(input_height - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
             output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
+        '''
 
         # convert to columns
         self.input_col = im2col_indices(inputs,
@@ -152,6 +159,7 @@ class Conv2D(Conv):
 
         return output.transpose(3, 0, 1, 2)
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.input_shape
         doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
@@ -203,6 +211,7 @@ class ConvLoop2D(Conv):
 
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
+    @jit(nogil = True, cache = True)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _ = self.weights.shape
         self.input_shape         = inputs.shape
@@ -220,21 +229,21 @@ class ConvLoop2D(Conv):
 
         x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
 
-        # confirm dimensions
-        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
+        # confirm dimensions: TODO: implement with numba
+        # assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        # assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
         # output_width = (input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1] + 1
 
         if self.padding == 'same':
-            output_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
-            output_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
+            output_height = np.ceil((input_height) / (self.strides[0])).astype(int)
+            output_width  = np.ceil((input_width) / (self.strides[1])).astype(int)
 
         if self.padding == 'valid':
-            output_height = np.ceil(np.float32(input_height - self.kernel_size[0] + 1) / np.float32(self.strides[0]))
-            output_width  = np.ceil(np.float32(input_width - self.kernel_size[1] + 1) / np.float32(self.strides[1]))
+            output_height = np.ceil((input_height - self.kernel_size[0] + 1) / (self.strides[0])).astype(int)
+            output_width  = np.ceil((input_width - self.kernel_size[1] + 1) / (self.strides[1])).astype(int)
 
         output = np.zeros((input_num, self.filter_num, output_height, output_width))
 
@@ -249,6 +258,7 @@ class ConvLoop2D(Conv):
 
         return output
 
+    @jit(nogil = True, cache = True)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
@@ -269,7 +279,7 @@ class ConvLoop2D(Conv):
                                                           self.kernel_size[0],
                                                           self.kernel_size[1])
 
-            pad_size = np.sum(pad_height)/2
+            pad_size = (np.sum(pad_height)/2).astype(int)
             if pad_size != 0:
                 grad = grad[:, :, pad_size: -pad_size, pad_size: -pad_size]
 
@@ -339,7 +349,7 @@ class ConvToeplitzMat(Conv):
 
         x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
 
-        # confirm dimensions
+        # confirm dimensions: TODO: implement with numba
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
         assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
@@ -375,4 +385,3 @@ class ConvToeplitzMat(Conv):
         return output.transpose(3, 0, 1, 2)
 
     def pass_backward(self, grad): pass
-    

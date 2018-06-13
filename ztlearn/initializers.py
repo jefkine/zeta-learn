@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 class WeightInitializer:
 
+    @jit(nogil = True, cache = True)
     def compute_fans(self, shape):
         # Original code forked from MIT licensed keras project
         # https://github.com/fchollet/keras/blob/master/keras/initializers.py
@@ -35,6 +37,7 @@ class HeNormal(WeightInitializer):
             [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / fan_in)
@@ -64,6 +67,7 @@ class HeUniform(WeightInitializer):
             [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / fan_in)
@@ -94,6 +98,7 @@ class GlorotNormal(WeightInitializer):
             [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / (fan_in + fan_out))
@@ -124,6 +129,7 @@ class GlorotUniform(WeightInitializer):
             [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / (fan_in + fan_out))
@@ -149,6 +155,7 @@ class LeCunUniform(WeightInitializer):
             [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(3. / fan_in)
@@ -174,6 +181,7 @@ class LeCunNormal(WeightInitializer):
             [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / fan_in)
@@ -194,6 +202,7 @@ class RandomUniform(WeightInitializer):
     Uniform distribution
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape, seed = None):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
@@ -215,6 +224,7 @@ class RandomNormal(WeightInitializer):
     Gaussian distribution
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape, seed = None):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
@@ -235,6 +245,7 @@ class Zero(WeightInitializer):
     Zero is an implementation of weight initialization that returns all zeros
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         return np.zeros(shape = shape)
 
@@ -251,6 +262,7 @@ class One(WeightInitializer):
     One is an implementation of weight initialization that returns all ones
     """
 
+    @jit(nogil = True, cache = True)
     def weights(self, shape):
         return np.ones(shape = shape)
 
@@ -285,4 +297,3 @@ class InitializeWeights:
 
     def initialize_weights(self, shape):
         return self.init_method.weights(shape)
-        

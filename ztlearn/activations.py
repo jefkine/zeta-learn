@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 class ELU:
 
@@ -23,6 +24,7 @@ class ELU:
     def __init__(self, activation_dict):
         self.alpha = activation_dict['alpha'] if 'alpha' in activation_dict else 0.1
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -37,6 +39,7 @@ class ELU:
 
         return np.where(input_signal >= 0.0, input_signal, np.multiply(np.expm1(input_signal), self.alpha))
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -80,6 +83,7 @@ class SELU:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -96,6 +100,7 @@ class SELU:
                                                             np.multiply(SELU.ALPHA,
                                                             np.exp(input_signal)) - SELU.ALPHA)
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -138,6 +143,7 @@ class ReLU:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -152,6 +158,7 @@ class ReLU:
 
         return np.where(input_signal >= 0.0, input_signal, 0.0)
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -189,6 +196,7 @@ class TanH:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -203,6 +211,7 @@ class TanH:
 
         return np.tanh(input_signal)
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -239,6 +248,7 @@ class Sigmoid:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -253,6 +263,7 @@ class Sigmoid:
 
         return np.exp(-np.logaddexp(0, -input_signal))
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -291,6 +302,7 @@ class SoftPlus:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -305,6 +317,7 @@ class SoftPlus:
 
         return np.logaddexp(0, input_signal)
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -348,6 +361,7 @@ class Softmax:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -364,6 +378,7 @@ class Softmax:
 
         return probs / np.sum(probs, axis = -1, keepdims = True)
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -410,6 +425,7 @@ class LeakyReLU:
     def __init__(self, activation_dict):
         self.alpha = activation_dict['alpha'] if 'alpha' in activation_dict else 0.01
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -424,6 +440,7 @@ class LeakyReLU:
 
         return np.where(input_signal >= 0, input_signal, np.multiply(input_signal, self.alpha))
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -461,6 +478,7 @@ class ElliotSigmoid:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -475,6 +493,7 @@ class ElliotSigmoid:
 
         return np.multiply(input_signal, 0.5) / (1 + np.abs(input_signal)) + 0.5
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """
@@ -510,6 +529,7 @@ class Linear:
 
     def __init__(self, activation_dict): pass
 
+    @jit(nogil = True, cache = True)
     def activation(self, input_signal):
 
         """
@@ -524,6 +544,7 @@ class Linear:
 
         return input_signal
 
+    @jit(nogil = True, cache = True)
     def derivative(self, input_signal):
 
         """

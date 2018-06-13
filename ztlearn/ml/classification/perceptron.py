@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from numba import jit
 
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
@@ -31,6 +32,7 @@ class Perceptron:
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
+    @jit(nogil = True, cache = True)
     def fit(self, inputs, targets, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
 
@@ -61,6 +63,7 @@ class Perceptron:
 
         return fit_stats
 
+    @jit(nogil = True, cache = True)
     def predict(self, inputs):
         # return self.activate.forward(inputs.dot(self.weights) + self.bias)
         return inputs.dot(self.weights) + self.bias
@@ -68,4 +71,3 @@ class Perceptron:
     @property
     def model_weights(self):
         return self.weights
-        
