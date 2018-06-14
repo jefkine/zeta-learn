@@ -14,7 +14,7 @@ class Optimizer(object):
         self.__dict__.update(kwargs)
         self.epoch = 0
 
-    @property
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def get_learning_rate(self):
         self.decay      = self.decay if hasattr(self, 'decay') else 1e-6
         self.min_lrate  = self.min_lrate if hasattr(self, 'min_lrate') else 0
@@ -95,8 +95,8 @@ class SGD(Optimizer):
         self.weights = weights
         self.grads   = grads
 
-        self.weights -= super(SGD, self).get_learning_rate * self.grads
-        # self.weights -= np.multiply(super(SGD, self).get_learning_rate, self.grads, dtype=np.float128)
+        self.weights -= super(SGD, self).get_learning_rate() * self.grads
+        # self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype=np.float128)
 
         return self.weights
 
@@ -146,7 +146,7 @@ class SGDMomentum(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        self.velocity  = self.momentum * self.velocity - super(SGDMomentum, self).get_learning_rate * self.grads
+        self.velocity  = self.momentum * self.velocity - super(SGDMomentum, self).get_learning_rate() * self.grads
         self.weights  += self.velocity
 
         return self.weights
@@ -207,7 +207,7 @@ class Adam(Optimizer):
         self.v = self.beta2 * self.v + (1 - self.beta2) * np.power(self.grads, 2)
         v_hat  = self.v / (1 - np.power(self.beta2, self.t))
 
-        self.weights -= (super(Adam, self).get_learning_rate * m_hat / (np.sqrt(v_hat) + self.epsilon))
+        self.weights -= (super(Adam, self).get_learning_rate() * m_hat / (np.sqrt(v_hat) + self.epsilon))
 
         return self.weights
 
@@ -262,7 +262,7 @@ class Adamax(Optimizer):
             self.u = np.zeros_like(self.weights)
 
         self.t += 1
-        learning_rate_t = super(Adamax, self).get_learning_rate / (1. - np.power(self.beta1, self.t))
+        learning_rate_t = super(Adamax, self).get_learning_rate() / (1. - np.power(self.beta1, self.t))
 
         m_hat = (self.beta1 * self.m) + (1. - self.beta1) * self.grads
         u_hat = np.maximum(self.beta2 * self.u, np.abs(self.grads))
@@ -311,7 +311,7 @@ class AdaGrad(Optimizer):
             self.cache = np.zeros_like(self.grads)
 
         self.cache   += np.power(self.grads, 2)
-        self.weights -= (super(AdaGrad, self).get_learning_rate * self.grads / (np.sqrt(self.cache) + self.epsilon))
+        self.weights -= (super(AdaGrad, self).get_learning_rate() * self.grads / (np.sqrt(self.cache) + self.epsilon))
 
         return self.weights
 
@@ -367,7 +367,7 @@ class Adadelta(Optimizer):
         RMSE_delta = np.sqrt(self.delta + self.epsilon)
 
         update = self.grads * (RMSE_delta / RMSE_grad)
-        self.weights -= super(Adadelta, self).get_learning_rate * update
+        self.weights -= super(Adadelta, self).get_learning_rate() * update
         self.delta    = self.rho * self.delta + (1 - self.rho) * np.power(update, 2)
 
         return self.weights
@@ -466,12 +466,12 @@ class NesterovAcceleratedGradient(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        # self.velocity       = self.momentum * self.velocity_prev - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
+        # self.velocity       = self.momentum * self.velocity_prev - super(NesterovAcceleratedGradient, self).get_learning_rate() * self.grads
         # self.weights       += (self.velocity + self.momentum * (self.velocity - self.velocity_prev))
         # self.velocity_prev  = self.velocity
 
         self.velocity_prev  = self.velocity
-        self.velocity       = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate * self.grads
+        self.velocity       = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate() * self.grads
         self.weights       += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
 
         return self.weights
