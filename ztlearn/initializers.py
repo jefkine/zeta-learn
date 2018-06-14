@@ -3,9 +3,9 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+from ztlearn.utils import DISABLE_JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 class WeightInitializer:
 

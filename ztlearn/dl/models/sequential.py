@@ -3,7 +3,7 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+from ztlearn.utils import DISABLE_JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
@@ -11,7 +11,7 @@ from ztlearn.utils import minibatches
 from ztlearn.dl.layers import Activation
 from ztlearn.objectives import ObjectiveFunction as objective
 
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 class Sequential:
 

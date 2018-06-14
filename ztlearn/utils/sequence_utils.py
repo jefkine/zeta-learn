@@ -5,9 +5,9 @@ import numpy as np
 
 from numba import jit, config
 from .data_utils import one_hot
-from .numba_utils import JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
+from .numba_utils import DISABLE_JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
 
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 #-----------------------------------------------------------------------------#
 #                     GENERATE SYNTHETIC SEQUENCES DATA                       #

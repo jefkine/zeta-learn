@@ -44,7 +44,7 @@ from .plot_utils import plot_generated_img_samples
 from .time_deco_utils import LogIfBusy
 
 # import from numba_utils.py
-from .numba_utils import JIT_FLAG
+from .numba_utils import DISABLE_JIT_FLAG
 from .numba_utils import CACHE_FLAG
 from .numba_utils import NOGIL_FLAG
 

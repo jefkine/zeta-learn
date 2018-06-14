@@ -3,7 +3,7 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+from ztlearn.utils import DISABLE_JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from ..base import Layer
 from ztlearn.utils import clip_gradients as cg
@@ -11,7 +11,7 @@ from ztlearn.initializers import InitializeWeights as init
 from ztlearn.activations import ActivationFunction as activate
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 class LSTM(Layer):
 

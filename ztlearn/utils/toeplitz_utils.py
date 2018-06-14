@@ -3,9 +3,9 @@
 import numpy as np
 
 from numba import jit, config
-from .numba_utils import JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
+from .numba_utils import DISABLE_JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
 
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def unroll_inputs(padded_inputs,
