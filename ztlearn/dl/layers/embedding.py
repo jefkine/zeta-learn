@@ -4,8 +4,7 @@ import numpy as np
 
 from numba import jit, config
 from ztlearn.utils import jit_flag
-if not jit_flag:
-    config.NUMBA_DISABLE_JIT = 1
+config.NUMBA_DISABLE_JIT = jit_flag
 
 from .base import Layer
 from ztlearn.utils import one_hot
