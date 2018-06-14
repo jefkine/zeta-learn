@@ -3,14 +3,14 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from .base import Layer
 from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
 from ztlearn.activations import ActivationFunction as activation
 
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class Activation(Layer):
 
@@ -41,12 +41,12 @@ class Activation(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, input_signal, train_mode = True, **kwargs):
         self.input_signal = input_signal
         return self.activation_func.forward(input_signal)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         return grad * self.activation_func.backward(self.input_signal)
 
@@ -101,19 +101,19 @@ class Dense(Layer):
     def output_shape(self):
         return (self.units,)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.kernel_shape = (self.input_shape[0], self.units)
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
         self.bias         = np.zeros((1, self.units))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
 
         return inputs @ self.weights + self.bias
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         prev_weights = self.weights
 
@@ -152,7 +152,7 @@ class Dropout(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         if 0. < self.drop < 1.:
             keep_prob = (1 - self.drop)
@@ -163,7 +163,7 @@ class Dropout(Layer):
         else:
             return inputs
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         if 0. < self.drop < 1.:
             return grad * self.mask
@@ -193,12 +193,12 @@ class Flatten(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
         return np.reshape(inputs, (inputs.shape[0], -1))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         return np.reshape(grad, self.prev_shape)
 
@@ -228,14 +228,14 @@ class UpSampling2D(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
         upsampled       = np.repeat(inputs, self.size[0], axis = 2)
 
         return np.repeat(upsampled, self.size[1], axis = 3)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         grad = grad[:, :, ::self.size[0], ::self.size[1]]
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
@@ -266,12 +266,12 @@ class Reshape(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
 
         return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         return np.reshape(grad, self.prev_shape)

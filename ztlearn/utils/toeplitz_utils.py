@@ -3,10 +3,11 @@
 import numpy as np
 
 from numba import jit, config
-from .numba_utils import JIT_FLAG
+from .numba_utils import JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
+
 config.NUMBA_DISABLE_JIT = JIT_FLAG
 
-@jit(nogil = True, cache = True)
+@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def unroll_inputs(padded_inputs,
                                  batch_num,
                                  filter_num,

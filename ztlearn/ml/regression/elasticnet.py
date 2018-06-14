@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from .base import Regression
 from ztlearn.utils import normalize
 from sklearn.preprocessing import PolynomialFeatures
 
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class ElasticNetRegression(Regression):
 
@@ -30,7 +30,7 @@ class ElasticNetRegression(Regression):
                                                    penalty_weight = penalty_weight,
                                                    l1_ratio       = l1_ratio)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
 
@@ -41,7 +41,7 @@ class ElasticNetRegression(Regression):
 
         return fit_stats
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def predict(self, inputs, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
 

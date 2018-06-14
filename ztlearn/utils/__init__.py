@@ -45,6 +45,8 @@ from .time_deco_utils import LogIfBusy
 
 # import from numba_utils.py
 from .numba_utils import JIT_FLAG
+from .numba_utils import CACHE_FLAG
+from .numba_utils import NOGIL_FLAG
 
 # import from sequence_utils.py
 from .sequence_utils import gen_mult_sequence_xtyt

@@ -3,8 +3,7 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
@@ -14,6 +13,7 @@ from ztlearn.activations import ActivationFunction as activate
 from ztlearn.optimizers import OptimizationFunction as optimize
 from ztlearn.regularizers import RegularizationFunction as regularize
 
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class Perceptron:
 
@@ -35,7 +35,7 @@ class Perceptron:
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit(self, inputs, targets, verbose = False):
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
 
@@ -66,7 +66,7 @@ class Perceptron:
 
         return fit_stats
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def predict(self, inputs):
         # return self.activate.forward(inputs.dot(self.weights) + self.bias)
         return inputs.dot(self.weights) + self.bias

@@ -3,14 +3,15 @@
 import numpy as np
 
 from numba import jit, config
-from .numba_utils import JIT_FLAG
+from .numba_utils import JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
+
 config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 #-----------------------------------------------------------------------------#
 #                       TEXT UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
-@jit(nogil = True, cache = True)
+@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
@@ -36,7 +37,7 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
 
     return x, y, len_chars
 
-@jit(nogil = True, cache = True)
+@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)

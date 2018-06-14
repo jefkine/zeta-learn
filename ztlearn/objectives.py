@@ -3,19 +3,20 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+
 config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class Objective(object):
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def clip(self, predictions, epsilon = 1e-15):
         clipped_predictions = np.clip(predictions, epsilon, 1 - epsilon)
         clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
 
         return clipped_predictions, clipped_divisor
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def add_fuzz_factor(self, np_array, epsilon = 1e-05):
         return np.add(np_array, epsilon)
 
@@ -38,7 +39,7 @@ class MeanSquaredError:
             [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error
     """
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -54,7 +55,7 @@ class MeanSquaredError:
 
         return 0.5 * np.mean(np.sum(np.power(predictions - targets, 2), axis = 1))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -70,7 +71,7 @@ class MeanSquaredError:
 
         return predictions - targets
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets, threshold = 0.5):
         return 0
 
@@ -94,11 +95,11 @@ class HellingerDistance:
 
     SQRT_2 = np.sqrt(2)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def sqrt_difference(self, predictions, targets):
         return np.sqrt(predictions) - np.sqrt(targets)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -116,7 +117,7 @@ class HellingerDistance:
 
         return np.mean(np.sum(np.power(root_difference, 2), axis = 1) / HellingerDistance.SQRT_2)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -134,7 +135,7 @@ class HellingerDistance:
 
         return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets, threshold = 0.5):
         return 0
 
@@ -156,7 +157,7 @@ class HingeLoss:
             [Wikipedia Article] https://en.wikipedia.org/wiki/Hinge_loss
     """
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -176,7 +177,7 @@ class HingeLoss:
 
         return np.mean(np.sum(margins, axis = 0))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -200,7 +201,7 @@ class HingeLoss:
 
         return binary
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets, threshold = 0.5):
 
         """
@@ -236,7 +237,7 @@ class BinaryCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -255,7 +256,7 @@ class BinaryCrossEntropy(Objective):
         return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
         # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -274,7 +275,7 @@ class BinaryCrossEntropy(Objective):
         return (clipped_predictions - targets) / clipped_divisor
         # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets, threshold = 0.5):
 
         """
@@ -310,7 +311,7 @@ class CategoricalCrossEntropy(Objective):
             [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -328,7 +329,7 @@ class CategoricalCrossEntropy(Objective):
 
         return np.mean(-np.sum(targets * np.log(clipped_predictions), axis = 1))
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -346,7 +347,7 @@ class CategoricalCrossEntropy(Objective):
 
         return clipped_predictions - targets
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets):
 
         """
@@ -377,7 +378,7 @@ class KLDivergence(Objective):
 
     """
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def loss(self, predictions, targets, np_type):
 
         """
@@ -396,7 +397,7 @@ class KLDivergence(Objective):
 
         return np.sum(targets * np.log(targets/predictions), axis = 1)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, predictions, targets, np_type):
 
         """
@@ -417,7 +418,7 @@ class KLDivergence(Objective):
 
         return (1 + np.log(targets/predictions)) * d_log_diff
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def accuracy(self, predictions, targets):
 
         """

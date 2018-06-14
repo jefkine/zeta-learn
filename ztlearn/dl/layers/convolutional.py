@@ -3,8 +3,7 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
-config.NUMBA_DISABLE_JIT = JIT_FLAG
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
 
 from .base import Layer
 from ztlearn.utils import get_pad
@@ -13,6 +12,8 @@ from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
 from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
+
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class Conv(Layer):
 
@@ -94,7 +95,7 @@ class Conv(Layer):
 
         return self.filters, int(output_height), int(output_width)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
@@ -113,7 +114,7 @@ class Conv2D(Conv):
 
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _  = self.weights.shape
         self.input_shape          = inputs.shape
@@ -162,7 +163,7 @@ class Conv2D(Conv):
 
         return output.transpose(3, 0, 1, 2)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.input_shape
         doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
@@ -214,7 +215,7 @@ class ConvLoop2D(Conv):
 
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _ = self.weights.shape
         self.input_shape         = inputs.shape
@@ -261,7 +262,7 @@ class ConvLoop2D(Conv):
 
         return output
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 

@@ -3,10 +3,10 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import JIT_FLAG
-config.NUMBA_DISABLE_JIT = JIT_FLAG
-
 from .decayers import DecayFunction as decay
+from ztlearn.utils import JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 class Optimizer(object):
 
@@ -90,7 +90,7 @@ class SGD(Optimizer):
     def __init__(self, **kwargs):
         super(SGD, self).__init__(**kwargs)
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -138,7 +138,7 @@ class SGDMomentum(Optimizer):
         self.momentum = kwargs['momentum'] if 'momemtum' in kwargs else 0.1
         self.velocity = None
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -188,7 +188,7 @@ class Adam(Optimizer):
         self.v       = None
         self.t       = 0
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -250,7 +250,7 @@ class Adamax(Optimizer):
         self.u       = None
         self.t       = 0
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -302,7 +302,7 @@ class AdaGrad(Optimizer):
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
         self.cache   = None
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -350,7 +350,7 @@ class Adadelta(Optimizer):
         self.cache   = None
         self.delta   = None
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -406,7 +406,7 @@ class RMSprop(Optimizer):
         self.learning_rate = 0.001 # preset and not decayed
         self.cache         = None
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
@@ -455,7 +455,7 @@ class NesterovAcceleratedGradient(Optimizer):
         self.velocity_prev = None
         self.velocity      = None
 
-    @jit(nogil = True, cache = True)
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
