@@ -12,7 +12,7 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(mnis
                                                                   test_size = 0.3, random_seed = 5)
 
 # plot samples of training data
-plot_img_samples(train_data, unhot(train_label), dataset = 'mnist')
+plot_img_samples(train_data[:40], unhot(train_label[:40]), dataset = 'mnist')
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
