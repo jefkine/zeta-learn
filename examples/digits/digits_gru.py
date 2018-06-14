@@ -9,8 +9,8 @@ from ztlearn.dl.layers import GRU, Dense, Flatten
 
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                             data.target,
-                                                                             test_size = 0.33, random_seed = 15)
+                                                                  data.target,
+                                                                  test_size = 0.33, random_seed = 15)
 
 # plot samples of training data
 plot_img_samples(train_data, train_label)

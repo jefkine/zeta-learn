@@ -17,8 +17,8 @@ input_data  = z_score(boston_data[:,[5]]) # work with only one of the features: 
 input_label = data['target']
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
-                                                                              input_label,
-                                                                              test_size = 0.3)
+                                                                  input_label,
+                                                                  test_size = 0.3)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)

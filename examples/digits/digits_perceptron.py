@@ -8,8 +8,8 @@ from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(normalize(data.data),
-                                                                                        one_hot(data.target),
-                                                                                        test_size = 0.3, random_seed = 5)
+                                                                  one_hot(data.target),
+                                                                  test_size = 0.3, random_seed = 5)
 
 # plot samples of training data
 plot_img_samples(train_data, unhot(train_label))

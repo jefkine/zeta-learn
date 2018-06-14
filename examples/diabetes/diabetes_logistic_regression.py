@@ -21,8 +21,8 @@ input_data  = z_score(dataset[:, 0:8]) # -> all the features (e.g using only one
 input_label = dataset[:, 8]
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
-                                                                              input_label,
-                                                                              test_size = 0.2, random_seed = 2)
+                                                                  input_label,
+                                                                  test_size = 0.2, random_seed = 2)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)

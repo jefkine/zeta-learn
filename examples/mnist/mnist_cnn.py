@@ -11,8 +11,8 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
-                                                                              mnist.target.astype('int'),
-                                                                              test_size = 0.33, random_seed = 5)
+                                                                  mnist.target.astype('int'),
+                                                                  test_size = 0.33, random_seed = 5)
 
 # plot samples of training data
 plot_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')

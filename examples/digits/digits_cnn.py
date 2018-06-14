@@ -11,8 +11,8 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 data = datasets.load_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                             data.target,
-                                                                             test_size = 0.33, random_seed = 5)
+                                                                  data.target,
+                                                                  test_size = 0.33, random_seed = 5)
 
 # plot samples of training data
 plot_img_samples(train_data, train_label)

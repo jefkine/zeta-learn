@@ -8,8 +8,8 @@ from ztlearn.ml.classification import Perceptron
 
 data = datasets.load_iris()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                             one_hot(data.target),
-                                                                             test_size = 0.33, random_seed = 5)
+                                                                  one_hot(data.target),
+                                                                  test_size = 0.33, random_seed = 5)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
