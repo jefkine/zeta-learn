@@ -3,8 +3,8 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import jit_flag
-config.NUMBA_DISABLE_JIT = jit_flag
+from ztlearn.utils import JIT_FLAG
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 from .decayers import DecayFunction as decay
 

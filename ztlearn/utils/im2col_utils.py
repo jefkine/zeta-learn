@@ -4,8 +4,8 @@
 import numpy as np
 
 from numba import jit, config
-from .numba_utils import jit_flag
-config.NUMBA_DISABLE_JIT = jit_flag
+from .numba_utils import JIT_FLAG
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 @jit(nogil = True, cache = True)
 def get_pad(padding, input_height, input_width, stride_height, stride_width, kernel_height, kernel_width):

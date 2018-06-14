@@ -3,8 +3,8 @@
 import numpy as np
 
 from numba import jit, config
-from ztlearn.utils import jit_flag
-config.NUMBA_DISABLE_JIT = jit_flag
+from ztlearn.utils import JIT_FLAG
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 # Note: careful as np.multiply does an elementwise multiply on numpy arrays
 #       asterisk (*) does the same but will perfom matrix multiplication on mat (numpy matrices)

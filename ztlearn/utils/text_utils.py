@@ -3,8 +3,8 @@
 import numpy as np
 
 from numba import jit, config
-from .numba_utils import jit_flag
-config.NUMBA_DISABLE_JIT = jit_flag
+from .numba_utils import JIT_FLAG
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 #-----------------------------------------------------------------------------#
 #                       TEXT UTILITY FUNCTIONS                                #

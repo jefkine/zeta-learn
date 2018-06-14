@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from numba import jit, config
-from ztlearn.utils import jit_flag
-config.NUMBA_DISABLE_JIT = jit_flag
+from ztlearn.utils import JIT_FLAG
+config.NUMBA_DISABLE_JIT = JIT_FLAG
 
 from .base import Regression
 from ztlearn.utils import normalize
