@@ -2,11 +2,9 @@
 
 import numpy as np
 
-from ztlearn.utils import use_numba
-if use_numba:
-    from numba import jit
-else:
-    from ztlearn.utils import jit
+from numba import jit, config
+from ztlearn.utils import jit_flag
+config.NUMBA_DISABLE_JIT = jit_flag
 
 # Note: careful as np.multiply does an elementwise multiply on numpy arrays
 #       asterisk (*) does the same but will perfom matrix multiplication on mat (numpy matrices)

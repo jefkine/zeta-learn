@@ -2,11 +2,10 @@
 
 import numpy as np
 
-from ztlearn.utils import use_numba
-if use_numba:
-    from numba import jit
-else:
-    from ztlearn.utils import jit
+from numba import jit, config
+from ztlearn.utils import jit_flag
+if not jit_flag:
+    config.NUMBA_DISABLE_JIT = 1
 
 from .base import Layer
 from ztlearn.utils import one_hot

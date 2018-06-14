@@ -3,11 +3,9 @@
 # Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
 import numpy as np
 
-from .numba_utils import use_numba
-if use_numba:
-    from numba import jit
-else:
-    from .numba_utils import jit
+from numba import jit, config
+from .numba_utils import jit_flag
+config.NUMBA_DISABLE_JIT = jit_flag
 
 @jit(nogil = True, cache = True)
 def get_pad(padding, input_height, input_width, stride_height, stride_width, kernel_height, kernel_width):
