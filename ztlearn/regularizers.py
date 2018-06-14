@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from numba import jit
+
+from ztlearn.utils import use_numba
+if use_numba:
+    from numba import jit
+else:
+    from ztlearn.utils import jit
 
 # Note: careful as np.multiply does an elementwise multiply on numpy arrays
 #       asterisk (*) does the same but will perfom matrix multiplication on mat (numpy matrices)

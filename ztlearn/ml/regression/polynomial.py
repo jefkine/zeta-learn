@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from numba import jit
+from ztlearn.utils import use_numba
+if use_numba:
+    from numba import jit
+else:
+    from ztlearn.utils import jit
 
 from .base import Regression
 from ztlearn.utils import normalize

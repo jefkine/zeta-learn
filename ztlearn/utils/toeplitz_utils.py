@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from numba import jit
+
+from .numba_utils import use_numba
+if use_numba:
+    from numba import jit
+else:
+    from .numba_utils import jit
 
 @jit(nogil = True, cache = True)
 def unroll_inputs(padded_inputs,

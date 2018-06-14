@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from numba import jit
+
+from ztlearn.utils import use_numba
+if use_numba:
+    from numba import jit
+else:
+    from ztlearn.utils import jit
 
 from .base import Layer
 from ztlearn.utils import get_pad
