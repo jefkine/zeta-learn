@@ -273,7 +273,7 @@ class ConvLoop2D(Conv):
 
             # initialize the gradient(s)
             dweights = np.zeros(self.weights.shape)
-            dbias = np.zeros(self.bias.shape)
+            dbias    = np.zeros(self.bias.shape)
 
             pad_height, pad_width = get_pad(self.padding,
                                                           input_height,
@@ -296,7 +296,8 @@ class ConvLoop2D(Conv):
                                                       c,
                                                       h: input_height - self.kernel_size[0] + h + 1: self.strides[0],
                                                       w: input_width - self.kernel_size[1] + w + 1: self.strides[1]]
-                            grad_patch = grad[:, f]
+                            grad_patch  = grad[:, f]
+                            
                             dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
 
             # dbias
@@ -305,7 +306,7 @@ class ConvLoop2D(Conv):
 
             # optimize the weights and bias
             self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
 
         # endif self.is_trainable
 
