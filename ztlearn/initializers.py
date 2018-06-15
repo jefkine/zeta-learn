@@ -42,9 +42,11 @@ class HeNormal(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / fan_in)
+
+        np.random.seed(random_seed)
 
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
@@ -72,9 +74,11 @@ class HeUniform(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / fan_in)
+
+        np.random.seed(random_seed)
 
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
@@ -103,9 +107,11 @@ class GlorotNormal(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / (fan_in + fan_out))
+
+        np.random.seed(random_seed)
 
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
@@ -134,9 +140,11 @@ class GlorotUniform(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / (fan_in + fan_out))
+
+        np.random.seed(random_seed)
 
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
@@ -160,9 +168,11 @@ class LeCunUniform(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(3. / fan_in)
+
+        np.random.seed(random_seed)
 
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
@@ -186,9 +196,11 @@ class LeCunNormal(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / fan_in)
+
+        np.random.seed(random_seed)
 
         return np.random.normal(low = -scale, high = scale, size = shape)
 
@@ -207,11 +219,12 @@ class RandomUniform(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape, seed = None):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
 
-        np.random.seed(seed)
+        np.random.seed(random_seed)
+
         return np.random.uniform(low = -scale, high = scale, size = shape)
 
     @property
@@ -229,11 +242,12 @@ class RandomNormal(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape, seed = None):
+    def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
 
-        np.random.seed(seed)
+        np.random.seed(random_seed)
+
         return np.random.normal(loc = 0.0, scale = scale, size = shape)
 
     @property
@@ -250,7 +264,7 @@ class Zero(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         return np.zeros(shape = shape)
 
     @property
@@ -267,7 +281,7 @@ class One(WeightInitializer):
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def weights(self, shape):
+    def weights(self, shape, random_seed):
         return np.ones(shape = shape)
 
     @property
@@ -299,5 +313,5 @@ class InitializeWeights:
     def name(self):
         return self.init_method.init_name
 
-    def initialize_weights(self, shape):
-        return self.init_method.weights(shape)
+    def initialize_weights(self, shape, random_seed = None):
+        return self.init_method.weights(shape, random_seed)

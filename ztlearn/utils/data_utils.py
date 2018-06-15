@@ -37,8 +37,7 @@ def unhot(one_hot, unhot_axis = 1):
 def shuffle_data(input_data, input_label, random_seed = None):
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
 
-    if random_seed:
-        np.random.seed(random_seed)
+    np.random.seed(random_seed)
 
     indices = np.arange(input_data.shape[0])
     np.random.shuffle(indices)
