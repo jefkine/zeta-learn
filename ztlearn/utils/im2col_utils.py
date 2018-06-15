@@ -59,11 +59,12 @@ def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0
 def im2col_indices(x, field_height, field_width, padding, stride = 1):
     """ An implementation of im2col based on some fancy indexing """
     pad_height, pad_width = padding
+
     x_padded = np.pad(x, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
     k, i, j  = get_im2col_indices(x.shape, field_height, field_width, padding, stride)
-    cols = x_padded[:, k, i, j]
-    C = x.shape[1]
-    cols = cols.transpose(1, 2, 0).reshape(field_height * field_width * C, -1)
+    cols     = x_padded[:, k, i, j]
+    C        = x.shape[1]
+    cols     = cols.transpose(1, 2, 0).reshape(field_height * field_width * C, -1)
 
     return cols
 
