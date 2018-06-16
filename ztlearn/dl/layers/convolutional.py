@@ -2,8 +2,13 @@
 
 import numpy as np
 
-from numba import jit, config
-from ztlearn.utils import DISABLE_JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+from numba import jit
+from numba import config
+from ztlearn.utils import CACHE_FLAG
+from ztlearn.utils import NOGIL_FLAG
+from ztlearn.utils import DISABLE_JIT_FLAG
+
+config.DISABLE_JIT = DISABLE_JIT_FLAG
 
 from .base import Layer
 from ztlearn.utils import get_pad
@@ -13,7 +18,6 @@ from ztlearn.utils import col2im_indices
 from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
-config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
 
 class Conv(Layer):
 
@@ -297,7 +301,7 @@ class ConvLoop2D(Conv):
                                                       h: input_height - self.kernel_size[0] + h + 1: self.strides[0],
                                                       w: input_width - self.kernel_size[1] + w + 1: self.strides[1]]
                             grad_patch  = grad[:, f]
-                            
+
                             dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
 
             # dbias

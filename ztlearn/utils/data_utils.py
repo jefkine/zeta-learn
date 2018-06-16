@@ -3,10 +3,13 @@
 import sys
 import numpy as np
 
-from numba import jit, config
-from .numba_utils import DISABLE_JIT_FLAG, NOGIL_FLAG, CACHE_FLAG
+from numba import jit
+from numba import config
+from .numba_utils import CACHE_FLAG
+from .numba_utils import NOGIL_FLAG
+from .numba_utils import DISABLE_JIT_FLAG
 
-config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
+config.DISABLE_JIT = DISABLE_JIT_FLAG
 
 #-----------------------------------------------------------------------------#
 #                       DATA UTILITY FUNCTIONS                                #

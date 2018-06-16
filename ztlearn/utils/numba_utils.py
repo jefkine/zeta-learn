@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-# config.NUMBA_DISABLE_JIT = 0 -- disable jit set to False
-# config.NUMBA_DISABLE_JIT = 1 -- disable jit set to True
+# config.DISABLE_JIT = 0 -- disable jit set to False
+# config.DISABLE_JIT = 1 -- disable jit set to True
 
 DISABLE_JIT_FLAG = 0
 

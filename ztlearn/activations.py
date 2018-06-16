@@ -2,10 +2,14 @@
 
 import numpy as np
 
-from numba import jit, config
-from ztlearn.utils import DISABLE_JIT_FLAG, CACHE_FLAG, NOGIL_FLAG
+from numba import jit
+from numba import config
+from ztlearn.utils import CACHE_FLAG
+from ztlearn.utils import NOGIL_FLAG
+from ztlearn.utils import DISABLE_JIT_FLAG
 
-config.NUMBA_DISABLE_JIT = DISABLE_JIT_FLAG
+config.DISABLE_JIT = DISABLE_JIT_FLAG
+
 
 class ELU:
 
