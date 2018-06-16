@@ -20,7 +20,7 @@ class Optimizer(object):
         self.epoch = 0
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def get_learning_rate(self):        
+    def get_learning_rate(self):
         self.min_lrate  = self.min_lrate if hasattr(self, 'min_lrate') else 0
         self.max_lrate  = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
         self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate') else 1e-6
@@ -267,10 +267,12 @@ class Adamax(Optimizer):
             self.u = np.zeros_like(self.weights)
 
         self.t += 1
+
         learning_rate_t = super(Adamax, self).get_learning_rate() / (1. - np.power(self.beta1, self.t))
 
         m_hat = (self.beta1 * self.m) + (1. - self.beta1) * self.grads
         u_hat = np.maximum(self.beta2 * self.u, np.abs(self.grads))
+
         self.weights -= (learning_rate_t * m_hat / (u_hat + self.epsilon))
 
         return self.weights
