@@ -42,6 +42,7 @@ def plotter(x,
 
     ax.set_axisbelow(True)
     ax.minorticks_on()
+    
     ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
     ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
 
