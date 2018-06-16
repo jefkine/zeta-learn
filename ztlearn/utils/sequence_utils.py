@@ -10,6 +10,8 @@ from .numba_utils import DISABLE_JIT_FLAG
 
 config.DISABLE_JIT = DISABLE_JIT_FLAG
 
+from .data_utils import one_hot
+
 #-----------------------------------------------------------------------------#
 #                     GENERATE SYNTHETIC SEQUENCES DATA                       #
 #-----------------------------------------------------------------------------#
