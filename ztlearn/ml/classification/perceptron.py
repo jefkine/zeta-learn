@@ -44,7 +44,7 @@ class Perceptron:
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
 
         self.weights = self.init_method.initialize_weights((inputs.shape[1], targets.shape[1]))
-        self.bias = np.zeros((1, targets.shape[1]))
+        self.bias    = np.zeros((1, targets.shape[1]))
 
         for i in range(self.epochs):
             linear_predictions = inputs.dot(self.weights) + self.bias

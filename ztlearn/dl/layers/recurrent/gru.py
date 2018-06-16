@@ -85,7 +85,7 @@ class GRU(Layer):
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         _, input_dim = self.input_shape
-        z_dim = self.h_units + input_dim # concatenate (h_units, vocabulary_size) vector
+        z_dim        = self.h_units + input_dim # concatenate (h_units, vocabulary_size) vector
 
         # gate weights
         self.W_update = init(self.init_method).initialize_weights((z_dim, self.h_units))
@@ -137,7 +137,7 @@ class GRU(Layer):
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
-        next_grad = np.zeros_like(grad)
+        next_grad        = np.zeros_like(grad)
 
         if self.is_trainable:
 
