@@ -10,6 +10,8 @@ from ztlearn.utils import DISABLE_JIT_FLAG
 
 config.DISABLE_JIT = DISABLE_JIT_FLAG
 
+from .decayers import DecayFunction as decayer
+
 
 class Optimizer(object):
 
@@ -18,10 +20,10 @@ class Optimizer(object):
         self.epoch = 0
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
-    def get_learning_rate(self):
-        self.decay      = self.decay if hasattr(self, 'decay') else 1e-6
+    def get_learning_rate(self):        
         self.min_lrate  = self.min_lrate if hasattr(self, 'min_lrate') else 0
         self.max_lrate  = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
+        self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate') else 1e-6
         self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse_time_decay'
 
         self.epoch += 1
@@ -30,20 +32,20 @@ class Optimizer(object):
 
         if hasattr(self, 'step_size') and isinstance(self.step_size, (int, np.integer)):
 
-            return decay(self.learning_rate,
-                                             self.decay_func,
-                                             self.decay,
-                                             self.epoch,
-                                             self.min_lrate,
-                                             self.max_lrate,
-                                             self.step_size).decompose()
+            return decayer(self.learning_rate,
+                                               self.decay_func,
+                                               self.decay_rate,
+                                               self.epoch,
+                                               self.min_lrate,
+                                               self.max_lrate,
+                                               self.step_size).decompose()
 
-        return decay(self.learning_rate,
-                                         self.decay_func,
-                                         self.decay,
-                                         self.epoch,
-                                         self.min_lrate,
-                                         self.max_lrate).decompose()
+        return decayer(self.learning_rate,
+                                           self.decay_func,
+                                           self.decay_rate,
+                                           self.epoch,
+                                           self.min_lrate,
+                                           self.max_lrate).decompose()
 
 
 class GD:
@@ -514,7 +516,6 @@ def register_opt(**kwargs):
 
     allowed_kwargs = {
         'rho',
-        'decay',
         'beta2',
         'beta1',
         'epsilon',
@@ -522,6 +523,7 @@ def register_opt(**kwargs):
         'momentum',
         'velocity',
         'step_size',
+        'decay_rate',
         'decay_func',
         'learning_rate',
         'optimizer_name'
