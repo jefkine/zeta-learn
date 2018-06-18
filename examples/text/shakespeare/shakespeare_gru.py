@@ -6,7 +6,7 @@ from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
 
 
-text = open('../../../datasets/text/tinyshakespeare.txt').read().lower()
+text = open('../../../datasets/text/tinyshakespeare_short.txt').read().lower()
 x, y, len_chars = gen_char_sequence_xtyt(text, maxlen = 30, step = 1)
 del text
 
