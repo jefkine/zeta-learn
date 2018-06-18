@@ -106,8 +106,7 @@ class SELU:
 
         return SELU._LAMBDA * np.where(input_signal >= 0.0,
                                                             input_signal,
-                                                            np.multiply(SELU.ALPHA,
-                                                            np.exp(input_signal)) - SELU.ALPHA)
+                                                            np.multiply(SELU.ALPHA, np.exp(input_signal)) - SELU.ALPHA)
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, input_signal):
@@ -122,7 +121,9 @@ class SELU:
             numpy.array: the output of the SELU derivative applied to the input
         """
 
-        return SELU._LAMBDA * np.where(input_signal >= 0.0, 1.0, np.multiply(np.exp(input_signal), SELU.ALPHA))
+        return SELU._LAMBDA * np.where(input_signal >= 0.0,
+                                                           1.0,
+                                                           np.multiply(np.exp(input_signal), SELU.ALPHA))
 
     @property
     def activation_name(self):
