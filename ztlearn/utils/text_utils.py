@@ -14,7 +14,8 @@ config.DISABLE_JIT = DISABLE_JIT_FLAG
 #                       TEXT UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
-@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+# @@BUG: Internal error with dictionary composition https://github.com/numba/numba/issues/3028
+# @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
@@ -40,7 +41,8 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
 
     return x, y, len_chars
 
-@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+# @@BUG: Internal error with dictionary composition https://github.com/numba/numba/issues/3028
+# @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
