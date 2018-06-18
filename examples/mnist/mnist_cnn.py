@@ -12,7 +12,9 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
                                                                   mnist.target.astype('int'),
-                                                                  test_size = 0.33, random_seed = 5)
+                                                                  test_size   = 0.33,
+                                                                  random_seed = 5,
+                                                                  cut_off     = 2000)
 
 # normalize to range [0, 1]
 train_data = range_normalize(train_data.astype('float32'), 0, 1)

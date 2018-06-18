@@ -50,7 +50,8 @@ images = range_normalize(mnist.data.astype(np.float32), 0, 1)  # rescale to rang
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
                                                                   test_size   = 0.2,
-                                                                  random_seed = 15)
+                                                                  random_seed = 15,
+                                                                  cut_off     = 2000)
 plot_img_samples(train_data[:40], None, dataset = 'mnist')
 
 model_epochs = 500

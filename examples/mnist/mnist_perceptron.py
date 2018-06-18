@@ -9,7 +9,9 @@ from ztlearn.ml.classification import Perceptron
 mnist = fetch_mldata('MNIST original')
 train_data, test_data, train_label, test_label = train_test_split(normalize(mnist.data.astype('float32')),
                                                                   one_hot(mnist.target.astype('int')),
-                                                                  test_size = 0.3, random_seed = 5)
+                                                                  test_size   = 0.3,
+                                                                  random_seed = 15,
+                                                                  cut_off     = 2000)
 
 # plot samples of training data
 plot_img_samples(train_data[:40], unhot(train_label[:40]), dataset = 'mnist')
