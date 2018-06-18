@@ -382,6 +382,7 @@ class ConvToeplitzMat(Conv):
                                                  output_height,
                                                  output_width,
                                                  self.kernel_size[0])
+                                                 
         #TODO: weights need to be rearraged in a way to have a matrix
         #      multiplication with the generated toeplitz matrix
         self.weight_col = self.weights.reshape(self.filter_num, -1)
