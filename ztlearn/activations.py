@@ -122,8 +122,8 @@ class SELU:
         """
 
         return SELU._LAMBDA * np.where(input_signal >= 0.0,
-                                                           1.0,
-                                                           np.multiply(np.exp(input_signal), SELU.ALPHA))
+                                                            1.0,
+                                                            np.multiply(np.exp(input_signal), SELU.ALPHA))
 
     @property
     def activation_name(self):
