@@ -86,7 +86,7 @@ class SGD(Optimizer):
             * [PDF] https://arxiv.org/pdf/1609.04747.pdf
 
         [2] Large-Scale Machine Learning with Stochastic Gradient Descent
-            [Leon Botou, 2011][PDF] http://leon.bottou.org/publications/pdf/compstat-2010.pdf
+            * [Leon Botou, 2011][PDF] http://leon.bottou.org/publications/pdf/compstat-2010.pdf
 
     Args:
         kwargs: Arbitrary keyword arguments.

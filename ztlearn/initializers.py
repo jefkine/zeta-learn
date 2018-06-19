@@ -42,7 +42,7 @@ class HeNormal(WeightInitializer):
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 
         [2] Initialization Of Deep Networks Case of Rectifiers
-            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
+            * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -74,7 +74,7 @@ class HeUniform(WeightInitializer):
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 
         [2] Initialization Of Deep Networks Case of Rectifiers
-            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
+            * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -108,7 +108,7 @@ class GlorotNormal(WeightInitializer):
             * [PDF] http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf
 
         [2] Initialization Of Deep Feedfoward Networks
-            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
+            * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
