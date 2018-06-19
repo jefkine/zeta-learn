@@ -20,6 +20,14 @@ ztlearn.utils.im2col\_utils module
     :undoc-members:
     :show-inheritance:
 
+ztlearn.utils.numba\_utils module
+---------------------------------
+
+.. automodule:: ztlearn.utils.numba_utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ztlearn.utils.plot\_utils module
 --------------------------------
 
