@@ -40,7 +40,7 @@ class MeanSquaredError:
 
     References:
         [1] Mean Squared error
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Mean_squared_error
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -94,7 +94,7 @@ class HellingerDistance:
 
     References:
         [1] Hellinger Distance
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Hellinger_distance
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Hellinger_distance
     """
 
     SQRT_2 = np.sqrt(2)
@@ -158,7 +158,7 @@ class HingeLoss:
 
     References:
         [1] Hinge loss
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Hinge_loss
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Hinge_loss
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -238,7 +238,7 @@ class BinaryCrossEntropy(Objective):
 
     References:
         [1] Cross Entropy
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -312,7 +312,7 @@ class CategoricalCrossEntropy(Objective):
 
     References:
         [1] Cross Entropy
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Cross_entropy
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)

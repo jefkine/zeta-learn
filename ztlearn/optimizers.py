@@ -401,7 +401,7 @@ class RMSprop(Optimizer):
             * [PDF] https://arxiv.org/pdf/1609.04747.pdf
 
         [2] Lecture 6.5 - rmsprop, COURSERA: Neural Networks for Machine Learning
-            [Tieleman, T. and Hinton, G. 2012][PDF] https://goo.gl/Dhkvpk
+            * [Tieleman, T. and Hinton, G. 2012][PDF] https://goo.gl/Dhkvpk
 
     Args:
         kwargs: Arbitrary keyword arguments.

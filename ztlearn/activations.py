@@ -359,14 +359,14 @@ class Softmax:
 
     References:
         [1] Softmax Regression
-            [UFLDL Tutorial] https://goo.gl/1qgqdg
+            * [UFLDL Tutorial] https://goo.gl/1qgqdg
 
         [2] Deep Learning using Linear Support Vector Machines
             * [Yichuan Tang, 2015] https://arxiv.org/abs/1306.0239
             * [PDF] https://arxiv.org/pdf/1306.0239.pdf
 
         [3] Probabilistic Interpretation of Feedforward Network Outputs
-            [Mario Costa, 1989] [PDF] https://goo.gl/ZhBY4r
+            * [Mario Costa, 1989] [PDF] https://goo.gl/ZhBY4r
     """
 
     def __init__(self, activation_dict): pass
@@ -534,7 +534,7 @@ class Linear:
 
     References:
         [1] Identity Function
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Identity_function
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Identity_function
     """
 
     def __init__(self, activation_dict): pass

@@ -144,7 +144,7 @@ class GlorotUniform(WeightInitializer):
             * [PDF] http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf
 
         [2] Initialization Of Deep Feedfoward Networks
-            [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
+            * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -172,7 +172,7 @@ class LeCunUniform(WeightInitializer):
 
     References:
         [1] Efficient Backprop
-            [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
+            * [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -200,7 +200,7 @@ class LeCunNormal(WeightInitializer):
 
     References:
         [1] Efficient Backprop
-            [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
+            * [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
