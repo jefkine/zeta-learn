@@ -102,6 +102,7 @@ def z_score(input_data, axis = None):
 def print_results(predictions, test_labels, num_samples = 20):
     print('Targeted  : {}'.format(test_labels[:num_samples]))
     print('Predicted : {}\n'.format(predictions[:num_samples]))
+
     print ('Model Accuracy : {:2.2f}% \n'.format(accuracy_score(predictions, test_labels)*100))
 
 @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
