@@ -252,8 +252,8 @@ class Sigmoid:
     is 'S-shaped' and feature one local minimum, and one local maximum
 
     References:
-        [1] The influence of the sigmoid function parameters on the speed of
-            backpropagation learning https://goo.gl/MavJjj
+        [1] The influence of the sigmoid function parameters on the speed of backpropagation learning
+            * [PDF] https://goo.gl/MavJjj
     """
 
     def __init__(self, activation_dict): pass

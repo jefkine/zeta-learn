@@ -23,14 +23,14 @@ class L1Regularization:
 
     References:
         [1] Regularization (mathematics)
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
 
         [2] Regression shrinkage and selection via the lasso
             * [R Tibshirani, 1996] https://goo.gl/Yh9bBU
             * [PDF] https://goo.gl/mQP5mA
 
         [3] Feature selection, L1 vs. L2 regularization, and rotational invariance
-            [Andrew Y. Ng, ] [PDF] https://goo.gl/rbwNCt
+            * [Andrew Y. Ng, ] [PDF] https://goo.gl/rbwNCt
 
     Args:
         _lambda  (float32): controls the weight of the penalty term
@@ -62,14 +62,14 @@ class L2Regularization:
 
     References:
         [1] Regularization (mathematics)
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
 
         [2] Regression shrinkage and selection via the lasso
             * [R Tibshirani, 1996] https://goo.gl/Yh9bBU
             * [PDF] https://goo.gl/mQP5mA
 
         [3] Feature selection, L1 vs. L2 regularization, and rotational invariance
-            [Andrew Y. Ng, ] [PDF] https://goo.gl/rbwNCt
+            * [Andrew Y. Ng, ] [PDF] https://goo.gl/rbwNCt
 
     Args:
         _lambda (float32): controls the weight of the penalty term
@@ -101,7 +101,7 @@ class ElasticNetRegularization:
 
     References:
         [1] Regularization (mathematics)
-            [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
+            * [Wikipedia Article] https://en.wikipedia.org/wiki/Regularization_(mathematics)
 
     Args:
         _lambda  (float32): controls the weight of the penalty term

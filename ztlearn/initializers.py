@@ -37,8 +37,7 @@ class HeNormal(WeightInitializer):
     distribution
 
     References:
-        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on
-            ImageNet Classification
+        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification
             * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 
@@ -70,8 +69,7 @@ class HeUniform(WeightInitializer):
     distribution
 
     References:
-        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on
-            ImageNet Classification
+        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification
             * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 

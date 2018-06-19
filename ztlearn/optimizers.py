@@ -131,8 +131,7 @@ class SGDMomentum(Optimizer):
             * [Ning Qian, 199] https://goo.gl/7fhr14
             * [PDF] https://goo.gl/91HtDt
 
-        [3] Two problems with backpropagation and other steepest-descent learning
-            procedures for networks.
+        [3] Two problems with backpropagation and other steepest-descent learning procedures for networks.
             * [Sutton, R. S., 1986][PDF] https://goo.gl/M3VFM1
 
     Args:
@@ -446,12 +445,10 @@ class NesterovAcceleratedGradient(Optimizer):
             * [Sebastien Ruder, 2016] https://arxiv.org/abs/1609.04747
             * [PDF] https://arxiv.org/pdf/1609.04747.pdf
 
-        [2] A method for unconstrained convex minimization problem with the rate
-            of convergence
+        [2] A method for unconstrained convex minimization problem with the rate of convergence
             * [Nesterov, Y. 1983][PDF] https://goo.gl/X8313t
 
-        [3] Nesterov's Accelerated Gradient and Momentum as approximations to
-            Regularised Update Descent
+        [3] Nesterov's Accelerated Gradient and Momentum as approximations to Regularised Update Descent
             * [Aleksandar Botev, 2016] https://arxiv.org/abs/1607.01981
             * [PDF] https://arxiv.org/pdf/1607.01981.pdf
 
