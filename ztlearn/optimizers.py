@@ -54,10 +54,10 @@ class GD:
     **Gradient Descent (GD)**
 
     GD optimizes parameters theta of an objective function J(theta) by updating
-    all of the training samples in the dataset. The update is perfomed in the
-    opposite direction of the gradient of the objective function d/d_theta
-    J(theta) - with respect to the parameters (theta). The learning rate
-    eta helps determine the size of teh steps we take to the minima
+    all of the  training samples in the dataset. The update is perfomed in  the
+    opposite  direction of  the  gradient of the objective  function  d/d_theta
+    J(theta) - with respect  to  the parameters (theta).  The learning rate eta
+    helps determine the size of teh steps we take to the minima
 
     References:
         [1] An overview of gradient descent optimization algorithms
@@ -76,9 +76,9 @@ class SGD(Optimizer):
     SGD optimizes parameters theta of an objective function J(theta) by updating
     each of the training samples inputs(i) and targets(i) for all samples in the
     dataset. The update is perfomed in the opposite direction of the gradient of
-    the objective function d/d_theta J(theta) - with respect to the parameters
-    (theta). The learning rate eta helps determine the size of the steps we
-    take to the minima
+    the objective function d/d_theta J(theta) - with respect  to the  parameters
+    (theta). The learning rate eta helps determine the size of the steps we take
+    to the minima
 
     References:
         [1] An overview of gradient descent optimization algorithms
@@ -116,11 +116,11 @@ class SGDMomentum(Optimizer):
     **Stochastic Gradient Descent with Momentum (SGDMomentum)**
 
     The objective function regularly forms places on the contour map in which
-    the surface curves more steeply than others (ravines). Standard SGD will
-    tend to oscillate across the narrow ravine since the negative gradient
-    will point down one of the steep sides rather than along the ravine
-    towards the optimum. Momentum hepls to push the objective more
-    quickly along the shallow ravine towards the global minima
+    the surface curves more steeply than others (ravines). Standard SGD  will
+    tend to oscillate across the  narrow ravine since  the negative  gradient
+    will point  down one  of the  steep  sides  rather than along the  ravine
+    towards  the  optimum. Momentum  hepls to push the objective more quickly
+    along the shallow ravine towards the global minima
 
     References:
         [1] An overview of gradient descent optimization algorithms
@@ -131,8 +131,9 @@ class SGDMomentum(Optimizer):
             * [Ning Qian, 199] https://goo.gl/7fhr14
             * [PDF] https://goo.gl/91HtDt
 
-        [3] Two problems with backpropagation and other steepest-descent learning procedures for networks.
-            [Sutton, R. S., 1986][PDF] https://goo.gl/M3VFM1
+        [3] Two problems with backpropagation and other steepest-descent learning
+            procedures for networks.
+            * [Sutton, R. S., 1986][PDF] https://goo.gl/M3VFM1
 
     Args:
         kwargs: Arbitrary keyword arguments.
@@ -167,8 +168,8 @@ class Adam(Optimizer):
     **Adaptive Moment Estimation (Adam)**
 
     Adam computes adaptive learning rates for by updating each of the training
-    samples while storing an exponentially decaying average of past squared
-    gradients. Adam also keeps an exponentially decaying average of past
+    samples while storing  an  exponentially decaying average of past  squared
+    gradients. Adam  also  keeps  an  exponentially  decaying  average of past
     gradients.
 
     References:
@@ -333,8 +334,8 @@ class Adadelta(Optimizer):
     **An Adaptive Learning Rate Method (Adadelta)**
 
     Adadelta is an extension of Adagrad that seeks to avoid setting the learing
-    rate to an aggresively monotonically decreasing rate. This is achieved via
-    a dynamic learning rate i.e a diffrent learning rate is computed for each
+    rate to an aggresively monotonically  decreasing rate. This is achieved via
+    a dynamic learning rate i.e a diffrent learning rate is computed  for  each
     training sample
 
     References:
@@ -390,8 +391,8 @@ class RMSprop(Optimizer):
     **Root Mean Squared Propagation (RMSprop)**
 
     RMSprop utilizes the magnitude of recent gradients to normalize the gradients.
-    A moving average over the root mean squared (RMS) gradients is kept and then
-    divided by the current gradient. Parameters are recomended to be set as
+    A moving average over the root mean squared (RMS) gradients  is kept and then
+    divided by  the current  gradient. Parameters are  recomended  to  be  set as
     follows rho = 0.9 and eta (learning rate) = 0.001
 
     References:
@@ -437,7 +438,7 @@ class NesterovAcceleratedGradient(Optimizer):
     **Nesterov Accelerated Gradient (NAG)**
 
     NAG is an improvement in SGDMomentum where the the previous parameter values
-    are smoothed and a gradient descent step is taken from this smoothed value.
+    are smoothed and a gradient descent  step is taken from this smoothed  value.
     This enables a more intelligent way of arriving at the minima
 
     References:
@@ -445,10 +446,12 @@ class NesterovAcceleratedGradient(Optimizer):
             * [Sebastien Ruder, 2016] https://arxiv.org/abs/1609.04747
             * [PDF] https://arxiv.org/pdf/1609.04747.pdf
 
-        [2] A method for unconstrained convex minimization problem with the rate of convergence
-            [Nesterov, Y. 1983][PDF] https://goo.gl/X8313t
+        [2] A method for unconstrained convex minimization problem with the rate
+            of convergence
+            * [Nesterov, Y. 1983][PDF] https://goo.gl/X8313t
 
-        [3] Nesterov's Accelerated Gradient and Momentum as approximations to Regularised Update Descent
+        [3] Nesterov's Accelerated Gradient and Momentum as approximations to
+            Regularised Update Descent
             * [Aleksandar Botev, 2016] https://arxiv.org/abs/1607.01981
             * [PDF] https://arxiv.org/pdf/1607.01981.pdf
 

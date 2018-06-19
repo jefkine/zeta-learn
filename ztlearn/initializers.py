@@ -33,11 +33,12 @@ class HeNormal(WeightInitializer):
     **He Normal (HeNormal)**
 
     HeNormal is a robust initialization method that particularly considers the
-    rectifier nonlinearities. He normal is an implementation based on
-    Gaussian distribution
+    rectifier nonlinearities. He normal is an implementation based on Gaussian
+    distribution
 
     References:
-        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification
+        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on
+            ImageNet Classification
             * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 
@@ -65,11 +66,12 @@ class HeUniform(WeightInitializer):
     **He Normal (HeNormal)**
 
     HeNormal is a robust initialization method that particularly considers the
-    rectifier nonlinearities. He uniform is an implementation based on
-    Uniform distribution
+    rectifier nonlinearities. He uniform is an implementation based on Uniform
+    distribution
 
     References:
-        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification
+        [1] Delving Deep into Rectifiers: Surpassing Human-Level Performance on
+            ImageNet Classification
             * [Kaiming He, 2015] https://arxiv.org/abs/1502.01852
             * [PDF] https://arxiv.org/pdf/1502.01852.pdf
 
@@ -97,9 +99,10 @@ class GlorotNormal(WeightInitializer):
     **Glorot Normal (GlorotNormal)**
 
     GlorotNormal more famously known as the Xavier initialization is based on the
-    effort to try mantain the same variance of the gradients of the weights for
-    all the layers. Glorot normal is an implementation based on
-    Gaussian distribution
+    effort to  try mantain the  same variance of the gradients of the weights for
+    all  the  layers.  Glorot  normal  is  an  implementation  based  on Gaussian
+    distribution
+
 
     References:
         [1] Understanding the difficulty of training deep feedforward neural networks
@@ -130,9 +133,10 @@ class GlorotUniform(WeightInitializer):
     **Glorot Uniform (GlorotUniform)**
 
     GlorotUniform more famously known as the Xavier initialization is based on the
-    effort to try mantain the same variance of the gradients of the weights for
-    all the layers. Glorot uniform is an implementation based on
-    Uniform distribution
+    effort to try  mantain the  same  variance of the gradients of the weights for
+    all  the  layers.  Glorot  uniform  is  an  implementation  based  on  Uniform
+    distribution
+
 
     References:
         [1] Understanding the difficulty of training deep feedforward neural networks
@@ -162,9 +166,9 @@ class LeCunUniform(WeightInitializer):
     """
     **LeCun Uniform (LeCunUniform)**
 
-    Weights should be randomly chosen but in such a way that the sigmoid is
-    primarily activated in its linear region. LeCun uniform is an
-    implementation based on Uniform distribution
+    Weights  should be  randomly chosen  but in  such a way that the sigmoid  is
+    primarily activated in its linear region. LeCun uniform is an implementation
+    based on Uniform distribution
 
     References:
         [1] Efficient Backprop
@@ -190,9 +194,9 @@ class LeCunNormal(WeightInitializer):
     """
     **LeCun Normal (LeCunNormal)**
 
-    Weights should be randomly chosen but in such a way that the sigmoid is
-    primarily activated in its linear region. LeCun uniform is the
-    implementation based on Gaussian distribution
+    Weights  should  be  randomly chosen  but in such a  way that the  sigmoid is
+    primarily activated in its linear region. LeCun uniform is the implementation
+    based on Gaussian distribution
 
     References:
         [1] Efficient Backprop
@@ -218,8 +222,8 @@ class RandomUniform(WeightInitializer):
     """
     **Random Uniform (RandomUniform)**
 
-    Random uniform is an implementation of weight initialization based on
-    Uniform distribution
+    Random uniform is an implementation of weight initialization based on Uniform
+    distribution
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
@@ -241,8 +245,8 @@ class RandomNormal(WeightInitializer):
     """
     **Random Normal (RandomNormal)**
 
-    Random uniform is an implementation of weight initialization based on
-    Gaussian distribution
+    Random uniform is an implementation of weight initialization based on Gaussian
+    distribution
     """
 
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)

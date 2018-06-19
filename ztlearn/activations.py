@@ -74,7 +74,7 @@ class SELU:
 
     SELUs are activations which induce self-normalizing properties and are used
     in Self-Normalizing Neural Networks (SNNs). SNNs enable high-level abstract
-    representations that tend to automatically converge towards zero mean and
+    representations that  tend to automatically  converge towards zero mean and
     unit variance.
 
     References:
@@ -136,10 +136,10 @@ class ReLU:
     **Rectified Linear Units (ReLUs)**
 
     Rectifying neurons are an even better model of biological neurons yielding
-    equal or better performance than hyperbolic tangent networks in-spite of
-    the hard non-linearity and non-differentiability at zero hence creating
-    sparse representations with true zeros which seem remarkably suitable
-    for naturally sparse data.
+    equal or better  performance than  hyperbolic tangent networks in-spite of
+    the hard  non-linearity and  non-differentiability at zero hence  creating
+    sparse representations with  true zeros which seem remarkably suitable for
+    naturally sparse data.
 
     References:
         [1] Deep Sparse Rectifier Neural Networks
@@ -195,8 +195,8 @@ class TanH:
 
     The Tangent Hyperbolic function is a rescaled version of the  sigmoid
     function that produces outputs in scale of [-1, +1]. As an activation
-    function it produces an output for every input value hence making
-    it a continuous function.
+    function it  produces an output for every input value hence making it
+    a continuous function.
 
     References:
         [1] Hyperbolic Functions
@@ -247,9 +247,9 @@ class Sigmoid:
     **Sigmoid Activation Function**
 
     A Sigmoid function is often used as the output activation function for binary
-    classification problems as it outputs values that are in the range (0, 1).
-    Sigmoid functions are real-valued and differentiable, producing a curve
-    that is 'S-shaped' and feature one local minimum, and one local maximum
+    classification  problems as it  outputs  values that  are in the range (0, 1).
+    Sigmoid functions are real-valued  and differentiable, producing a curve that
+    is 'S-shaped' and feature one local minimum, and one local maximum
 
     References:
         [1] The influence of the sigmoid function parameters on the speed of
@@ -353,9 +353,9 @@ class Softmax:
     **Softmax Activation Function**
 
     The Softmax Activation Function is a generalization of the logistic function
-    that squashes the outputs of each unit to real values in the range [0, 1]
-    but it also divides each output such that the total sum of the outputs
-    is equal to 1.
+    that  squashes  the outputs of each  unit to real values in the range [0, 1]
+    but it  also  divides each output such that  the total sum of the outputs is
+    equal to 1.
 
     References:
         [1] Softmax Regression
@@ -415,9 +415,9 @@ class LeakyReLU:
     """
     **LeakyReLU Activation Functions**
 
-    Leaky ReLUs allow a small, non-zero gradient to propagate through the network
-    when the unit is not active hence avoiding bottlenecks that can prevent
-    learning in the Neural Network.
+    Leaky ReLUs allow a small, non-zero gradient to propagate through the network when
+    the unit is not active hence avoiding bottlenecks that can prevent learning in the
+    Neural Network.
 
     References:
         [1] Rectifier Nonlinearities Improve Neural Network Acoustic Models
@@ -476,9 +476,9 @@ class ElliotSigmoid:
     **Elliot Sigmoid Activation Function**
 
     Elliot Sigmoid squashes each element of the input from the interval [-inf, inf]
-    to the interval [-1, 1] with an 'S-shaped' function. The fucntion is fast to
-    calculate on simple computing hardware as it does not require any
-    exponential or trigonometric functions
+    to the  interval [-1, 1] with an 'S-shaped'  function.  The fucntion is fast to
+    calculate on  simple computing hardware as it does not require any  exponential
+    or trigonometric functions
 
     References:
         [1] A better Activation Function for Artificial Neural Networks
@@ -529,7 +529,7 @@ class Linear:
     **Linear Activation Function**
 
     Linear Activation applies identity operation on your data such that the output
-    data is proportional to the input data. The function always returns the same
+    data is  proportional  to the input data. The function always returns the same
     value that was used as its argument.
 
     References:

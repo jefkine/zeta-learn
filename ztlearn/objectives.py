@@ -34,9 +34,9 @@ class MeanSquaredError:
     """
     **Mean Squared error (MSE)**
 
-    MSE measures the average squared difference between the predictions and the
-    targets. The closer the predictions are to the targets the more efficient
-    the estimator.
+    MSE measures  the average squared  difference between the predictions and the
+    targets. The closer the predictions are to the targets the more efficient the
+    estimator.
 
     References:
         [1] Mean Squared error
@@ -153,7 +153,7 @@ class HingeLoss:
     """
     **Hinge Loss**
 
-    Hinge Loss also known as SVM Loss is used "maximum-margin" classification,
+    Hinge Loss  also known  as SVM Loss is used "maximum-margin" classification,
     most notably for support vector machines (SVMs)
 
     References:
@@ -232,8 +232,8 @@ class BinaryCrossEntropy(Objective):
     **Binary Cross Entropy**
 
     Binary CrossEntropy measures the performance of a classification model whose
-    output is a probability value between 0 & 1. 'Binary' is meant for discrete
-    classification tasks in which the classes are independent and not mutually
+    output is a probability value between 0 & 1. 'Binary' is meant for  discrete
+    classification  tasks in which  the classes are independent and not mutually
     exclusive. Targets here could be either 0 or 1 scalar
 
     References:
@@ -306,8 +306,8 @@ class CategoricalCrossEntropy(Objective):
     """
     **Categorical Cross Entropy**
 
-    Categorical Cross Entropy measures the performance of a classification model
-    whose output is a probability value between 0 and 1. 'Categorical' is  meant
+    Categorical Cross Entropy measures the  performance of a classification model
+    whose output is a probability value  between 0 and 1. 'Categorical' is  meant
     for discrete classification tasks in which the classes are mutually exclusive.
 
     References:
@@ -377,7 +377,7 @@ class KLDivergence(Objective):
     """
     **KL Divergence**
 
-     Kullback–Leibler divergence (also called relative entropy) is a measure of
+     Kullback–Leibler  divergence  (also called relative entropy) is a measure of
      divergence between two probability distributions.
 
     """
