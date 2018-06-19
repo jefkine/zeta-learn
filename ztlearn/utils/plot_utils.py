@@ -41,8 +41,9 @@ def plotter(x,
     fig.set_size_inches(fig_dims)
 
     ax.set_axisbelow(True)
+
     ax.minorticks_on()
-    
+
     ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
     ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
 
@@ -50,8 +51,10 @@ def plotter(x,
         ax.plot(x, y[i], **plot_dict)
 
     ax.set_title(title, **title_dict)
+
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
+
     ax.legend(legend, **legend_dict)
 
     if to_save:
@@ -136,10 +139,13 @@ def plot_opt_viz(dims,
 
     elif dims == 2:
         plt.figure(figsize = fig_dims)
+
         plt.xticks(**xticks_dict)
         plt.yticks(**yticks_dict)
+
         plt.plot(x, y)
         plt.scatter(z, f_solution, color = 'r')
+
         plt.xlabel(xlabel, **xlabel_dict)
         plt.ylabel(ylabel, **ylabel_dict)
 
