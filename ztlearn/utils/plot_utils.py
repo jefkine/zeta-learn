@@ -187,6 +187,7 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
 
         digit.xaxis.set_ticklabels([])
         digit.yaxis.set_ticklabels([])
+        
         digit.minorticks_on()
 
         digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
