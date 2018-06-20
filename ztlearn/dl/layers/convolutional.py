@@ -243,7 +243,7 @@ class ConvLoop2D(Conv):
 
         # alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
-        # output_width = (input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1] + 1
+        # output_width  = (input_width - self.kernel_size[1] + np.sum(pad_width)) / self.strides[1] + 1
 
         if self.padding == 'same':
             output_height = np.ceil((input_height) / (self.strides[0])).astype(int)
@@ -382,7 +382,7 @@ class ConvToeplitzMat(Conv):
                                                  output_height,
                                                  output_width,
                                                  self.kernel_size[0])
-                                                 
+
         #TODO: weights need to be rearraged in a way to have a matrix
         #      multiplication with the generated toeplitz matrix
         self.weight_col = self.weights.reshape(self.filter_num, -1)
