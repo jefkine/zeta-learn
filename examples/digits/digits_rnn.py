@@ -26,14 +26,14 @@ model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model_epochs = 100
-fit_stats = model.fit(train_data.reshape(-1,8,8),
+fit_stats = model.fit(train_data.reshape(-1, 8, 8),
                       one_hot(train_label),
                       batch_size      = 128,
                       epochs          = model_epochs,
-                      validation_data = (test_data.reshape(-1,8,8), one_hot(test_label)),
+                      validation_data = (test_data.reshape(-1, 8, 8), one_hot(test_label)),
                       shuffle_data    = True)
 
-predictions = unhot(model.predict(test_data.reshape(-1,8,8), True))
+predictions = unhot(model.predict(test_data.reshape(-1, 8, 8), True))
 print_results(predictions, test_label)
 plot_img_results(test_data, test_label, predictions)
 
