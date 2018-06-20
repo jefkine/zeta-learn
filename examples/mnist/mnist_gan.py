@@ -13,7 +13,7 @@ mnist               = fetch_mldata('MNIST original')
 mnist_data, _, _, _ = train_test_split(mnist.data, mnist.target, test_size = 0.0, cut_off = 2000)
 
 # plot samples of training data
-plot_img_samples(train_data[:40], None, dataset = 'mnist')
+plot_img_samples(mnist_data[:40], None, dataset = 'mnist')
 
 img_rows = 28
 img_cols = 28
