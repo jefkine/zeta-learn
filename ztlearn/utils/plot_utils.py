@@ -41,7 +41,6 @@ def plotter(x,
     fig.set_size_inches(fig_dims)
 
     ax.set_axisbelow(True)
-
     ax.minorticks_on()
 
     ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
@@ -162,10 +161,10 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
+
         digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
                                            img_specs[dataset]['img_width']),
-                                           cmap = plt.cm.binary,
-                                           interpolation = 'nearest')
+                                           cmap = plt.cm.binary, interpolation = 'nearest')
 
         if train_target is not None:
             digit.text(img_specs[dataset]['pix_row'],
@@ -187,13 +186,12 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
 
         digit.xaxis.set_ticklabels([])
         digit.yaxis.set_ticklabels([])
-        
+
         digit.minorticks_on()
 
         digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
                                            img_specs[dataset]['img_width']),
-                                           cmap = plt.cm.binary,
-                                           interpolation = 'nearest')
+                                           cmap = plt.cm.binary, interpolation = 'nearest')
 
         if train_target is not None:
             digit.text(img_specs[dataset]['pix_row'],
@@ -212,8 +210,7 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
         digit.imshow(test_data.reshape(-1,
                                        img_specs[dataset]['img_height'],
                                        img_specs[dataset]['img_width'])[i],
-                                       cmap = plt.cm.binary,
-                                       interpolation = 'nearest')
+                                       cmap = plt.cm.binary, interpolation = 'nearest')
 
         if predictions[i] == test_label[i]:
             digit.text(img_specs[dataset]['pix_row'],
@@ -244,8 +241,7 @@ def plot_generated_img_samples(test_label,
         digit.imshow(predictions.reshape(-1,
                                          img_specs[dataset]['img_height'],
                                          img_specs[dataset]['img_width'])[i],
-                                         cmap = plt.cm.binary,
-                                         interpolation = 'nearest')
+                                         cmap = plt.cm.binary, interpolation = 'nearest')
 
         if test_label is not None:
             digit.text(img_specs[dataset]['pix_row'],
