@@ -242,6 +242,7 @@ class UpSampling2D(Layer):
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         grad = grad[:, :, ::self.size[0], ::self.size[1]]
+        
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
 
         return grad
