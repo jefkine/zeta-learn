@@ -47,7 +47,7 @@ class Pool(Layer):
 
         # formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
         out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
-        out_width = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
+        out_width  = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
 
         ''' NOTE: alternate formula:
         if self.padding == 'same':
@@ -95,15 +95,15 @@ class Pool(Layer):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
         d_input_col = np.zeros_like(self.input_col)
-        grad_col = grad.transpose(2, 3, 0, 1).ravel()
+        grad_col    = grad.transpose(2, 3, 0, 1).ravel()
 
         d_input_col = self.pool_backward(d_input_col, grad_col, self.pool_cache)
-        d_input = col2im_indices(d_input_col,
-                                              (input_num * input_depth, 1, input_height, input_width),
-                                              self.pool_size[0],
-                                              self.pool_size[1],
-                                              padding = (self.pad_height, self.pad_width),
-                                              stride  = self.strides[0])
+        d_input     = col2im_indices(d_input_col,
+                                                  (input_num * input_depth, 1, input_height, input_width),
+                                                  self.pool_size[0],
+                                                  self.pool_size[1],
+                                                  padding = (self.pad_height, self.pad_width),
+                                                  stride  = self.strides[0])
 
         return d_input.reshape(self.inputs.shape)
 
