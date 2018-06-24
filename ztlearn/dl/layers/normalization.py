@@ -92,3 +92,66 @@ class BatchNormalization(Layer):
         dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
 
         return dinput
+
+
+class LayerNormalization1D(Layer):
+
+    def __init__(self, eps = 1e-6):
+        self.eps              = eps
+        self.optimizer_kwargs = None
+
+        self.is_trainable = True
+
+    @property
+    def trainable(self):
+        return self.is_trainable
+
+    @trainable.setter
+    def trainable(self, is_trainable):
+        self.is_trainable = is_trainable
+
+    @property
+    def weight_optimizer(self):
+        return self.optimizer_kwargs
+
+    @weight_optimizer.setter
+    def weight_optimizer(self, optimizer_kwargs = {}):
+        self.optimizer_kwargs = optimizer_kwargs
+
+    @property
+    def output_shape(self):
+        return self.input_shape
+
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    def prep_layer(self):
+        self.gamma = np.ones(self.input_shape) # * 0.2 (reduce gamma to 0.2 incase of NaNs)
+        self.beta  = np.zeros(self.input_shape)
+
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    def pass_forward(self, inputs, train_mode = True, **kwargs):
+        self.mean = np.mean(inputs, axis = -1, keepdims = True)
+        self.std  = np.std(inputs, axis = -1, keepdims = True)
+
+        self.input_mean = inputs - self.mean
+        self.inv_stddev = np.reciprocal(self.std + self.eps)
+        self.input_norm = self.input_mean * self.inv_stddev
+
+        return self.input_norm * self.gamma + self.beta
+
+    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    def pass_backward(self, grad):
+        dinput_norm = grad * self.gamma
+
+        if self.is_trainable:
+
+            dbeta  = np.sum(grad, axis = 0)
+            dgamma = np.sum(grad * self.input_norm, axis = 0)
+
+            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
+            self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta)
+
+        # endif self.is_trainable
+
+        dinput = np.divide(1., grad.shape[0]) * self.inv_stddev * (grad.shape[0] * dinput_norm - np.sum(dinput_norm, axis = 0) - self.input_norm * np.sum(dinput_norm * self.input_norm, axis = 0))
+
+        return dinput

@@ -36,6 +36,7 @@ from .convolutional import ConvToeplitzMat
 
 # normalization layer(s)
 from .normalization import BatchNormalization
+from .normalization import LayerNormalization1D
 
 # recurrent layer(s)
 from .recurrent import RNN

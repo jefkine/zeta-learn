@@ -45,11 +45,12 @@ class Pool(Layer):
                                                                 self.pool_size[0],
                                                                 self.pool_size[1])
 
-        # formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
+        # NOTE: formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
         out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
         out_width  = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
 
-        ''' NOTE: alternate formula:
+        '''
+        # NOTE: alternate formula:
         if self.padding == 'same':
             out_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
             out_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))

@@ -3,7 +3,7 @@
 # config.DISABLE_JIT = 0 -- disable jit set to False
 # config.DISABLE_JIT = 1 -- disable jit set to True
 
-DISABLE_JIT_FLAG = 0
+DISABLE_JIT_FLAG = 1
 
 # jit options
 

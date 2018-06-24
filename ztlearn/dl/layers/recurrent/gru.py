@@ -126,8 +126,7 @@ class GRU(Layer):
             self.cell[:, t]    = activate(self.activation).forward(np.dot(self.z_tilde[:, t-1], self.W_cell) + self.b_cell)
             self.states[:, t]  = (1. - self.update[:, t]) * self.states[:, t-1]  + self.update[:, t] * self.cell[:, t]
 
-            # logits
-            self.final[:, t] = np.dot(self.states[:, t], self.W_final) + self.b_final
+            self.final[:, t] = np.dot(self.states[:, t], self.W_final) + self.b_final # logits
 
         if not train_mode:
             return activate('softmax').forward(self.final) # if mode is not training

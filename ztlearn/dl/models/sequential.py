@@ -39,6 +39,10 @@ class Sequential:
     def added_layers(self):
         return self.layers
 
+    def print_layer_names(self):
+        for layer in self.layers:
+            print(layer.layer_cls_name)
+
     @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def add(self, layer):
         if self.layers:

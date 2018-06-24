@@ -36,7 +36,7 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
 
     for i, sentence in enumerate(sentences):
         for t, char in enumerate(sentence):
-            x[i, t, char_to_indices[char]] = 1
+            x[i, t, char_to_indices[char]] = 1            
         y[i, char_to_indices[next_chars[i]]] = 1
 
     return x, y, len_chars
