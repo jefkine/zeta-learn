@@ -96,7 +96,7 @@ class BatchNormalization(Layer):
 
 class LayerNormalization1D(Layer):
 
-    def __init__(self, eps = 1e-6):
+    def __init__(self, eps = 1e-5):
         self.eps              = eps
         self.optimizer_kwargs = None
 
