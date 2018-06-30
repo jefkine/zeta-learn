@@ -57,8 +57,9 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
     samples_train, samples_test = samples[:split_ratio], samples[split_ratio:]
     labels_train, labels_test   = labels[:split_ratio], labels[split_ratio:]
 
-    if cut_off is not None:
+    if cut_off is not None and isinstance(cut_off, (int, np.integer)):
         return samples_train[:cut_off], samples_test[:cut_off], labels_train[:cut_off], labels_test[:cut_off]
+
     return samples_train, samples_test, labels_train, labels_test
 
 @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
