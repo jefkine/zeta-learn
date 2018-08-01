@@ -19,7 +19,7 @@ plot_img_samples(mnist_data[:40], None, dataset = 'mnist')
 img_rows     = 28
 img_cols     = 28
 img_channels = 1
-img_dims = (img_channels, img_rows, img_cols)
+img_dims     = (img_channels, img_rows, img_cols)
 
 latent_dim = 100
 batch_size = 128
