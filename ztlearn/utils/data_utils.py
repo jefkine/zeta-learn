@@ -90,7 +90,7 @@ def range_normalize(input_data, a = -1, b = 1, axis = None):
 
 @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def min_max(input_data, axis = None):
-    return (input_data - input_data.min(axis = axis, keepdims = True))/np.ptp(input_data, axis = axis)
+    return (input_data - input_data.min(axis = axis, keepdims = True)) / np.ptp(input_data, axis = axis)
 
 @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def z_score(input_data, axis = None):
