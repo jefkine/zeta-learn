@@ -2,18 +2,10 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 
 class WeightInitializer:
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+
     def compute_fans(self, shape):
         # Original code forked from MIT licensed keras project
         # https://github.com/fchollet/keras/blob/master/keras/initializers.py
@@ -45,7 +37,6 @@ class HeNormal(WeightInitializer):
             * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / fan_in)
@@ -77,7 +68,6 @@ class HeUniform(WeightInitializer):
             * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/TBNw5t
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / fan_in)
@@ -111,7 +101,6 @@ class GlorotNormal(WeightInitializer):
             * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(2. / (fan_in + fan_out))
@@ -145,7 +134,6 @@ class GlorotUniform(WeightInitializer):
             * [DeepGrid Article - Jefkine Kafunah] https://goo.gl/E2XrGe
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(6. / (fan_in + fan_out))
@@ -173,7 +161,6 @@ class LeCunUniform(WeightInitializer):
             * [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(3. / fan_in)
@@ -201,7 +188,6 @@ class LeCunNormal(WeightInitializer):
             * [LeCun, 1998][PDF] http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / fan_in)
@@ -224,7 +210,6 @@ class RandomUniform(WeightInitializer):
     distribution
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
@@ -247,7 +232,6 @@ class RandomNormal(WeightInitializer):
     distribution
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         fan_in, fan_out = self.compute_fans(shape)
         scale           = np.sqrt(1. / (fan_in + fan_out))
@@ -269,7 +253,6 @@ class Zero(WeightInitializer):
     Zero is an implementation of weight initialization that returns all zeros
     """
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def weights(self, shape, random_seed):
         return np.zeros(shape = shape)
 
@@ -285,8 +268,7 @@ class One(WeightInitializer):
 
     One is an implementation of weight initialization that returns all ones
     """
-
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    
     def weights(self, shape, random_seed):
         return np.ones(shape = shape)
 

@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 # Note: careful as np.multiply does an elementwise multiply on numpy arrays
 #       asterisk (*) does the same but will perfom matrix multiplication on mat (numpy matrices)
 
@@ -39,11 +31,9 @@ class L1Regularization:
     def __init__(self, _lambda, **kwargs):
         self._lambda = _lambda
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def regulate(self, weights):
         return np.multiply(self._lambda, np.linalg.norm(weights))
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, weights):
         return np.multiply(self._lambda, np.sign(weights))
 
@@ -78,11 +68,9 @@ class L2Regularization:
     def __init__(self, _lambda, **kwargs):
         self._lambda = _lambda
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def regulate(self, weights):
         return np.multiply(self._lambda, (0.5 *  weights.T.dot(weights)))
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def derivative(self, weights):
         return np.multiply(self._lambda, weights)
 
@@ -112,11 +100,9 @@ class ElasticNetRegularization:
         self._lambda  = _lambda
         self.l1_ratio = l1_ratio
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def regulate(self, weights):
         return np.multiply(self._lambda, (((self.l1_ratio * 0.5) * weights.T.dot(weights)) + ((1 - self.l1_ratio) * np.linalg.norm(weights))))
-
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    
     def derivative(self, weights):
         return np.multiply(self._lambda, (((self.l1_ratio * 0.5) * weights) + ((1 - self.l1_ratio) *  np.sign(weights))))
 

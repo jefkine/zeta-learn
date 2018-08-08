@@ -2,21 +2,12 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from .numba_utils import CACHE_FLAG
-from .numba_utils import NOGIL_FLAG
-from .numba_utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .data_utils import one_hot
 
 #-----------------------------------------------------------------------------#
 #                     GENERATE SYNTHETIC SEQUENCES DATA                       #
 #-----------------------------------------------------------------------------#
 
-@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_mult_sequence_xtyt(nums, cols = 10, factor = 10, tensor_dtype = np.int):
     assert factor >= cols, 'factor should be more than or equal to cols'
     lookup = cols * factor
@@ -34,7 +25,6 @@ def gen_mult_sequence_xtyt(nums, cols = 10, factor = 10, tensor_dtype = np.int):
 
     return x, y, lookup
 
-@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_mult_sequence_xtym(nums, cols = 10, factor = 10, tensor_dtype = np.int):
     assert factor >= cols, 'factor should be more than or equal to cols'
     lookup = cols * factor

@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .base import Regression
 from ztlearn.utils import normalize
 from sklearn.preprocessing import PolynomialFeatures
@@ -34,7 +26,6 @@ class PolynomialRegression(Regression):
                                                    penalty_weight = penalty_weight,
                                                    l1_ratio       = l1_ratio)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit(self, inputs, targets, verbose = False, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
 
@@ -45,7 +36,6 @@ class PolynomialRegression(Regression):
 
         return fit_stats
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def predict(self, inputs, normalized = True):
         polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
 

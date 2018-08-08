@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .base import Layer
 from ztlearn.utils import get_pad
 from ztlearn.utils import unroll_inputs
@@ -100,7 +92,6 @@ class Conv(Layer):
 
         return self.filters, int(output_height), int(output_width)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.kernel_shape = (self.filters, self.input_shape[0], self.kernel_size[0], self.kernel_size[1])
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
@@ -119,7 +110,6 @@ class Conv2D(Conv):
 
         super(Conv2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _  = self.weights.shape
         self.input_shape          = inputs.shape
@@ -136,8 +126,8 @@ class Conv2D(Conv):
                                                       self.kernel_size[1])
 
         # confirm dimensions: TODO: implement with numba
-        #assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        #assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # NOTE: formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         output_height = ((input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0]) + 1
@@ -169,7 +159,6 @@ class Conv2D(Conv):
 
         return output.transpose(3, 0, 1, 2)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.input_shape
         doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
@@ -221,7 +210,6 @@ class ConvLoop2D(Conv):
 
         super(ConvLoop2D, self).__init__(filters, kernel_size, activation, input_shape, strides, padding)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.filter_num, _, _, _ = self.weights.shape
         self.input_shape         = inputs.shape
@@ -240,8 +228,8 @@ class ConvLoop2D(Conv):
         x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
 
         # confirm dimensions: TODO: implement with numba
-        # assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
-        # assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
         # NOTE: alternate formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
         # output_height = (input_height - self.kernel_size[0] + np.sum(pad_height)) / self.strides[0] + 1
@@ -268,7 +256,6 @@ class ConvLoop2D(Conv):
 
         return output
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 

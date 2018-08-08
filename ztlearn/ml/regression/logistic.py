@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
 from ztlearn.initializers import InitializeWeights as init
@@ -38,7 +30,6 @@ class LogisticRegression:
         self.regularization = regularize(penalty, penalty_weight, l1_ratio = l1_ratio)
 
     @LogIfBusy
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit(self, inputs, targets, verbose = False):
         fit_stats    = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         self.weights = self.init_method.initialize_weights((inputs.shape[1], ))
@@ -63,7 +54,6 @@ class LogisticRegression:
         return fit_stats
 
     @LogIfBusy
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit_NR(self, inputs, targets, verbose = False):
         ''' Newton-Raphson Method '''
         fit_stats = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
@@ -88,6 +78,5 @@ class LogisticRegression:
 
         return fit_stats
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def predict(self, inputs):
         return np.round(self.activate.forward(inputs.dot(self.weights))).astype(int)

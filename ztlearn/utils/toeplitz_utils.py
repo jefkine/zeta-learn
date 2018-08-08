@@ -2,15 +2,7 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from .numba_utils import CACHE_FLAG
-from .numba_utils import NOGIL_FLAG
-from .numba_utils import DISABLE_JIT_FLAG
 
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
-@jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def unroll_inputs(padded_inputs,
                                  batch_num,
                                  filter_num,

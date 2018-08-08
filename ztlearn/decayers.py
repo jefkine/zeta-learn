@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 
 class Decay(object):
 
@@ -20,7 +12,6 @@ class Decay(object):
         self.min_lrate = min_lrate
         self.max_lrate = max_lrate
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def clip_lrate(self):
         return np.clip(self.lrate, self.min_lrate, self.max_lrate)
 
@@ -30,7 +21,6 @@ class InverseTimeDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(InverseTimeDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def decompose(self):
         self.lrate *= (1. / (1 + self.decay * self.epoch))
 
@@ -48,7 +38,6 @@ class StepDecay(Decay):
         super(StepDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
         self.step_size = step_size
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def decompose(self):
         self.lrate *= np.power(self.decay, ((1 + self.epoch) // self.step_size))
 
@@ -64,7 +53,6 @@ class ExponetialDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(ExponetialDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def decompose(self):
         self.lrate *= np.power(self.decay, self.epoch)
 
@@ -80,7 +68,6 @@ class NaturalExponentialDecay(Decay):
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(NaturalExponentialDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def decompose(self):
         self.lrate *= np.exp(-self.decay * self.epoch)
 
@@ -116,7 +103,6 @@ class DecayFunction:
     @property
     def name(self):
         return self.decay_func.decay_name
-
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    
     def decompose(self):
         return self.decay_func.decompose()

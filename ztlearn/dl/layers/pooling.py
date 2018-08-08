@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .base import Layer
 from ztlearn.utils import get_pad
 from ztlearn.utils import im2col_indices
@@ -67,7 +59,6 @@ class Pool(Layer):
 
     def prep_layer(self): pass
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         input_num, input_depth, input_height, input_width = inputs.shape
         self.inputs = inputs
@@ -91,7 +82,6 @@ class Pool(Layer):
 
         return output.transpose(2, 3, 0, 1)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
@@ -114,14 +104,12 @@ class MaxPooling2D(Pool):
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super(MaxPooling2D, self).__init__(pool_size, strides, padding)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pool_forward(self, input_col):
         max_id = np.argmax(input_col, axis = 0)
         out    = input_col[max_id, range(max_id.size)]
 
         return out, max_id
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pool_backward(self, d_input_col, grad_col, pool_cache):
         d_input_col[pool_cache, range(grad_col.size)] = grad_col
 
@@ -133,13 +121,11 @@ class AveragePool2D(Pool):
     def __init__(self, pool_size = (2, 2), strides = (1, 1), padding = 'valid'):
         super(AveragePool2D, self).__init__(pool_size, strides, padding)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pool_forward(self, input_col):
         out = np.mean(input_col, axis = 0)
 
         return out, None
-
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+    
     def pool_backward(self, d_input_col, grad_col, pool_cache = None):
         d_input_col[:, range(grad_col.size)] = 1. / d_input_col.shape[0] * grad_col
 

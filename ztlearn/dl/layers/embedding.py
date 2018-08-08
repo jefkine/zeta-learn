@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .base import Layer
 from ztlearn.utils import one_hot
 from ztlearn.initializers import InitializeWeights as init
@@ -66,24 +58,20 @@ class Embedding(Layer):
     def output_shape(self):
         return self.input_shape
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.kernel_shape = (self.input_dim, self.output_dim)
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.inputs         = inputs
-        self.one_hot_inputs = np.zeros((batch_size, num_cols, self.input_dim))
-
+        self.inputs                    = inputs
         batch_size, num_rows, num_cols = self.inputs.shape
+        self.one_hot_inputs            = np.zeros((batch_size, num_cols, self.input_dim))
 
         for i in range(batch_size):
             self.one_hot_inputs[i, :, :] = one_hot(self.inputs[i, :, :], num_classes = self.input_dim)
 
         return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis = 2), axis = 1)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         d_inputs     = np.matmul(grad, self.one_hot_inputs)
         d_embeddings = np.sum(d_inputs, axis = 0)

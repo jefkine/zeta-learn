@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from .base import Layer
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
@@ -46,12 +38,10 @@ class BatchNormalization(Layer):
     def output_shape(self):
         return self.input_shape
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.gamma = np.ones(self.input_shape)
         self.beta  = np.zeros(self.input_shape)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         if self.running_var is None:
             self.running_var = np.var(inputs, axis = 0)
@@ -75,7 +65,6 @@ class BatchNormalization(Layer):
 
         return self.gamma * self.input_norm + self.beta
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         dinput_norm = grad * self.gamma
 
@@ -122,12 +111,10 @@ class LayerNormalization1D(Layer):
     def output_shape(self):
         return self.input_shape
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         self.gamma = np.ones(self.input_shape) # * 0.2 (reduce gamma to 0.2 incase of NaNs)
         self.beta  = np.zeros(self.input_shape)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.mean = np.mean(inputs, axis = -1, keepdims = True)
         self.std  = np.std(inputs, axis = -1, keepdims = True)
@@ -138,7 +125,6 @@ class LayerNormalization1D(Layer):
 
         return self.input_norm * self.gamma + self.beta
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         dinput_norm = grad * self.gamma
 

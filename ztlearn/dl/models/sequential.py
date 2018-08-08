@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
 from ztlearn.utils import minibatches
@@ -43,7 +35,6 @@ class Sequential:
         for layer in self.layers:
             print(layer.layer_cls_name)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def add(self, layer):
         if self.layers:
             layer.input_shape = self.layers[-1].output_shape
@@ -55,12 +46,11 @@ class Sequential:
         if hasattr(layer, 'layer_activation') and layer.layer_activation is not None:
             self.append_layer(Activation(layer.layer_activation, input_shape = self.layers[-1].output_shape))
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
+
     def append_layer(self, layer):
         layer.prep_layer()
         self.layers.append(layer)
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def compile(self, loss = 'categorical_crossentropy', optimizer = {}):
         self.loss = loss
         for layer in self.layers:
@@ -68,7 +58,6 @@ class Sequential:
                 layer.weight_optimizer = optimizer
 
     @LogIfBusy
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
         fit_stats = {'train_loss': [], 'train_acc': [], 'valid_loss': [], 'valid_acc': []}
 
@@ -101,7 +90,6 @@ class Sequential:
 
         return fit_stats
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def train_on_batch(self, train_batch_data, train_batch_label):
         predictions = self.foward_pass(train_batch_data, train_mode = True)
 
@@ -121,7 +109,6 @@ class Sequential:
         return loss, acc
 
     @LogIfBusy
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def evaluate(self, test_data, test_label, batch_size = 128, shuffle_data = True, verbose = False):
         eval_stats = {'valid_batches' : 0, 'valid_loss': [], 'valid_acc': []}
 
@@ -141,20 +128,17 @@ class Sequential:
 
         return eval_stats
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def predict(self, sample_input, train_mode = False):
         return self.foward_pass(sample_input, train_mode = train_mode)
 
     def summary(self): pass
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def foward_pass(self, inputs, train_mode = False):
         layer_output = inputs
         for layer in self.layers:
             layer_output = layer.pass_forward(layer_output, train_mode)
         return layer_output
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def backward_pass(self, loss_grad):
         for layer in reversed(self.layers):
             loss_grad = layer.pass_backward(loss_grad)

@@ -4,7 +4,6 @@
 from . import data_utils
 from . import text_utils
 from . import plot_utils
-from . import numba_utils
 from . import im2col_utils
 from . import toeplitz_utils
 from . import sequence_utils
@@ -42,11 +41,6 @@ from .plot_utils import plot_generated_img_samples
 
 # import from time_deco_utils.py
 from .time_deco_utils import LogIfBusy
-
-# import from numba_utils.py
-from .numba_utils import DISABLE_JIT_FLAG
-from .numba_utils import CACHE_FLAG
-from .numba_utils import NOGIL_FLAG
 
 # import from sequence_utils.py
 from .sequence_utils import gen_mult_sequence_xtyt

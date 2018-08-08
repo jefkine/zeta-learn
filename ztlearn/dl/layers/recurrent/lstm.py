@@ -2,14 +2,6 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from ztlearn.utils import CACHE_FLAG
-from ztlearn.utils import NOGIL_FLAG
-from ztlearn.utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
-
 from ..base import Layer
 from ztlearn.utils import clip_gradients as cg
 from ztlearn.initializers import InitializeWeights as init
@@ -91,7 +83,6 @@ class LSTM(Layer):
     def output_shape(self):
         return self.input_shape
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def prep_layer(self):
         _, input_dim = self.input_shape
         z_dim        = self.h_units + input_dim # concatenate (h_units, vocabulary_size) vector
@@ -118,7 +109,6 @@ class LSTM(Layer):
         # final output bias
         self.b_final = np.zeros((input_dim,))
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
         batch_size, time_steps, input_dim = inputs.shape
@@ -149,7 +139,6 @@ class LSTM(Layer):
 
         return self.final
 
-    @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
         next_grad = np.zeros_like(grad)

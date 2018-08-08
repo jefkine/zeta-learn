@@ -13,10 +13,9 @@ it a useful resource for researchers and students.
 
 Dependencies
 ------------
- - numpy >= 1.19.0
+ - numpy >= 1.15.0
  - scikit-learn >= 0.18.0
  - matplotlib >= 2.0.0
- - numba >= 0.38.0
 
 Features
 --------

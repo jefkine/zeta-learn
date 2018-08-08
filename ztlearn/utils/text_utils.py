@@ -2,20 +2,11 @@
 
 import numpy as np
 
-from numba import jit
-from numba import config
-from .numba_utils import CACHE_FLAG
-from .numba_utils import NOGIL_FLAG
-from .numba_utils import DISABLE_JIT_FLAG
-
-config.DISABLE_JIT = DISABLE_JIT_FLAG
 
 #-----------------------------------------------------------------------------#
 #                       TEXT UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
-# @@BUG: numba - internal error with dictionary composition https://github.com/numba/numba/issues/3028
-# @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
@@ -36,13 +27,11 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
 
     for i, sentence in enumerate(sentences):
         for t, char in enumerate(sentence):
-            x[i, t, char_to_indices[char]] = 1            
+            x[i, t, char_to_indices[char]] = 1
         y[i, char_to_indices[next_chars[i]]] = 1
 
     return x, y, len_chars
 
-# @@BUG: numba - internal error with dictionary composition https://github.com/numba/numba/issues/3028
-# @jit(nogil = NOGIL_FLAG, cache = CACHE_FLAG)
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
     len_chars = len(chars)
