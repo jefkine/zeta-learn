@@ -10,6 +10,7 @@ class Sequential(Trainer):
 
     def __init__(self, init_method = 'he_normal'):
         self.layers      = []
+        self.layer_num   = 0
         self.init_method = init_method
 
         self.is_trainable = True
@@ -28,9 +29,24 @@ class Sequential(Trainer):
     def added_layers(self):
         return self.layers
 
-    def print_layer_names(self):
-        for layer in self.layers:
-            print(layer.layer_cls_name)
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        try:
+            result = self.layers[self.layer_num]
+        except IndexError:
+            raise StopIteration
+        self.layer_num += 1
+
+        return result
+
+    def __str__(self):
+        model_layers = ""
+        for i, layer in enumerate(self.layers):
+            model_layers += "LAYER {}: {}\n".format(i + 1, layer.layer_cls_name)
+
+        return model_layers
 
     def add(self, layer):
         if self.layers:

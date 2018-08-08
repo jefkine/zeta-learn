@@ -28,4 +28,3 @@ class Layer(ABC):
 
     @abstractmethod
     def pass_backward(self): pass
-    
