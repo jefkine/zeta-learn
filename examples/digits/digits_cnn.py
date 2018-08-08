@@ -36,10 +36,6 @@ model.add(BatchNormalization())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-print(model)
-
-'''
-
 model_epochs = 12
 fit_stats = model.fit(train_data.reshape(-1, 1, 8, 8),
                       one_hot(train_label),
@@ -55,4 +51,3 @@ plot_img_results(test_data, test_label, predictions)
 model_name = 'digits_cnn'
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
-'''

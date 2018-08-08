@@ -78,7 +78,7 @@ class Conv(Layer):
 
         output_height, output_width = get_output_dims(self.input_shape[1], self.input_shape[2],
                                                                            self.kernel_size,
-                                                                           self.strides, 
+                                                                           self.strides,
                                                                            self.padding)
 
         return self.filters, int(output_height), int(output_width)
