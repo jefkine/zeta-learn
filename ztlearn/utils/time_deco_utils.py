@@ -5,6 +5,7 @@ import types
 from functools import wraps
 from datetime import timedelta
 
+
 class LogIfBusy:
 
     def __init__(self, func):
@@ -26,4 +27,3 @@ class LogIfBusy:
             return self
         else:
             return types.MethodType(self, instance)
-            

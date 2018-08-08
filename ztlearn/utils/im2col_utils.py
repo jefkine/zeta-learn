@@ -3,7 +3,6 @@
 # Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
 import numpy as np
 
-
 def get_pad(padding, input_height, input_width, stride_height, stride_width, kernel_height, kernel_width):
     if padding == 'valid':
         return (0, 0), (0, 0)
