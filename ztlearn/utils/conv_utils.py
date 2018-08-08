@@ -34,7 +34,7 @@ def get_output_dims(input_height, input_width, kernel_size, strides, padding_typ
 
     return output_height, output_width
 
-# unroll for toeplitlz
+# unroll for toeplitz
 def unroll_inputs(padded_inputs,
                                  batch_num,
                                  filter_num,
