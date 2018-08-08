@@ -13,12 +13,14 @@ def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_hei
 
 def get_output_dims(input_height, input_width, kernel_size, strides, padding_type = 'valid'):
     """
-    VALID: No padding applied. Assume that all dimensions are valid so that input image gets fully
-           covered by filter and stride you specified.
+    **SAME and VALID Padding**
 
-    SAME:  Apply padding to input (if needed) so that input image gets fully covered by filter and
-           stride you specified. For stride 1, this will ensure that output image size is same as
-           input.
+    VALID: No padding is applied.  Assume that all  dimensions are valid so that input image
+           gets fully covered by filter and stride you specified.
+
+    SAME:  Padding is applied to input (if needed) so that input image gets fully covered by
+           filter and stride you specified. For stride 1, this will ensure that output image
+           size is same as input.
 
     References:
         [1] SAME and VALID Padding: http://bit.ly/2MtGgBM
