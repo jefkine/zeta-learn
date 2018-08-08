@@ -6,6 +6,7 @@ from .base import Layer
 from ztlearn.utils import get_pad
 from ztlearn.utils import im2col_indices
 from ztlearn.utils import col2im_indices
+from ztlearn.utils import get_output_dims
 
 
 class Pool(Layer):
@@ -37,25 +38,12 @@ class Pool(Layer):
                                                                 self.pool_size[0],
                                                                 self.pool_size[1])
 
-        # NOTE: formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
-        out_height = ((input_height - self.pool_size[0] + np.sum(self.pad_height)) / self.strides[0]) + 1
-        out_width  = ((input_width - self.pool_size[1] + np.sum(self.pad_width)) / self.strides[1]) + 1
+        output_height, output_width = get_output_dims(input_height, input_width, self.pool_size, self.strides, self.padding)
 
-        '''
-        # NOTE: alternate formula:
-        if self.padding == 'same':
-            out_height = np.ceil(np.float32(input_height) / np.float32(self.strides[0]))
-            out_width  = np.ceil(np.float32(input_width) / np.float32(self.strides[1]))
+        assert output_height % 1 == 0
+        assert output_width % 1  == 0
 
-        if self.padding == 'valid':
-            out_height = np.ceil(np.float32(input_height - self.pool_size[0] + 1) / np.float32(self.strides[0]))
-            out_width  = np.ceil(np.float32(input_width - self.pool_size[1] + 1) / np.float32(self.strides[1]))
-        '''
-
-        assert out_height % 1 == 0
-        assert out_width % 1  == 0
-
-        return input_channels, int(out_height), int(out_width)
+        return input_channels, int(output_height), int(output_width)
 
     def prep_layer(self): pass
 
@@ -66,8 +54,7 @@ class Pool(Layer):
         assert (input_height - self.pool_size[0]) % self.strides[0] == 0, 'Invalid height'
         assert (input_width - self.pool_size[1]) % self.strides[1]  == 0, 'Invalid width'
 
-        output_height = (input_height - self.pool_size[0]) / self.strides[0] + 1
-        output_width  = (input_width - self.pool_size[1]) / self.strides[1] + 1
+        output_height, output_width = get_output_dims(input_height, input_width, self.pool_size, self.strides)
 
         input_reshaped = inputs.reshape(input_num * input_depth, 1, input_height, input_width)
         self.input_col = im2col_indices(input_reshaped,
@@ -125,7 +112,7 @@ class AveragePool2D(Pool):
         out = np.mean(input_col, axis = 0)
 
         return out, None
-    
+
     def pool_backward(self, d_input_col, grad_col, pool_cache = None):
         d_input_col[:, range(grad_col.size)] = 1. / d_input_col.shape[0] * grad_col
 
