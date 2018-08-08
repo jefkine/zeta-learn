@@ -4,8 +4,8 @@
 from . import data_utils
 from . import text_utils
 from . import plot_utils
+from . import conv_utils
 from . import im2col_utils
-from . import toeplitz_utils
 from . import sequence_utils
 from . import time_deco_utils
 
@@ -51,8 +51,9 @@ from .im2col_utils import get_pad
 from .im2col_utils import im2col_indices
 from .im2col_utils import col2im_indices
 
-# import from toeplitz_utils.py
-from .toeplitz_utils import unroll_inputs
+# import from conv_utils.py
+from .conv_utils import unroll_inputs
+from .conv_utils import get_output_dims
 
 __all__ = [
 
