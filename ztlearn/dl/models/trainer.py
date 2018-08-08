@@ -11,7 +11,8 @@ from ztlearn.objectives import ObjectiveFunction as objective
 
 class Trainer:
 
-    def __init__(self): pass
+    def __init__(self):
+        self.loss = 'categorical_crossentropy' # default objective
 
     @LogIfBusy
     def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
@@ -88,4 +89,3 @@ class Trainer:
         return self.foward_pass(sample_input, train_mode = train_mode)
 
     # def summary(self): pass
-    
