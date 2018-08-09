@@ -12,6 +12,14 @@ ztlearn.dl.models.sequential module
     :undoc-members:
     :show-inheritance:
 
+ztlearn.dl.models.trainer module
+--------------------------------
+
+.. automodule:: ztlearn.dl.models.trainer
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
