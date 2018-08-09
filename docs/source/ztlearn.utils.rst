@@ -4,6 +4,14 @@ ztlearn.utils package
 Submodules
 ----------
 
+ztlearn.utils.conv\_utils module
+--------------------------------
+
+.. automodule:: ztlearn.utils.conv_utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ztlearn.utils.data\_utils module
 --------------------------------
 
@@ -16,14 +24,6 @@ ztlearn.utils.im2col\_utils module
 ----------------------------------
 
 .. automodule:: ztlearn.utils.im2col_utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-ztlearn.utils.numba\_utils module
----------------------------------
-
-.. automodule:: ztlearn.utils.numba_utils
     :members:
     :undoc-members:
     :show-inheritance:
@@ -56,14 +56,6 @@ ztlearn.utils.time\_deco\_utils module
 --------------------------------------
 
 .. automodule:: ztlearn.utils.time_deco_utils
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-ztlearn.utils.toeplitz\_utils module
-------------------------------------
-
-.. automodule:: ztlearn.utils.toeplitz_utils
     :members:
     :undoc-members:
     :show-inheritance:
