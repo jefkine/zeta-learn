@@ -7,7 +7,7 @@ def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_hei
 
     """
     FORMULA: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-    FORMULA: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
+    FORMULA: [((W - PoolW + 2P)   / Sw) + 1] and [((H - PoolH + 2P)   / Sh) + 1]
     """
 
     output_height = ((input_height - kernel_size[0] + np.sum(pad_height)) / strides[0]) + 1
@@ -33,7 +33,7 @@ def get_output_dims(input_height, input_width, kernel_size, strides, padding_typ
 
     if padding_type == 'same':
         output_height = ceil(float(input_height) / float(strides[0]))
-        output_width  = ceil(float(input_width) / float(strides[1]))
+        output_width  = ceil(float(input_width)  / float(strides[1]))
 
     if padding_type == 'valid':
         output_height = ceil(float(input_height - kernel_size[0] + 1) / float(strides[0]))
