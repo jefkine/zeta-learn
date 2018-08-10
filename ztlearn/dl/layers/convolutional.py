@@ -117,7 +117,7 @@ class Conv2D(Conv):
                                                       self.kernel_size[0],
                                                       self.kernel_size[1])
 
-        # confirm dimensions: TODO: implement with numba
+        # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
         assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
@@ -207,7 +207,7 @@ class ConvLoop2D(Conv):
 
         x_padded = np.pad(self.inputs, ((0, 0), (0, 0), pad_height, pad_width), mode = 'constant')
 
-        # confirm dimensions: TODO: implement with numba
+        # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
         assert (input_width + np.sum(pad_width) - self.kernel_size[1]) %  self.strides[1]  == 0, 'width does not work'
 
