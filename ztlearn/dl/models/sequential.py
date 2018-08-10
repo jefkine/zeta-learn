@@ -72,8 +72,10 @@ class Sequential(Trainer):
                                                                                                  max_name   = max_name,
                                                                                                  max_params = max_params,
                                                                                                  max_output = max_output)
+                                                                                                 
             if i > 0:
                 total_params += int(layer_params[i])
+
         model_layers += lining +"\n"
         model_layers += "\n TOTAL PARAMS: "+str(total_params)+"\n"
 
