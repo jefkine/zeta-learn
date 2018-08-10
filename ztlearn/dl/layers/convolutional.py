@@ -222,7 +222,8 @@ class ConvLoop2D(Conv):
                 for h in np.arange(output_height): # output height
                     for w in np.arange(output_width): # output width
                         h_stride, w_stride = h * self.strides[0], w * self.strides[1]
-                        x_patch = x_padded[b, :, h_stride: h_stride + self.kernel_size[0], w_stride: w_stride + self.kernel_size[1]]
+                        x_patch            = x_padded[b, :, h_stride: h_stride + self.kernel_size[0],
+                                                            w_stride: w_stride + self.kernel_size[1]]
                         output[b, f, h, w] = np.sum(x_patch * self.weights[f]) + self.bias[f]
 
         return output
@@ -260,8 +261,8 @@ class ConvLoop2D(Conv):
                                                       c,
                                                       h: input_height - self.kernel_size[0] + h + 1: self.strides[0],
                                                       w: input_width - self.kernel_size[1] + w + 1: self.strides[1]]
-                            grad_patch  = grad[:, f]
 
+                            grad_patch           = grad[:, f]
                             dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num
 
             # dbias
