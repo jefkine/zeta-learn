@@ -28,7 +28,6 @@ model.add(Dense(10, activation = 'relu')) # 10 digits classes
 model.compile(loss = 'cce', optimizer = opt)
 
 model.summary(model_name = 'digits mlp')
-model_epochs = 100
 
 model_epochs = 12
 fit_stats = model.fit(train_data,
