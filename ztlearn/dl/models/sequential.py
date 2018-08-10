@@ -49,6 +49,8 @@ class Sequential(Trainer):
 
         return model_layers
 
+    summary = __str__ # method alias
+
     def add(self, layer):
         if self.layers:
             layer.input_shape = self.layers[-1].output_shape

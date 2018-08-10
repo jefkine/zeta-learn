@@ -87,5 +87,3 @@ class Trainer:
 
     def predict(self, sample_input, train_mode = False):
         return self.foward_pass(sample_input, train_mode = train_mode)
-
-    # def summary(self): pass

@@ -13,8 +13,8 @@ class Optimizer(object):
         self.epoch = 0
 
     def get_learning_rate(self):
-        self.min_lrate  = self.min_lrate if hasattr(self, 'min_lrate') else 0
-        self.max_lrate  = self.max_lrate if hasattr(self, 'max_lrate') else np.inf
+        self.min_lrate  = self.min_lrate  if hasattr(self, 'min_lrate')  else 0
+        self.max_lrate  = self.max_lrate  if hasattr(self, 'max_lrate')  else np.inf
         self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate') else 1e-6
         self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse_time_decay'
 
@@ -177,8 +177,8 @@ class Adam(Optimizer):
     def __init__(self, **kwargs):
         super(Adam, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
-        self.beta1   = kwargs['beta1'] if 'beta1' in kwargs else 0.9
-        self.beta2   = kwargs['beta2'] if 'beta2' in kwargs else 0.999
+        self.beta1   = kwargs['beta1']   if 'beta1'   in kwargs else 0.9
+        self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
         self.m       = None
         self.v       = None
         self.t       = 0
@@ -238,8 +238,8 @@ class Adamax(Optimizer):
     def __init__(self, **kwargs):
         super(Adamax, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
-        self.beta1   = kwargs['beta1'] if 'beta1' in kwargs else 0.9
-        self.beta2   = kwargs['beta2'] if 'beta2' in kwargs else 0.999
+        self.beta1   = kwargs['beta1']   if 'beta1'   in kwargs else 0.9
+        self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
         self.m       = None
         self.u       = None
         self.t       = 0
@@ -340,7 +340,7 @@ class Adadelta(Optimizer):
     def __init__(self, **kwargs):
         super(Adadelta, self).__init__(**kwargs)
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
-        self.rho     = kwargs['rho'] if 'rho' in kwargs else 0.9
+        self.rho     = kwargs['rho']     if 'rho'     in kwargs else 0.9
         self.cache   = None
         self.delta   = None
 
@@ -395,7 +395,7 @@ class RMSprop(Optimizer):
     def __init__(self, **kwargs):
         super(RMSprop, self).__init__(**kwargs)
         self.epsilon       = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
-        self.rho           = kwargs['rho'] if 'rho' in kwargs else 0.9
+        self.rho           = kwargs['rho']     if 'rho'     in kwargs else 0.9
         self.learning_rate = 0.001 # preset and not decayed
         self.cache         = None
 
@@ -446,7 +446,7 @@ class NesterovAcceleratedGradient(Optimizer):
         self.momentum      = kwargs['momentum'] if 'momemtum' in kwargs else 0.9
         self.velocity_prev = None
         self.velocity      = None
-    
+
     def update(self, weights, grads):
         self.weights = weights
         self.grads   = grads
