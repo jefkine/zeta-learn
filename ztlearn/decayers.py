@@ -32,7 +32,7 @@ class InverseTimeDecay(Decay):
 
 
 class StepDecay(Decay):
-    """Decay the learning rate every after step_size steps"""
+    """ Decay the learning rate every after step_size steps """
 
     def __init__(self, lrate, decay, epoch, min_lrate, max_lrate, step_size):
         super(StepDecay, self).__init__(lrate, decay, epoch, min_lrate, max_lrate)
@@ -103,6 +103,6 @@ class DecayFunction:
     @property
     def name(self):
         return self.decay_func.decay_name
-    
+
     def decompose(self):
         return self.decay_func.decompose()
