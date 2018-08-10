@@ -83,7 +83,6 @@ def z_score(input_data, axis = None):
 def print_results(predictions, test_labels, num_samples = 20):
     print('Targeted  : {}'.format(test_labels[:num_samples]))
     print('Predicted : {}\n'.format(predictions[:num_samples]))
-
     print ('Model Accuracy : {:2.2f}% \n'.format(accuracy_score(predictions, test_labels)*100))
 
 def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):

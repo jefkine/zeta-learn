@@ -124,7 +124,6 @@ class GlorotUniform(WeightInitializer):
     all  the  layers.  Glorot  uniform  is  an  implementation  based  on  Uniform
     distribution
 
-
     References:
         [1] Understanding the difficulty of training deep feedforward neural networks
             * [Xavier Glorot, 2010] http://proceedings.mlr.press/v9/glorot10a.html
@@ -268,7 +267,7 @@ class One(WeightInitializer):
 
     One is an implementation of weight initialization that returns all ones
     """
-    
+
     def weights(self, shape, random_seed):
         return np.ones(shape = shape)
 

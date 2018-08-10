@@ -4,9 +4,10 @@ import numpy as np
 from math import ceil
 
 def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_height, pad_width):
+    
     """
-        Formula: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-        Formula: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
+    FORMULA: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
+    FORMULA: [((W - PoolW + 2P) / Sw) + 1] and [((H - PoolH + 2P) / Sh) + 1]
     """
 
     output_height = ((input_height - kernel_size[0] + np.sum(pad_height)) / strides[0]) + 1
@@ -15,6 +16,7 @@ def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_hei
     return output_height, output_width
 
 def get_output_dims(input_height, input_width, kernel_size, strides, padding_type = 'valid'):
+
     """
     **SAME and VALID Padding**
 
