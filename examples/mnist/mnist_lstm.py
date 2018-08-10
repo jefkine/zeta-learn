@@ -27,6 +27,8 @@ model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+model.summary('mnist lstm')
+
 model_epochs = 100
 fit_stats = model.fit(train_data.reshape(-1, 28, 28),
                       one_hot(train_label),
@@ -39,6 +41,6 @@ predictions = unhot(model.predict(test_data.reshape(-1, 28, 28), True))
 print_results(predictions, test_label)
 plot_img_results(test_data[:40], test_label[:40], predictions, dataset = 'mnist')
 
-model_name = 'mnist_lstm'
+model_name = model.model_name
 plot_metric('loss',     model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'],  fit_stats['valid_acc'],  model_name = model_name)

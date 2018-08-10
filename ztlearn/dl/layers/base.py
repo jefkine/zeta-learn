@@ -20,7 +20,11 @@ class Layer(ABC):
         return self.input_shape
 
     @property
-    def layer_cls_name(self):
+    def layer_parameters(self):
+        return 0
+
+    @property
+    def layer_name(self):
         return self.__class__.__name__
 
     @abstractmethod

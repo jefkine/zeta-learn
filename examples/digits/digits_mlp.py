@@ -27,6 +27,9 @@ model.add(BatchNormalization())
 model.add(Dense(10, activation = 'relu')) # 10 digits classes
 model.compile(loss = 'cce', optimizer = opt)
 
+model.summary(model_name = 'digits mlp')
+model_epochs = 100
+
 model_epochs = 12
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
@@ -41,7 +44,7 @@ print_results(predictions, test_label)
 
 plot_img_results(test_data, test_label, predictions)
 
-model_name = 'digits_mlp'
+model_name = model.model_name
 plot_metric('loss',     model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'],  fit_stats['valid_acc'],  model_name = model_name)
 plot_metric('evaluation',

@@ -20,6 +20,8 @@ model = Sequential()
 model.add(GRU(128, activation = 'tanh', input_shape = (30, len_chars)))
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+model.summary('nietzsche gru')
+
 model_epochs = 20
 fit_stats = model.fit(train_data,
                       train_label,
@@ -28,6 +30,6 @@ fit_stats = model.fit(train_data,
                       validation_data = (test_data, test_label),
                       verbose         = False)
 
-model_name = 'nietzsche_gru'
+model_name = model.model_name
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

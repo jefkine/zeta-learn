@@ -20,6 +20,8 @@ model = Sequential()
 model.add(GRU(10, activation = 'tanh', input_shape = (10, seq_len)))
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+model.summary('seq gru')
+
 model_epochs = 100
 fit_stats = model.fit(train_data,
                       train_label,
@@ -29,6 +31,6 @@ fit_stats = model.fit(train_data,
 
 print_seq_results(model.predict(test_data,(0, 2, 1)), test_label, test_data, unhot_axis = 2)
 
-model_name = 'seq_gru'
+model_name = model.model_name
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
 plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)

@@ -27,7 +27,6 @@ gen_epoch = 500
 gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
 
 model_epochs = 7000
-model_name   = 'digits_gan'
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
 d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0001)
@@ -73,6 +72,9 @@ generator_discriminator = Sequential(init_method = init_type)
 generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
+
+generator_discriminator.summary('digits_gan')
+model_name = generator_discriminator.model_name
 
 # rescale to range [-1, 1]
 images = range_normalize(data.data.astype(np.float32))

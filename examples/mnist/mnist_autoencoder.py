@@ -44,6 +44,9 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+autoencoder.summary('mnist autoencoder')
+model_name = autoencoder.model_name
+
 mnist  = fetch_mldata('MNIST original')
 images = range_normalize(mnist.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 
@@ -66,7 +69,6 @@ fit_stats = autoencoder.fit(train_data,
 _, _, _, test_label = train_test_split(mnist.data, mnist.target.astype('int'), test_size = 0.2, random_seed = 15)
 predictions         = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
-model_name = 'mnist_autoencoder'
 plot_generated_img_samples(unhot(one_hot(test_label)),
                                                        predictions,
                                                        to_save    = False,

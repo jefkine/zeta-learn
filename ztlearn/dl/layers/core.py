@@ -35,6 +35,10 @@ class Activation(Layer):
     def output_shape(self):
         return self.input_shape
 
+    @property
+    def layer_name(self):
+        return "Activation: {}".format(self.activation_name.upper())
+
     def prep_layer(self): pass
 
     def pass_forward(self, input_signal, train_mode = True, **kwargs):
