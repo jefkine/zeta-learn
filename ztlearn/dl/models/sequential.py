@@ -8,6 +8,7 @@ from ztlearn.dl.layers import Activation
 class Sequential(Trainer):
 
     __slots__ = ['layers', 'layer_num', 'init_method', 'model_name', 'is_trainable']
+
     def __init__(self, init_method = 'he_normal', model_name = 'ztlearn_model'):
         self.layers      = []
         self.layer_num   = 0
