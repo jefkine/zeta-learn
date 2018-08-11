@@ -152,8 +152,8 @@ for epoch_idx in range(model_epochs):
                                          model_name = model_name)
 
     if verbose:
-        print('\nEpoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, d_loss, d_acc))
-        print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.\n'.format(print_epoch, g_loss, g_acc))
+        print('{}Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_pad(1), print_epoch, d_loss, d_acc))
+        print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.{}'.format(print_epoch, g_loss, g_acc, print_pad(1)))
     else:
         computebar(model_epochs, epoch_idx)
 

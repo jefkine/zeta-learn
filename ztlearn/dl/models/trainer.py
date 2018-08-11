@@ -5,7 +5,6 @@ import numpy as np
 from ztlearn.utils import LogIfBusy
 from ztlearn.utils import computebar
 from ztlearn.utils import minibatches
-from ztlearn.dl.layers import Activation
 from ztlearn.objectives import ObjectiveFunction as objective
 
 

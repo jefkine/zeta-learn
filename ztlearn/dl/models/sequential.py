@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import numpy as np
-
 from .trainer import Trainer
 from ztlearn.utils import print_pad
 from ztlearn.dl.layers import Activation

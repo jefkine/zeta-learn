@@ -107,7 +107,7 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
     bar = "\r{}: [{}] {:d}% {}".format(prefix,
                                        sign * update + "-" * (size - update),
                                        int(round(progress * 100)),
-                                       "" if progress < 1. else '\r\n')
+                                       "" if progress < 1. else print_pad(1, "\r\n"))
 
     sys.stdout.write(bar)
     sys.stdout.flush()
