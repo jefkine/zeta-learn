@@ -6,8 +6,8 @@ from math import ceil
 def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_height, pad_width):
 
     """
-    FORMULA: [((W - KernelW + 2P) / Sw) + 1] and [((H - KernelH + 2P) / Sh) + 1]
-    FORMULA: [((W - PoolW + 2P)   / Sw) + 1] and [((H - PoolH + 2P)   / Sh) + 1]
+    FORMULA: [((W - Kernel_W + 2P) / S_W) + 1] and [((H - Kernel_H + 2P) / S_H) + 1]
+    FORMULA: [((W - Pool_W + 2P)   / S_W) + 1] and [((H - Pool_H + 2P)   / S_H) + 1]
     """
 
     output_height = ((input_height - kernel_size[0] + np.sum(pad_height)) / strides[0]) + 1
