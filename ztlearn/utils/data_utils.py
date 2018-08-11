@@ -82,12 +82,12 @@ def z_score(input_data, axis = None):
 
 def print_results(predictions, test_labels, num_samples = 20):
     print('Targeted  : {}'.format(test_labels[:num_samples]))
-    print('Predicted : {}\n'.format(predictions[:num_samples]))
-    print ('Model Accuracy : {:2.2f}% \n'.format(accuracy_score(predictions, test_labels)*100))
+    print('Predicted : {}{}'.format(predictions[:num_samples], print_pad(1)))
+    print('Model Accuracy : {:2.2f}% {}'.format(accuracy_score(predictions, test_labels)*100, print_pad(1)))
 
 def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):
-    print('Sample Sequence : {}'.format(unhot(train_data[sample_num])))
-    print('Next Entry      : {} \n'.format(unhot(train_label[sample_num], unhot_axis)))
+    print(print_pad(1) + 'Sample Sequence : {}'.format(unhot(train_data[sample_num])))
+    print('Next Entry      : {} {}'.format(unhot(train_label[sample_num], unhot_axis), print_pad(1)))
 
 def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval = 5):
     predictions = unhot(predicted, unhot_axis)
@@ -96,7 +96,7 @@ def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval
     for i in range(interval):
         print('Sequence  : {}'.format(unhot(test_data[i])))
         print('Targeted  : {}'.format(targets[i]))
-        print('Predicted : {} \n'.format(predictions[i]))
+        print('Predicted : {} {}'.format(predictions[i], print_pad(1)))
 
     print ('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
 
@@ -111,3 +111,10 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
 
     sys.stdout.write(bar)
     sys.stdout.flush()
+
+def print_pad(pad_count, pad_char = "\n"):
+    """ pad strings with pad_count new line characters """
+    padding = ""
+    for i in range(pad_count):
+        padding += pad_char
+    return padding

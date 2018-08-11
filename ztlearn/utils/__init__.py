@@ -14,6 +14,7 @@ from .data_utils import unhot
 from .data_utils import one_hot
 from .data_utils import min_max
 from .data_utils import z_score
+from .data_utils import print_pad
 from .data_utils import normalize
 from .data_utils import computebar
 from .data_utils import minibatches
@@ -68,7 +69,7 @@ __all__ = [
             ,'plot_img_results','plot_generated_img_samples','plot_tiled_img_samples',
 
             # From data_utils.py
-            'unhot','one_hot','min_max','z_score','normalize',
+            'unhot','one_hot','min_max','z_score','normalize','print_pad',
             'minibatches','shuffle_data','computebar','clip_gradients','range_normalize',
             'accuracy_score','train_test_split','print_seq_samples','print_seq_results','print_results'
 

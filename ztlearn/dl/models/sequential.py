@@ -3,6 +3,7 @@
 import numpy as np
 
 from .trainer import Trainer
+from ztlearn.utils import print_pad
 from ztlearn.dl.layers import Activation
 
 
@@ -62,22 +63,23 @@ class Sequential(Trainer):
         lining += "+"
 
         total_params = 0
-        model_layers = "\n "+self.model_name.upper()+"\n"
+        model_layers = print_pad(1)+ " " + self.model_name.upper() + print_pad(1)
         for i, layer in enumerate(self.layers):
             if i < 2:
-                model_layers += lining +"\n"
-            model_layers += "¦ {:<{max_name}} ¦ {:>{max_params}} ¦ {:>{max_output}} ¦ \n".format(layer_names[i],
+                model_layers += lining + print_pad(1)
+            model_layers += "¦ {:<{max_name}} ¦ {:>{max_params}} ¦ {:>{max_output}} ¦ ".format(layer_names[i],
                                                                                                  layer_params[i],
                                                                                                  layer_output[i],
                                                                                                  max_name   = max_name,
                                                                                                  max_params = max_params,
                                                                                                  max_output = max_output)
-                                                                                                 
+            model_layers += print_pad(1)
+
             if i > 0:
                 total_params += int(layer_params[i])
 
-        model_layers += lining +"\n"
-        model_layers += "\n TOTAL PARAMS: "+str(total_params)+"\n"
+        model_layers += lining + print_pad(1)
+        model_layers += print_pad(1) + " TOTAL PARAMS: " + str(total_params) + print_pad(1)
 
         return model_layers
 
