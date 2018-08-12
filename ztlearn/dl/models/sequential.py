@@ -36,12 +36,12 @@ class Sequential(Trainer):
 
     def __next__(self):
         try:
-            result = self.layers[self.layer_num]
+            collection = self.layers[self.layer_num]
         except IndexError:
             raise StopIteration
         self.layer_num += 1
 
-        return result
+        return collection
 
     def __str__(self):
         layer_names, layer_params, layer_output = ['LAYER TYPE'], ['PARAMS'], ['OUTPUT SHAPE']
