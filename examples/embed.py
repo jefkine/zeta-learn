@@ -22,7 +22,6 @@ train_data, test_data, train_label, test_label = train_test_split(train_data,
 
 fit_stats = model.fit(train_data, train_label, batch_size = 4, epochs = 50)
 
-
 """
 works
 
