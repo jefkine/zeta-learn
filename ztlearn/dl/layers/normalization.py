@@ -53,7 +53,7 @@ class BatchNormalization(Layer):
             self.var  = np.var(inputs, axis = 0)
             self.mean = np.mean(inputs, axis = 0)
 
-            self.running_var  = self.momentum * self.running_var + (1 - self.momentum) * self.var
+            self.running_var  = self.momentum * self.running_var  + (1 - self.momentum) * self.var
             self.running_mean = self.momentum * self.running_mean + (1 - self.momentum) * self.mean
         else:
             self.var  = self.running_var
@@ -117,7 +117,7 @@ class LayerNormalization1D(Layer):
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.mean = np.mean(inputs, axis = -1, keepdims = True)
-        self.std  = np.std(inputs, axis = -1, keepdims = True)
+        self.std  = np.std(inputs,  axis = -1, keepdims = True)
 
         self.input_mean = inputs - self.mean
         self.inv_stddev = np.reciprocal(self.std + self.eps)

@@ -260,7 +260,7 @@ class ConvLoop2D(Conv):
                             input_patch = self.inputs[:,
                                                       c,
                                                       h: input_height - self.kernel_size[0] + h + 1: self.strides[0],
-                                                      w: input_width - self.kernel_size[1] + w + 1: self.strides[1]]
+                                                      w: input_width  - self.kernel_size[1] + w + 1: self.strides[1]]
 
                             grad_patch           = grad[:, f]
                             dweights[f, c, h, w] = np.sum(input_patch * grad_patch) / input_num

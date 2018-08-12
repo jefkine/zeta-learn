@@ -52,7 +52,7 @@ class Pool(Layer):
         self.inputs = inputs
 
         assert (input_height - self.pool_size[0]) % self.strides[0] == 0, 'Invalid height'
-        assert (input_width - self.pool_size[1]) % self.strides[1]  == 0, 'Invalid width'
+        assert (input_width  - self.pool_size[1]) % self.strides[1] == 0, 'Invalid width'
 
         output_height, output_width = get_output_dims(input_height, input_width, self.pool_size, self.strides)
 
