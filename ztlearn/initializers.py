@@ -5,7 +5,6 @@ import numpy as np
 
 class WeightInitializer:
 
-
     def compute_fans(self, shape):
         # Original code forked from MIT licensed keras project
         # https://github.com/fchollet/keras/blob/master/keras/initializers.py
