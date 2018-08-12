@@ -69,7 +69,7 @@ class L2Regularization:
         self._lambda = _lambda
 
     def regulate(self, weights):
-        return np.multiply(self._lambda, (0.5 *  weights.T.dot(weights)))
+        return np.multiply(self._lambda, (0.5 * weights.T.dot(weights)))
 
     def derivative(self, weights):
         return np.multiply(self._lambda, weights)
@@ -102,7 +102,7 @@ class ElasticNetRegularization:
 
     def regulate(self, weights):
         return np.multiply(self._lambda, (((self.l1_ratio * 0.5) * weights.T.dot(weights)) + ((1 - self.l1_ratio) * np.linalg.norm(weights))))
-    
+
     def derivative(self, weights):
         return np.multiply(self._lambda, (((self.l1_ratio * 0.5) * weights) + ((1 - self.l1_ratio) *  np.sign(weights))))
 
