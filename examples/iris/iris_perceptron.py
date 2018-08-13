@@ -19,7 +19,8 @@ model     = Perceptron(epochs = 500, activation = 'softmax', loss = 'cce', init_
 fit_stats = model.fit(train_data, train_label)
 
 print_results(unhot(model.predict(test_data)), unhot(test_label))
-plot_metric('accuracy_loss', len(fit_stats["train_loss"]),
-                                                           fit_stats['train_acc'],
-                                                           fit_stats['train_loss'],
-                                                           model_name = 'iris_perceptron', legend = ['acc', 'loss'])
+plot_metric('accuracy_loss',
+                             len(fit_stats["train_loss"]),
+                             fit_stats['train_acc'],
+                             fit_stats['train_loss'],
+                             model_name = 'iris_perceptron', legend = ['acc', 'loss'])
