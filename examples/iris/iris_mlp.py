@@ -24,6 +24,8 @@ model.add(Dense(10, activation = 'sigmoid', input_shape = (train_data.shape[1],)
 model.add(Dense(3, activation = 'sigmoid')) # 3 iris_classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+model.summary('iris mlp')
+
 model_epochs = 25
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
@@ -36,6 +38,6 @@ fit_stats = model.fit(train_data,
 predictions = unhot(model.predict(test_data))
 print_results(predictions, test_label)
 
-model_name = 'iris_mlp'
-plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
-plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
+model_name = model.model_name
+plot_metric('loss',     model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('accuracy', model_epochs, fit_stats['train_acc'],  fit_stats['valid_acc'],  model_name = model_name)
