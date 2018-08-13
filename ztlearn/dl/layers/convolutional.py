@@ -118,8 +118,8 @@ class Conv2D(Conv):
                                                       self.kernel_size[1])
 
         # confirm dimensions
-        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0]  == 0, 'height does not work'
-        assert (input_width  + np.sum(pad_width)  - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+        assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0] == 0, 'height does not work'
+        assert (input_width  + np.sum(pad_width)  - self.kernel_size[1]) % self.strides[1] == 0, 'width does not work'
 
         # compute output_height and output_width
         output_height, output_width = get_output_dims(input_height, input_width, self.kernel_size, self.strides, self.padding)
@@ -209,7 +209,7 @@ class ConvLoop2D(Conv):
 
         # confirm dimensions
         assert (input_height + np.sum(pad_height) - self.kernel_size[0]) % self.strides[0]  == 0, 'height does not work'
-        assert (input_width  + np.sum(pad_width)  - self.kernel_size[1]) %  self.strides[1] == 0, 'width does not work'
+        assert (input_width  + np.sum(pad_width)  - self.kernel_size[1]) % self.strides[1]  == 0, 'width does not work'
 
         # compute output_height and output_width
         output_height, output_width = get_output_dims(input_height, input_width, self.kernel_size, self.strides, self.padding)
