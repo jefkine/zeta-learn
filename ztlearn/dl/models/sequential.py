@@ -47,9 +47,9 @@ class Sequential(Trainer):
         layer_names, layer_params, layer_output = ['LAYER TYPE'], ['PARAMS'], ['OUTPUT SHAPE']
 
         for _, layer in enumerate(self.layers):
-            layer_names.append(layer.layer_name)
-            layer_params.append(str(layer.layer_parameters))
+            layer_names.append(layer.layer_name)            
             layer_output.append(str(layer.output_shape))
+            layer_params.append(str(layer.layer_parameters))
 
         max_name   = len(max(layer_names,  key = len))
         max_params = len(max(layer_params, key = len))
