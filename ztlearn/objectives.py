@@ -433,6 +433,8 @@ class HuberLoss(Objective):
      References:
          [1] Huber Loss
              * [Wikipedia Article] https://en.wikipedia.org/wiki/Huber_loss
+         [2] Huber loss
+             * [Wikivisually Article] https://wikivisually.com/wiki/Huber_loss
 
     """
 
