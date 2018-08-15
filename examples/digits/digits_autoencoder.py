@@ -44,7 +44,7 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-autoencoder.summary('digits_autoencoder')
+autoencoder.summary('digits autoencoder')
 
 data   = datasets.load_digits()
 images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]

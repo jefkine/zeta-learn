@@ -42,7 +42,7 @@ model.add(BatchNormalization())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-model.summary(model_name = 'mnist_cnn')
+model.summary(model_name = 'mnist cnn')
 
 model_epochs = 12
 fit_stats = model.fit(train_data.reshape(-1, 1, 28, 28),
