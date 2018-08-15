@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import math as mt
 import numpy as np
 
 
@@ -10,6 +11,12 @@ class Objective(object):
         clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
 
         return clipped_predictions, clipped_divisor
+
+    def error(self, predictions, targets):
+        error     = targets - predictions
+        abs_error = np.absolute(error)
+
+        return error, abs_error
 
     def add_fuzz_factor(self, np_array, epsilon = 1e-05):
         return np.add(np_array, epsilon)
@@ -200,7 +207,7 @@ class HingeLoss:
             numpy.float32: the output of Hinge-Loss Accuracy Score
         """
 
-        return np.mean(np.argmax(predictions, axis=1) == np.argmax(targets, axis = 1))
+        return np.mean(np.argmax(predictions, axis = 1) == np.argmax(targets, axis = 1))
 
     @property
     def objective_name(self):
@@ -340,7 +347,7 @@ class CategoricalCrossEntropy(Objective):
             numpy.float32: the output of CategoricalCrossEntropy Accuracy Score
         """
 
-        return np.mean(np.argmax(predictions, axis=1) == np.argmax(targets, axis = 1))
+        return np.mean(np.argmax(predictions, axis = 1) == np.argmax(targets, axis = 1))
 
     @property
     def objective_name(self):
@@ -373,7 +380,7 @@ class KLDivergence(Objective):
         targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
-        return np.sum(targets * np.log(targets/predictions), axis = 1)
+        return np.sum(targets * np.log(targets / predictions), axis = 1)
 
     def derivative(self, predictions, targets, np_type):
 
@@ -391,10 +398,10 @@ class KLDivergence(Objective):
         targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
-        d_log_diff = np.multiply((predictions - targets), (np.log(targets/predictions)))
+        d_log_diff = np.multiply((predictions - targets), (np.log(targets / predictions)))
 
-        return (1 + np.log(targets/predictions)) * d_log_diff
-    
+        return (1 + np.log(targets / predictions)) * d_log_diff
+
     def accuracy(self, predictions, targets):
 
         """
@@ -408,7 +415,77 @@ class KLDivergence(Objective):
             numpy.float32: the output of KLDivergence Accuracy Score
         """
 
-        return np.mean(np.argmax(predictions, axis=1) == np.argmax(targets, axis = 1))
+        return np.mean(np.argmax(predictions, axis = 1) == np.argmax(targets, axis = 1))
+
+    @property
+    def objective_name(self):
+        return self.__class__.__name__
+
+
+class HuberLoss(Objective):
+
+    """
+    **Huber Loss**
+
+     Huber Loss is a loss function used in robust regression, that is less sensitive
+     to outliers in data than the squared error loss.
+
+     References:
+         [1] Huber Loss
+             * [Wikipedia Article] https://en.wikipedia.org/wiki/Huber_loss
+
+    """
+
+    def loss(self, predictions, targets, np_type, delta = 1.):
+
+        """
+        Applies the HuberLoss Loss to prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of KLDivergence Loss to prediction and targets
+        """
+
+        error, abs_error = super(HuberLoss, self).error(predictions, targets)
+
+        return np.sum(np.where(abs_error < delta,
+                                                  0.5 * (np.square(error)),
+                                                  delta * abs_error - 0.5 * (mt.pow(delta, 2))))
+
+    def derivative(self, predictions, targets, np_type, delta = 1.):
+
+        """
+        Applies the HuberLoss Derivative to prediction and targets provided
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.array: the output of KLDivergence Derivative to prediction and targets
+        """
+
+        error, abs_error = super(HuberLoss, self).error(predictions, targets)
+
+        return np.sum(np.where(abs_error > delta, delta * np.sign(error), error))
+
+    def accuracy(self, predictions, targets):
+
+        """
+        Calculates the HuberLoss Accuracy Score given prediction and targets
+
+        Args:
+            predictions (numpy.array): the predictions numpy array
+            targets     (numpy.array): the targets numpy array
+
+        Returns:
+            numpy.float32: the output of KLDivergence Accuracy Score
+        """
+
+        return 0
 
     @property
     def objective_name(self):
@@ -420,6 +497,9 @@ class ObjectiveFunction:
     _functions = {
         'svm'                         : HingeLoss,
         'hinge'                       : HingeLoss,
+        'huber'                       : HuberLoss,
+        'huber_loss'                  : HuberLoss,
+        'hinge_loss'                  : HingeLoss,
         'kld'                         : KLDivergence,
         'mse'                         : MeanSquaredError,
         'bce'                         : BinaryCrossEntropy,
