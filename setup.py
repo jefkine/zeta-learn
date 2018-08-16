@@ -15,7 +15,7 @@ EMAIL           = 'jefkine@gmail.com'
 AUTHOR          = 'Jefkine Kafunah'
 REQUIRES_PYTHON = '>=3.5.0'
 VERSION         = None
-REQUIRED        = ['numpy', 'matplotlib', 'numba']
+REQUIRED        = ['numpy', 'matplotlib']
 
 here = os.path.abspath(os.path.dirname(__file__))
 
