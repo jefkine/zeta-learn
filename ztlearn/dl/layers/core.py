@@ -37,7 +37,7 @@ class Activation(Layer):
 
     @property
     def layer_name(self):
-        return "Activation: {}".format(self.activation_name.upper())
+        return "Activation: {}".format(" ".join(self.activation_name.upper().split("_")))
 
     def prep_layer(self): pass
 
