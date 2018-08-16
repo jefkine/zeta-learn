@@ -428,12 +428,13 @@ class HuberLoss(Objective):
     """
     **Huber Loss**
 
-     Huber Loss: is a loss function  used in robust regression where it is found 
+     Huber Loss: is a loss function  used in robust regression where it is found
      to be less sensitive to outliers in data than the squared error loss.
 
      References:
          [1] Huber Loss
              * [Wikipedia Article] https://en.wikipedia.org/wiki/Huber_loss
+             
          [2] Huber loss
              * [Wikivisually Article] https://wikivisually.com/wiki/Huber_loss
 
