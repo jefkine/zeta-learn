@@ -5,16 +5,16 @@ import matplotlib.pyplot as plt
 
 """
 
-For the function y = theta^2, we can plot the y against the thetas and we
-can see that for the range -5 to 6 with a step of 1, we bypass the minima
-at (0,0), beyond which we start rising yet again.
+For the function y = theta^2,  we can plot the y  against the  thetas and we can
+see that for the  range -5 to 6 with a step of 1, we  bypass the minima at (0,0),
+beyond which we start rising yet again.
 
-The np.meshgrid function helps us to merge the ys and the thetas so that
-the plot that follows is a combination of the function (curve) and the
-evaluations at various points of y (the red dots)
+The np.meshgrid function helps us to merge the ys and the thetas so thatthe plot
+that  follows is a  combination of  the function (curve) and  the evaluations at
+various points of y (the red dots)
 
-Our next task is then to show that we can use methods like SGD and Momentum
-SGD to find the minimum with ease
+Our next task is then to show that  we can use methods like SGD and Momentum SGD
+to find the minimum with ease
 
 """
 
