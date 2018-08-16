@@ -31,9 +31,9 @@ class MeanSquaredError:
     """
     **Mean Squared error (MSE)**
 
-    MSE measures  the average squared  difference between the predictions and the
-    targets. The closer the predictions are to the targets the more efficient the
-    estimator.
+    MSE measures  the average squared difference between the predictions and the
+    targets. The closer  the predictions are to  the targets  the more efficient
+    the estimator.
 
     References:
         [1] Mean Squared error
@@ -291,9 +291,10 @@ class CategoricalCrossEntropy(Objective):
     """
     **Categorical Cross Entropy**
 
-    Categorical Cross Entropy measures the  performance of a classification model
-    whose output is a probability value  between 0 and 1. 'Categorical' is  meant
-    for discrete classification tasks in which the classes are mutually exclusive.
+    Categorical Cross Entropy measures the performance of a classification model
+    whose  output  is a  probability  value  between  0 and 1.  'Categorical' is
+    meant for discrete  classification tasks  in which  the classes are mutually
+    exclusive.
 
     References:
         [1] Cross Entropy
@@ -359,7 +360,7 @@ class KLDivergence(Objective):
     """
     **KL Divergence**
 
-     Kullback–Leibler  divergence  (also called relative entropy) is a measure of
+     Kullback–Leibler  divergence (also called relative entropy) is a measure of
      divergence between two probability distributions.
 
     """
@@ -427,8 +428,8 @@ class HuberLoss(Objective):
     """
     **Huber Loss**
 
-     Huber Loss is a loss function used in robust regression, that is less sensitive
-     to outliers in data than the squared error loss.
+     Huber Loss: is a loss function  used in robust regression where it is found 
+     to be less sensitive to outliers in data than the squared error loss.
 
      References:
          [1] Huber Loss

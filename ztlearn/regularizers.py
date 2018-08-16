@@ -10,7 +10,7 @@ class L1Regularization:
     """
     **Lasso Regression (L1Regularization)**
 
-    L1Regularization adds sum of the absolute value magnitudes of parameters as
+    L1Regularization adds sum  of the absolute value magnitudes of parameters as
     penalty term to the loss function
 
     References:
@@ -84,7 +84,7 @@ class ElasticNetRegularization:
     """
     **Elastic Net Regularization (ElasticNetRegularization)**
 
-    ElasticNetRegularization adds both absolute value of magnitude and squared
+    ElasticNetRegularization  adds both absolute  value of magnitude and squared
     magnitude of coefficient as penalty term to the loss function
 
     References:

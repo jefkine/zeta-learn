@@ -2,7 +2,6 @@
 
 import numpy as np
 
-
 from .decayers import DecayFunction as decayer
 
 
@@ -45,10 +44,10 @@ class GD:
     """
     **Gradient Descent (GD)**
 
-    GD optimizes parameters theta of an objective function J(theta) by updating
-    all of the  training samples in the dataset. The update is perfomed in  the
-    opposite  direction of  the  gradient of the objective  function  d/d_theta
-    J(theta) - with respect  to  the parameters (theta).  The learning rate eta
+    GD optimizes parameters theta of an objective function J(theta) by  updating
+    all of the  training samples in the  dataset. The update is perfomed in  the
+    opposite  direction of  the  gradient of the  objective  function  d/d_theta
+    J(theta) - with respect  to  the parameters (theta).  The learning rate  eta
     helps determine the size of teh steps we take to the minima
 
     References:
@@ -106,11 +105,11 @@ class SGDMomentum(Optimizer):
     """
     **Stochastic Gradient Descent with Momentum (SGDMomentum)**
 
-    The objective function regularly forms places on the contour map in which
-    the surface curves more steeply than others (ravines). Standard SGD  will
-    tend to oscillate across the  narrow ravine since  the negative  gradient
-    will point  down one  of the  steep  sides  rather than along the  ravine
-    towards  the  optimum. Momentum  hepls to push the objective more quickly
+    The objective function  regularly forms  places on  the contour map in which
+    the surface  curves more steeply  than  others (ravines). Standard SGD  will
+    tend to  oscillate across the  narrow  ravine since  the  negative  gradient
+    will  point  down one  of  the  steep  sides  rather than  along the  ravine
+    towards  the  optimum.  Momentum  hepls to  push the  objective more quickly
     along the shallow ravine towards the global minima
 
     References:
@@ -156,9 +155,9 @@ class Adam(Optimizer):
     """
     **Adaptive Moment Estimation (Adam)**
 
-    Adam computes adaptive learning rates for by updating each of the training
-    samples while storing  an  exponentially decaying average of past  squared
-    gradients. Adam  also  keeps  an  exponentially  decaying  average of past
+    Adam computes adaptive  learning rates for by  updating each of the training
+    samples while storing  an  exponentially  decaying  average of past  squared
+    gradients. Adam  also  keeps  an  exponentially  decaying  average  of  past
     gradients.
 
     References:
@@ -215,12 +214,12 @@ class Adamax(Optimizer):
     """
     **Admax**
 
-    AdaMax, a variant of Adam based on the infinity norm. In Adam, the update rule
-    for individual weights is to scale their gradients inversely proportional to a
-    (scaled) L2 norm of their individual current and past gradients. For Adamax we
-    generalize the L2 norm based update rule to a Lp norm based update rule. These
-    variants are numerically unstable for large p. but have special cases where as
-    p tens to infinity, a simple and stable algorithm emerges.
+    AdaMax is a variant of Adam based on the infinity norm. The Adam update rule
+    for individual weights is to scale their gradients inversely proportional to
+    a (scaled) L2  norm of  their  individual c urrent and  past  gradients. For
+    Adamax we generalize the L2 norm based update rule to a Lp norm based update
+    rule. These variants are numerically unstable for large p.  but have special
+    cases where as p tens to infinity, a simple and stable algorithm emerges.
 
     References:
         [1] An overview of gradient descent optimization algorithms
@@ -275,8 +274,8 @@ class AdaGrad(Optimizer):
     """
     **Adaptive Gradient Algorithm (AdaGrad)**
 
-    AdaGrad is an optimization method that allows different step sizes for
-    different features. It increases the influence of rare but informative
+    AdaGrad is an  optimization method  that  allows  different  step  sizes for
+    different  features.  It increases  the  influence of  rare  but informative
     features
 
     References:
@@ -319,9 +318,9 @@ class Adadelta(Optimizer):
     """
     **An Adaptive Learning Rate Method (Adadelta)**
 
-    Adadelta is an extension of Adagrad that seeks to avoid setting the learing
-    rate to an aggresively monotonically  decreasing rate. This is achieved via
-    a dynamic learning rate i.e a diffrent learning rate is computed  for  each
+    Adadelta is an extension of Adagrad that seeks to avoid setting  the learing
+    rate to an aggresively  monotonically  decreasing rate. This is achieved via
+    a dynamic learning rate i.e a diffrent learning  rate is computed  for  each
     training sample
 
     References:
@@ -375,9 +374,9 @@ class RMSprop(Optimizer):
     """
     **Root Mean Squared Propagation (RMSprop)**
 
-    RMSprop utilizes the magnitude of recent gradients to normalize the gradients.
-    A moving average over the root mean squared (RMS) gradients  is kept and then
-    divided by  the current  gradient. Parameters are  recomended  to  be  set as
+    RMSprop utilizes  the magnitude of recent gradients to  normalize  gradients.
+    A moving average over the root mean squared (RMS) gradients is kept and then
+    divided by  the current  gradient. Parameters are  recomended to  be  set as
     follows rho = 0.9 and eta (learning rate) = 0.001
 
     References:
@@ -422,7 +421,7 @@ class NesterovAcceleratedGradient(Optimizer):
     **Nesterov Accelerated Gradient (NAG)**
 
     NAG is an improvement in SGDMomentum where the the previous parameter values
-    are smoothed and a gradient descent  step is taken from this smoothed  value.
+    are smoothed and a gradient  descent  step is taken from this smoothed value.
     This enables a more intelligent way of arriving at the minima
 
     References:

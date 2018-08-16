@@ -8,9 +8,9 @@ class ELU:
     """
     **Exponential Linear Units (ELUs)**
 
-    ELUs are exponential functions which have negative values that allow them
-    to push mean unit activations closer to zero like batch normalization but
-    with lower computational complexity.
+    ELUs are exponential functions which have negative values that allow them to
+    push mean unit activations closer to zero like batch normalization but  with
+    lower computational complexity.
 
     References:
         [1] Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)
@@ -62,9 +62,9 @@ class SELU:
     """
     **Scaled Exponential Linear Units (SELUs)**
 
-    SELUs are activations which induce self-normalizing properties and are used
-    in Self-Normalizing Neural Networks (SNNs). SNNs enable high-level abstract
-    representations that  tend to automatically  converge towards zero mean and
+    SELUs are activations which induce self-normalizing properties and are  used
+    in Self-Normalizing Neural Networks (SNNs). SNNs  enable high-level abstract
+    representations that  tend to  automatically  converge towards zero mean and
     unit variance.
 
     References:
@@ -123,11 +123,11 @@ class ReLU:
     """
     **Rectified Linear Units (ReLUs)**
 
-    Rectifying neurons are an even better model of biological neurons yielding
-    equal or better  performance than  hyperbolic tangent networks in-spite of
-    the hard  non-linearity and  non-differentiability at zero hence  creating
-    sparse representations with  true zeros which seem remarkably suitable for
-    naturally sparse data.
+    Rectifying neurons are an  even better model of biological  neurons yielding
+    equal or better performance than hyperbolic tangent networks in-spite of the
+    hard non-linearity  and  non-differentiability at zero hence creating sparse
+    representations with true zeros which seem remarkably suitable for naturally
+    sparse data.
 
     References:
         [1] Deep Sparse Rectifier Neural Networks
@@ -179,10 +179,10 @@ class TanH:
     """
     **Tangent Hyperbolic (TanH)**
 
-    The Tangent Hyperbolic function is a rescaled version of the  sigmoid
-    function that produces outputs in scale of [-1, +1]. As an activation
-    function it  produces an output for every input value hence making it
-    a continuous function.
+    The Tangent Hyperbolic function, a rescaled  version of the sigmoid function
+    that produces  outputs in scale of  [-1, +1]. As  an  activation function it
+    gives an output for every input value hence making is a continuous function.
+
 
     References:
         [1] Hyperbolic Functions
@@ -230,9 +230,9 @@ class Sigmoid:
     """
     **Sigmoid Activation Function**
 
-    A Sigmoid function is often used as the output activation function for binary
-    classification  problems as it  outputs  values that  are in the range (0, 1).
-    Sigmoid functions are real-valued  and differentiable, producing a curve that
+    A Sigmoid function, often used as  the output activation function for binary
+    classification problems as it  outputs  values that  are in the range (0, 1).
+    Sigmoid functions are real-valued and differentiable, producing a curve that
     is 'S-shaped' and feature one local minimum, and one local maximum
 
     References:
@@ -282,8 +282,8 @@ class SoftPlus:
     """
     **SoftPlus Activation Function**
 
-    A Softplus function is a smooth approximation to the rectifier linear units
-    (ReLUs). Near point 0, it is smooth and differentiable and produces outputs
+    A Softplus function  is a smooth approximation to the rectifier linear units
+    (ReLUs). Near point 0, it is  smooth and differentiable and produces outputs
     in scale of (0, +inf).
 
     References:
@@ -393,9 +393,9 @@ class LeakyReLU:
     """
     **LeakyReLU Activation Functions**
 
-    Leaky ReLUs allow a small, non-zero gradient to propagate through the network when
-    the unit is not active hence avoiding bottlenecks that can prevent learning in the
-    Neural Network.
+    Leaky ReLUs allow a small non-zero gradient to propagate through the network
+    when the  unit is  not active  hence  avoiding bottlenecks that can  prevent
+    learning in the Neural Network.
 
     References:
         [1] Rectifier Nonlinearities Improve Neural Network Acoustic Models
@@ -451,10 +451,10 @@ class ElliotSigmoid:
     """
     **Elliot Sigmoid Activation Function**
 
-    Elliot Sigmoid squashes each element of the input from the interval [-inf, inf]
-    to the  interval [-1, 1] with an 'S-shaped'  function.  The fucntion is fast to
-    calculate on  simple computing hardware as it does not require any  exponential
-    or trigonometric functions
+    Elliot Sigmoid squashes each element of the input from  the interval ranging
+    [-inf, inf] to the interval ranging [-1, 1] with an 'S-shaped' function. The
+    fucntion is fast to  calculate  on simple  computing hardware as it does not
+    require any exponential or trigonometric functions
 
     References:
         [1] A better Activation Function for Artificial Neural Networks
@@ -502,9 +502,9 @@ class Linear:
     """
     **Linear Activation Function**
 
-    Linear Activation applies identity operation on your data such that the output
-    data is  proportional  to the input data. The function always returns the same
-    value that was used as its argument.
+    Linear Activation  applies  identity  operation on your  data such  that the
+    output data is  proportional to the input data. The function always  returns 
+    the same value that was used as its argument.
 
     References:
         [1] Identity Function
@@ -526,7 +526,7 @@ class Linear:
         """
 
         return input_signal
-    
+
     def derivative(self, input_signal):
 
         """

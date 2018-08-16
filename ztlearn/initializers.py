@@ -23,8 +23,8 @@ class HeNormal(WeightInitializer):
     """
     **He Normal (HeNormal)**
 
-    HeNormal is a robust initialization method that particularly considers the
-    rectifier nonlinearities. He normal is an implementation based on Gaussian
+    HeNormal is a robust initialization  method that  particularly considers the
+    rectifier nonlinearities.  He normal is an  implementation based on Gaussian
     distribution
 
     References:
@@ -54,8 +54,8 @@ class HeUniform(WeightInitializer):
     """
     **He Normal (HeNormal)**
 
-    HeNormal is a robust initialization method that particularly considers the
-    rectifier nonlinearities. He uniform is an implementation based on Uniform
+    HeNormal is a robust  initialization method  that particularly considers the
+    rectifier  nonlinearities. He uniform  is an implementation based on Uniform
     distribution
 
     References:
@@ -85,9 +85,9 @@ class GlorotNormal(WeightInitializer):
     """
     **Glorot Normal (GlorotNormal)**
 
-    GlorotNormal more famously known as the Xavier initialization is based on the
-    effort to  try mantain the  same variance of the gradients of the weights for
-    all  the  layers.  Glorot  normal  is  an  implementation  based  on Gaussian
+    GlorotNormal, more famously known as the  Xavier initialization is  based on
+    the effort to try mantain the  same variance of the gradients of the weights
+    for all  the  layers. Glorot normal is an implementation  based  on Gaussian
     distribution
 
 
@@ -118,9 +118,9 @@ class GlorotUniform(WeightInitializer):
     """
     **Glorot Uniform (GlorotUniform)**
 
-    GlorotUniform more famously known as the Xavier initialization is based on the
-    effort to try  mantain the  same  variance of the gradients of the weights for
-    all  the  layers.  Glorot  uniform  is  an  implementation  based  on  Uniform
+    GlorotUniform, more famously known as  the Xavier initialization is based on
+    the effort to try mantain the same  variance of the gradients of the weights
+    for all the layers. Glorot uniform is  an  implementation based  on  Uniform
     distribution
 
     References:
@@ -177,8 +177,8 @@ class LeCunNormal(WeightInitializer):
     """
     **LeCun Normal (LeCunNormal)**
 
-    Weights  should  be  randomly chosen  but in such a  way that the  sigmoid is
-    primarily activated in its linear region. LeCun uniform is the implementation
+    Weights  should  be  randomly chosen  but in such a  way that the sigmoid is
+    primarily activated in its linear region. LeCun uniform is an implementation
     based on Gaussian distribution
 
     References:
@@ -204,7 +204,7 @@ class RandomUniform(WeightInitializer):
     """
     **Random Uniform (RandomUniform)**
 
-    Random uniform is an implementation of weight initialization based on Uniform
+    Random uniform, an implementation  of weight initialization based on Uniform
     distribution
     """
 
@@ -226,7 +226,7 @@ class RandomNormal(WeightInitializer):
     """
     **Random Normal (RandomNormal)**
 
-    Random uniform is an implementation of weight initialization based on Gaussian
+    Random uniform, an implementation of weight initialization based on Gaussian
     distribution
     """
 
