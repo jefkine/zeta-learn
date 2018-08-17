@@ -144,7 +144,7 @@ class HingeLoss:
     """
     **Hinge Loss**
 
-    Hinge Loss  also known  as SVM Loss is used "maximum-margin" classification,
+    Hinge Loss  also known  as  SVM Loss is used "maximum-margin" classification,
     most notably for support vector machines (SVMs)
 
     References:
@@ -167,6 +167,7 @@ class HingeLoss:
 
         correct_class = predictions[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)]
         margins       = np.maximum(0, predictions - correct_class[:, np.newaxis] + 1.0) # delta = 1.0
+
         margins[np.arange(predictions.shape[0]), np.argmax(targets, axis = 1)] = 0
 
         return np.mean(np.sum(margins, axis = 0))
@@ -244,8 +245,8 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
 
-        return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
         # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
+        return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
 
     def derivative(self, predictions, targets, np_type):
 
@@ -262,8 +263,9 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, clipped_divisor = super(BinaryCrossEntropy, self).clip(predictions)
 
-        return (clipped_predictions - targets) / clipped_divisor
         # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
+        return (clipped_predictions - targets) / clipped_divisor
+
 
     def accuracy(self, predictions, targets, threshold = 0.5):
 
@@ -434,7 +436,7 @@ class HuberLoss(Objective):
      References:
          [1] Huber Loss
              * [Wikipedia Article] https://en.wikipedia.org/wiki/Huber_loss
-             
+
          [2] Huber loss
              * [Wikivisually Article] https://wikivisually.com/wiki/Huber_loss
 
@@ -489,7 +491,7 @@ class HuberLoss(Objective):
             numpy.float32: the output of KLDivergence Accuracy Score
         """
 
-        return 0
+        return np.mean(predictions - targets)
 
     @property
     def objective_name(self):
