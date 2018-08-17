@@ -245,7 +245,6 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
 
-        # return - targets * np.log(clipped_predictions) - (1 - targets) * np.log(1 - clipped_predictions)
         return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
 
     def derivative(self, predictions, targets, np_type):
