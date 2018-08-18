@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math as mt
 import numpy as np
-from math import ceil
 
 def alt_get_output_dims(input_height, input_width, kernel_size, strides, pad_height, pad_width):
 
@@ -32,12 +32,12 @@ def get_output_dims(input_height, input_width, kernel_size, strides, padding_typ
     """
 
     if padding_type == 'same':
-        output_height = ceil(float(input_height) / float(strides[0]))
-        output_width  = ceil(float(input_width)  / float(strides[1]))
+        output_height = mt.ceil(float(input_height) / float(strides[0]))
+        output_width  = mt.ceil(float(input_width)  / float(strides[1]))
 
     if padding_type == 'valid':
-        output_height = ceil(float(input_height - kernel_size[0] + 1) / float(strides[0]))
-        output_width  = ceil(float(input_width  - kernel_size[1] + 1) / float(strides[1]))
+        output_height = mt.ceil(float(input_height - kernel_size[0] + 1) / float(strides[0]))
+        output_width  = mt.ceil(float(input_width  - kernel_size[1] + 1) / float(strides[1]))
 
     return output_height, output_width
 
