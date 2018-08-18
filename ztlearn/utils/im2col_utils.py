@@ -27,14 +27,14 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
 
 def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     # First figure out what the size of the output should be
-    N, C, H, W = x_shape
+    N, C, H, W            = x_shape
     pad_height, pad_width = padding
 
     assert (H + np.sum(pad_height) - field_height) % stride == 0
-    assert (W + np.sum(pad_width) - field_height) % stride  == 0
+    assert (W + np.sum(pad_width)  - field_height) % stride == 0
 
     out_height = (H + np.sum(pad_height) - field_height) / stride + 1
-    out_width  = (W + np.sum(pad_width) - field_width) / stride + 1
+    out_width  = (W + np.sum(pad_width)  - field_width)  / stride + 1
 
     i0 = np.repeat(np.arange(field_height, dtype = 'int32'), field_width)
     i0 = np.tile(i0, C)
