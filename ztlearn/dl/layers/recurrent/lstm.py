@@ -121,13 +121,13 @@ class LSTM(Layer):
         self.cell       = np.zeros((batch_size, time_steps, self.h_units))
         self.final      = np.zeros((batch_size, time_steps, input_dim))
 
-        self.z = np.concatenate((self.inputs, self.states), axis=2)
+        self.z = np.concatenate((self.inputs, self.states), axis = 2)
 
         for t in range(time_steps):
             self.forget[:, t]     = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_forget) + self.b_forget)
             self.input[:, t]      = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_input) + self.b_input)
             self.cell_tilde[:, t] = activate(self.activation).forward(np.dot(self.z[:, t], self.W_cell) + self.b_cell)
-            self.cell[:, t]       = self.forget[:, t] * self.cell[:, t-1] + self.input[:, t] * self.cell_tilde[:, t]
+            self.cell[:, t]       = self.forget[:, t] * self.cell[:, t - 1] + self.input[:, t] * self.cell_tilde[:, t]
             self.output[:, t]     = activate(self.gate_activation).forward(np.dot(self.z[:, t], self.W_output) + self.b_output)
             self.states[:, t]     = self.output[:, t] * activate(self.activation).forward(self.cell[:, t])
 
@@ -193,7 +193,7 @@ class LSTM(Layer):
                 dW_input     += np.dot(self.z[:, t].T, dinput[:, t])
                 db_input     += np.sum(dinput[:, t], axis = 0)
 
-                dforget[:, t]  = self.cell[:, t-1] * dcell[:, t]
+                dforget[:, t]  = self.cell[:, t - 1] * dcell[:, t]
                 dforget[:, t]  = activate(self.gate_activation).backward(self.forget[:, t]) * dforget[:, t]
                 dW_forget     += np.dot(self.z[:, t].T, dforget[:, t])
                 db_forget     += np.sum(dforget[:, t], axis = 0)

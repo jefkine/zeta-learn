@@ -30,7 +30,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 model.summary('mnist rnn')
 
 model_epochs = 100
-fit_stats = model.fit(train_data.reshape(-1,28,28),
+fit_stats = model.fit(train_data.reshape(-1, 28, 28),
                       one_hot(train_label),
                       batch_size      = 128,
                       epochs          = model_epochs,
