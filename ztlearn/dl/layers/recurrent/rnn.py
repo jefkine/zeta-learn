@@ -80,19 +80,19 @@ class RNN(Layer):
         self.inputs = inputs
         batch_size, time_steps, input_dim = inputs.shape
 
-        self.input_states = np.zeros((batch_size, time_steps, self.h_units))
-        self.states       = np.zeros((batch_size, time_steps + 1, self.h_units)) # additional(+1) last column containing the final state also set to zero
-        self.outputs      = np.zeros((batch_size, time_steps, input_dim))
+        self.state_inputs  = np.zeros((batch_size, time_steps, self.h_units))
+        self.states        = np.zeros((batch_size, time_steps + 1, self.h_units)) # additional(+1) last column containing the final state also set to zero
+        self.state_outputs = np.zeros((batch_size, time_steps, input_dim))
 
         for t in range(time_steps):
-            self.input_states[:, t] = (np.dot(inputs[:, t], self.W_input.T) + np.dot(self.states[:, t - 1], self.W_recur.T)) + self.b_input
-            self.states[:, t]       = activate(self.activation).forward(self.input_states[:, t])
-            self.outputs[:, t]      = np.dot(self.states[:, t], self.W_output.T) + self.b_output
+            self.state_inputs[:, t]  = (np.dot(inputs[:, t], self.W_input.T) + np.dot(self.states[:, t - 1], self.W_recur.T)) + self.b_input
+            self.states[:, t]        = activate(self.activation).forward(self.state_inputs[:, t])
+            self.state_outputs[:, t] = np.dot(self.states[:, t], self.W_output.T) + self.b_output
 
         if not train_mode:
-            return activate('softmax').forward(self.outputs) # if mode is not training
+            return activate('softmax').forward(self.state_outputs) # if mode is not training
 
-        return self.outputs
+        return self.state_outputs
 
     # implementation based on techniques as seen here: https://github.com/dennybritz/rnn-tutorial-rnnlm/blob/master/RNNLM.ipynb
     def pass_backward(self, grad):
@@ -111,14 +111,14 @@ class RNN(Layer):
             for t in np.arange(time_steps)[::-1]: # reversed
                 dW_output       += np.dot(grad[:, t].T, self.states[:, t])
                 db_output       += np.sum(grad[:, t], axis = 0)
-                dstate           = np.dot(grad[:, t], self.W_output) * activate(self.activation).backward(self.input_states[:, t])
+                dstate           = np.dot(grad[:, t], self.W_output) * activate(self.activation).backward(self.state_inputs[:, t])
                 next_grad[:, t]  = np.dot(dstate, self.W_input)
 
                 for tt in np.arange(max(0, t - self.bptt_truncate), t + 1)[::-1]: # reversed
                     dW_input += np.dot(dstate.T, self.inputs[:, tt])
                     dW_recur += np.dot(dstate.T, self.states[:, tt - 1])
                     db_input += np.sum(dstate, axis = 0)
-                    dstate    = np.dot(dstate, self.W_recur) * activate(self.activation).backward(self.input_states[:, tt - 1])
+                    dstate    = np.dot(dstate, self.W_recur) * activate(self.activation).backward(self.state_inputs[:, tt - 1])
 
             # optimize weights and bias
             self.W_input  = optimizer(self.optimizer_kwargs).update(self.W_input,  cg(dW_input))
