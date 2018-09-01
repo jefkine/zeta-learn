@@ -120,7 +120,7 @@ class RNN(Layer):
                     dW_input += np.dot(dstate.T, self.inputs[:, tt])
                     dW_recur += np.dot(dstate.T, self.states[:, tt - 1])
                     db_input += np.sum(dstate, axis = 0)
-                    dstate    = dstate.dot(self.W_recur) * activate(self.activation).backward(self.input_states[:, tt - 1])
+                    dstate    = np.dot(dstate, self.W_recur) * activate(self.activation).backward(self.input_states[:, tt - 1])
 
             # optimize weights and bias
             self.W_input  = optimizer(self.optimizer_kwargs).update(self.W_input,  cg(dW_input))
