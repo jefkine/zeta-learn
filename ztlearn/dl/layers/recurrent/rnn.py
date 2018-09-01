@@ -76,7 +76,6 @@ class RNN(Layer):
         self.b_input  = np.zeros((self.h_units,))
 
     # implementation based on techniques as seen here: https://github.com/dennybritz/rnn-tutorial-rnnlm/blob/master/RNNLM.ipynb
-    #                                                  http://peterroelants.github.io/posts/rnn_implementation_part01
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
         batch_size, time_steps, input_dim = inputs.shape
@@ -96,7 +95,6 @@ class RNN(Layer):
         return self.outputs
 
     # implementation based on techniques as seen here: https://github.com/dennybritz/rnn-tutorial-rnnlm/blob/master/RNNLM.ipynb
-    #                                                  http://peterroelants.github.io/posts/rnn_implementation_part01
     def pass_backward(self, grad):
         _, time_steps, _ = grad.shape
         next_grad        = np.zeros_like(grad)
