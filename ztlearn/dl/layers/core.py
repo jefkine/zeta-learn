@@ -214,14 +214,12 @@ class UpSampling2D(Layer):
     @property
     def output_shape(self):
         input_depth, input_height, input_width = self.input_shape
-
         return input_depth, self.h_scale * input_height, self.w_scale * input_width
 
     def prep_layer(self): pass
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
-
         return np.repeat(np.repeat(inputs, self.h_scale, axis = 2), self.w_scale, axis = 3)
 
     def pass_backward(self, grad):
@@ -256,7 +254,6 @@ class Reshape(Layer):
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
-
         return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
 
     def pass_backward(self, grad):
