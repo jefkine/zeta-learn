@@ -197,9 +197,9 @@ class Flatten(Layer):
 class UpSampling2D(Layer):
 
     def __init__(self, size = (2, 2), input_shape = None):
-        self.size        = size
-        self.input_shape = input_shape
-        self.prev_shape  = None
+        self.h_scale, self.w_scale = size[0], size[1]
+        self.input_shape           = input_shape
+        self.prev_shape            = None
 
         self.is_trainable = True
 
@@ -215,18 +215,17 @@ class UpSampling2D(Layer):
     def output_shape(self):
         input_depth, input_height, input_width = self.input_shape
 
-        return input_depth, self.size[0] * input_height, self.size[1] * input_width
+        return input_depth, self.h_scale * input_height, self.w_scale * input_width
 
     def prep_layer(self): pass
 
     def pass_forward(self, inputs, train_mode = True, **kwargs):
         self.prev_shape = inputs.shape
-        upsampled       = np.repeat(inputs, self.size[0], axis = 2)
 
-        return np.repeat(upsampled, self.size[1], axis = 3)
+        return np.repeat(np.repeat(inputs, self.h_scale, axis = 2), self.w_scale, axis = 3)
 
     def pass_backward(self, grad):
-        grad = grad[:, :, ::self.size[0], ::self.size[1]]
+        grad = grad[:, :, ::self.h_scale, ::self.w_scale]
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
 
         return grad
