@@ -8,18 +8,18 @@ LARGE_FONT = 14
 FIG_SIZE   = (8, 6)
 
 img_specs = {
-              'mnist'  : {
-                            'pix_row'    : 1,
-                            'pix_col'    : 26,
-                            'img_width'  : 28,
-                            'img_height' : 28
-                         },
-              'digits' : {
-                            'pix_row'    : 0,
-                            'pix_col'    : 7,
-                            'img_width'  : 8,
-                            'img_height' : 8
-                         }
+                'mnist' :  {
+                                'pix_row'    : 1,
+                                'pix_col'    : 26,
+                                'img_width'  : 28,
+                                'img_height' : 28
+                           },
+                'digits':  {
+                                'pix_row'    : 0,
+                                'pix_col'    : 7,
+                                'img_width'  : 8,
+                                'img_height' : 8
+                            }
             }
 
 def plotter(x,
@@ -28,14 +28,15 @@ def plotter(x,
                 fig_dims    = (7, 5),
                 title       = 'Model',
                 title_dict  = {},
-                ylabel      = 'y',
+                ylabel      = 'y-axis',
                 ylabel_dict = {},
-                xlabel      = 'x',
+                xlabel      = 'x-axis',
                 xlabel_dict = {},
-                legend      = ['train', 'valid'],
+                legend      = [], # ['train', 'valid'],
                 legend_dict = {},
                 file_path   = '',
-                to_save     = False):
+                to_save     = False,
+                plot_type   = 'line'):
 
     fig, ax = plt.subplots()
     fig.set_size_inches(fig_dims)
@@ -46,8 +47,13 @@ def plotter(x,
     ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
     ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
 
-    for i in range(len(y)):
-        ax.plot(x, y[i], **plot_dict)
+    if plot_type == 'line':
+        for i in range(len(y)):
+            ax.plot(x, y[i], **plot_dict)
+
+    if plot_type == 'scatter':
+        ax.scatter(x[:, 0], x[:, 1], **plot_dict)
+        ax.scatter(y[:, 0], y[:, 1], **{'c' : 'red'}) # centroids
 
     ax.set_title(title, **title_dict)
 
@@ -62,19 +68,46 @@ def plotter(x,
     return plt
 
 
+def plot_kmeans(data,
+                        labels      = None,
+                        centroids   = None,
+                        model_name  = 'K-Means',
+                        to_save     = False,
+                        fig_dims    = FIG_SIZE,
+                        title_dict  = {'size' : SMALL_FONT}):
+
+    file_path = '../plots/cluster/'+('{}{}{}{}{}'.format(model_name,
+                                                         '_',
+                                                         model_name,
+                                                         '_',
+                                                         time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
+
+    plt = plotter(data,
+                        y           = centroids,
+                        plot_dict   = {'c' : labels},
+                        fig_dims    = fig_dims,
+                        title       = 'Model {}'.format(model_name.title()),
+                        title_dict  = title_dict,
+                        file_path   = file_path,
+                        to_save     = to_save,
+                        plot_type   = 'scatter')
+
+    plt.show()
+
+
 def plot_metric(metric,
-                         epoch,
-                         train,
-                         valid,
-                         model_name  = '',
-                         to_save     = False,
-                         plot_dict   = {'linewidth' : 0.8},
-                         fig_dims    = FIG_SIZE,
-                         title_dict  = {'size' : SMALL_FONT},
-                         ylabel_dict = {'size' : SMALL_FONT},
-                         xlabel_dict = {'size' : SMALL_FONT},
-                         legend      = ['train', 'valid'],
-                         legend_dict = {'loc' : 'upper right'}):
+                        epoch,
+                        train,
+                        valid,
+                        model_name  = '',
+                        to_save     = False,
+                        plot_dict   = {'linewidth' : 0.8},
+                        fig_dims    = FIG_SIZE,
+                        title_dict  = {'size' : SMALL_FONT},
+                        ylabel_dict = {'size' : SMALL_FONT},
+                        xlabel_dict = {'size' : SMALL_FONT},
+                        legend      = ['train', 'valid'],
+                        legend_dict = {'loc' : 'upper right'}):
 
     file_path = '../plots/metrics/'+('{}{}{}{}{}'.format(model_name,
                                                          '_',
@@ -83,19 +116,19 @@ def plot_metric(metric,
                                                          time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt = plotter(range(epoch),
-                                 [train, valid],
-                                 plot_dict   = plot_dict,
-                                 fig_dims    = fig_dims,
-                                 title       = 'Model {}'.format(metric.title()),
-                                 title_dict  = title_dict,
-                                 ylabel      = metric.title(),
-                                 ylabel_dict = ylabel_dict,
-                                 xlabel      = 'Iterations',
-                                 xlabel_dict = xlabel_dict,
-                                 legend      = legend,
-                                 legend_dict = legend_dict,
-                                 file_path   = file_path,
-                                 to_save     = to_save)
+                                [train, valid],
+                                plot_dict   = plot_dict,
+                                fig_dims    = fig_dims,
+                                title       = 'Model {}'.format(metric.title()),
+                                title_dict  = title_dict,
+                                ylabel      = metric.title(),
+                                ylabel_dict = ylabel_dict,
+                                xlabel      = 'Iterations',
+                                xlabel_dict = xlabel_dict,
+                                legend      = legend,
+                                legend_dict = legend_dict,
+                                file_path   = file_path,
+                                to_save     = to_save)
 
     plt.show()
 
@@ -226,12 +259,12 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
 
 
 def plot_generated_img_samples(test_label,
-                                           predictions,
-                                           fig_dims   = (6, 6),
-                                           dataset    = 'digits',
-                                           to_save    = False,
-                                           iteration  = 0,
-                                           model_name = ''):
+                                            predictions,
+                                            fig_dims   = (6, 6),
+                                            dataset    = 'digits',
+                                            to_save    = False,
+                                            iteration  = 0,
+                                            model_name = ''):
 
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
@@ -255,19 +288,19 @@ def plot_generated_img_samples(test_label,
 
 
 def plot_regression_results(train_data,
-                                         train_label,
-                                         test_data,
-                                         test_label,
-                                         input_data,
-                                         pred_line,
-                                         mse,
-                                         super_title,
-                                         y_label,
-                                         x_label,
-                                         model_name = '',
-                                         to_save    = False,
-                                         fig_dims   = FIG_SIZE,
-                                         font_size  = 10):
+                                        train_label,
+                                        test_data,
+                                        test_label,
+                                        input_data,
+                                        pred_line,
+                                        mse,
+                                        super_title,
+                                        y_label,
+                                        x_label,
+                                        model_name = '',
+                                        to_save    = False,
+                                        fig_dims   = FIG_SIZE,
+                                        font_size  = 10):
 
     plt.figure(figsize = fig_dims)
 

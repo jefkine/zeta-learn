@@ -32,6 +32,7 @@ from .text_utils import gen_char_sequence_xtym
 from .text_utils import gen_char_sequence_xtyt
 
 # import from plot_utils.py
+from .plot_utils import plot_kmeans
 from .plot_utils import plot_metric
 from .plot_utils import plot_opt_viz
 from .plot_utils import plot_img_samples
@@ -65,7 +66,7 @@ __all__ = [
             'gen_char_sequence_xtym','gen_char_sequence_xtyt',
 
             # From plot_utils.py
-            'plot_metric','plot_regression_results','plot_img_samples'
+            'plot_metric','plot_kmeans','plot_regression_results','plot_img_samples'
             ,'plot_img_results','plot_generated_img_samples','plot_tiled_img_samples',
 
             # From data_utils.py
