@@ -5,8 +5,9 @@ Subpackages
 -----------
 
 .. toctree::
-
+  
     ztlearn.ml.classification
+    ztlearn.ml.clustering
     ztlearn.ml.regression
 
 Module contents
