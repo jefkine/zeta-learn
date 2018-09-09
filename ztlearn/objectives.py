@@ -53,7 +53,7 @@ class MeanSquaredError:
             numpy.array: the output of MeanSquaredError Loss to prediction and targets
         """
 
-        return 0.5 * np.mean(np.sum(np.power(predictions - targets, 2), axis = 1))
+        return 0.5 * np.mean(np.sum(np.square(predictions - targets), axis = 1))
 
     def derivative(self, predictions, targets, np_type):
 
@@ -111,7 +111,7 @@ class HellingerDistance:
 
         root_difference = self.sqrt_difference(predictions, targets)
 
-        return np.mean(np.sum(np.power(root_difference, 2), axis = 1) / HellingerDistance.SQRT_2)
+        return np.mean(np.sum(np.square(root_difference), axis = 1) / HellingerDistance.SQRT_2)
 
     def derivative(self, predictions, targets, np_type):
 

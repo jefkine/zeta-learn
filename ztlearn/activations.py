@@ -218,7 +218,7 @@ class TanH:
             numpy.array: the output of the TanH derivative applied to the input
         """
 
-        return 1 - np.power(self.activation(input_signal), 2)
+        return 1 - np.square(self.activation(input_signal))
 
     @property
     def activation_name(self):
@@ -490,7 +490,7 @@ class ElliotSigmoid:
             numpy.array: the output of the ElliotSigmoid derivative applied to the input
         """
 
-        return 0.5 / np.power((1 + np.abs(input_signal)), 2)
+        return 0.5 / np.square(1 + np.abs(input_signal))
 
     @property
     def activation_name(self):
@@ -503,7 +503,7 @@ class Linear:
     **Linear Activation Function**
 
     Linear Activation  applies  identity  operation on your  data such  that the
-    output data is  proportional to the input data. The function always  returns 
+    output data is  proportional to the input data. The function always  returns
     the same value that was used as its argument.
 
     References:

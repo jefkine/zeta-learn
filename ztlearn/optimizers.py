@@ -197,7 +197,7 @@ class Adam(Optimizer):
         self.m = self.beta1 * self.m + (1 - self.beta1) * self.grads
         m_hat  = self.m / (1 - np.power(self.beta1, self.t))
 
-        self.v = self.beta2 * self.v + (1 - self.beta2) * np.power(self.grads, 2)
+        self.v = self.beta2 * self.v + (1 - self.beta2) * np.square(self.grads)
         v_hat  = self.v / (1 - np.power(self.beta2, self.t))
 
         self.weights -= (super(Adam, self).get_learning_rate() * m_hat / (np.sqrt(v_hat) + self.epsilon))
@@ -303,7 +303,7 @@ class AdaGrad(Optimizer):
         if self.cache is None:
             self.cache = np.zeros_like(self.grads)
 
-        self.cache   += np.power(self.grads, 2)
+        self.cache   += np.square(self.grads)
         self.weights -= (super(AdaGrad, self).get_learning_rate() * self.grads / (np.sqrt(self.cache) + self.epsilon))
 
         return self.weights
@@ -353,14 +353,14 @@ class Adadelta(Optimizer):
         if self.delta is None:
             self.delta = np.zeros_like(self.weights)
 
-        self.cache = self.rho * self.cache + (1 - self.rho) * np.power(self.grads, 2)
+        self.cache = self.rho * self.cache + (1 - self.rho) * np.square(self.grads)
 
         RMSE_grad  = np.sqrt(self.cache + self.epsilon)
         RMSE_delta = np.sqrt(self.delta + self.epsilon)
 
         update = self.grads * (RMSE_delta / RMSE_grad)
         self.weights -= super(Adadelta, self).get_learning_rate() * update
-        self.delta    = self.rho * self.delta + (1 - self.rho) * np.power(update, 2)
+        self.delta    = self.rho * self.delta + (1 - self.rho) * np.square(update)
 
         return self.weights
 
@@ -405,7 +405,7 @@ class RMSprop(Optimizer):
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
 
-        self.cache    = self.rho * self.cache + (1 - self.rho) * np.power(self.grads, 2)
+        self.cache    = self.rho * self.cache + (1 - self.rho) * np.square(self.grads)
         self.weights -= self.learning_rate * self.grads / (np.sqrt(self.cache) + self.epsilon)
 
         return self.weights
