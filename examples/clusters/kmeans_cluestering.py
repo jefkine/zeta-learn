@@ -2,7 +2,7 @@
 
 from sklearn.datasets import make_blobs
 
-from ztlearn.utils import *
+from ztlearn.utils import plot_kmeans
 from ztlearn.ml.clustering import KMeans
 
 # generate fake data
