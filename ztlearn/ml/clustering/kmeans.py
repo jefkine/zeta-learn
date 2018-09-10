@@ -36,23 +36,21 @@ class KMeans:
             # returns a distance tensor of dim [no of data_points, distance_from_each_centroid]
             distances = np.linalg.norm(self.stacked_inputs - self.centroids, axis = 1)
 
-            # for n clusters we shall have n different 'distance_from_each_centroid' values
-            # we then will determine the minimum value from the given 'distance_from_each_centroid'
-            # given [no of data_points, distance_from_each_centroid], reducing on the last axis (i.e axis = -1)
-            # will leave us with a closest_centroid tensor of dim [no of data_points]
-            # closest_centroid is a tensor of indices related to the individual centroid indices
-            closest_centroid = np.argmin(distances, axis = -1)
+            # given n centroids the 'distance_from_each_centroid' metric consists of n diffrent distances to the n centroids
+            # to find the minimum distance amongst the n diffrent distance we use the np.argmin function on this axis.
+            # closest_centroid = np.argmin(distances, axis = -1). closest_centroid is a tensor of dim [no of data_points]
+            # closest_centroid tensor consists of a collection of the indices of closest centroids.
 
-            # assign datapoints to closest centroids in a sparse_data tensor
+            # for each data_point, the [row number, closest_centroid] index is its position in the sparse_data tensor
             # this operation fills in the sparse_data tensor positions at [all_rows, closest_centroid] with data from the inputs
-            self.sparse_data[self.all_rows, closest_centroid] = inputs
+            self.sparse_data[self.all_rows, np.argmin(distances, axis = -1)] = inputs
 
-            # Save current centroids for convergence check
+            # save current centroids for model convergence check
             prior_centroids = self.centroids
 
-            # calculate the mean of all the points (new cluster points)
-            # get the sum of elements on the first axis (i.e axis = 0) and divide by
-            # the count of non zero elements in the sparse_data tensor on the first axis (i.e axis = 0)
+            # calculate the mean of all the newly formed clusters
+            # get the sum of elements on the first axis (i.e axis = 0)
+            # divide by the count of non zero elements in the sparse_data tensor on the first axis (i.e axis = 0)
             # also clip at a minimum of 1 to avoid division by zero
             self.centroids = np.divide(np.sum(self.sparse_data, axis = 0),
                                        np.clip(np.count_nonzero(self.sparse_data, axis = 0), a_min = 1, a_max = None)).T
