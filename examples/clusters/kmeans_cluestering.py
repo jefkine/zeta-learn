@@ -13,4 +13,4 @@ model = KMeans(n_clusters = 4, max_iter = 1000)
 centroids = model.fit(data)
 
 # plot clusters and centroids
-plot_kmeans(data, labels, centroids)
+plot_kmeans(data, labels, centroids, model_clusters = 4)

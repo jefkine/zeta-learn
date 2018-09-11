@@ -69,28 +69,29 @@ def plotter(x,
 
 
 def plot_kmeans(data,
-                        labels      = None,
-                        centroids   = None,
-                        model_name  = 'K-Means',
-                        to_save     = False,
-                        fig_dims    = FIG_SIZE,
-                        title_dict  = {'size' : SMALL_FONT}):
+                        labels         = None,
+                        centroids      = None,
+                        model_name     = 'K-Means',
+                        model_clusters = 1,
+                        to_save        = False,
+                        fig_dims       = FIG_SIZE,
+                        title_dict     = {'size' : SMALL_FONT}):
 
-    file_path = '../plots/cluster/'+('{}{}{}{}{}'.format(model_name,
-                                                         '_',
-                                                         model_name,
-                                                         '_',
-                                                         time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
+    file_path = '../plots/clusters/'+('{}{}{}{}{}'.format(model_name,
+                                                          '_',
+                                                          model_clusters,
+                                                          '_',
+                                                          time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt = plotter(data,
-                        y           = centroids,
-                        plot_dict   = {'c' : labels},
-                        fig_dims    = fig_dims,
-                        title       = 'Model {}'.format(model_name.title()),
-                        title_dict  = title_dict,
-                        file_path   = file_path,
-                        to_save     = to_save,
-                        plot_type   = 'scatter')
+                        y          = centroids,
+                        plot_dict  = {'c' : labels},
+                        fig_dims   = fig_dims,
+                        title      = 'Model {}'.format(model_name.title()),
+                        title_dict = title_dict,
+                        file_path  = file_path,
+                        to_save    = to_save,
+                        plot_type  = 'scatter')
 
     plt.show()
 
