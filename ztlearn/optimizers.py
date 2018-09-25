@@ -90,8 +90,7 @@ class SGD(Optimizer):
         self.weights = weights
         self.grads   = grads
 
-        self.weights -= super(SGD, self).get_learning_rate() * self.grads
-        # self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype=np.float128)
+        self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype=np.float128)
 
         return self.weights
 
@@ -140,7 +139,7 @@ class SGDMomentum(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        self.velocity  = self.momentum * self.velocity - super(SGDMomentum, self).get_learning_rate() * self.grads
+        self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(), self.grads)
         self.weights  += self.velocity
 
         return self.weights
@@ -194,13 +193,13 @@ class Adam(Optimizer):
 
         self.t += 1
 
-        self.m = self.beta1 * self.m + (1 - self.beta1) * self.grads
-        m_hat  = self.m / (1 - np.power(self.beta1, self.t))
+        self.m = np.multiply(self.beta1, self.m) + np.multiply((1 - self.beta1), self.grads)
+        m_hat  = np.true_divide(self.m, (1 - np.power(self.beta1, self.t)))
 
-        self.v = self.beta2 * self.v + (1 - self.beta2) * np.square(self.grads)
-        v_hat  = self.v / (1 - np.power(self.beta2, self.t))
+        self.v = np.multiply(self.beta2, self.v)  + np.multiply((1 - self.beta2), np.square(self.grads))
+        v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
-        self.weights -= (super(Adam, self).get_learning_rate() * m_hat / (np.sqrt(v_hat) + self.epsilon))
+        self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(), m_hat), np.sqrt(v_hat) + self.epsilon)
 
         return self.weights
 
@@ -255,12 +254,12 @@ class Adamax(Optimizer):
 
         self.t += 1
 
-        learning_rate_t = super(Adamax, self).get_learning_rate() / (1. - np.power(self.beta1, self.t))
+        learning_rate_t = np.true_divide(super(Adamax, self).get_learning_rate(), 1. - np.power(self.beta1, self.t))
 
-        m_hat = (self.beta1 * self.m) + (1. - self.beta1) * self.grads
-        u_hat = np.maximum(self.beta2 * self.u, np.abs(self.grads))
+        m_hat = np.multiply(self.beta1, self.m) + np.multiply((1. - self.beta1), self.grads)
+        u_hat = np.maximum(np.multiply(self.beta2, self.u), np.abs(self.grads))
 
-        self.weights -= (learning_rate_t * m_hat / (u_hat + self.epsilon))
+        self.weights -= np.true_divide(np.multiply(learning_rate_t, m_hat), (u_hat + self.epsilon))
 
         return self.weights
 
@@ -304,7 +303,8 @@ class AdaGrad(Optimizer):
             self.cache = np.zeros_like(self.grads)
 
         self.cache   += np.square(self.grads)
-        self.weights -= (super(AdaGrad, self).get_learning_rate() * self.grads / (np.sqrt(self.cache) + self.epsilon))
+        self.weights -= np.multiply(super(AdaGrad, self).get_learning_rate(),
+                                    np.true_divide(self.grads, np.sqrt(self.cache) + self.epsilon))
 
         return self.weights
 
@@ -353,14 +353,15 @@ class Adadelta(Optimizer):
         if self.delta is None:
             self.delta = np.zeros_like(self.weights)
 
-        self.cache = self.rho * self.cache + (1 - self.rho) * np.square(self.grads)
+        self.cache = np.multiply(self.rho, self.cache) + np.multiply(1 - self.rho, np.square(self.grads))
 
         RMSE_grad  = np.sqrt(self.cache + self.epsilon)
         RMSE_delta = np.sqrt(self.delta + self.epsilon)
 
-        update = self.grads * (RMSE_delta / RMSE_grad)
-        self.weights -= super(Adadelta, self).get_learning_rate() * update
-        self.delta    = self.rho * self.delta + (1 - self.rho) * np.square(update)
+        update = np.multiply(self.grads, np.true_divide(RMSE_delta, RMSE_grad))
+
+        self.weights -= np.multiply(super(Adadelta, self).get_learning_rate(), update)
+        self.delta    = np.multiply(self.rho, self.delta) + np.multiply((1 - self.rho), np.square(update))
 
         return self.weights
 
@@ -405,8 +406,8 @@ class RMSprop(Optimizer):
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
 
-        self.cache    = self.rho * self.cache + (1 - self.rho) * np.square(self.grads)
-        self.weights -= self.learning_rate * self.grads / (np.sqrt(self.cache) + self.epsilon)
+        self.cache    = np.multiply(self.rho, np.multiply(self.cache + (1 - self.rho), np.square(self.grads)))
+        self.weights -= np.multiply(self.learning_rate, np.true_divide(self.grads, (np.sqrt(self.cache) + self.epsilon)))
 
         return self.weights
 
@@ -456,13 +457,9 @@ class NesterovAcceleratedGradient(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        # self.velocity       = self.momentum * self.velocity_prev - super(NesterovAcceleratedGradient, self).get_learning_rate() * self.grads
-        # self.weights       += (self.velocity + self.momentum * (self.velocity - self.velocity_prev))
-        # self.velocity_prev  = self.velocity
-
         self.velocity_prev  = self.velocity
-        self.velocity       = self.momentum * self.velocity - super(NesterovAcceleratedGradient, self).get_learning_rate() * self.grads
-        self.weights       += -self.momentum * self.velocity_prev + (1 + self.momentum) * self.velocity
+        self.velocity       = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(), self.grads)
+        self.weights       += np.multiply(-self.momentum, self.velocity_prev) + np.multiply(1 + self.momentum, self.velocity)
 
         return self.weights
 

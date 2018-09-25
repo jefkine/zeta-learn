@@ -8,7 +8,7 @@ class Objective(object):
 
     def clip(self, predictions, epsilon = 1e-15):
         clipped_predictions = np.clip(predictions, epsilon, 1 - epsilon)
-        clipped_divisor     = np.maximum(predictions * (1 - predictions), epsilon)
+        clipped_divisor     = np.maximum(np.multiply(predictions, 1 - predictions), epsilon)
 
         return clipped_predictions, clipped_divisor
 
@@ -111,7 +111,7 @@ class HellingerDistance:
 
         root_difference = self.sqrt_difference(predictions, targets)
 
-        return np.mean(np.sum(np.square(root_difference), axis = 1) / HellingerDistance.SQRT_2)
+        return np.mean(np.true_divide(np.sum(np.square(root_difference), axis = 1), HellingerDistance.SQRT_2))
 
     def derivative(self, predictions, targets, np_type):
 
@@ -128,7 +128,7 @@ class HellingerDistance:
 
         root_difference = self.sqrt_difference(predictions, targets)
 
-        return root_difference / (HellingerDistance.SQRT_2 * np.sqrt(predictions))
+        return np.true_divide(root_difference, np.multiply(HellingerDistance.SQRT_2, np.sqrt(predictions)))
 
 
     def accuracy(self, predictions, targets, threshold = 0.5):
@@ -245,7 +245,7 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
 
-        return np.mean(-np.sum(targets * np.log(clipped_predictions) + (1 - targets) * np.log(1 - clipped_predictions), axis = 1))
+        return np.mean(-np.sum(np.multiply(targets, np.log(clipped_predictions)) + np.multiply((1 - targets), np.log(1 - clipped_predictions)), axis = 1))
 
     def derivative(self, predictions, targets, np_type):
 
@@ -262,8 +262,7 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, clipped_divisor = super(BinaryCrossEntropy, self).clip(predictions)
 
-        # return - (targets / clipped_predictions) + (1 - targets) / (1 - clipped_predictions)
-        return (clipped_predictions - targets) / clipped_divisor
+        return np.true_divide((clipped_predictions - targets), clipped_divisor)
 
 
     def accuracy(self, predictions, targets, threshold = 0.5):
@@ -280,7 +279,7 @@ class BinaryCrossEntropy(Objective):
             numpy.float32: the output of BinaryCrossEntropy Accuracy Score
         """
 
-        return 1 - np.count_nonzero((predictions > threshold) == targets) / float(targets.size)
+        return 1 - np.true_divide(np.count_nonzero((predictions > threshold) == targets), float(targets.size))
 
     @property
     def objective_name(self):
@@ -317,7 +316,7 @@ class CategoricalCrossEntropy(Objective):
 
         clipped_predictions, _ = super(CategoricalCrossEntropy, self).clip(predictions)
 
-        return np.mean(-np.sum(targets * np.log(clipped_predictions), axis = 1))
+        return np.mean(-np.sum(np.multiply(targets, np.log(clipped_predictions)), axis = 1))
 
     def derivative(self, predictions, targets, np_type):
 
@@ -382,7 +381,7 @@ class KLDivergence(Objective):
         targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
-        return np.sum(targets * np.log(targets / predictions), axis = 1)
+        return np.sum(np.multiply(targets, np.log(np.true_divide(targets, predictions))), axis = 1)
 
     def derivative(self, predictions, targets, np_type):
 
@@ -400,9 +399,9 @@ class KLDivergence(Objective):
         targets     = super(KLDivergence, self).add_fuzz_factor(targets)
         predictions = super(KLDivergence, self).add_fuzz_factor(predictions)
 
-        d_log_diff = np.multiply((predictions - targets), (np.log(targets / predictions)))
+        d_log_diff = np.multiply((predictions - targets), (np.log(np.true_divide(targets, predictions))))
 
-        return (1 + np.log(targets / predictions)) * d_log_diff
+        return np.multiply((1 + np.log(np.true_divide(targets, predictions))), d_log_diff)
 
     def accuracy(self, predictions, targets):
 
