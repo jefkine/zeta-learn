@@ -254,7 +254,8 @@ class Adamax(Optimizer):
 
         self.t += 1
 
-        learning_rate_t = np.true_divide(super(Adamax, self).get_learning_rate(), 1. - np.power(self.beta1, self.t))
+        learning_rate_t = np.true_divide(super(Adamax, self).get_learning_rate(),
+                                         1. - np.power(self.beta1, self.t))
 
         m_hat = np.multiply(self.beta1, self.m) + np.multiply((1. - self.beta1), self.grads)
         u_hat = np.maximum(np.multiply(self.beta2, self.u), np.abs(self.grads))
