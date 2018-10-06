@@ -309,7 +309,8 @@ def plot_regression_results(train_data,
     train = plt.scatter(train_data, train_label, color = cmap(0.8), s = 12)
     test  = plt.scatter(test_data,  test_label,  color = cmap(0.4), s = 12)
 
-    plt.plot(input_data, pred_line, '*', color = 'green', markersize = 4)
+    # minimum parameters: plt.plot(input_data, pred_line, '*', color = 'green', markersize = 4)
+    plt.plot(input_data, pred_line, marker = '*', color = 'green', markersize = 4, linestyle = 'none')
     plt.suptitle(super_title)
 
     if mse is not None:
