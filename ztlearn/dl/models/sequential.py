@@ -47,7 +47,7 @@ class Sequential(Trainer):
         layer_names, layer_params, layer_output = ['LAYER TYPE'], ['PARAMS'], ['OUTPUT SHAPE']
 
         for _, layer in enumerate(self.layers):
-            layer_names.append(layer.layer_name)            
+            layer_names.append(layer.layer_name)
             layer_output.append(str(layer.output_shape))
             layer_params.append(str(layer.layer_parameters))
 
@@ -67,11 +67,11 @@ class Sequential(Trainer):
             if i < 2:
                 model_layers += lining + print_pad(1)
             model_layers += "¦ {:<{max_name}} ¦ {:>{max_params}} ¦ {:>{max_output}} ¦ ".format(layer_names[i],
-                                                                                                 layer_params[i],
-                                                                                                 layer_output[i],
-                                                                                                 max_name   = max_name,
-                                                                                                 max_params = max_params,
-                                                                                                 max_output = max_output)
+                                                                                               layer_params[i],
+                                                                                               layer_output[i],
+                                                                                               max_name   = max_name,
+                                                                                               max_params = max_params,
+                                                                                               max_output = max_output)
             model_layers += print_pad(1)
 
             if i > 0:
