@@ -38,7 +38,7 @@ model.compile(loss = 'cce', optimizer = opt)
 
 model.summary(model_name = 'digits mlp')
 
-model_epochs = 120
+model_epochs = 12
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
                       batch_size      = 128,
