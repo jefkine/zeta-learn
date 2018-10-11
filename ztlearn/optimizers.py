@@ -90,7 +90,7 @@ class SGD(Optimizer):
         self.weights = weights
         self.grads   = grads
 
-        self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype=np.float128)
+        self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype = np.float128)
 
         return self.weights
 

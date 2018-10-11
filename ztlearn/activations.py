@@ -539,7 +539,7 @@ class Linear:
             numpy.array: the output of the Linear derivative applied to the input
         """
 
-        return input_signal
+        return np.eye(input_signal.shape[0], input_signal.shape[1], dtype = np.float32)
 
     @property
     def activation_name(self):
