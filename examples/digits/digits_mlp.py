@@ -17,12 +17,12 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 plot_tiled_img_samples(train_data, train_label)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adamax', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
 # opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 0.0001)
 
 # 1. model definition
-model = Sequential()
-model.add(Dense(256, activation = 'relu', input_shape=(64,)))
+model = Sequential(init_method = 'he_normal')
+model.add(Dense(256, activation = 'relu', input_shape = (64,)))
 model.add(Dropout(0.25))
 model.add(BatchNormalization())
 model.add(Dense(10, activation = 'relu')) # 10 digits classes

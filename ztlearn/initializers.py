@@ -275,11 +275,31 @@ class One(WeightInitializer):
         return self.__class__.__name__
 
 
+class Identity(WeightInitializer):
+
+    """
+    **Identity (Identity)**
+
+    Identity is an implementation of weight initialization that returns an
+    identity matrix of size shape
+    """
+
+    def weights(self, shape, random_seed):
+        return np.eye(shape[0], shape[1], dtype = np.float32)
+
+    @property
+    def init_name(self):
+        return self.__class__.__name__
+
+
+
+
 class InitializeWeights:
 
     _methods = {
         'ones'           : One,
         'zeros'          : Zero,
+        'identity'       : Identity,
         'he_normal'      : HeNormal,
         'he_uniform'     : HeUniform,
         'lecun_normal'   : LeCunNormal,
