@@ -27,19 +27,19 @@ class Optimizer(object):
         if hasattr(self, 'step_size') and isinstance(self.step_size, (int, np.integer)):
 
             return decayer(self.learning_rate,
-                                               self.decay_func,
-                                               self.decay_rate,
-                                               self.epoch,
-                                               self.min_lrate,
-                                               self.max_lrate,
-                                               self.step_size).decompose()
+                                                self.decay_func,
+                                                self.decay_rate,
+                                                self.epoch,
+                                                self.min_lrate,
+                                                self.max_lrate,
+                                                self.step_size).decompose()
 
         return decayer(self.learning_rate,
-                                           self.decay_func,
-                                           self.decay_rate,
-                                           self.epoch,
-                                           self.min_lrate,
-                                           self.max_lrate).decompose()
+                                            self.decay_func,
+                                            self.decay_rate,
+                                            self.epoch,
+                                            self.min_lrate,
+                                            self.max_lrate).decompose()
 
 
 class GD:
