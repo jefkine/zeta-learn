@@ -34,7 +34,6 @@ class LinearRegression(Regression):
     def fit_OLS(self, inputs, targets, verbose = True):
         fit_stats    = {"train_loss": [], "train_acc": [], "valid_loss": [], "valid_acc": []}
         inputs       = np.column_stack((np.ones(inputs.shape[0]), inputs))
-
         self.weights = np.linalg.inv(inputs.T.dot(inputs)).dot(inputs.T).dot(targets)
 
         return fit_stats
