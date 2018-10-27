@@ -82,7 +82,7 @@ def plot_pca(components,
                             n_components = 2,
                             colour_array = None,
                             model_name   = 'PCA',
-                            to_save      = True,
+                            to_save      = False,
                             fig_dims     = (10, 8),
                             title_dict   = {'size' : SMALL_FONT}):
 
@@ -122,7 +122,7 @@ def plot_kmeans(data,
                         centroids      = None,
                         model_name     = 'K-Means',
                         model_clusters = 1,
-                        to_save        = True,
+                        to_save        = False,
                         fig_dims       = FIG_SIZE,
                         title_dict     = {'size' : SMALL_FONT}):
 
