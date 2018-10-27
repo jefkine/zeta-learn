@@ -46,5 +46,5 @@ class PCA(object):
 
         return transformed_inputs
 
-    def inverse_transform(transformed_inputs):
+    def inverse_transform(self, transformed_inputs):
         return np.dot(transformed_inputs, self.components) + self.mean
