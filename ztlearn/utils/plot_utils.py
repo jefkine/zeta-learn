@@ -36,7 +36,10 @@ def plotter(x,
                 legend_dict = {},
                 file_path   = '',
                 to_save     = False,
-                plot_type   = 'line'):
+                plot_type   = 'line',
+                cmap_name   = None,
+                cmap_number = 10,
+                grid_on     = True):
 
     fig, ax = plt.subplots()
     fig.set_size_inches(fig_dims)
@@ -44,16 +47,23 @@ def plotter(x,
     ax.set_axisbelow(True)
     ax.minorticks_on()
 
-    ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
-    ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
+    if grid_on:
+        ax.grid(which = 'major', linestyle = '-', linewidth = 0.5, color = 'grey')
+        ax.grid(which = 'minor', linestyle = ':', linewidth = 0.5, color = 'red')
 
     if plot_type == 'line':
         for i in range(len(y)):
             ax.plot(x, y[i], **plot_dict)
 
     if plot_type == 'scatter':
-        ax.scatter(x[:, 0], x[:, 1], **plot_dict)
-        ax.scatter(y[:, 0], y[:, 1], **{'c' : 'red'}) # centroids
+        if cmap_name is not None:
+            plot_dict.update(cmap = plt.cm.get_cmap(cmap_name, cmap_number))
+            plot = ax.scatter(x[:, 0], x[:, 1], **plot_dict)
+            fig.colorbar(plot, ax = ax)
+        else:
+            ax.scatter(x[:, 0], x[:, 1], **plot_dict)
+        if y is not None:
+            ax.scatter(y[:, 0], y[:, 1], **{'c' : 'red'}) # centroids for k-means
 
     ax.set_title(title, **title_dict)
 
@@ -66,6 +76,45 @@ def plotter(x,
         fig.savefig(file_path)
 
     return plt
+
+
+def plot_pca(components,
+                            n_components = 2,
+                            colour_array = None,
+                            model_name   = 'PCA',
+                            to_save      = False,
+                            fig_dims     = (10, 8),
+                            title_dict   = {'size' : SMALL_FONT}):
+
+    file_path = '../plots/decomposition/'+('{}{}{}{}{}'.format(model_name,
+                                                               '_',
+                                                               n_components,
+                                                               '_components',
+                                                               time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
+
+    plt_dict = {
+                    'c'         : colour_array,
+                    'edgecolor' : 'none',
+                    'alpha'     : 0.5,
+                    's'         : 50
+                }
+
+    plt = plotter(components,
+                                y           = None,
+                                plot_dict   = plt_dict,
+                                fig_dims    = fig_dims,
+                                title       = 'Model {}'.format(model_name.upper()),
+                                title_dict  = title_dict,
+                                xlabel      = 'PC 1',
+                                ylabel      = 'PC 2',
+                                file_path   = file_path,
+                                to_save     = to_save,
+                                plot_type   = 'scatter',
+                                cmap_name   = 'tab10',
+                                cmap_number = 10,
+                                grid_on     = False)
+
+    plt.show()
 
 
 def plot_kmeans(data,
