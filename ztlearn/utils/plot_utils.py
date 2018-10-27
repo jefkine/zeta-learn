@@ -82,14 +82,14 @@ def plot_pca(components,
                             n_components = 2,
                             colour_array = None,
                             model_name   = 'PCA',
-                            to_save      = False,
+                            to_save      = True,
                             fig_dims     = (10, 8),
                             title_dict   = {'size' : SMALL_FONT}):
 
-    file_path = '../plots/decomposition/'+('{}{}{}{}{}'.format(model_name,
+    file_path = '../plots/decompositions/'+('{}{}{}{}{}'.format(model_name,
                                                                '_',
                                                                n_components,
-                                                               '_components',
+                                                               '_Components_',
                                                                time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt_dict = {
@@ -122,14 +122,14 @@ def plot_kmeans(data,
                         centroids      = None,
                         model_name     = 'K-Means',
                         model_clusters = 1,
-                        to_save        = False,
+                        to_save        = True,
                         fig_dims       = FIG_SIZE,
                         title_dict     = {'size' : SMALL_FONT}):
 
     file_path = '../plots/clusters/'+('{}{}{}{}{}'.format(model_name,
                                                           '_',
                                                           model_clusters,
-                                                          '_',
+                                                          '_Clusters_',
                                                           time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt = plotter(data,
