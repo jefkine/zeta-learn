@@ -33,8 +33,8 @@ Examples
 Convolutional Neural Network (CNN)
 ##################################
 
-.. literalinclude:: /examples/plots/results/cnn/digits_model_summary.txt
-  
+.. ::
+
   DIGITS CNN
 
    Input Shape: (1, 8, 8)
