@@ -26,3 +26,10 @@ Features
 Install
 -------
   - pip install ztlearn
+
+Examples
+--------
+
+<p align="center">
+    <img src="https://jefkine.com/assets/images/rnn_full_model.png" width="640"\>
+</p>
