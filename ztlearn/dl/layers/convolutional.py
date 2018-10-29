@@ -67,6 +67,10 @@ class Conv(Layer):
         self.activation = activation
 
     @property
+    def layer_parameters(self):
+        return sum([np.prod(param.shape) for param in [self.weights, self.bias]])
+
+    @property
     def output_shape(self):
         pad_height, pad_width = get_pad(self.padding,
                                                       self.input_shape[1],

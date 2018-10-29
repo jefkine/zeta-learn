@@ -71,6 +71,24 @@ class GRU(Layer):
         self.activation = activation
 
     @property
+    def layer_parameters(self):
+        parameters = [
+                        self.W_update,
+                        self.W_reset,
+                        self.W_cell,
+                        self.W_states,
+
+                        self.b_update,
+                        self.b_reset,
+                        self.b_cell,
+                        self.b_states,
+
+                        self.W_final,
+                        self.b_final
+                     ]
+        return sum([np.prod(param.shape) for param in parameters])
+
+    @property
     def output_shape(self):
         return self.input_shape
 

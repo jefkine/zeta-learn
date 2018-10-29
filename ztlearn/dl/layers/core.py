@@ -96,6 +96,10 @@ class Dense(Layer):
         self.activation = activation
 
     @property
+    def layer_parameters(self):
+        return sum([np.prod(param.shape) for param in [self.weights, self.bias]])
+
+    @property
     def output_shape(self):
         return (self.units,)
 

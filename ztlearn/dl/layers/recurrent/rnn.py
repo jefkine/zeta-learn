@@ -62,6 +62,18 @@ class RNN(Layer):
         self.activation = activation
 
     @property
+    def layer_parameters(self):
+        parameters = [
+                        self.W_input,
+                        self.W_output,
+                        self.W_recur,
+
+                        self.b_output,
+                        self.b_input
+                     ]
+        return sum([np.prod(param.shape) for param in parameters])
+
+    @property
     def output_shape(self):
         return self.input_shape
 

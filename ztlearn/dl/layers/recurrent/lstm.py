@@ -80,6 +80,25 @@ class LSTM(Layer):
         self.activation = activation
 
     @property
+    def layer_parameters(self):
+        parameters = [
+                        self.W_input,
+                        self.W_forget,
+                        self.W_output,
+
+                        self.b_input,
+                        self.b_forget,
+                        self.b_output,
+
+                        self.W_cell,
+                        self.b_cell,
+
+                        self.W_final,
+                        self.b_final
+                     ]
+        return sum([np.prod(param.shape) for param in parameters])
+
+    @property
     def output_shape(self):
         return self.input_shape
 

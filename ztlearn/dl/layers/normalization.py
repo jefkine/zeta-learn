@@ -35,6 +35,10 @@ class BatchNormalization(Layer):
         self.optimizer_kwargs = optimizer_kwargs
 
     @property
+    def layer_parameters(self):
+        return sum([np.prod(param.shape) for param in [self.gamma, self.beta]])
+
+    @property
     def output_shape(self):
         return self.input_shape
 

@@ -61,8 +61,9 @@ class Sequential(Trainer):
             lining += "+" + ("-" * (col_size + 2))
         lining += "+"
 
-        total_params = 0
-        model_layers = print_pad(1)+ " " + self.model_name.upper() + print_pad(1)
+        total_params  = 0
+        model_layers  = print_pad(1)+ " " + self.model_name.upper() + print_pad(1)
+        model_layers += print_pad(1)+ " Input Shape: " + str(self.layers[0].input_shape) + print_pad(1)
         for i, layer in enumerate(self.layers):
             if i < 2:
                 model_layers += lining + print_pad(1)
@@ -78,7 +79,7 @@ class Sequential(Trainer):
                 total_params += int(layer_params[i])
 
         model_layers += lining + print_pad(1)
-        model_layers += print_pad(1) + " TOTAL PARAMS: " + str(total_params) + print_pad(1)
+        model_layers += print_pad(1) + " TOTAL PARAMETERS: " + str(total_params) + print_pad(1)
 
         return model_layers
 
