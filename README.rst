@@ -34,7 +34,7 @@ Principal Component Analysis (PCA)
 ##################################
 
 `DIGITS Dataset - PCA <https://github.com/jefkine/zeta-learn/blob/master/examples/digits/digits_pca.py>`_
-====================
+=====================
 .. image:: /examples/plots/results/pca/digits_pca.png
       :align: center
       :alt: digits pca
@@ -46,11 +46,11 @@ Principal Component Analysis (PCA)
       :align: center
       :alt: mnist pca
 
-`K-MEANS <https://github.com/jefkine/zeta-learn/blob/master/examples/clusters/kmeans_cluestering.py>`_
-#######
+KMEANS
+######
 
-K-Means Clustering (4 Clusters)
-===============================
+`K-Means Clustering (4 Clusters) <https://github.com/jefkine/zeta-learn/blob/master/examples/clusters/kmeans_cluestering.py>`_
+================================
 .. image:: /examples/plots/results/kmeans/k_means_4_clusters.png
       :align: center
       :alt: k-means (4 clusters)
@@ -58,8 +58,9 @@ K-Means Clustering (4 Clusters)
 Convolutional Neural Network (CNN)
 ##################################
 
-DIGITS Dataset Model Summary
-============================
+
+`DIGITS Dataset Model Summary <https://github.com/jefkine/zeta-learn/blob/master/examples/digits/digits_cnn.py>`_
+=============================
 .. code:: html
 
   DIGITS CNN
@@ -105,9 +106,8 @@ DIGITS Dataset Model Accuracy
       :align: center
       :alt: digits model accuracy
 
-
-MNIST Dataset Model Summary
-===========================
+`MNIST Dataset Model Summary <https://github.com/jefkine/zeta-learn/blob/master/examples/mnist/mnist_cnn.py>`_
+============================
 .. code:: html
 
   MNIST CNN
@@ -145,19 +145,19 @@ MNIST Dataset Model Results
 Regression
 ##########
 
-Linear Regression
-=================
+`Linear Regression <https://github.com/jefkine/zeta-learn/blob/master/examples/boston/boston_linear_regression.py>`_
+==================
 .. image:: /examples/plots/results/regression/linear_regression.png
       :align: center
       :alt: linear regression
 
-Polynomial Regression
-=====================
+`Polynomial Regression <https://github.com/jefkine/zeta-learn/blob/master/examples/boston/boston_polynomial_regression.py>`_
+======================
 .. image:: /examples/plots/results/regression/polynomial_regression.png
       :align: center
       :alt: polynomial regression
 
-Linear Regression
+`Elastic Regression <https://github.com/jefkine/zeta-learn/blob/master/examples/boston/boston_elastic_regression.py>`_
 =================
 .. image:: /examples/plots/results/regression/elastic_regression.png
       :align: center
