@@ -30,6 +30,30 @@ Install
 Examples
 --------
 
+Principal Component Analysis (PCA)
+##################################
+
+DIGITS Dataset - PCA
+====================
+.. image:: /examples/plots/results/pca/digits_pca.png
+      :align: center
+      :alt: digits pca
+
+MNIST Dataset - PCA
+====================
+.. image:: /examples/plots/results/pca/mnist_pca.png
+      :align: center
+      :alt: mnist pca
+
+K-MEANS
+#######
+
+K-Means Clustering (4 Clusters)
+===============================
+.. image:: /examples/plots/results/kmeans/k_means_4_clusters.png
+      :align: center
+      :alt: k-means (4 clusters)
+
 Convolutional Neural Network (CNN)
 ##################################
 
@@ -137,28 +161,3 @@ Linear Regression
 .. image:: /examples/plots/results/regression/elastic_regression.png
       :align: center
       :alt: elastic regression
-
-
-Principal Component Analysis (PCA)
-##################################
-
-DIGITS Dataset - PCA
-====================
-.. image:: /examples/plots/results/pca/digits_pca.png
-      :align: center
-      :alt: digits pca
-
-MNIST Dataset - PCA
-====================
-.. image:: /examples/plots/results/pca/mnist_pca.png
-      :align: center
-      :alt: mnist pca
-
-K-MEANS
-#######
-
-K-Means Clustering (4 Clusters)
-===============================
-.. image:: /examples/plots/results/kmeans/k_means_4_clusters.png
-      :align: center
-      :alt: k-means (4 clusters)
