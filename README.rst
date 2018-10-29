@@ -33,6 +33,8 @@ Examples
 Convolutional Neural Network (CNN)
 ##################################
 
+Model Summary
+=============
 .. code:: html
 
   DIGITS CNN
