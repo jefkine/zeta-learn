@@ -33,8 +33,8 @@ Examples
 Convolutional Neural Network (CNN)
 ##################################
 
-.. literalinclude:: /examples/plots/results/cnn/digits_model_summary.txt
-
+.. include:: /examples/plots/results/cnn/digits_model_summary.txt
+   :literal:
 
 .. image:: /examples/plots/results/cnn/digits_cnn_tiled_results.png
       :align: center
