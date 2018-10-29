@@ -30,8 +30,8 @@ Install
 Examples
 --------
 
-figure:: https://jefkine.com/assets/images/rnn_full_model.png
-    :width: 640px
-    :align: center
-    :height: 100px
-    :alt: alternate text
+..image:: https://jefkine.com/assets/images/rnn_full_model.png
+      :width: 640px
+      :align: center
+      :height: 100px
+      :alt: alternate text
