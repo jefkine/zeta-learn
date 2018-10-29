@@ -72,13 +72,13 @@ DIGITS Dataset Model Loss
 =========================
 .. image:: /examples/plots/results/cnn/digits_cnn_loss_graph.png
       :align: center
-      :alt: digits cnn results tiled
+      :alt: digits model loss
 
 DIGITS Dataset Model Accuracy
 =============================
 .. image:: /examples/plots/results/cnn/digits_cnn_accuracy_graph.png
       :align: center
-      :alt: digits cnn results tiled
+      :alt: digits model accuracy
 
 
 MNIST Dataset Model Summary
@@ -114,4 +114,26 @@ MNIST Dataset Model Results
 ============================
 .. image:: /examples/plots/results/cnn/mnist_cnn_tiled_results.png
       :align: center
-      :alt: digits cnn results tiled
+      :alt: mnist cnn results tiled
+
+
+Regression
+##########
+
+Linear Regression
+=====================
+.. image:: /examples/plots/results/regression/linear_regression.png
+      :align: center
+      :alt: linear regression
+
+Polynomial Regression
+=====================
+.. image:: /examples/plots/results/regression/polynomial_regression.png
+      :align: center
+      :alt: polynomial regression
+
+Linear Regression
+=====================
+.. image:: /examples/plots/results/regression/elastic_regression.png
+      :align: center
+      :alt: elastic regression
