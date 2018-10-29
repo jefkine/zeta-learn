@@ -35,6 +35,7 @@ Convolutional Neural Network (CNN)
 
 .. literalinclude:: /examples/plots/results/cnn/digits_model_summary.txt
 
+
 .. image:: /examples/plots/results/cnn/digits_cnn_tiled_results.png
       :align: center
       :alt: digits cnn results tiled
