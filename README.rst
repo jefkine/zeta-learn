@@ -34,8 +34,7 @@ Convolutional Neural Network (CNN)
 ##################################
 
 .. literalinclude:: /examples/plots/results/cnn/digits_model_summary.txt
-  :language: html
-
+  
   DIGITS CNN
 
    Input Shape: (1, 8, 8)
