@@ -82,7 +82,7 @@ DIGITS Dataset Model Accuracy
 
 
 MNIST Dataset Model Summary
-============================
+===========================
 .. code:: html
 
   MNIST CNN
@@ -111,7 +111,7 @@ MNIST Dataset Model Summary
   TOTAL PARAMETERS: 12109578
 
 MNIST Dataset Model Results
-============================
+===========================
 .. image:: /examples/plots/results/cnn/mnist_cnn_tiled_results.png
       :align: center
       :alt: mnist cnn results tiled
@@ -121,7 +121,7 @@ Regression
 ##########
 
 Linear Regression
-=====================
+=================
 .. image:: /examples/plots/results/regression/linear_regression.png
       :align: center
       :alt: linear regression
@@ -133,7 +133,32 @@ Polynomial Regression
       :alt: polynomial regression
 
 Linear Regression
-=====================
+=================
 .. image:: /examples/plots/results/regression/elastic_regression.png
       :align: center
       :alt: elastic regression
+
+
+Principal Component Analysis (PCA)
+##################################
+
+DIGITS Dataset - PCA
+====================
+.. image:: /examples/plots/results/pca/digits_pca.png
+      :align: center
+      :alt: digits pca
+
+MNIST Dataset - PCA
+====================
+.. image:: /examples/plots/results/pca/mnist_pca.png
+      :align: center
+      :alt: mnist pca
+
+K-MEANS
+#######
+
+K-Means Clustering (4 Clusters)
+===============================
+.. image:: /examples/plots/results/kmeans/k_means_4_clusters.png
+      :align: center
+      :alt: k-means (4 clusters)
