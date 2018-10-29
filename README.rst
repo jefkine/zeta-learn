@@ -39,6 +39,9 @@ DIGITS Dataset - PCA
       :align: center
       :alt: digits pca
 
+Python_.
+.. _Python: http://www.python.org/
+
 MNIST Dataset - PCA
 ====================
 .. image:: /examples/plots/results/pca/mnist_pca.png
