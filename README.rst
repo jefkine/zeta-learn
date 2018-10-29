@@ -36,31 +36,30 @@ Convolutional Neural Network (CNN)
 .. include:: /examples/plots/results/cnn/digits_model_summary.txt
    :literal:
 
-.. :: 
-      DIGITS CNN
+DIGITS CNN
 
-       Input Shape: (1, 8, 8)
-      +---------------------+--------+--------------+
-      ¦ LAYER TYPE          ¦ PARAMS ¦ OUTPUT SHAPE ¦
-      +---------------------+--------+--------------+
-      ¦ Conv2D              ¦    320 ¦   (32, 8, 8) ¦
-      ¦ Activation: RELU    ¦      0 ¦   (32, 8, 8) ¦
-      ¦ Dropout             ¦      0 ¦   (32, 8, 8) ¦
-      ¦ BatchNormalization  ¦   4096 ¦   (32, 8, 8) ¦
-      ¦ Conv2D              ¦  18496 ¦   (64, 8, 8) ¦
-      ¦ Activation: RELU    ¦      0 ¦   (64, 8, 8) ¦
-      ¦ MaxPooling2D        ¦      0 ¦   (64, 7, 7) ¦
-      ¦ Dropout             ¦      0 ¦   (64, 7, 7) ¦
-      ¦ BatchNormalization  ¦   6272 ¦   (64, 7, 7) ¦
-      ¦ Flatten             ¦      0 ¦      (3136,) ¦
-      ¦ Dense               ¦ 803072 ¦       (256,) ¦
-      ¦ Activation: RELU    ¦      0 ¦       (256,) ¦
-      ¦ Dropout             ¦      0 ¦       (256,) ¦
-      ¦ BatchNormalization  ¦    512 ¦       (256,) ¦
-      ¦ Dense               ¦   2570 ¦        (10,) ¦
-      +---------------------+--------+--------------+
+ Input Shape: (1, 8, 8)
++---------------------+--------+--------------+
+¦ LAYER TYPE          ¦ PARAMS ¦ OUTPUT SHAPE ¦
++---------------------+--------+--------------+
+¦ Conv2D              ¦    320 ¦   (32, 8, 8) ¦
+¦ Activation: RELU    ¦      0 ¦   (32, 8, 8) ¦
+¦ Dropout             ¦      0 ¦   (32, 8, 8) ¦
+¦ BatchNormalization  ¦   4096 ¦   (32, 8, 8) ¦
+¦ Conv2D              ¦  18496 ¦   (64, 8, 8) ¦
+¦ Activation: RELU    ¦      0 ¦   (64, 8, 8) ¦
+¦ MaxPooling2D        ¦      0 ¦   (64, 7, 7) ¦
+¦ Dropout             ¦      0 ¦   (64, 7, 7) ¦
+¦ BatchNormalization  ¦   6272 ¦   (64, 7, 7) ¦
+¦ Flatten             ¦      0 ¦      (3136,) ¦
+¦ Dense               ¦ 803072 ¦       (256,) ¦
+¦ Activation: RELU    ¦      0 ¦       (256,) ¦
+¦ Dropout             ¦      0 ¦       (256,) ¦
+¦ BatchNormalization  ¦    512 ¦       (256,) ¦
+¦ Dense               ¦   2570 ¦        (10,) ¦
++---------------------+--------+--------------+
 
-      TOTAL PARAMETERS: 835338
+TOTAL PARAMETERS: 835338
 
 .. image:: /examples/plots/results/cnn/digits_cnn_tiled_results.png
       :align: center
