@@ -36,7 +36,7 @@ Convolutional Neural Network (CNN)
 .. include:: /examples/plots/results/cnn/digits_model_summary.txt
    :literal:
 
-.. Model Summary::
+::
   DIGITS CNN
 
    Input Shape: (1, 8, 8)
@@ -60,7 +60,7 @@ Convolutional Neural Network (CNN)
   ¦ Dense               ¦   2570 ¦        (10,) ¦
   +---------------------+--------+--------------+
 
-   TOTAL PARAMETERS: 835338
+  TOTAL PARAMETERS: 835338
 
 .. image:: /examples/plots/results/cnn/digits_cnn_tiled_results.png
       :align: center

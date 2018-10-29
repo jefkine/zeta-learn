@@ -46,4 +46,4 @@ DIGITS CNN
 ¦ Dense               ¦   2570 ¦        (10,) ¦
 +---------------------+--------+--------------+
 
- TOTAL PARAMETERS: 835338
+TOTAL PARAMETERS: 835338
