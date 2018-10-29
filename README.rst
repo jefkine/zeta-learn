@@ -33,23 +33,20 @@ Examples
 Principal Component Analysis (PCA)
 ##################################
 
-DIGITS Dataset - PCA
+`DIGITS Dataset - PCA <https://github.com/jefkine/zeta-learn/blob/master/examples/digits/digits_pca.py>`_
 ====================
 .. image:: /examples/plots/results/pca/digits_pca.png
       :align: center
       :alt: digits pca
 
-`DIGITS PCA Implementation <https://github.com/jefkine/zeta-learn/blob/master/examples/digits/digits_pca.py>`_
 
-MNIST Dataset - PCA
+`MNIST Dataset - PCA <https://github.com/jefkine/zeta-learn/blob/master/examples/mnist/mnist_pca.py>`_
 ====================
 .. image:: /examples/plots/results/pca/mnist_pca.png
       :align: center
       :alt: mnist pca
 
-`MNIST PCA Implementation <https://github.com/jefkine/zeta-learn/blob/master/examples/mnist/mnist_pca.py>`_
-
-K-MEANS
+`K-MEANS <https://github.com/jefkine/zeta-learn/blob/master/examples/clusters/kmeans_cluestering.py>`_
 #######
 
 K-Means Clustering (4 Clusters)
@@ -57,8 +54,6 @@ K-Means Clustering (4 Clusters)
 .. image:: /examples/plots/results/kmeans/k_means_4_clusters.png
       :align: center
       :alt: k-means (4 clusters)
-
-`K-MEANS Implementation <https://github.com/jefkine/zeta-learn/blob/master/examples/clusters/kmeans_cluestering.py>`_
 
 Convolutional Neural Network (CNN)
 ##################################
