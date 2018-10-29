@@ -83,7 +83,7 @@ def plot_pca(components,
                             colour_array = None,
                             model_name   = 'PCA',
                             to_save      = False,
-                            fig_dims     = (10, 8),
+                            fig_dims     = FIG_SIZE, #(10, 8),
                             title_dict   = {'size' : SMALL_FONT}):
 
     file_path = '../plots/decompositions/'+('{}{}{}{}{}'.format(model_name,
