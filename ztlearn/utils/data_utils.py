@@ -118,3 +118,13 @@ def print_pad(pad_count, pad_char = "\n"):
     for i in range(pad_count):
         padding += pad_char
     return padding
+
+def custom_tuple(tup):
+    """ customize tuple to have comma separated numbers """
+    tuple_string = "("
+    for itup in tup:
+        tuple_string += "{:,d}".format(itup) + ", "
+
+    if len(tup) == 1:
+        return tuple_string[:-2] + ",)"
+    return tuple_string[:-2] + ")"

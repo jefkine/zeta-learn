@@ -2,6 +2,7 @@
 
 from .trainer import Trainer
 from ztlearn.utils import print_pad
+from ztlearn.utils import custom_tuple
 from ztlearn.dl.layers import Activation
 
 
@@ -48,8 +49,9 @@ class Sequential(Trainer):
 
         for _, layer in enumerate(self.layers):
             layer_names.append(layer.layer_name)
-            layer_output.append(str(layer.output_shape))
-            layer_params.append(str(layer.layer_parameters))
+            layer_output.append(custom_tuple(layer.output_shape))
+            # @@DEPRECATED: removed number formating for tuples: layer_output.append(str(layer.output_shape))
+            layer_params.append("{:,}".format(layer.layer_parameters))
 
         max_name   = len(max(layer_names,  key = len))
         max_params = len(max(layer_params, key = len))
@@ -76,10 +78,10 @@ class Sequential(Trainer):
             model_layers += print_pad(1)
 
             if i > 0:
-                total_params += int(layer_params[i])
+                total_params += int(layer_params[i].replace(',', ''))
 
         model_layers += lining + print_pad(1)
-        model_layers += print_pad(1) + " TOTAL PARAMETERS: " + str(total_params) + print_pad(1)
+        model_layers += print_pad(1) + " TOTAL PARAMETERS: " + "{:,}".format(total_params) + print_pad(1)
 
         return model_layers
 
