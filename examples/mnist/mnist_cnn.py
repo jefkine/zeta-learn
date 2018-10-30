@@ -18,7 +18,7 @@ train_data, test_data, train_label, test_label = train_test_split(mnist.data,
 
 # normalize to range [0, 1]
 train_data = range_normalize(train_data.astype('float32'), 0, 1)
-test_data = range_normalize(test_data.astype('float32'), 0, 1)
+test_data  = range_normalize(test_data.astype('float32'), 0, 1)
 
 # plot samples of training data
 plot_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
