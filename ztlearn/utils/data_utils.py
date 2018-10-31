@@ -98,7 +98,7 @@ def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval
         print('Targeted  : {}'.format(targets[i]))
         print('Predicted : {} {}'.format(predictions[i], print_pad(1)))
 
-    print ('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
+    print('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
 
 def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
     progress = float((curr + 1) / total)
