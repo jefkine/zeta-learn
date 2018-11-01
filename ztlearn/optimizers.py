@@ -17,9 +17,9 @@ class Optimizer(object):
         self.max_lrate   = self.max_lrate   if hasattr(self, 'max_lrate')   else np.inf
         self.decay_rate  = self.decay_rate  if hasattr(self, 'decay_rate')  else 1e-6
         self.decay_func  = self.decay_func  if hasattr(self, 'decay_func')  else 'inverse_time_decay'
-        self.allow_decay = self.allow_decay if hasattr(self, 'allow_decay') else True
+        self.decay_lrate = self.decay_lrate if hasattr(self, 'decay_lrate') else True
 
-        if self.allow_decay is False: return self.learning_rate
+        if self.decay_lrate is False: return self.learning_rate
 
         self.epoch += 1
         if self.epoch == 1: return self.learning_rate
@@ -511,7 +511,7 @@ def register_opt(**kwargs):
         'step_size',
         'decay_rate',
         'decay_func',
-        'allow_decay',
+        'decay_lrate',
         'learning_rate',
         'optimizer_name'
     }
