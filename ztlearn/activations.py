@@ -183,7 +183,6 @@ class TanH:
     that produces  outputs in scale of  [-1, +1]. As  an  activation function it
     gives an output for every input value hence making is a continuous function.
 
-
     References:
         [1] Hyperbolic Functions
             * [Mathematics Education Centre] https://goo.gl/4Dkkrd
