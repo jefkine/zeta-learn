@@ -32,14 +32,14 @@ class Optimizer(object):
                                                 self.epoch,
                                                 self.min_lrate,
                                                 self.max_lrate,
-                                                self.step_size).decompose()
+                                                self.step_size).decompose
 
         return decayer(self.learning_rate,
                                             self.decay_func,
                                             self.decay_rate,
                                             self.epoch,
                                             self.min_lrate,
-                                            self.max_lrate).decompose()
+                                            self.max_lrate).decompose
 
 
 class GD:
