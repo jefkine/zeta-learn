@@ -90,7 +90,6 @@ class GlorotNormal(WeightInitializer):
     for all  the  layers. Glorot normal is an implementation  based  on Gaussian
     distribution
 
-
     References:
         [1] Understanding the difficulty of training deep feedforward neural networks
             * [Xavier Glorot, 2010] http://proceedings.mlr.press/v9/glorot10a.html
