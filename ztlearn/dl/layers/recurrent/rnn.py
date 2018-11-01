@@ -64,13 +64,13 @@ class RNN(Layer):
     @property
     def layer_parameters(self):
         parameters = [
-                        self.W_input,
-                        self.W_output,
-                        self.W_recur,
+            self.W_input,
+            self.W_output,
+            self.W_recur,
 
-                        self.b_output,
-                        self.b_input
-                     ]
+            self.b_output,
+            self.b_input
+        ]
         return sum([np.prod(param.shape) for param in parameters])
 
     @property

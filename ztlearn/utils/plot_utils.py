@@ -8,19 +8,19 @@ LARGE_FONT = 14
 FIG_SIZE   = (8, 6)
 
 img_specs = {
-                'mnist' :  {
-                                'pix_row'    : 1,
-                                'pix_col'    : 26,
-                                'img_width'  : 28,
-                                'img_height' : 28
-                           },
-                'digits':  {
-                                'pix_row'    : 0,
-                                'pix_col'    : 7,
-                                'img_width'  : 8,
-                                'img_height' : 8
-                            }
-            }
+    'mnist' :  {
+        'pix_row'    : 1,
+        'pix_col'    : 26,
+        'img_width'  : 28,
+        'img_height' : 28
+    },
+    'digits':  {
+        'pix_row'    : 0,
+        'pix_col'    : 7,
+        'img_width'  : 8,
+        'img_height' : 8
+    }
+}
 
 def plotter(x,
                 y           = [],
@@ -93,11 +93,11 @@ def plot_pca(components,
                                                                time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt_dict = {
-                    'c'         : colour_array,
-                    'edgecolor' : 'none',
-                    'alpha'     : 0.5,
-                    's'         : 50
-                }
+        'c'         : colour_array,
+        'edgecolor' : 'none',
+        'alpha'     : 0.5,
+        's'         : 50
+    }
 
     plt = plotter(components,
                                 y           = None,
