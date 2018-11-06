@@ -12,7 +12,7 @@ img_rows   = 8
 img_cols   = 8
 img_dim    = 64  # img_rows * img_cols
 latent_dim = 4
-init_type  = 'he_normal'
+init_type  = 'he_uniform'
 
 def stack_encoder_layers(init):
     model = Sequential(init_method = init)
@@ -37,7 +37,7 @@ def stack_decoder_layers(init):
 encoder = stack_encoder_layers(init = init_type)
 decoder = stack_decoder_layers(init = init_type)
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
 autoencoder = Sequential(init_method = init_type)
 autoencoder.layers.extend(encoder.layers)
@@ -50,7 +50,7 @@ data   = datasets.load_digits()
 images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                           images,
-                                                                          test_size = 0.2, random_seed = 15)
+                                                                          test_size = 0.2, random_seed = 5)
 # plot samples of training data
 plot_img_samples(train_data, None)
 
