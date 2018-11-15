@@ -331,8 +331,9 @@ def plot_generated_img_samples(test_label,
                        img_specs[dataset]['pix_col'],
                        str(test_label[i]), color = 'blue')
 
-    plt.suptitle(('{}{}'.format('Generator Epoch: ', iteration)), y = 1.05, fontsize = 12).set_color('blue')
-    plt.savefig('../plots/generated/'+('{}{}{}'.format(model_name, '_', iteration, '.png')))
+    if to_save:
+        plt.suptitle(('{}{}'.format('Generator Epoch: ', iteration)), y = 1.05, fontsize = 12).set_color('blue')
+        plt.savefig('../plots/generated/'+('{}{}{}'.format(model_name, '_', iteration, '.png')))
 
     plt.show(block = False) if to_save else plt.show(block = True)
 
