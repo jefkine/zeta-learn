@@ -60,7 +60,7 @@ def im2col_indices(x, field_height, field_width, padding, stride = 1):
 
     return cols
 
-def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride=1):
+def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     """ An implementation of col2im based on fancy indexing and np.add.at """
     N, C, H, W            = x_shape
     pad_height, pad_width = padding
