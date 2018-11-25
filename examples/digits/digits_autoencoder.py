@@ -49,8 +49,10 @@ autoencoder.summary('digits autoencoder')
 data   = datasets.load_digits()
 images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
-                                                                          images,
-                                                                          test_size = 0.2, random_seed = 5)
+                                                                  images,
+                                                                  test_size   = 0.2,
+                                                                  random_seed = 5)
+                                                                  
 # plot samples of training data
 plot_img_samples(train_data, None)
 
@@ -62,8 +64,8 @@ fit_stats = autoencoder.fit(train_data,
                             validation_data = (test_data, test_label),
                             shuffle_data    = True)
 
-# generate non rescaled test labels for use in generated digits plot
-_, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, random_seed = 15)
+# generate non rescaled test labels for use in generated digits plot (use the same random_seed as above)
+_, _, _, test_label = train_test_split(data.data, data.target, test_size = 0.2, random_seed = 5)
 predictions         = autoencoder.predict(test_data).reshape((-1, img_rows, img_cols))
 
 model_name = autoencoder.model_name
