@@ -107,6 +107,8 @@ class Dense(Layer):
         self.kernel_shape = (self.input_shape[0], self.units)
         self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
         self.bias         = np.zeros((1, self.units))
+        # @@DEPRECATED: initialize bias using the chosen weight initializers
+        # self.bias       = init(self.weight_initializer).initialize_weights((1, self.units))
 
     def pass_forward(self, inputs, train_mode = True):
         self.inputs = inputs
