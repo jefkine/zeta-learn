@@ -26,7 +26,7 @@ print_results(predictions, unhot(test_label))
 
 plot_img_results(test_data, unhot(test_label), predictions)
 plot_metric('accuracy_loss',
-                                len(fit_stats["train_loss"]),
-                                fit_stats['train_acc'],
-                                fit_stats['train_loss'],
-                                model_name = 'digits_perceptron', legend = ['acc', 'loss'])
+                              len(fit_stats["train_loss"]),
+                              fit_stats['train_acc'],
+                              fit_stats['train_loss'],
+                              model_name = 'digits_perceptron', legend = ['acc', 'loss'])

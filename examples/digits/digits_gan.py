@@ -135,10 +135,10 @@ for epoch_idx in range(model_epochs):
 
     if epoch_idx % gen_epoch == 0 and epoch_idx > 0:
         plot_generated_img_samples(None,
-                                            generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
-                                            to_save    = True,
-                                            iteration  = epoch_idx,
-                                            model_name = model_name)
+                                          generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
+                                          to_save    = True,
+                                          iteration  = epoch_idx,
+                                          model_name = model_name)
 
     if verbose:
         print('{}Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_pad(1), print_epoch, d_loss, d_acc))
@@ -150,7 +150,7 @@ plot_metric('loss',     model_epochs, model_stats['d_train_loss'], model_stats['
 plot_metric('accuracy', model_epochs, model_stats['d_train_acc'],  model_stats['g_train_acc'],  legend = ['D', 'G'], model_name = model_name)
 
 plot_generated_img_samples(None,
-                                    generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
-                                    to_save    = False,
-                                    iteration  = model_epochs,
-                                    model_name = model_name)
+                                  generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),
+                                  to_save    = False,
+                                  iteration  = model_epochs,
+                                  model_name = model_name)
