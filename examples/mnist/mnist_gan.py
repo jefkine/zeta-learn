@@ -27,7 +27,7 @@ verbose   = True
 init_type = 'he_uniform'
 
 gen_epoch = 500
-gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for image generation
+gen_noise = np.random.normal(0, 1, (36, latent_dim)) # 36 as batch size and is also the number of sample to be generated at the prediction stage
 
 model_epochs = 8000
 model_name   = 'mnist_gan'
