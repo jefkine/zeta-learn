@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-import pandas as pd
 
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
