@@ -5,7 +5,7 @@ from ztlearn.utils import maybe_download
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
-def fetch_iris():
+def fetch_iris(in_class = True):
     file_path   = maybe_download('../../datasets/iris/', URL)
     describe    = ['sepal-length (cm)', 'sepal-width (cm)', 'petal-length (cm)', 'petal-width (cm)', 'petal_type']
     dataframe   = pd.read_csv(file_path, names = describe)
@@ -14,4 +14,9 @@ def fetch_iris():
     dataframe.petal_type    = pd.Categorical(dataframe.petal_type)
     dataframe['petal_type'] = dataframe.petal_type.cat.codes
 
-    return DataSet(dataframe.values[:,0:4], dataframe.values[:,4].astype('int'), describe)
+    data, targets = dataframe.values[:,0:4], dataframe.values[:,4].astype('int')
+
+    if in_class:
+        return DataSet(data, targets, describe)
+    else:
+        return train_test_split(data, targets, test_size = 0.2, random_seed = 2)

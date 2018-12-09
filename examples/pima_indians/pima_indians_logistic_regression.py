@@ -3,25 +3,16 @@
 import numpy as np
 import pandas as pd
 
+from datasets.pima import fetch_pima_indians
+
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
 
-#-------------------------------------------------------------#
-#            Diabetes Dataset Features                        #
-#-------------------------------------------------------------#
-# 1.Pregnancies, 2.Glucose, 3.BloodPressure, 4.SkinThickness, #
-# 5.DiabetesPedigreeFunction, 6.Age, 7.Insulin, 8.BMI,        #
-#-------------------------------------------------------------#
-# Outcome                                                     #
-#-------------------------------------------------------------#
-
-dataset     = pd.read_csv('../../datasets/diabetes/pima-indians-diabetes.csv', sep = ',').values
-input_data  = z_score(dataset[:, 0:8]) # -> all the features (e.g using only one feature dataset[:, 5:6])
-input_label = dataset[:, 8]
-
-train_data, test_data, train_label, test_label = train_test_split(input_data,
-                                                                  input_label,
+data = fetch_pima_indians()
+# data.target -> using all the features (e.g to use only one feature data.target [:, 5:6])
+train_data, test_data, train_label, test_label = train_test_split(z_score(data.data),
+                                                                  data.target,
                                                                   test_size = 0.2, random_seed = 2)
 
 # optimizer definition
