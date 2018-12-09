@@ -144,11 +144,10 @@ def maybe_download(path, url, print_log = False):
         if print_log:
             print('{} already exists'.format(filepath))
     else:
-        if print_log:
-            print('DOWNLOADING. Please Wait ...')
+        print('Dataset Not Found! Will Proceed To Download!')  
+        print(print_pad(1) +'DOWNLOADING. Please Wait ...')
         filepath, _ = urllib.request.urlretrieve(url, filepath)
-        if print_log:
-            print(print_pad(1) +'SUCCESFUL DOWNLOAD : {}'.format(filepath))
+        print(print_pad(1) +'SUCCESFUL DOWNLOAD : {}'.format(filepath))
 
     return filepath
 
