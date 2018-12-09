@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+
+from datasets.iris import fetch_iris
 
 from ztlearn.utils import *
 from ztlearn.dl.layers import Dense
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
 
-
-data = datasets.load_iris()
-# print(data['DESCR'])
+data = fetch_iris()
+# print(data.describe)
 
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,

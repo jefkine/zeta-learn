@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.iris import fetch_iris
 
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
 
-data        = datasets.load_iris()
+data        = fetch_iris()
 input_data  = normalize(data.data[data.target != 2])
 input_label = data.target[data.target != 2]
 

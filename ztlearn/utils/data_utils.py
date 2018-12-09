@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import os
 import sys
+import gzip
+import urllib
+import tarfile
+import zipfile
 import numpy as np
 
 #-----------------------------------------------------------------------------#
@@ -128,3 +133,41 @@ def custom_tuple(tup):
     if len(tup) == 1:
         return tuple_string[:-2] + ",)"
     return tuple_string[:-2] + ")"
+
+def maybe_download(path, url, print_log = False):
+    """ download the data from url, or return existing """
+    path = os.path.expanduser(path)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    filepath = os.path.join(path, url.rpartition('/')[2])
+    if os.path.exists(filepath):
+        if print_log:
+            print('{} already exists'.format(filepath))
+    else:
+        if print_log:
+            print('DOWNLOADING. Please Wait ...')
+        filepath, _ = urllib.request.urlretrieve(url, filepath)
+        if print_log:
+            print(print_pad(1) +'SUCCESFUL DOWNLOAD : {}'.format(filepath))
+
+    return filepath
+
+def extract_files(path, filepath):
+    """ extract files from a detected compressed format """
+    opener, mode = None, None
+    if filepath.endswith('.tar.bz2') or filepath.endswith('.tbz'):
+        opener, mode = tarfile.open, 'r:bz2'
+    if zipfile.is_zipfile(filepath):
+        opener, mode = zipfile.ZipFile, 'r'
+    if filepath.endswith('.tar.gz') or filepath.endswith('.gz'):
+        opener, mode = gzip.open, 'rb'
+
+    if opener is not None:
+        if mode is 'rb':
+            with opener(filepath, mode) as f:
+                contents = f.read()
+            with open(os.path.splitext(filepath)[0], 'wb') as f:
+                f.write(contents)
+        else:
+            with opener(filepath, mode) as f:
+                f.extractall(path)

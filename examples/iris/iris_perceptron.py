@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.iris import fetch_iris
 
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
-data = datasets.load_iris()
+data = fetch_iris()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   one_hot(data.target),
                                                                   test_size = 0.3, random_seed = 5)

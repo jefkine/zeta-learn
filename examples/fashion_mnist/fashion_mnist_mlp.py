@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from datasets.mnist import fetch_mnist
+from datasets.fashion import fetch_fashion_mnist
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
-train_data, test_data, train_label, test_label = fetch_mnist()
+train_data, test_data, train_label, test_label = fetch_fashion_mnist()
 
 # plot samples of training data
 plot_tiled_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 0.0001)
+# opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.001, learning_rate = 0.001)
 
 # model definition
 model = Sequential()
@@ -25,7 +26,7 @@ model.compile(loss = 'cce', optimizer = opt)
 
 model.summary()
 
-model_epochs = 12
+model_epochs = 5
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
                       batch_size      = 128,

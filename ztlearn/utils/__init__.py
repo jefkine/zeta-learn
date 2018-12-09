@@ -20,8 +20,10 @@ from .data_utils import computebar
 from .data_utils import minibatches
 from .data_utils import custom_tuple
 from .data_utils import shuffle_data
+from .data_utils import extract_files
 from .data_utils import print_results
 from .data_utils import clip_gradients
+from .data_utils import maybe_download
 from .data_utils import accuracy_score
 from .data_utils import range_normalize
 from .data_utils import train_test_split
@@ -69,11 +71,13 @@ __all__ = [
 
             # From plot_utils.py
             'plot_metric','plot_kmeans','plot_pca','plot_regression_results',
-            'plot_img_samples','plot_img_results','plot_generated_img_samples','plot_tiled_img_samples',
+            'plot_img_samples','plot_img_results','plot_generated_img_samples',
+            'plot_tiled_img_samples',
 
             # From data_utils.py
             'unhot','one_hot','min_max','z_score','normalize','print_pad','custom_tuple',
             'minibatches','shuffle_data','computebar','clip_gradients','range_normalize',
-            'accuracy_score','train_test_split','print_seq_samples','print_seq_results','print_results'
+            'accuracy_score','train_test_split','print_seq_samples','print_seq_results',
+            'print_results'
 
           ]
