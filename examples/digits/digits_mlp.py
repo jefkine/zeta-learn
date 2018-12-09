@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -8,10 +8,11 @@ from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 # NOTE: Check the random_seed seeding for improperly shuffled data.
-data = datasets.load_digits()
+data = fetch_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
                                                                   test_size = 0.3, random_seed = 3)
+
 
 # plot samples of training data
 plot_tiled_img_samples(train_data, train_label)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -9,7 +9,7 @@ from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 
-data = datasets.load_digits()
+data = fetch_digits()
 plot_img_samples(data.data, None)
 
 img_rows = 8

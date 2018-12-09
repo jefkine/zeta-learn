@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -10,7 +10,7 @@ from ztlearn.dl.layers import Activation, BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 
 
-data = datasets.load_digits()
+data = fetch_digits()
 
 # plot samples of training data
 plot_img_samples(data.data, None)

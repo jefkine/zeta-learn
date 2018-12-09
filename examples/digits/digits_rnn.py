@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import RNN, Dense, Flatten
 
-data = datasets.load_digits()
+data = fetch_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
                                                                   test_size = 0.4, random_seed = 5)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -9,7 +9,7 @@ from ztlearn.dl.layers import BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
-data = datasets.load_digits()
+data = fetch_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
                                                                   test_size = 0.33, random_seed = 5)

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import plot_pca
 from ztlearn.ml.decomposition import PCA
 
-data = datasets.load_digits()
+data = fetch_digits()
 
 pca        = PCA(n_components = 2)
 components = pca.fit_transform(data.data)
