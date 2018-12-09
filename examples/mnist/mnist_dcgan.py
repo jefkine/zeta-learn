@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn.datasets import fetch_mldata
+from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -10,7 +10,7 @@ from ztlearn.dl.layers import Activation, BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dense, Dropout, Flatten, Reshape, UpSampling2D
 
 
-mnist               = fetch_mldata('MNIST original')
+mnist               = fetch_mnist()
 mnist_data, _, _, _ = train_test_split(mnist.data, mnist.target, test_size = 0.0, cut_off = 2000)
 
 # plot samples of training data

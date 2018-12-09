@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sklearn.datasets import fetch_mldata
+from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -9,7 +9,7 @@ from ztlearn.dl.layers import BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
-mnist = fetch_mldata('MNIST original')
+mnist = fetch_mnist()
 train_data, test_data, train_label, test_label = train_test_split(mnist.data,
                                                                   mnist.target.astype('int'),
                                                                   test_size   = 0.33,

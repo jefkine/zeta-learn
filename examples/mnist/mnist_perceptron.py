@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from sklearn.datasets import fetch_mldata
+from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.classification import Perceptron
 
-mnist = fetch_mldata('MNIST original')
+mnist = fetch_mnist()
 train_data, test_data, train_label, test_label = train_test_split(normalize(mnist.data.astype('float32')),
                                                                   one_hot(mnist.target.astype('int')),
                                                                   test_size   = 0.3,

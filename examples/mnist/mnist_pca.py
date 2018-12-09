@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from sklearn.datasets import fetch_mldata
+from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import plot_pca
 from ztlearn.ml.decomposition import PCA
 
-mnist = fetch_mldata('MNIST original')
+mnist = fetch_mnist()
 
 pca        = PCA(n_components = 2)
 components = pca.fit_transform(mnist.data.astype('float64'))
