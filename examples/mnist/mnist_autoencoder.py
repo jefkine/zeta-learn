@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn.datasets import fetch_mldata
+from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -47,7 +47,7 @@ autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 autoencoder.summary('mnist autoencoder')
 model_name = autoencoder.model_name
 
-mnist  = fetch_mldata('MNIST original')
+mnist  = fetch_mnist()
 images = range_normalize(mnist.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 
 train_data, test_data, train_label, test_label = train_test_split(images,
