@@ -7,7 +7,12 @@ from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
-train_data, test_data, train_label, test_label = fetch_fashion_mnist()
+fashion_mnist = fetch_fashion_mnist()
+train_data, test_data, train_label, test_label = train_test_split(fashion_mnist.data,
+                                                                  fashion_mnist.target.astype('int'),
+                                                                  test_size   = 0.33,
+                                                                  random_seed = 5,
+                                                                  cut_off     = None)
 
 # plot samples of training data
 plot_tiled_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
