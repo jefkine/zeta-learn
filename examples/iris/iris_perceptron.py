@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.iris import fetch_iris
-
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.iris import fetch_iris
 from ztlearn.ml.classification import Perceptron
 
 data = fetch_iris()

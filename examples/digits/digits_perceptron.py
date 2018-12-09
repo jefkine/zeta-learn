@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.digits import fetch_digits
-
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.digits import fetch_digits
 from ztlearn.ml.classification import Perceptron
 
 data = fetch_digits()

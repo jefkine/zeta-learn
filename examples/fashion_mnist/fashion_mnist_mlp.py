@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from datasets.fashion import fetch_fashion_mnist
-
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.fashion import fetch_fashion_mnist
 from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 
 fashion_mnist = fetch_fashion_mnist()

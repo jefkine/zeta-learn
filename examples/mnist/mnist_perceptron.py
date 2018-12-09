@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.mnist import fetch_mnist
-
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.mnist import fetch_mnist
 from ztlearn.ml.classification import Perceptron
 
 mnist = fetch_mnist()

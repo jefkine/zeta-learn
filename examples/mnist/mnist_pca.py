@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.mnist import fetch_mnist
-
 from ztlearn.utils import plot_pca
 from ztlearn.ml.decomposition import PCA
+from ztlearn.datasets.mnist import fetch_mnist
 
 mnist = fetch_mnist()
 

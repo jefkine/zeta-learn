@@ -7,7 +7,7 @@ from ztlearn.utils import train_test_split
 URL = 'http://ftp.ics.uci.edu/pub/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data'
 
 def fetch_pima_indians(in_class = True):
-    file_path   = maybe_download('../../datasets/pima/', URL)
+    file_path   = maybe_download('../../ztlearn/datasets/pima/', URL)
     describe    = [
         'Pregnancies',
         'Glucose',

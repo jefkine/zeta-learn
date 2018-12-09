@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from datasets.mnist import fetch_mnist
-
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.mnist import fetch_mnist
 from ztlearn.dl.layers import BatchNormalization, Conv2D
 from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 

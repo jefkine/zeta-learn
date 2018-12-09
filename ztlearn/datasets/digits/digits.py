@@ -8,7 +8,7 @@ from ztlearn.utils import train_test_split
 URL = 'https://github.com/scikit-learn/scikit-learn/raw/master/sklearn/datasets/data/digits.csv.gz'
 
 def fetch_digits(in_class = True):
-    file_path   = maybe_download('../../datasets/digits/', URL)
+    file_path   = maybe_download('../../ztlearn/datasets/digits/', URL)
 
     with gzip.open(file_path, 'rb') as digits_path:
         digits_data = np.loadtxt(digits_path, delimiter=',')

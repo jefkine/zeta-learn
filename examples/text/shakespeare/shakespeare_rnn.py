@@ -6,7 +6,7 @@ from ztlearn.optimizers import register_opt
 from ztlearn.dl.layers import RNN, Flatten, Dense
 
 
-text = open('../../../datasets/text/tinyshakespeare_short.txt').read().lower()
+text = open('../../../ztlearn/datasets/text/tinyshakespeare_short.txt').read().lower()
 x, y, len_chars = gen_char_sequence_xtym(text, maxlen = 30, step = 1)
 del text
 

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.fashion import fetch_fashion_mnist
-
 from ztlearn.utils import plot_pca
 from ztlearn.ml.decomposition import PCA
+from ztlearn.datasets.fashion import fetch_fashion_mnist
 
 fashion_mnist = fetch_fashion_mnist()
 

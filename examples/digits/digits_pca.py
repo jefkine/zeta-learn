@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from datasets.digits import fetch_digits
-
 from ztlearn.utils import plot_pca
 from ztlearn.ml.decomposition import PCA
+from ztlearn.datasets.digits import fetch_digits
 
 data = fetch_digits()
 

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.digits import fetch_digits
 from ztlearn.dl.layers import BatchNormalization, Dense, Dropout, Activation
 
 

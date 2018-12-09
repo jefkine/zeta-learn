@@ -3,11 +3,10 @@
 import numpy as np
 import pandas as pd
 
-from datasets.pima import fetch_pima_indians
-
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
 from ztlearn.ml.regression import LogisticRegression
+from ztlearn.datasets.pima import fetch_pima_indians
 
 data = fetch_pima_indians()
 # data.target -> using all the features (e.g to use only one feature data.target [:, 5:6])

@@ -6,7 +6,7 @@ from ztlearn.utils import maybe_download
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
 def fetch_iris(in_class = True):
-    file_path   = maybe_download('../../datasets/iris/', URL)
+    file_path   = maybe_download('../../ztlearn/datasets/iris/', URL)
     describe    = ['sepal-length (cm)', 'sepal-width (cm)', 'petal-length (cm)', 'petal-width (cm)', 'petal_type']
     dataframe   = pd.read_csv(file_path, names = describe)
 

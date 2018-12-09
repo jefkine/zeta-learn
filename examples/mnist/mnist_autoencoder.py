@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from datasets.mnist import fetch_mnist
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.mnist import fetch_mnist
 from ztlearn.dl.layers import BatchNormalization, Dense
 
 img_rows   = 28

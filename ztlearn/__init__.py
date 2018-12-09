@@ -4,6 +4,7 @@ from . import dl
 from . import ml
 from . import utils
 from . import toolkit
+from . import datasets
 from . import decayers
 from . import objectives
 from . import optimizers

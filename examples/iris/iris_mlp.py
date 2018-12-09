@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
-
-from datasets.iris import fetch_iris
-
 from ztlearn.utils import *
 from ztlearn.dl.layers import Dense
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.iris import fetch_iris
 
 data = fetch_iris()
 # print(data.describe)
