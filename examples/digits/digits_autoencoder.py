@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
+from datasets.digits import fetch_digits
 
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
@@ -46,7 +46,7 @@ autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 autoencoder.summary('digits autoencoder')
 
-data   = datasets.load_digits()
+data   = fetch_digits()
 images = range_normalize(data.data.astype(np.float32), 0, 1)  # rescale to range [0, 1]
 train_data, test_data, train_label, test_label = train_test_split(images,
                                                                   images,
