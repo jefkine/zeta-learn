@@ -109,5 +109,6 @@ class DecayFunction:
     def name(self):
         return self.decay_func.decay_name
 
+    @property
     def decompose(self):
-        return self.decay_func.decompose()
+        return self.decay_func.decompose
