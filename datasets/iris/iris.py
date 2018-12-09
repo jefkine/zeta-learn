@@ -1,13 +1,7 @@
 import pandas as pd
 
+from ..data_set import DataSet
 from ztlearn.utils import maybe_download
-
-class Data_set:
-
-    def __init__(self, data, target, describe):
-        self.data     = data
-        self.target   = target
-        self.describe = describe
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
@@ -20,6 +14,4 @@ def fetch_iris():
     dataframe.petal_type    = pd.Categorical(dataframe.petal_type)
     dataframe['petal_type'] = dataframe.petal_type.cat.codes
 
-    iris_dataset = Data_set(dataframe.values[:,0:4], dataframe.values[:,4].astype('int'), describe)
-
-    return iris_dataset
+    return DataSet(dataframe.values[:,0:4], dataframe.values[:,4].astype('int'), describe)

@@ -1,6 +1,7 @@
 import gzip
 import numpy as np
 
+from ..data_set import DataSet
 from ztlearn.utils import maybe_download
 
 URL = 'http://fashion-mnist.s3-website.eu-central-1.amazonaws.com/'
@@ -15,7 +16,7 @@ test_files = {
     'test_data'   : 't10k-images-idx3-ubyte.gz'
 }
 
-def fetch_fashion_mnist():
+def fetch_fashion_mnist(in_class = True):
     train_dict = {}
     for file_key, file_value in train_files.items():
         train_dict.update({file_key : maybe_download('../../datasets/fashion/', URL + file_value)})
@@ -36,4 +37,8 @@ def fetch_fashion_mnist():
     with gzip.open(list(test_dict.values())[1], 'rb') as data_path:
         test_data = np.frombuffer(data_path.read(), dtype = np.uint8, offset = 16).reshape(len(test_label), 784)
 
-    return train_data, test_data, train_label, test_label
+    if in_class:
+        return DataSet(np.concatenate((train_data,  test_data),  axis=0),
+                       np.concatenate((train_label, test_label), axis=0))
+    else:
+        return train_data, test_data, train_label, test_label
