@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    ztlearn.datasets
     ztlearn.dl
     ztlearn.ml
     ztlearn.toolkit
