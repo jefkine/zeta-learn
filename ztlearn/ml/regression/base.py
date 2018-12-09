@@ -51,7 +51,7 @@ class Regression(object):
                 computebar(self.epochs, i)
 
         return fit_stats
-    
+
     def predict(self, inputs):
         inputs = np.column_stack((np.ones(inputs.shape[0]), inputs))
 
