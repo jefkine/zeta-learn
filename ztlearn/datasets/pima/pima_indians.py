@@ -26,4 +26,4 @@ def fetch_pima_indians(data_target = True):
     if data_target:
         return DataSet(data, target, describe)
     else:
-        return train_test_split(data, targets, test_size = 0.2, random_seed = 2)
+        return train_test_split(data, target, test_size = 0.2, random_seed = 2)
