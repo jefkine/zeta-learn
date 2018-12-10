@@ -1,20 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from sklearn import datasets
 
 from ztlearn.utils import *
 from ztlearn.optimizers import register_opt
+from ztlearn.datasets.boston import fetch_boston
 from ztlearn.ml.regression import PolynomialRegression
 from ztlearn.objectives import ObjectiveFunction as objective
 
-data = datasets.load_boston()
-# print(data['DESCR'])
+data = fetch_boston()
 
-# take the boston data
-boston_data = data['data']
-input_data  = z_score(boston_data[:,[5]]) # work with only one of the features: RM
-input_label = data['target']
+input_data  = z_score(data.data[:,[5]]) # normalize and work with only one of the features
+input_label = data.target
 
 train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   input_label,
