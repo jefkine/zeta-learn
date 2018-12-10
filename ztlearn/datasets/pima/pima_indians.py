@@ -20,7 +20,7 @@ def fetch_pima_indians(in_class = True):
         'Outcome (0 or 1)'
     ]
 
-    dataframe = pd.read_csv(file_path, names = describe)
+    dataframe     = pd.read_csv(file_path, names = describe)
     data, targets = dataframe.values[:,0:8], dataframe.values[:,8]
     if in_class:
         return DataSet(data, targets, describe)
