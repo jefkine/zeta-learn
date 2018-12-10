@@ -38,11 +38,14 @@ plot_metric('accuracy_loss',
                              fit_stats['train_loss'],
                              model_name = model_name, legend = ['acc', 'loss'])
 
-plot_regression_results(train_data, train_label, test_data, test_label,
-                                                                        input_data,
-                                                                        model.predict(input_data),
-                                                                        mse,
-                                                                        'Linear Regression',
-                                                                        'Median House Price',
-                                                                        'Average Number of Rooms',
-                                                                        model_name = model_name)
+plot_regression_results(train_data,
+                                    train_label,
+                                    test_data,
+                                    test_label,
+                                    input_data,
+                                    model.predict(input_data),
+                                    mse,
+                                    'Linear Regression',
+                                    'Median House Price',
+                                    'Average Number of Rooms',
+                                    model_name = model_name)

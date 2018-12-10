@@ -11,7 +11,8 @@ data = fetch_iris()
 
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
-                                                                  test_size = 0.3, random_seed = 5)
+                                                                  test_size   = 0.3, 
+                                                                  random_seed = 5)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.1, learning_rate = 0.01)

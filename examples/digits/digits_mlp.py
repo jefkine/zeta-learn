@@ -10,8 +10,8 @@ from ztlearn.dl.layers import Dropout, Dense, BatchNormalization
 data = fetch_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
-                                                                  test_size = 0.3, random_seed = 3)
-
+                                                                  test_size   = 0.3,
+                                                                  random_seed = 3)
 
 # plot samples of training data
 plot_tiled_img_samples(train_data, train_label)

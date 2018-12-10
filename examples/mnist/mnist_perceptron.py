@@ -29,4 +29,5 @@ plot_metric('accuracy_loss',
                              len(fit_stats["train_loss"]),
                              fit_stats['train_acc'],
                              fit_stats['train_loss'],
-                             model_name = 'mnist_perceptron', legend = ['acc', 'loss'])
+                             model_name = 'mnist_perceptron',
+                             legend     = ['acc', 'loss'])

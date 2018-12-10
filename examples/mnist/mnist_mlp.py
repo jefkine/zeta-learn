@@ -50,4 +50,5 @@ plot_metric('evaluation',
                           eval_stats['valid_batches'],
                           eval_stats['valid_loss'],
                           eval_stats['valid_acc'],
-                          model_name = model_name, legend = ['loss', 'acc'])
+                          model_name = model_name, 
+                          legend     = ['loss', 'acc'])

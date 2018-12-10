@@ -11,7 +11,8 @@ data = fetch_pima_indians()
 # data.target -> using all the features (e.g to use only one feature data.target [:, 5:6])
 train_data, test_data, train_label, test_label = train_test_split(z_score(data.data),
                                                                   data.target,
-                                                                  test_size = 0.2, random_seed = 2)
+                                                                  test_size   = 0.2,
+                                                                  random_seed = 2)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
@@ -27,4 +28,5 @@ plot_metric('accuracy_loss',
                              len(fit_stats["train_loss"]),
                              fit_stats['train_acc'],
                              fit_stats['train_loss'],
-                             model_name = 'diabetes_logistic_regression', legend = ['acc', 'loss'])
+                             model_name = 'diabetes_logistic_regression',
+                             legend     = ['acc', 'loss'])
