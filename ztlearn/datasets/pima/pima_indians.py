@@ -6,7 +6,7 @@ from ztlearn.utils import train_test_split
 
 URL = 'http://ftp.ics.uci.edu/pub/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data'
 
-def fetch_pima_indians(in_class = True):
+def fetch_pima_indians(data_target = True):
     file_path = maybe_download('../../ztlearn/datasets/pima/', URL)
     describe  = [
         'Pregnancies',
@@ -21,9 +21,9 @@ def fetch_pima_indians(in_class = True):
     ]
 
     dataframe     = pd.read_csv(file_path, names = describe)
-    data, targets = dataframe.values[:,0:8], dataframe.values[:,8]
-    
-    if in_class:
-        return DataSet(data, targets, describe)
+    data, target = dataframe.values[:,0:8], dataframe.values[:,8]
+
+    if data_target:
+        return DataSet(data, target, describe)
     else:
         return train_test_split(data, targets, test_size = 0.2, random_seed = 2)

@@ -6,7 +6,7 @@ from ztlearn.utils import train_test_split
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
 
-def fetch_boston(in_class = True):
+def fetch_boston(data_target = True):
     file_path = maybe_download('../../ztlearn/datasets/boston/', URL)
     describe  = [
         'CRIM',
@@ -26,9 +26,9 @@ def fetch_boston(in_class = True):
     ]
 
     dataframe     = pd.read_csv(file_path, delim_whitespace = True, names = describe)
-    data, targets = dataframe.values[:,0:13], dataframe.values[:,13]
+    data, target = dataframe.values[:,0:13], dataframe.values[:,13]
 
-    if in_class:
-        return DataSet(data, targets, describe)
+    if data_target:
+        return DataSet(data, target, describe)
     else:
-        return train_test_split(data, targets, test_size = 0.2, random_seed = 2)
+        return train_test_split(data, target, test_size = 0.2, random_seed = 2)

@@ -6,7 +6,7 @@ from ztlearn.utils import train_test_split
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
-def fetch_iris(in_class = True):
+def fetch_iris(data_target = True):
     file_path = maybe_download('../../ztlearn/datasets/iris/', URL)
     describe  = [
         'sepal-length (cm)',
@@ -24,7 +24,7 @@ def fetch_iris(in_class = True):
 
     data, targets = dataframe.values[:,0:4], dataframe.values[:,4].astype('int')
 
-    if in_class:
+    if data_target:
         return DataSet(data, targets, describe)
     else:
         return train_test_split(data, targets, test_size = 0.2, random_seed = 2)
