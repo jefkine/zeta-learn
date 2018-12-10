@@ -5,6 +5,7 @@ from . import pima
 from . import iris
 from . import mnist
 from . import digits
+from . import boston
 from . import fashion
 from . import data_set
 
