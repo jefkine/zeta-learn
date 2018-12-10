@@ -22,9 +22,9 @@ def fetch_iris(data_target = True):
     dataframe.petal_type    = pd.Categorical(dataframe.petal_type)
     dataframe['petal_type'] = dataframe.petal_type.cat.codes
 
-    data, targets = dataframe.values[:,0:4], dataframe.values[:,4].astype('int')
+    data, target = dataframe.values[:,0:4], dataframe.values[:,4].astype('int')
 
     if data_target:
-        return DataSet(data, targets, describe)
+        return DataSet(data, target, describe)
     else:
-        return train_test_split(data, targets, test_size = 0.2, random_seed = 2)
+        return train_test_split(data, target, test_size = 0.2, random_seed = 2)
