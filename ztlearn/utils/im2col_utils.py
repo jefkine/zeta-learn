@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
 import numpy as np
 
 def get_pad(padding, input_height, input_width, stride_height, stride_width, kernel_height, kernel_width):
@@ -25,6 +24,7 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
 
         return (pad_top, pad_bottom), (pad_left, pad_right)
 
+# Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
 def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     # First figure out what the size of the output should be
     N, C, H, W            = x_shape
