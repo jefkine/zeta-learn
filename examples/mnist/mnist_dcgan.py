@@ -157,8 +157,8 @@ for epoch_idx in range(model_epochs):
     else:
         computebar(model_epochs, epoch_idx)
 
-plot_metric('loss',     model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
-plot_metric('accuracy', model_epochs, model_stats['d_train_acc'],  model_stats['g_train_acc'],  legend = ['D', 'G'], model_name = model_name)
+plot_metric('loss', model_epochs, model_stats['d_train_loss'], model_stats['g_train_loss'], legend = ['D', 'G'], model_name = model_name)
+plot_metric('accuracy', model_epochs, model_stats['d_train_acc'],  model_stats['g_train_acc'], legend = ['D', 'G'], model_name = model_name)
 
 plot_generated_img_samples(None,
                                  generator.predict(gen_noise).reshape((-1, img_rows, img_cols)),

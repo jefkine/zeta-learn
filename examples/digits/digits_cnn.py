@@ -11,7 +11,7 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 data = fetch_digits()
 train_data, test_data, train_label, test_label = train_test_split(data.data,
                                                                   data.target,
-                                                                  test_size   = 0.33, 
+                                                                  test_size   = 0.33,
                                                                   random_seed = 5)
 
 # plot samples of training data
@@ -51,5 +51,5 @@ print_results(predictions, test_label)
 plot_img_results(test_data, test_label, predictions)
 
 model_name = model.model_name
-plot_metric('loss',     model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
-plot_metric('accuracy', model_epochs, fit_stats['train_acc'],  fit_stats['valid_acc'],  model_name = model_name)
+plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
