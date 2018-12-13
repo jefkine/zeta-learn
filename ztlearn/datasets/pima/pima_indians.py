@@ -1,8 +1,8 @@
 import pandas as pd
 
-from ..data_set import DataSet
 from ztlearn.utils import maybe_download
 from ztlearn.utils import train_test_split
+from ztlearn.datasets.data_set import DataSet
 
 URL = 'http://ftp.ics.uci.edu/pub/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data'
 

@@ -1,9 +1,9 @@
 import gzip
 import numpy as np
 
-from ..data_set import DataSet
 from ztlearn.utils import maybe_download
 from ztlearn.utils import train_test_split
+from ztlearn.datasets.data_set import DataSet
 
 URL = 'https://github.com/scikit-learn/scikit-learn/raw/master/sklearn/datasets/data/digits.csv.gz'
 

@@ -1,8 +1,8 @@
 import gzip
 import numpy as np
 
-from ..data_set import DataSet
 from ztlearn.utils import maybe_download
+from ztlearn.datasets.data_set import DataSet
 
 URL = 'https://storage.googleapis.com/cvdf-datasets/mnist/'
 
