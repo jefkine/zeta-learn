@@ -43,7 +43,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model.summary(model_name = 'fashion mnist cnn')
 
-model_epochs = 2
+model_epochs = 12
 fit_stats = model.fit(train_data.reshape(-1, 1, 28, 28),
                       one_hot(train_label),
                       batch_size      = 128,
