@@ -92,7 +92,7 @@ class LSTM(Layer):
             self.b_forget,
             self.b_output,
             self.b_cell,
-            self.b_final            
+            self.b_final
         ]
         return sum([np.prod(param.shape) for param in parameters])
 
@@ -225,20 +225,20 @@ class LSTM(Layer):
                 dcell_next         = self.forget * dcell
 
             # optimize weights and bias
-            self.W_final = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
-            self.b_final = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
+            self.W_final  = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
+            self.b_final  = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
 
             self.W_forget = optimizer(self.optimizer_kwargs).update(self.W_forget, cg(dW_forget))
             self.b_forget = optimizer(self.optimizer_kwargs).update(self.b_forget, cg(db_forget))
 
-            self.W_input = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
-            self.b_input = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
+            self.W_input  = optimizer(self.optimizer_kwargs).update(self.W_input, cg(dW_input))
+            self.b_input  = optimizer(self.optimizer_kwargs).update(self.b_input, cg(db_input))
 
             self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
             self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
-
-            self.W_cell = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
-            self.b_cell = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
+            
+            self.W_cell   = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
+            self.b_cell   = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
 
         # endif self.is_trainable
 
