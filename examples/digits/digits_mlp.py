@@ -20,7 +20,6 @@ plot_tiled_img_samples(train_data, train_label)
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 # opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 0.0001)
 
-
 # 1. model definition
 model = Sequential(init_method = 'he_normal')
 model.add(Dense(256, activation = 'relu', input_shape = (64,)))
