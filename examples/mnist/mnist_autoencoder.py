@@ -44,7 +44,11 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+encoder.summary('mnist encoder')
+decoder.summary('mnist decoder')
+
 autoencoder.summary('mnist autoencoder')
+
 model_name = autoencoder.model_name
 
 mnist  = fetch_mnist()

@@ -44,7 +44,11 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+encoder.summary('fashion mnist encoder')
+decoder.summary('fashion mnist decoder')
+
 autoencoder.summary('fashion mnist autoencoder')
+
 model_name = autoencoder.model_name
 
 fashion_mnist  = fetch_fashion_mnist()

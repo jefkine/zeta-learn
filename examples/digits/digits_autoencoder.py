@@ -45,6 +45,9 @@ autoencoder.layers.extend(encoder.layers)
 autoencoder.layers.extend(decoder.layers)
 autoencoder.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
+encoder.summary('digits encoder')
+decoder.summary('digits decoder')
+
 autoencoder.summary('digits autoencoder')
 
 data   = fetch_digits()
