@@ -25,7 +25,7 @@ def fetch_boston(data_target = True):
         'MEDV'
     ]
 
-    dataframe     = pd.read_csv(file_path, delim_whitespace = True, names = describe)
+    dataframe    = pd.read_csv(file_path, delim_whitespace = True, names = describe)
     data, target = dataframe.values[:,0:13], dataframe.values[:,13]
 
     if data_target:

@@ -20,7 +20,7 @@ def fetch_pima_indians(data_target = True):
         'Outcome (0 or 1)'
     ]
 
-    dataframe     = pd.read_csv(file_path, names = describe)
+    dataframe    = pd.read_csv(file_path, names = describe)
     data, target = dataframe.values[:,0:8], dataframe.values[:,8]
 
     if data_target:
