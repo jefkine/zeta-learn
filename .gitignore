@@ -1,3 +1,17 @@
+#Downloaded Datasets
+ztlearn/datasets/boston/housing.data
+ztlearn/datasets/digits/digits.csv.gz
+ztlearn/datasets/fashion/t10k-images-idx3-ubyte.gz
+ztlearn/datasets/fashion/t10k-labels-idx1-ubyte.gz
+ztlearn/datasets/fashion/train-images-idx3-ubyte.gz
+ztlearn/datasets/fashion/train-labels-idx1-ubyte.gz
+ztlearn/datasets/iris/iris.data
+ztlearn/datasets/mnist/t10k-images-idx3-ubyte.gz
+ztlearn/datasets/mnist/t10k-labels-idx1-ubyte.gz
+ztlearn/datasets/mnist/train-images-idx3-ubyte.gz
+ztlearn/datasets/mnist/train-labels-idx1-ubyte.gz
+ztlearn/datasets/pima/pima-indians-diabetes.data
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
