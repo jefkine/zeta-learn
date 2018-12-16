@@ -73,6 +73,9 @@ generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
+generator.summary('digits generator')
+discriminator.summary('digits discriminator')
+
 generator_discriminator.summary('digits gan')
 model_name = generator_discriminator.model_name
 

@@ -84,6 +84,9 @@ generator_discriminator.layers.extend(generator.layers)
 generator_discriminator.layers.extend(discriminator.layers)
 generator_discriminator.compile(loss = 'cce', optimizer = g_opt)
 
+generator.summary('mnist generator')
+discriminator.summary('mnist discriminator')
+
 generator_discriminator.summary('mnist dcgan')
 model_name = generator_discriminator.model_name
 
