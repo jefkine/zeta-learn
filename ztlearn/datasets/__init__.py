@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# import file(s)
+# import module(s)
 from . import pima
 from . import iris
 from . import mnist
+from . import cifar
 from . import digits
 from . import boston
 from . import fashion
