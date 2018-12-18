@@ -156,9 +156,11 @@ def extract_files(path, filepath):
     opener, mode = None, None
     if filepath.endswith('.tar.bz2') or filepath.endswith('.tbz'):
         opener, mode = tarfile.open, 'r:bz2'
-    if zipfile.is_zipfile(filepath):
+    elif zipfile.is_zipfile(filepath):
         opener, mode = zipfile.ZipFile, 'r'
-    if filepath.endswith('.tar.gz') or filepath.endswith('.gz'):
+    elif filepath.endswith('.tar.gz') :
+        opener, mode = tarfile.open, 'r:gz'
+    elif filepath.endswith('.gz'): # @@TODO: write a more robust method for this
         opener, mode = gzip.open, 'rb'
 
     if opener is not None:
