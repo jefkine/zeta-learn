@@ -22,6 +22,7 @@ train_files = [
 ]
 test_files = ['test_batch']
 
+
 def fetch_cifar_10(data_target = True):
     extract_files(CIFAR_10_BASE_PATH, maybe_download(CIFAR_10_BASE_PATH, URL))
 
@@ -35,7 +36,7 @@ def fetch_cifar_10(data_target = True):
 
         with open(os.path.join(CIFAR_10_BASE_PATH, CIFAR_10_BATCHES_FOLDER, train_file),'rb') as file:
             data        = cPickle.load(file, encoding = 'latin1')
-            batch_data  = data['data'].reshape((-1, 3, 32, 32)).astype('float32')
+            batch_data  = data['data'].reshape((-1, 3, 32, 32)).astype('uint8')
             batch_label = np.reshape(data['labels'], len(data['labels'],))
 
         train_data[idx * 10000: (idx + 1) * 10000, ...] = batch_data
@@ -43,11 +44,11 @@ def fetch_cifar_10(data_target = True):
 
     with open(os.path.join(CIFAR_10_BASE_PATH, CIFAR_10_BATCHES_FOLDER, test_files[0]),'rb') as file:
         data       = cPickle.load(file, encoding = 'latin1')
-        test_data  = data['data'].reshape((-1, 3, 32, 32)).astype('float32')
+        test_data  = data['data'].reshape((-1, 3, 32, 32)).astype('uint8')
         test_label = np.reshape(data['labels'], len(data['labels'],))
 
-        if data_target:
-            return DataSet(np.concatenate((train_data,  test_data),  axis = 0),
-                           np.concatenate((train_label, test_label), axis = 0))
-        else:
-            return train_data, test_data, train_label, test_label
+    if data_target:
+        return DataSet(np.concatenate((train_data,  test_data),  axis = 0),
+                       np.concatenate((train_label, test_label), axis = 0))
+    else:
+        return train_data, test_data, train_label, test_label
