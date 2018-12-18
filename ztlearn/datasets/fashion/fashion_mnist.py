@@ -38,7 +38,7 @@ def fetch_fashion_mnist(data_target = True):
         test_data = np.frombuffer(data_path.read(), dtype = np.uint8, offset = 16).reshape(len(test_label), 784)
 
     if data_target:
-        return DataSet(np.concatenate((train_data,  test_data),  axis=0),
-                       np.concatenate((train_label, test_label), axis=0))
+        return DataSet(np.concatenate((train_data,  test_data),  axis = 0),
+                       np.concatenate((train_label, test_label), axis = 0))
     else:
         return train_data, test_data, train_label, test_label
