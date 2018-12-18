@@ -14,6 +14,18 @@ img_specs = {
         'img_width'  : 28,
         'img_height' : 28
     },
+    'fashion_mnist' :  {
+        'pix_row'    : 1,
+        'pix_col'    : 26,
+        'img_width'  : 28,
+        'img_height' : 28
+    },
+    'cifar' :  {
+        'pix_row'    : 1,
+        'pix_col'    : 30,
+        'img_width'  : 32,
+        'img_height' : 32
+    },
     'digits':  {
         'pix_row'    : 0,
         'pix_col'    : 7,
@@ -238,16 +250,21 @@ def plot_opt_viz(dims,
     plt.show()
 
 
-def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits'):
+def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits', channels = 1):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
+
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
 
-        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
-                                           img_specs[dataset]['img_width']),
-                                           cmap = plt.cm.binary, interpolation = 'nearest')
+        if channels == 3:
+            color_img = train_data[i].reshape(channels, 32, 32).transpose([1, 2, 0])
+            digit.imshow(color_img, interpolation = 'nearest')
+        else:
+            digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
+                                               img_specs[dataset]['img_width']),
+                                               cmap = plt.cm.binary, interpolation = 'nearest')
 
         if train_target is not None:
             digit.text(img_specs[dataset]['pix_row'],
@@ -257,7 +274,7 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
     plt.show()
 
 
-def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits'):
+def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset = 'digits', channels = 1):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
@@ -272,9 +289,13 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
 
         digit.minorticks_on()
 
-        digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
-                                           img_specs[dataset]['img_width']),
-                                           cmap = plt.cm.binary, interpolation = 'nearest')
+        if channels == 3:
+            color_img = train_data[i].reshape(channels, 32, 32).transpose([1, 2, 0])
+            digit.imshow(color_img, interpolation = 'nearest')
+        else:
+            digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
+                                               img_specs[dataset]['img_width']),
+                                               cmap = plt.cm.binary, interpolation = 'nearest')
 
         if train_target is not None:
             digit.text(img_specs[dataset]['pix_row'],
@@ -284,16 +305,21 @@ def plot_tiled_img_samples(train_data, train_target = None, fig_dims = (6, 6), d
     plt.show()
 
 
-def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), dataset = 'digits'):
+def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), dataset = 'digits', channels = 1):
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i + 1, xticks = [], yticks = [])
-        digit.imshow(test_data.reshape(-1,
-                                       img_specs[dataset]['img_height'],
-                                       img_specs[dataset]['img_width'])[i],
-                                       cmap = plt.cm.binary, interpolation = 'nearest')
+
+        if channels == 3:
+            color_img = test_data[i].reshape(channels, 32, 32).transpose([1, 2, 0])
+            digit.imshow(color_img, interpolation = 'nearest')
+        else:
+            digit.imshow(test_data.reshape(-1,
+                                           img_specs[dataset]['img_height'],
+                                           img_specs[dataset]['img_width'])[i],
+                                           cmap = plt.cm.binary, interpolation = 'nearest')
 
         if predictions[i] == test_label[i]:
             digit.text(img_specs[dataset]['pix_row'],
