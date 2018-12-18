@@ -54,7 +54,7 @@ eval_stats  = model.evaluate(vectorized_test_data, one_hot(test_label))
 predictions = unhot(model.predict(vectorized_test_data, True))
 print_results(predictions, test_label)
 
-plot_img_results(test_data, test_label, predictions, channels = 3)
+plot_img_results(test_data, test_label, predictions, dataset = 'cifar', channels = 3)
 
 model_name = model.model_name
 plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
