@@ -40,7 +40,7 @@ model.add(Dense(100))
 model.add(Activation('softmax'))
 model.compile(loss = 'cce', optimizer = opt)
 
-model.summary(model_name = 'cifar-10 mlp')
+model.summary(model_name = 'cifar-100 mlp')
 
 model_epochs = 12 # change to 200 epochs
 fit_stats = model.fit(vectorized_train_data,

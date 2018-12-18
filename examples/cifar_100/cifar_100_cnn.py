@@ -37,7 +37,7 @@ model.add(BatchNormalization())
 model.add(Dense(100, activation = 'softmax')) # 10 digits classes
 model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
-model.summary('cifar-10 cnn')
+model.summary('cifar-100 cnn')
 
 model_epochs = 2 # change to 12 epochs
 fit_stats = model.fit(train_data.reshape(-1, 3, 32, 32),
