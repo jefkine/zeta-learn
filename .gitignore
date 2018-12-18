@@ -11,6 +11,8 @@ ztlearn/datasets/mnist/t10k-labels-idx1-ubyte.gz
 ztlearn/datasets/mnist/train-images-idx3-ubyte.gz
 ztlearn/datasets/mnist/train-labels-idx1-ubyte.gz
 ztlearn/datasets/pima/pima-indians-diabetes.data
+ztlearn/datasets/cifar_10/cifar-10-batches-py/
+ztlearn/datasets/cifar_10/cifar-10-python.tar.gz
 examples/test.py
 
 # Byte-compiled / optimized / DLL files
