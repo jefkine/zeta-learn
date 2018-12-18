@@ -19,8 +19,8 @@ plot_img_samples(train_data[:40], unhot(train_label[:40]), dataset = 'mnist')
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
 
 # model definition
-model       = Perceptron(epochs = 600, activation = 'relu', loss = 'cce', init_method = 'he_normal', optimizer =  opt)
-fit_stats   = model.fit(train_data, train_label)
+model     = Perceptron(epochs = 600, activation = 'relu', loss = 'cce', init_method = 'he_normal', optimizer = opt)
+fit_stats = model.fit(train_data, train_label)
 
 predictions = unhot(model.predict(test_data))
 print_results(predictions, unhot(test_label))
