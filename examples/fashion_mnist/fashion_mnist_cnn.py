@@ -9,8 +9,9 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
 fashion_mnist = fetch_fashion_mnist()
-train_data, test_data, train_label, test_label = train_test_split(fashion_mnist.data,
-                                                                  fashion_mnist.target.astype('int'),
+input_data, input_label = shuffle_data(fashion_mnist.data, fashion_mnist.target, random_seed = 5)
+train_data, test_data, train_label, test_label = train_test_split(input_data,
+                                                                  input_label.astype('int'),
                                                                   test_size   = 0.33,
                                                                   random_seed = 5,
                                                                   cut_off     = 2000)
