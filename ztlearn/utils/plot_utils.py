@@ -14,12 +14,6 @@ img_specs = {
         'img_width'  : 28,
         'img_height' : 28
     },
-    'fashion_mnist' :  {
-        'pix_row'    : 1,
-        'pix_col'    : 26,
-        'img_width'  : 28,
-        'img_height' : 28
-    },
     'cifar' :  {
         'pix_row'    : 1,
         'pix_col'    : 30,
