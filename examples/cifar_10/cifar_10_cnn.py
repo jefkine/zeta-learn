@@ -9,8 +9,9 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
 data = fetch_cifar_10()
-train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
+input_data, input_label = shuffle_data(data.data, data.target, random_seed = 3)
+train_data, test_data, train_label, test_label = train_test_split(input_data,
+                                                                  input_label,
                                                                   test_size   = 0.3,
                                                                   random_seed = 5,
                                                                   cut_off     = 2000)
@@ -39,7 +40,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model.summary('cifar-10 cnn')
 
-model_epochs = 2 # change to 12 epochs
+model_epochs = 12 # change to 12 epochs
 fit_stats = model.fit(train_data.reshape(-1, 3, 32, 32),
                       one_hot(train_label),
                       batch_size      = 128,

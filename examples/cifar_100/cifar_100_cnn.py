@@ -9,8 +9,9 @@ from ztlearn.dl.layers import Dropout, Dense, Flatten, MaxPooling2D
 
 
 data = fetch_cifar_100()
-train_data, test_data, train_label, test_label = train_test_split(data.data,
-                                                                  data.target,
+input_data, input_label = shuffle_data(data.data, data.target, random_seed = 3)
+train_data, test_data, train_label, test_label = train_test_split(input_data,
+                                                                  input_label,
                                                                   test_size   = 0.3,
                                                                   random_seed = 5,
                                                                   cut_off     = 2000)
