@@ -33,7 +33,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model.summary(model_name = 'cifar-10 rnn')
 
-model_epochs = 50 # add more epochs
+model_epochs = 100 # add more epochs
 fit_stats = model.fit(transformed_train_data.reshape(-1, 3, 1024),
                       one_hot(train_label),
                       batch_size      = 128,
