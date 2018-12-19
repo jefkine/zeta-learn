@@ -36,7 +36,7 @@ fit_stats = model.fit(transformed_train_data.reshape(-1, 3, 1024),
                       one_hot(train_label),
                       batch_size      = 128,
                       epochs          = model_epochs,
-                      validation_data = (test_data.reshape(-1, 3, 1024), one_hot(test_label)),
+                      validation_data = (transformed_test_data.reshape(-1, 3, 1024), one_hot(test_label)),
                       shuffle_data    = True)
 
 predictions = unhot(model.predict(transformed_test_data.reshape(-1, 3, 1024), True))
