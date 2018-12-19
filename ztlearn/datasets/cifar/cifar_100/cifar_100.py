@@ -20,10 +20,10 @@ def fetch_cifar_100(data_target = True):
     extract_files(CIFAR_100_BASE_PATH, maybe_download(CIFAR_100_BASE_PATH, URL))
 
     if not os.path.exists(os.path.join(CIFAR_100_BASE_PATH, CIFAR_100_BATCHES_FOLDER, train_files[0])):
-        print('{} Train File Not Found'.format(train_file)) # dont continue
+        raise FileNotFoundError('{} File Not Found'.format(train_files[0])) # dont continue
 
     if not os.path.exists(os.path.join(CIFAR_100_BASE_PATH, CIFAR_100_BATCHES_FOLDER, test_files[0])):
-        print('{} Test File Not Found'.format(train_file)) # dont continue
+        raise FileNotFoundError('{} File Not Found'.format(test_files[0])) # dont continue
 
     with open(os.path.join(CIFAR_100_BASE_PATH, CIFAR_100_BATCHES_FOLDER, train_files[0]),'rb') as file:
         data       = cPickle.load(file, encoding = 'latin1')

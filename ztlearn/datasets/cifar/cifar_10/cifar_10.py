@@ -28,7 +28,7 @@ def fetch_cifar_10(data_target = True):
 
     for train_file in train_files:
         if not os.path.exists(os.path.join(CIFAR_10_BASE_PATH, CIFAR_10_BATCHES_FOLDER, train_file)):
-            print('{} File Not Found'.format(train_file)) # dont continue
+            raise FileNotFoundError('{} File Not Found'.format(train_file)) # dont continue
 
     train_data  = np.zeros((50000, 3, 32, 32), dtype = 'uint8')
     train_label = np.zeros((50000,), dtype = 'uint8')
