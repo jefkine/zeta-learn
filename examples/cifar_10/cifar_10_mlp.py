@@ -16,9 +16,9 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 # plot samples of training data
 plot_img_samples(train_data, train_label, dataset = 'cifar_10', channels = 3)
 
-vectorized_image_dims = 3 * 32 * 32 # ==> (channels * height * width)
-vectorized_train_data = train_data.reshape(42000, vectorized_image_dims).astype('float32') / 255
-vectorized_test_data  = test_data.reshape(18000, vectorized_image_dims).astype('float32') / 255
+transformed_image_dims = 3 * 32 * 32 # ==> (channels * height * width)
+transformed_train_data = train_data.reshape(42000, transformed_image_dims).astype('float32') / 255
+transformed_test_data  = test_data.reshape(18000, transformed_image_dims).astype('float32') / 255
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
@@ -43,15 +43,15 @@ model.compile(loss = 'cce', optimizer = opt)
 model.summary(model_name = 'cifar-10 mlp')
 
 model_epochs = 12 # change to 200 epochs
-fit_stats = model.fit(vectorized_train_data,
+fit_stats = model.fit(transformed_train_data,
                       one_hot(train_label),
                       batch_size      = 128,
                       epochs          = model_epochs,
-                      validation_data = (vectorized_test_data, one_hot(test_label)),
+                      validation_data = (transformed_test_data, one_hot(test_label)),
                       shuffle_data    = True)
 
-eval_stats  = model.evaluate(vectorized_test_data, one_hot(test_label))
-predictions = unhot(model.predict(vectorized_test_data, True))
+eval_stats  = model.evaluate(transformed_test_data, one_hot(test_label))
+predictions = unhot(model.predict(transformed_test_data, True))
 print_results(predictions, test_label)
 
 plot_img_results(test_data, test_label, predictions, dataset = 'cifar', channels = 3)
