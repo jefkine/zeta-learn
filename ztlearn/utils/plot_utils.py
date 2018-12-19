@@ -253,7 +253,9 @@ def plot_img_samples(train_data, train_target = None, fig_dims = (6, 6), dataset
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
 
         if channels == 3:
-            color_img = train_data[i].reshape(channels, 32, 32).transpose([1, 2, 0])
+            color_img = train_data[i].reshape(channels,
+                                              img_specs[dataset]['img_height'],
+                                              img_specs[dataset]['img_width']).transpose([1, 2, 0])
             digit.imshow(color_img, interpolation = 'nearest')
         else:
             digit.imshow(train_data[i].reshape(img_specs[dataset]['img_height'],
@@ -307,7 +309,9 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
         digit = fig.add_subplot(6, 6, i + 1, xticks = [], yticks = [])
 
         if channels == 3:
-            color_img = test_data[i].reshape(channels, 32, 32).transpose([1, 2, 0])
+            color_img = test_data[i].reshape(channels,
+                                             img_specs[dataset]['img_height'],
+                                             img_specs[dataset]['img_width']).transpose([1, 2, 0])
             digit.imshow(color_img, interpolation = 'nearest')
         else:
             digit.imshow(test_data.reshape(-1,
