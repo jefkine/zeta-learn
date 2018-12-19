@@ -26,15 +26,15 @@ opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0
 model = Sequential()
 model.add(Dense(1024, input_shape = (3072, )))
 model.add(Activation('relu'))
-model.add(Dropout(0.3))
+model.add(Dropout(0.2))
 model.add(BatchNormalization())
 model.add(Dense(512))
 model.add(Activation('relu'))
-model.add(Dropout(0.3))
+model.add(Dropout(0.2))
 model.add(BatchNormalization())
 model.add(Dense(512))
 model.add(Activation('relu'))
-model.add(Dropout(0.3))
+model.add(Dropout(0.2))
 model.add(BatchNormalization())
 model.add(Dense(10))
 model.add(Activation('softmax'))
@@ -42,7 +42,7 @@ model.compile(loss = 'cce', optimizer = opt)
 
 model.summary(model_name = 'cifar-10 mlp')
 
-model_epochs = 12 # change to 200 epochs
+model_epochs = 200 # change to 200 epochs
 fit_stats = model.fit(transformed_train_data,
                       one_hot(train_label),
                       batch_size      = 128,
