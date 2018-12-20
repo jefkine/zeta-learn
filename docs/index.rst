@@ -5,7 +5,7 @@ zeta-learn: Python Machine Learning Library
     :width: 300px
     :align: center
     :height: 300px
-    :alt: mnist samples
+    :alt: zeta-learn logo
     :figclass: align-center
 
 
@@ -37,13 +37,14 @@ Features
 * Examples folder with readily implemented machine learning models.
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
-   :caption: Featured Models
+   :caption: Samples Gallery
 
-   writeups/tutorials/perceptron
-   writeups/tutorials/cnn
+   writeups/examples/samples
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: API
 
@@ -54,6 +55,7 @@ Features
    writeups/api/initializers
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: Support
 

@@ -39,6 +39,15 @@ release = '1.0.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 
+html_context = {
+  "display_github": True, # Add 'Edit on Github' link instead of 'View page source'
+  "github_user": "jefkine", # Username
+  "github_repo": "zeta-learn", # Repo name
+  "github_version": "master", # Version
+  "conf_py_path": "/docs/", # Path in the checkout to the docs root
+  "last_updated": True,
+  "commit": False,
+}
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -50,6 +59,7 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
     'sphinxcontrib.googleanalytics'
 ]
 
@@ -105,8 +115,8 @@ html_theme = 'sphinx_rtd_theme'
 # html_theme_options = {}
 
 html_theme_options = {
-    'canonical_url': '',
-    'analytics_id': '',
+    'canonical_url': 'https://zeta-learn.com/',
+    'analytics_id': 'UA-120729203-1',
     'logo_only': False,
     'display_version': True,
     'prev_next_buttons_location': 'bottom',

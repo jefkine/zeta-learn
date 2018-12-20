@@ -6,6 +6,8 @@ Subpackages
 
 .. toctree::
 
+    ztlearn.datasets.boston
+    ztlearn.datasets.cifar
     ztlearn.datasets.digits
     ztlearn.datasets.fashion
     ztlearn.datasets.iris
