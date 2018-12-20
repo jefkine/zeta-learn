@@ -26,7 +26,7 @@ def fetch_cifar_100(data_target = True):
         raise FileNotFoundError('{} File Not Found'.format(test_files[0])) # dont continue
 
     with open(os.path.join(CIFAR_100_BASE_PATH, CIFAR_100_BATCHES_FOLDER, train_files[0]),'rb') as file:
-        data       = cPickle.load(file, encoding = 'latin1')
+        data        = cPickle.load(file, encoding = 'latin1')
         train_data  = np.reshape(data['data'], (data['data'].shape[0], 3, 32, 32))
         train_label = np.reshape(data['fine_labels'], len(data['fine_labels'],))
 
