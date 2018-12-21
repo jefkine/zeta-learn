@@ -172,3 +172,5 @@ def extract_files(path, filepath):
         else:
             with opener(filepath, mode) as f:
                 f.extractall(path)
+    else:
+        raise NotImplementedError('Extraction Method For This Filetype Not Implemented')
