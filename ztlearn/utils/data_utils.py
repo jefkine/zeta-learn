@@ -164,7 +164,7 @@ def extract_files(path, filepath):
         opener, mode = gzip.open, 'rb'
 
     if opener is not None:
-        if opener.__eq__(gzip.open):
+        if opener is gzip.open: # OR if mode == 'rb':
             with opener(filepath, mode) as f:
                 contents = f.read()
             with open(os.path.splitext(filepath)[0], 'wb') as f:
