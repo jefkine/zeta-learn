@@ -336,6 +336,7 @@ def plot_generated_img_samples(test_label,
                                             predictions,
                                             fig_dims   = (6, 6),
                                             dataset    = 'digits',
+                                            channels   = 1,
                                             to_save    = False,
                                             iteration  = 0,
                                             model_name = ''):
@@ -345,10 +346,17 @@ def plot_generated_img_samples(test_label,
 
     for i in range(36):
         digit = fig.add_subplot(6, 6, i+1, xticks = [], yticks = [])
-        digit.imshow(predictions.reshape(-1,
-                                         img_specs[dataset]['img_height'],
-                                         img_specs[dataset]['img_width'])[i],
-                                         cmap = plt.cm.binary, interpolation = 'nearest')
+
+        if channels == 3:
+            color_img = predictions[i].reshape(channels,
+                                             img_specs[dataset]['img_height'],
+                                             img_specs[dataset]['img_width']).transpose([1, 2, 0])
+            digit.imshow(color_img, interpolation = 'nearest')
+        else:
+            digit.imshow(predictions.reshape(-1,
+                                             img_specs[dataset]['img_height'],
+                                             img_specs[dataset]['img_width'])[i],
+                                             cmap = plt.cm.binary, interpolation = 'nearest')
 
         if test_label is not None:
             digit.text(img_specs[dataset]['pix_row'],
