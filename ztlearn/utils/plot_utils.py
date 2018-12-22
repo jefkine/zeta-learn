@@ -349,8 +349,8 @@ def plot_generated_img_samples(test_label,
 
         if channels == 3:
             color_img = predictions[i].reshape(channels,
-                                             img_specs[dataset]['img_height'],
-                                             img_specs[dataset]['img_width']).transpose([1, 2, 0])
+                                               img_specs[dataset]['img_height'],
+                                               img_specs[dataset]['img_width']).transpose([1, 2, 0])
             digit.imshow(color_img, interpolation = 'nearest')
         else:
             digit.imshow(predictions.reshape(-1,
