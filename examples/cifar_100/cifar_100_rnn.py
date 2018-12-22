@@ -16,8 +16,8 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 plot_img_samples(train_data, train_label, dataset = 'cifar', channels = 3)
 
 reshaped_image_dims = 3 * 1024 # ==> (channels * (height * width))
-reshaped_train_data = z_score(train_data.reshape(train_data.shape[0], reshaped_image_dims).astype(np.float32))
-reshaped_test_data  = z_score(test_data.reshape(test_data.shape[0], reshaped_image_dims).astype(np.float32))
+reshaped_train_data = z_score(train_data.reshape(train_data.shape[0], reshaped_image_dims).astype('float32'))
+reshaped_test_data  = z_score(test_data.reshape(test_data.shape[0], reshaped_image_dims).astype('float32'))
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
