@@ -7,7 +7,7 @@ from ztlearn.datasets.cifar import fetch_cifar_10
 
 data = fetch_cifar_10()
 reshaped_image_dims = 3 * 32 * 32 # ==> (channels * height * width)
-reshaped_data       = z_score(data.data.reshape(-1, reshaped_image_dims).astype('float32'))
+reshaped_data       = z_score(data.data.reshape(-1, reshaped_image_dims).astype(np.float32'))
 
 pca        = PCA(n_components = 2)
 components = pca.fit_transform(reshaped_data)
