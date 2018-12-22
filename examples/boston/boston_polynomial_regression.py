@@ -21,12 +21,12 @@ train_data, test_data, train_label, test_label = train_test_split(input_data,
 opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)
 
 # model definition
-model = PolynomialRegression(degree = 5,
-                                         epochs         = 100,
-                                         optimizer      = opt,
-                                         penalty        = 'elastic',
-                                         penalty_weight = 0.5,
-                                         l1_ratio       = 0.3)
+model = PolynomialRegression(degree         = 5,
+                             epochs         = 100,
+                             optimizer      = opt,
+                             penalty        = 'elastic',
+                             penalty_weight = 0.5,
+                             l1_ratio       = 0.3)
 
 fit_stats   = model.fit(train_data, train_label)
 targets     = np.expand_dims(test_label, axis = 1)
@@ -43,13 +43,13 @@ plot_metric('accuracy_loss',
                              model_name = model_name,
                              legend     = ['acc', 'loss'])
 
-plot_regression_results(train_data, train_label,
-                                                 test_data,
-                                                 test_label,
-                                                 input_data,
-                                                 model.predict(input_data),
-                                                 mse,
-                                                 'Polynomial Regression',
-                                                 'Median House Price',
-                                                 'Average Number of Rooms',
-                                                 model_name = model_name)
+plot_regression_results(train_data,
+                                    train_label,
+                                    test_data,
+                                    test_label,
+                                    input_data,
+                                    model.predict(input_data),
+                                    mse, 'Polynomial Regression',                                    
+                                    'Median House Price',
+                                    'Average Number of Rooms',
+                                    model_name = model_name)
