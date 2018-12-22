@@ -1,4 +1,4 @@
-zeta-learn: Python Machine Learning Library
+zeta-learn: python machine learning library
 ===========================================
 
 .. figure:: img/zeta_learn_slim.png
