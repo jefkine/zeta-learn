@@ -1,5 +1,5 @@
-Some Featured Examples
-======================
+Featured Examples
+=================
 
 Principal Component Analysis (PCA)
 ##################################
