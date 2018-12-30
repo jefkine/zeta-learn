@@ -8,6 +8,6 @@ from ztlearn.datasets.pima import fetch_pima_indians
 data = fetch_pima_indians()
 
 pca        = PCA(n_components = 2)
-components = pca.fit_transform(data.data[:,[2,3,4,5]].astype('float64'))
+components = pca.fit_transform(data.data[:,[2,5]].astype('float64'))
 
 plot_pca(components, n_components = 2, colour_array = data.target.astype('int'), model_name = 'PIMA INDIANS PCA')
