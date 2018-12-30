@@ -184,7 +184,7 @@ def polynomial_features(inputs, degree = 2, repeated_elems = False, with_bias = 
 
     def feature_combinations():
         combination_type = (combinations if repeated_elems else combinations_with_replacement)
-        start = 0 if repeated_elems == False else 0
+        start = 0 if repeated_elems == False else 1
         combs = [list(combination_type(range(num_features), i)) for i in range(start, degree + 1)]
         flatten_combs =  list(chain(*combs))
         return flatten_combs, len(flatten_combs)
