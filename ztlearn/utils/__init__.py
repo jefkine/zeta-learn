@@ -29,6 +29,7 @@ from .data_utils import range_normalize
 from .data_utils import train_test_split
 from .data_utils import print_seq_samples
 from .data_utils import print_seq_results
+from .data_utils import polynomial_features
 
 # import from text_utils.py
 from .text_utils import gen_char_sequence_xtym

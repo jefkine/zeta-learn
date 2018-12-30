@@ -2,7 +2,7 @@
 
 from .base import Regression
 from ztlearn.utils import normalize
-from sklearn.preprocessing import PolynomialFeatures
+from ztlearn.utils import polynomial_features
 
 
 class PolynomialRegression(Regression):
@@ -27,7 +27,7 @@ class PolynomialRegression(Regression):
                                                    l1_ratio       = l1_ratio)
 
     def fit(self, inputs, targets, verbose = False, normalized = True):
-        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
+        polynomial_inputs = polynomial_features(inputs, degree = self.degree)
 
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)
@@ -37,7 +37,7 @@ class PolynomialRegression(Regression):
         return fit_stats
 
     def predict(self, inputs, normalized = True):
-        polynomial_inputs = PolynomialFeatures(degree = self.degree).fit_transform(inputs)
+        polynomial_inputs = polynomial_features(inputs, degree = self.degree)
 
         if normalized:
             polynomial_inputs = normalize(polynomial_inputs)

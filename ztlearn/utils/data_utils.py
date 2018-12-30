@@ -8,6 +8,10 @@ import tarfile
 import zipfile
 import numpy as np
 
+from itertools import chain
+from itertools import combinations
+from itertools import combinations_with_replacement
+
 #-----------------------------------------------------------------------------#
 #                       DATA UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
@@ -174,3 +178,20 @@ def extract_files(path, filepath):
                 f.extractall(path)
     else:
         raise NotImplementedError('Extraction Method For This Filetype Not Implemented')
+
+def polynomial_features(inputs, degree = 2, repeated_elems = False, with_bias = True):
+    num_samples, num_features = np.shape(inputs)
+
+    def feature_combinations():
+        combination_type = (combinations if repeated_elems else combinations_with_replacement)
+        start = 0 if repeated_elems == False else 0
+        combs = [list(combination_type(range(num_features), i)) for i in range(start, degree + 1)]
+        flatten_combs =  list(chain(*combs))
+        return flatten_combs, len(flatten_combs)
+
+    flat_combs, num_output_features = feature_combinations()
+    inputs_poly = np.empty((num_samples, num_output_features), dtype = inputs.dtype)
+    for i, flat_comb in enumerate(flat_combs):
+        inputs_poly[:, i] = inputs[:, flat_comb].prod(1)
+
+    return inputs_poly
