@@ -37,7 +37,6 @@ mse         = objective('mean_squared_error').forward(predictions, targets)
 print('Mean Squared Error: {:.2f}'.format(mse))
 
 model_name = 'boston_elastic_regression'
-
 plot_metric('accuracy_loss',
                              len(fit_stats['train_loss']),
                              fit_stats['train_acc'],
