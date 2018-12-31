@@ -17,12 +17,15 @@ from itertools import combinations_with_replacement
 #-----------------------------------------------------------------------------#
 
 def clip_gradients(grad, g_min = -1., g_max = 1.):
+    """ enforce min and max bounderies on a given gradient """
     return np.clip(grad, g_min, g_max, out = grad)
 
 def accuracy_score(predictions, targets):
+    """ compute an average accuracy score of prediction vs targets """
     return np.mean(predictions == targets)
 
 def one_hot(labels, num_classes = None):
+    """ generate one hot encoding for a given set labels """
     num_classes    = np.max(labels.astype('int')) + 1 if not num_classes else num_classes
     one_hot_labels = np.zeros([labels.size, num_classes])
 
@@ -31,9 +34,11 @@ def one_hot(labels, num_classes = None):
     return one_hot_labels
 
 def unhot(one_hot, unhot_axis = 1):
+    """ reverse one hot encoded data back to labels """
     return np.argmax(one_hot, axis = unhot_axis)
 
 def shuffle_data(input_data, input_label, random_seed = None):
+    """ perfom randomized shuffle on a given input dataset """
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
 
     np.random.seed(random_seed)
@@ -44,6 +49,7 @@ def shuffle_data(input_data, input_label, random_seed = None):
     return input_data[indices], input_label[indices]
 
 def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_seed = None, cut_off = None):
+    """ generate a train vs test split given a test size """
     if shuffle:
         samples, labels = shuffle_data(samples, labels, random_seed)
 
@@ -58,6 +64,7 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
     return samples_train, samples_test, labels_train, labels_test
 
 def minibatches(input_data, input_label, batch_size, shuffle):
+    """ generate minibatches on a given input data matrix """
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
     minibatches = []
     indices     = np.arange(input_data.shape[0])
@@ -72,33 +79,40 @@ def minibatches(input_data, input_label, batch_size, shuffle):
     return minibatches
 
 def normalize(input_data, axis = -1, order = 2):
+    """ compute normalization (order) for a given input matrix, order and axis """
     l2 = np.linalg.norm(input_data, order, axis, keepdims = True)
     l2[l2 == 0] = 1
 
     return input_data / l2
 
 def range_normalize(input_data, a = -1, b = 1, axis = None):
+    """ compute the range normalization for a given input matrix, range [a,b] and axis """
     return (((b - a) * ((input_data - input_data.min(axis = axis, keepdims = True)) / np.ptp(input_data, axis = axis))) + a)
 
 def min_max(input_data, axis = None):
+    """ compute the min max standardization for a given input matrix and axis """
     return (input_data - input_data.min(axis = axis, keepdims = True)) / np.ptp(input_data, axis = axis)
 
 def z_score(input_data, axis = None):
+    """ compute the z score for a given input matrix and axis """
     input_mean = input_data.mean(axis = axis, keepdims = True)
     input_std  = input_data.std(axis = axis, keepdims = True)
 
     return (input_data - input_mean) / input_std
 
 def print_results(predictions, test_labels, num_samples = 20):
+    """ print model targeted vs predicted results """
     print('Targeted  : {}'.format(test_labels[:num_samples]))
     print('Predicted : {}{}'.format(predictions[:num_samples], print_pad(1)))
     print('Model Accuracy : {:2.2f}% {}'.format(accuracy_score(predictions, test_labels)*100, print_pad(1)))
 
 def print_seq_samples(train_data, train_label, unhot_axis = 1, sample_num = 0):
+    """ print generated sequence samples """
     print(print_pad(1) + 'Sample Sequence : {}'.format(unhot(train_data[sample_num])))
     print('Next Entry      : {} {}'.format(unhot(train_label[sample_num], unhot_axis), print_pad(1)))
 
 def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval = 5):
+    """ print results for a model predicting a sequence """
     predictions = unhot(predicted, unhot_axis)
     targets     = unhot(test_label, unhot_axis)
 
@@ -110,6 +124,7 @@ def print_seq_results(predicted, test_label, test_data, unhot_axis = 1, interval
     print('Model Accuracy : {:2.2f}%'.format(accuracy_score(predictions, targets)*100))
 
 def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
+    """ generate a graphical loading bar [####---] for a given iteration """
     progress = float((curr + 1) / total)
     update   = int(round(size * progress))
 
@@ -180,6 +195,7 @@ def extract_files(path, filepath):
         raise NotImplementedError('Extraction Method For This Filetype Not Implemented')
 
 def polynomial_features(inputs, degree = 2, repeated_elems = False, with_bias = True):
+    """ generate feature matrix of all polynomial combinations for degrees upto <= degree """
     num_samples, num_features = np.shape(inputs)
 
     def feature_combinations():
