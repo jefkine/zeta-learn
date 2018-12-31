@@ -7,7 +7,9 @@ from ztlearn.datasets.iris import fetch_iris
 # fetch dataset
 data = fetch_iris()
 
+# model definition
 pca        = PCA(n_components = 2)
 components = pca.fit_transform(data.data.astype('float64'))
 
+# plot clusters
 plot_pca(components, n_components = 2, colour_array = data.target.astype('int'), model_name = 'IRIS PCA')
