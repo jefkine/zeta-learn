@@ -137,7 +137,7 @@ def computebar(total, curr, size = 45, sign = "#", prefix = "Computing"):
     sys.stdout.flush()
 
 def print_pad(pad_count, pad_char = "\n"):
-    """ pad strings with pad_count new line characters """
+    """ pad strings with a total of n = pad_count, pad_char type characters """
     padding = ""
     for i in range(pad_count):
         padding += pad_char
