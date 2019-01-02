@@ -48,7 +48,7 @@ class Perceptron:
             fit_stats["train_acc"].append(np.mean(acc))
 
             grad      = self.loss.backward(predictions, targets) * self.activate.backward(linear_predictions)
-            d_weights = inputs.T.dot(grad) + self.regularization.derivative(self.weights)
+            d_weights = inputs.T.dot(grad) # + self.regularization.derivative(self.weights)
             d_bias    = np.sum(grad, axis = 0, keepdims = True)
 
             self.weights = optimize(self.optimizer).update(self.weights, d_weights)
