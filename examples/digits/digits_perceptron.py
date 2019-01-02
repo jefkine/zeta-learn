@@ -15,10 +15,10 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(data
 plot_img_samples(train_data, unhot(train_label))
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.01)
 
 # model definition
-model     = Perceptron(epochs = 300, activation = 'selu', loss = 'cce', init_method = 'he_normal', optimizer = opt)
+model     = Perceptron(epochs = 1500, activation = 'softmax', loss = 'cce', init_method = 'he_uniform', optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
 
 predictions = unhot(model.predict(test_data))

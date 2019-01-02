@@ -10,16 +10,16 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(mnis
                                                                   one_hot(mnist.target.astype('int')),
                                                                   test_size   = 0.3,
                                                                   random_seed = 15,
-                                                                  cut_off     = 2000)
+                                                                  cut_off     = None)
 
 # plot samples of training data
 plot_img_samples(train_data[:40], unhot(train_label[:40]), dataset = 'mnist')
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.001)
 
 # model definition
-model     = Perceptron(epochs = 600, activation = 'relu', loss = 'cce', init_method = 'he_normal', optimizer = opt)
+model     = Perceptron(epochs = 2500, activation = 'softmax', loss = 'cce', init_method = 'he_normal', optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
 
 predictions = unhot(model.predict(test_data))
