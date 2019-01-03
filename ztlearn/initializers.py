@@ -294,17 +294,17 @@ class Identity(WeightInitializer):
 class InitializeWeights:
 
     _methods = {
-        'ones'              : One,
-        'zeros'             : Zero,
-        'identity'          : Identity,
-        'he_normal'         : HeNormal,
-        'he_uniform'        : HeUniform,
-        'lecun_normal'      : LeCunNormal,
-        'lecun_uniform'     : LeCunUniform,
-        'random_normal'     : RandomNormal,
-        'glorot_normal'     : GlorotNormal,
-        'random_uniform'    : RandomUniform,
-        'glorot_uniform'    : GlorotUniform
+        'ones'           : One,
+        'zeros'          : Zero,
+        'identity'       : Identity,
+        'he_normal'      : HeNormal,
+        'he_uniform'     : HeUniform,
+        'lecun_normal'   : LeCunNormal,
+        'lecun_uniform'  : LeCunUniform,
+        'random_normal'  : RandomNormal,
+        'glorot_normal'  : GlorotNormal,
+        'random_uniform' : RandomUniform,
+        'glorot_uniform' : GlorotUniform
     }
 
     def __init__(self, name):
