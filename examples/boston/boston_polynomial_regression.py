@@ -25,7 +25,7 @@ model = PolynomialRegression(degree         = 5,
                              epochs         = 100,
                              optimizer      = opt,
                              penalty        = 'elastic',
-                             penalty_weight = 0.5,
+                             penalty_weight = 0.01,
                              l1_ratio       = 0.3)
 
 fit_stats   = model.fit(train_data, train_label)

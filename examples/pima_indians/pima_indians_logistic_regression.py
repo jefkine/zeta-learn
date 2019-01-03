@@ -12,13 +12,13 @@ data = fetch_pima_indians()
 train_data, test_data, train_label, test_label = train_test_split(z_score(data.data),
                                                                   data.target,
                                                                   test_size   = 0.2,
-                                                                  random_seed = 2)
+                                                                  random_seed = 0)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
 
 # model definition
-model     = LogisticRegression(epochs = 10000, optimizer = opt)
+model     = LogisticRegression(epochs = 1000, optimizer = opt)
 fit_stats = model.fit(train_data, train_label)
 
 # fit_stats = model.fit_NR(train_data, train_label) # --- Newton-Raphson Method
