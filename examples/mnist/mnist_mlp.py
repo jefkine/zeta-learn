@@ -22,7 +22,7 @@ opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 
 # model definition
 model = Sequential()
 model.add(Dense(512, activation = 'relu', input_shape = (784,)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.3))
 model.add(BatchNormalization())
 model.add(Dense(10, activation = 'relu')) # 10 digits classes
 model.compile(loss = 'cce', optimizer = opt)
