@@ -9,7 +9,7 @@ from ztlearn.ml.clustering import KMeans
 data, labels = make_blobs(n_samples = 1000, n_features = 2, centers = 4)
 
 # model definition
-model = KMeans(n_clusters = 4, max_iter = 1000)
+model = KMeans(n_clusters = 4, max_iter = 2500)
 centroids = model.fit(data)
 
 # plot clusters and centroids
