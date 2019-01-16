@@ -24,6 +24,7 @@ from .data_utils import extract_files
 from .data_utils import print_results
 from .data_utils import clip_gradients
 from .data_utils import maybe_download
+from .data_utils import eucledian_norm
 from .data_utils import accuracy_score
 from .data_utils import range_normalize
 from .data_utils import train_test_split

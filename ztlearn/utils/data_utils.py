@@ -16,6 +16,13 @@ from itertools import combinations_with_replacement
 #                       DATA UTILITY FUNCTIONS                                #
 #-----------------------------------------------------------------------------#
 
+def eucledian_norm(vec_a, vec_b):
+    """ compute the eucledian distance between two vectors """
+    distance = vec_a - vec_b
+    # return np.sqrt(np.sum(np.square(distance)))
+    # return np.sqrt(np.einsum('ij, ij->i', distance, distance))
+    return np.linalg.norm(distance, ord = 'fro', axis = 1)
+
 def clip_gradients(grad, g_min = -1., g_max = 1.):
     """ enforce min and max bounderies on a given gradient """
     return np.clip(grad, g_min, g_max, out = grad)
