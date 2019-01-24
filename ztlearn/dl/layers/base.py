@@ -28,7 +28,9 @@ class Layer(ABC):
         return self.__class__.__name__
 
     @abstractmethod
-    def pass_forward(self): pass
+    def pass_forward(self):
+        raise NotImplementedError
 
     @abstractmethod
-    def pass_backward(self): pass
+    def pass_backward(self):
+        raise NotImplementedError
