@@ -1,3 +1,4 @@
+import os
 import gzip
 import numpy as np
 
@@ -8,7 +9,7 @@ from ztlearn.datasets.data_set import DataSet
 URL = 'https://github.com/scikit-learn/scikit-learn/raw/master/sklearn/datasets/data/digits.csv.gz'
 
 def fetch_digits(data_target = True):
-    file_path = maybe_download('../../ztlearn/datasets/digits/', URL)
+    file_path = maybe_download(os.getcwd() + '/../../ztlearn/datasets/digits/', URL)
 
     with gzip.open(file_path, 'rb') as digits_path:
         digits_data = np.loadtxt(digits_path, delimiter=',')

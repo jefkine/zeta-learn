@@ -1,3 +1,4 @@
+import os
 import gzip
 import numpy as np
 
@@ -19,7 +20,7 @@ test_files = {
 def fetch_mnist(data_target = True):
     train_dict = {}
     for file_key, file_value in train_files.items():
-        train_dict.update({file_key : maybe_download('../../ztlearn/datasets/mnist/', URL + file_value)})
+        train_dict.update({file_key : maybe_download(os.getcwd() + '/../../ztlearn/datasets/mnist/', URL + file_value)})
 
     with gzip.open(list(train_dict.values())[0], 'rb') as label_path:
         train_label = np.frombuffer(label_path.read(), dtype = np.uint8, offset = 8)
@@ -29,7 +30,7 @@ def fetch_mnist(data_target = True):
 
     test_dict = {}
     for file_key, file_value in test_files.items():
-        test_dict.update({file_key : maybe_download('../../ztlearn/datasets/mnist/', URL + file_value)})
+        test_dict.update({file_key : maybe_download(os.getcwd() + '/../../ztlearn/datasets/mnist/', URL + file_value)})
 
     with gzip.open(list(test_dict.values())[0], 'rb') as label_path:
         test_label = np.frombuffer(label_path.read(), dtype = np.uint8, offset = 8)

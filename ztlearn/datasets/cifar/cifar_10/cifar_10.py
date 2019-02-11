@@ -10,7 +10,7 @@ from ztlearn.datasets.data_set import DataSet
 
 URL = 'http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
 
-CIFAR_10_BASE_PATH      = '../../ztlearn/datasets/cifar/cifar_10'
+CIFAR_10_BASE_PATH      = os.getcwd() + '/../../ztlearn/datasets/cifar/cifar_10'
 CIFAR_10_BATCHES_FOLDER = 'cifar-10-batches-py'
 
 train_files = [

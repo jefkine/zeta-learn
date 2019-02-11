@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 from ztlearn.utils import maybe_download
@@ -7,7 +8,7 @@ from ztlearn.datasets.data_set import DataSet
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
 
 def fetch_boston(data_target = True):
-    file_path = maybe_download('../../ztlearn/datasets/boston/', URL)
+    file_path = maybe_download(os.getcwd() + '/../../ztlearn/datasets/boston/', URL)
     describe  = [
         'CRIM',
         'ZN',
