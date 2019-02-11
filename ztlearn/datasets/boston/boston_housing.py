@@ -7,8 +7,8 @@ from ztlearn.datasets.data_set import DataSet
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.data'
 
-def fetch_boston(data_target = True):
-    file_path = maybe_download(os.getcwd() + '/../../ztlearn/datasets/boston/', URL)
+def fetch_boston(data_target = True, custom_path = os.getcwd()):
+    file_path = maybe_download(custom_path + '/../../ztlearn/datasets/boston/', URL)
     describe  = [
         'CRIM',
         'ZN',

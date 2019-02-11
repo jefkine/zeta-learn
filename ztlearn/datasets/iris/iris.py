@@ -7,8 +7,8 @@ from ztlearn.datasets.data_set import DataSet
 
 URL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
 
-def fetch_iris(data_target = True):
-    file_path = maybe_download(os.getcwd() + '/../../ztlearn/datasets/iris/', URL)
+def fetch_iris(data_target = True, custom_path = os.getcwd()):
+    file_path = maybe_download(custom_path + '/../../ztlearn/datasets/iris/', URL)
     describe  = [
         'sepal-length (cm)',
         'sepal-width (cm)',

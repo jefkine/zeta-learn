@@ -7,8 +7,8 @@ from ztlearn.datasets.data_set import DataSet
 
 URL = 'http://ftp.ics.uci.edu/pub/machine-learning-databases/pima-indians-diabetes/pima-indians-diabetes.data'
 
-def fetch_pima_indians(data_target = True):
-    file_path = maybe_download(os.getcwd() + '/../../ztlearn/datasets/pima/', URL)
+def fetch_pima_indians(data_target = True, custom_path = os.getcwd()):
+    file_path = maybe_download(custom_path + '/../../ztlearn/datasets/pima/', URL)
     describe  = [
         'Pregnancies',
         'Glucose',
