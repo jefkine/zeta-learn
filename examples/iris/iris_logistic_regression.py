@@ -25,8 +25,8 @@ fit_stats = model.fit(train_data, train_label)
 
 print_results(model.predict(test_data), test_label)
 plot_metric('accuracy_loss',
-                             len(fit_stats["train_loss"]),
-                             fit_stats['train_acc'],
-                             fit_stats['train_loss'],
-                             model_name = 'iris_logistic_regression',
-                             legend     = ['acc', 'loss'])
+                              len(fit_stats["train_loss"]),
+                              fit_stats['train_acc'],
+                              fit_stats['train_loss'],
+                              model_name = 'iris_logistic_regression',
+                              legend     = ['acc', 'loss'])
