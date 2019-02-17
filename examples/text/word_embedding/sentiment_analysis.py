@@ -1,7 +1,7 @@
 from ztlearn.utils import *
-from ztlearn.utils import get_sentence_tokens
-from ztlearn.optimizers import register_opt
 from ztlearn.dl.models import Sequential
+from ztlearn.optimizers import register_opt
+from ztlearn.utils import get_sentence_tokens
 from ztlearn.dl.layers import Embedding, Flatten, Dense
 
 text_list = [
@@ -20,14 +20,11 @@ text_list = [
 ]
 
 paragraph = ' '.join(text_list)
-targets = one_hot(np.array([1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]))
-
 sentences_tokens, vocab_size, longest_sentence = get_sentence_tokens(paragraph)
-
-
+sentence_targets = one_hot(np.array([1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]))
 
 train_data, test_data, train_label, test_label = train_test_split(sentences_tokens,
-                                                                  targets,
+                                                                  sentence_targets,
                                                                   test_size   = 0,
                                                                   random_seed = 5)
 
