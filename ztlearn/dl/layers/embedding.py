@@ -17,6 +17,7 @@ class Embedding(Layer):
                        output_dim,                  # size of the embedding vectors
                        embeddings_init = 'uniform', # init type for the embedding matrix (weights)
                        input_length    = 10):       # size of input sentences
+                       
         self.input_dim    = input_dim
         self.output_dim   = output_dim
         self.input_length = input_length
