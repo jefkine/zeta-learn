@@ -3,6 +3,7 @@
 from ztlearn.utils import *
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.utils import gen_char_sequence_xtym
 from ztlearn.dl.layers import RNN, Flatten, Dense
 
 

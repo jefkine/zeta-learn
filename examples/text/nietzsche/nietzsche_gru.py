@@ -4,6 +4,7 @@ from ztlearn.utils import *
 from ztlearn.dl.layers import GRU
 from ztlearn.dl.models import Sequential
 from ztlearn.optimizers import register_opt
+from ztlearn.utils import gen_char_sequence_xtyt
 
 
 text = open('../../../ztlearn/datasets/text/nietzsche_short.txt').read().lower()
