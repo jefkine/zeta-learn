@@ -33,6 +33,8 @@ from .data_utils import print_seq_results
 from .data_utils import polynomial_features
 
 # import from text_utils.py
+from .text_utils import pad_sequence
+from .text_utils import get_sentence_tokens
 from .text_utils import gen_char_sequence_xtym
 from .text_utils import gen_char_sequence_xtyt
 
@@ -68,8 +70,7 @@ __all__ = [
             # From sequence_utils.py
             'gen_mult_sequence_xtyt','gen_mult_sequence_xtym',
 
-            # From text_utils.py
-            'gen_char_sequence_xtym','gen_char_sequence_xtyt',
+            # From text_utils.py -- import nothing
 
             # From plot_utils.py
             'plot_metric','plot_kmeans','plot_pca','plot_regression_results',
