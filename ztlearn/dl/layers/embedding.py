@@ -4,6 +4,7 @@ import numpy as np
 
 from .base import Layer
 from ztlearn.utils import one_hot
+from ztlearn.utils import get_sentence_tokens
 from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
@@ -11,11 +12,15 @@ from ztlearn.optimizers import OptimizationFunction as optimizer
 # NOTE: Embedding Module is still experimental (does not work as expected)
 class Embedding(Layer):
 
-    def __init__(self, input_dim, output_dim, activation = 'relu', input_shape = (1,10)):
-        self.input_dim   = input_dim
-        self.output_dim  = output_dim
-        self.activation  = activation
-        self.input_shape = input_shape
+    def __init__(self,
+                       input_dim,                   # number of unique words in the text dataset
+                       output_dim,                  # size of the embedding vectors
+                       embeddings_init = 'uniform', # init type for the embedding matrix (weights)
+                       input_length    = 10):       # size of input sentences
+        self.input_dim    = input_dim
+        self.output_dim   = output_dim
+        self.input_length = input_length
+        self.input_shape  = None # required by the base class
 
         self.init_method      = None
         self.optimizer_kwargs = None
@@ -47,32 +52,37 @@ class Embedding(Layer):
         self.optimizer_kwargs = optimizer_kwargs
 
     @property
-    def layer_activation(self):
-        return self.activation
-
-    @layer_activation.setter
-    def layer_activation(self, activation):
-        self.activation = activation
-
-    @property
     def output_shape(self):
-        return self.input_shape
+        return (self.input_length, self.output_dim)
 
     def prep_layer(self):
-        self.kernel_shape = (self.input_dim, self.output_dim)
-        self.weights      = init(self.weight_initializer).initialize_weights(self.kernel_shape)
+        self.uniques_one_hot = one_hot(np.arange(self.input_dim)) # master one hot matrix
+        self.kernel_shape    = (self.input_dim, self.output_dim)
+        self.weights         = init(self.weight_initializer).initialize_weights(self.kernel_shape) # embeddings
 
+    # inputs should be gotten from sentences_tokens = get_sentence_tokens(text_input)
     def pass_forward(self, inputs, train_mode = True, **kwargs):
-        self.inputs                    = inputs
-        batch_size, num_rows, num_cols = self.inputs.shape
-        self.one_hot_inputs            = np.zeros((batch_size, num_cols, self.input_dim))
+        self.inputs = inputs # tokenized inputs
 
-        for i in range(batch_size):
-            self.one_hot_inputs[i, :, :] = one_hot(self.inputs[i, :, :], num_classes = self.input_dim)
+        embeded_inputs = []
+        for _, tokens in enumerate(self.inputs.tolist()):
 
-        return np.expand_dims(np.sum(np.matmul(self.one_hot_inputs, self.weights), axis = 2), axis = 1)
+            for i, word_index in enumerate(tokens):
+                embed = np.expand_dims(self.uniques_one_hot[word_index,:], 1).T.dot(self.weights)
+                tokens[i] = list(np.array(embed).flat)
+
+            embeded_inputs.append(tokens)
+
+        return np.array(embeded_inputs)
 
     def pass_backward(self, grad):
-        d_inputs     = np.matmul(grad, self.one_hot_inputs)
-        d_embeddings = np.sum(d_inputs, axis = 0)
-        self.weights = optimizer(self.weight_optimizer).update(self.weights, d_embeddings.T)
+        prev_weights = self.weights
+
+        if self.is_trainable:
+
+            dweights = np.sum(grad @ self.weights.T, axis = 1)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights.T)
+
+        # endif self.is_trainable
+
+        return grad @ prev_weights.T
