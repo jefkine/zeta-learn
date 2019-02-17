@@ -1,4 +1,3 @@
-import numpy as np
 from ztlearn.utils import *
 from ztlearn.utils import get_sentence_tokens
 from ztlearn.optimizers import register_opt
@@ -12,7 +11,7 @@ text_list = [
     'Rainy days are the worst.',
     'Mercedes is a good brand.',
     'Nobody has the patience for bad food.',
-    'I believe Masai Mara is the best.',
+    'I believe Maasai Mara is the best.',
     'This is definately a bad idea.',
     'The trains in the city center suck!',
     'I have a new shinny app love it!',
@@ -55,6 +54,7 @@ fit_stats = model.fit(train_data,
                       batch_size = 4,
                       epochs     = model_epochs)
 
+# test out with the first sentence - sentences_tokens[0]
 output_array = model.predict(np.expand_dims(sentences_tokens[0], axis=0))
 print(np.argmax(output_array))
 
