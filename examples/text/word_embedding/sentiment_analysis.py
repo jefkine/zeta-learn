@@ -22,7 +22,7 @@ text_list = [
 paragraph = ' '.join(text_list)
 targets = one_hot(np.array([1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]))
 
-sentences_tokens, unique_words, longest_sentence = get_sentence_tokens(paragraph)
+sentences_tokens, vocab_size, longest_sentence = get_sentence_tokens(paragraph)
 
 
 
@@ -35,7 +35,7 @@ train_data, test_data, train_label, test_label = train_test_split(sentences_toke
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.01)
 
 model = Sequential()
-model.add(Embedding(unique_words, 4, input_length = longest_sentence))
+model.add(Embedding(vocab_size, 4, input_length = longest_sentence))
 model.add(Flatten())
 model.add(Dense(2, activation = 'relu'))
 model.compile(loss = 'mse', optimizer = opt)
