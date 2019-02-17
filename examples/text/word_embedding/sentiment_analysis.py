@@ -25,14 +25,14 @@ sentence_targets = one_hot(np.array([1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1]))
 
 train_data, test_data, train_label, test_label = train_test_split(sentences_tokens,
                                                                   sentence_targets,
-                                                                  test_size   = 0,
+                                                                  test_size   = 0.2,
                                                                   random_seed = 5)
 
 # optimizer definition
 opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.01)
 
 model = Sequential()
-model.add(Embedding(vocab_size, 4, input_length = longest_sentence))
+model.add(Embedding(vocab_size, 2, input_length = longest_sentence))
 model.add(Flatten())
 model.add(Dense(2, activation = 'relu'))
 model.compile(loss = 'mse', optimizer = opt)
@@ -45,13 +45,17 @@ batch size should be equal the size of embedding
 vectors and divisible by the training set size
 '''
 
-model_epochs = 500
+model_epochs = 150
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 4,
-                      epochs     = model_epochs)
+                      batch_size = 2,
+                      epochs     = model_epochs,
+                      validation_data = (test_data, test_label))
+
+model_name = model.model_name
+plot_metric('loss', model_epochs, fit_stats['train_loss'], fit_stats['valid_loss'], model_name = model_name)
+plot_metric('accuracy', model_epochs, fit_stats['train_acc'], fit_stats['valid_acc'], model_name = model_name)
 
 # test out with the first sentence - sentences_tokens[0]
 output_array = model.predict(np.expand_dims(sentences_tokens[0], axis=0))
 print(np.argmax(output_array))
-
