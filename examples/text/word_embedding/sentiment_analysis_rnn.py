@@ -31,11 +31,11 @@ train_data, test_data, train_label, test_label = train_test_split(sentences_toke
                                                                   random_seed = 5)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adamax', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'adamax', momentum = 0.01, learning_rate = 0.01)
 
 model = Sequential()
 model.add(Embedding(vocab_size, 4, input_length = longest_sentence))
-model.add(RNN(5, activation = 'tanh', bptt_truncate = 2, input_shape = (2, longest_sentence)))
+model.add(RNN(5, activation = 'tanh', bptt_truncate = 2, input_shape = (4, longest_sentence)))
 model.add(Flatten())
 model.add(Dense(2, activation = 'softmax'))
 model.compile(loss = 'bce', optimizer = opt)
