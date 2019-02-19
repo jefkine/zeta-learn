@@ -41,11 +41,11 @@ model.compile(loss = 'mse', optimizer = opt)
 
 model.summary('embedded sentences rnn')
 
-'''
+"""
 NOTE:
 batch size should be equal the size of embedding
-vectors and divisible by the training set size
-'''
+vectors and divisible  by the training  set size
+"""
 
 model_epochs = 150
 fit_stats = model.fit(train_data,
