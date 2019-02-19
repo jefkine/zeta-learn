@@ -66,6 +66,7 @@ def pad_sequence(sequence,
                            padding    = 'pre',
                            truncating = 'pre',
                            value      = 0.0):
+    """ pad or truncate sequences depending on size of maxlen - longest sequence """
     if (maxlen is None):  return sequence
 
     np_sequence   = np.array(sequence)
@@ -111,7 +112,7 @@ def get_sentence_tokens(text_list, maxlen = None, dtype = 'int32'):
 
 
 def longest_sentence(sentences):
-    ''' find longest sentence in a list of sentences '''
+    """ find longest sentence in a list of sentences """
     if isinstance(sentences, list):
         yield len(sentences)
         for sentence in sentences:
