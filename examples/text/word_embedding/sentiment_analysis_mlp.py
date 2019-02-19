@@ -39,7 +39,7 @@ model.add(Flatten())
 model.add(Dense(2, activation = 'relu'))
 model.compile(loss = 'mse', optimizer = opt)
 
-model.summary('embedded sentences rnn')
+model.summary('embedded sentences mlp')
 
 """
 NOTE:
