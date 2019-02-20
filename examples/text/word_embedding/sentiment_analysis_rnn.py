@@ -34,8 +34,8 @@ train_data, test_data, train_label, test_label = train_test_split(sentences_toke
 opt = register_opt(optimizer_name = 'adamax', momentum = 0.01, learning_rate = 0.01)
 
 model = Sequential()
-model.add(Embedding(vocab_size, 4, input_length = longest_sentence))
-model.add(RNN(5, activation = 'tanh', bptt_truncate = 2, input_shape = (4, longest_sentence)))
+model.add(Embedding(vocab_size, 2, input_length = longest_sentence))
+model.add(RNN(5, activation = 'tanh', bptt_truncate = 2, input_shape = (2, longest_sentence)))
 model.add(Flatten())
 model.add(Dense(2, activation = 'softmax'))
 model.compile(loss = 'bce', optimizer = opt)
@@ -51,7 +51,7 @@ vectors and divisible  by the training  set size
 model_epochs = 500
 fit_stats = model.fit(train_data,
                       train_label,
-                      batch_size = 4,
+                      batch_size = 2,
                       epochs     = model_epochs,
                       validation_data = (test_data, test_label))
 
