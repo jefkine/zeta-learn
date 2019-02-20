@@ -30,6 +30,7 @@ def gen_char_sequence_xtym(text, maxlen, step, tensor_dtype = np.int):
         y[i, char_to_indices[next_chars[i]]] = 1
 
     return x, y, len_chars
+    
 
 def gen_char_sequence_xtyt(text, maxlen, step, tensor_dtype = np.int):
     chars     = sorted(list(set(text)))
