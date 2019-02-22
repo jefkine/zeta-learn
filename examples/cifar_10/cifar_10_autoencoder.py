@@ -11,7 +11,7 @@ from ztlearn.dl.layers import BatchNormalization, Dense
 img_rows   = 32
 img_cols   = 32
 img_dim    = 3072 # channels * img_rows * img_cols
-channels   = 3    # Red Blue Green
+channels   = 3    # red blue green
 latent_dim = 4
 init_type  = 'he_uniform'
 
