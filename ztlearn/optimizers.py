@@ -197,7 +197,7 @@ class Adam(Optimizer):
         if self.v is None:
             self.v = np.zeros_like(self.weights)
 
-        self.t += 1
+        self.t += 1 #@@TODO: this should come from the trainer class as the current epoch number
 
         self.m = np.multiply(self.beta1, self.m) + np.multiply((1 - self.beta1), self.grads)
         m_hat  = np.true_divide(self.m, (1 - np.power(self.beta1, self.t)))
@@ -206,7 +206,7 @@ class Adam(Optimizer):
         v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
         self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(), m_hat), np.sqrt(v_hat) + self.epsilon)
-        
+
         return self.weights
 
     @property
@@ -494,7 +494,7 @@ class OptimizationFunction:
 
     def __init__(self, optimizer_kwargs):
 
-        # check if optimizer_kwargs is an instance of any of the classes in _optimizers.values
+        # check if optimizer_kwargs is an instance of any of the classes in _optimizers.values dict
         if any(isinstance(optimizer_kwargs, cls_type) for cls_type in list(self._optimizers.values())):
             import copy
             self.optimization_func = copy.copy(optimizer_kwargs)
