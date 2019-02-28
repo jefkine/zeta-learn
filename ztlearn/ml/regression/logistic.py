@@ -44,7 +44,7 @@ class LogisticRegression:
 
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights     = inputs.T.dot(cost_gradient) + self.regularization.derivative(self.weights)
-            self.weights  = self.optimizer.update(self.weights, d_weights)
+            self.weights  = self.optimizer.update(self.weights, d_weights, i, 1, 1)
 
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:.2f} acc: {:.2f}'.format(i+1, cost, acc))

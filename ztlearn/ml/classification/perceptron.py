@@ -51,8 +51,8 @@ class Perceptron:
             d_weights = inputs.T.dot(grad) + self.regularization.derivative(self.weights)
             d_bias    = np.sum(grad, axis = 0, keepdims = True) + self.regularization.derivative(self.bias)
 
-            self.weights = optimize(self.optimizer).update(self.weights, d_weights)
-            self.bias    = optimize(self.optimizer).update(self.bias, d_bias)
+            self.weights = optimize(self.optimizer).update(self.weights, d_weights, i, 1, 1)
+            self.bias    = optimize(self.optimizer).update(self.bias, d_bias, i, 1, 1)
 
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, loss, acc))

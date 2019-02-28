@@ -43,7 +43,7 @@ class Regression(object):
 
             cost_gradient = self.loss.backward(predictions, targets)
             d_weights     = cost_gradient.dot(inputs) + self.regularization.derivative(self.weights)
-            self.weights  = self.optimizer.update(self.weights, d_weights)
+            self.weights  = self.optimizer.update(self.weights, d_weights, i, 1, 1)
 
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, mse, acc))
