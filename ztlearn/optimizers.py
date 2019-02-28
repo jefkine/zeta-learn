@@ -13,33 +13,33 @@ class Optimizer(object):
 
     def get_learning_rate(self):
 
-        self.min_lrate   = self.min_lrate   if hasattr(self, 'min_lrate')   else 0
-        self.max_lrate   = self.max_lrate   if hasattr(self, 'max_lrate')   else np.inf
-        self.decay_rate  = self.decay_rate  if hasattr(self, 'decay_rate')  else 1e-6
-        self.decay_func  = self.decay_func  if hasattr(self, 'decay_func')  else 'inverse_time_decay'
-        self.decay_lrate = self.decay_lrate if hasattr(self, 'decay_lrate') else True
+        self.min_lr     = self.min_lr if hasattr(self, 'min_lr')   else 0
+        self.max_lr     = self.max_lr if hasattr(self, 'max_lr')   else np.inf
+        self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate')  else 1e-6
+        self.decay_func = self.decay_func if hasattr(self, 'decay_func')  else 'inverse_time_decay'
+        self.decay_lr   = self.decay_lr if hasattr(self, 'decay_lr') else True
 
-        if self.decay_lrate is False: return self.learning_rate
+        if self.decay_lr is False: return self.lr
 
         self.epoch += 1
-        if self.epoch == 1: return self.learning_rate
+        if self.epoch == 1: return self.lr
 
         if hasattr(self, 'step_size') and isinstance(self.step_size, (int, np.integer)):
 
-            return decayer(self.learning_rate,
-                                                self.decay_func,
-                                                self.decay_rate,
-                                                self.epoch,
-                                                self.min_lrate,
-                                                self.max_lrate,
-                                                self.step_size).decompose
+            return decayer(self.lr,
+                                    self.decay_func,
+                                    self.decay_rate,
+                                    self.epoch,
+                                    self.min_lr,
+                                    self.max_lr,
+                                    self.step_size).decompose
 
-        return decayer(self.learning_rate,
-                                            self.decay_func,
-                                            self.decay_rate,
-                                            self.epoch,
-                                            self.min_lrate,
-                                            self.max_lrate).decompose
+        return decayer(self.lr,
+                                self.decay_func,
+                                self.decay_rate,
+                                self.epoch,
+                                self.min_lr,
+                                self.max_lr).decompose
 
 
 class GD:
@@ -88,6 +88,7 @@ class SGD(Optimizer):
 
     def __init__(self, **kwargs):
         super(SGD, self).__init__(**kwargs)
+        self.lr = kwargs['lr'] if 'lr' in kwargs else 0.01
 
     def update(self, weights, grads):
         self.weights = weights
@@ -132,6 +133,7 @@ class SGDMomentum(Optimizer):
 
     def __init__(self, **kwargs):
         super(SGDMomentum, self).__init__(**kwargs)
+        self.lr       = kwargs['lr']       if 'lr'       in kwargs else 0.01
         self.momentum = kwargs['momentum'] if 'momemtum' in kwargs else 0.1
         self.velocity = None
 
@@ -177,6 +179,7 @@ class Adam(Optimizer):
 
     def __init__(self, **kwargs):
         super(Adam, self).__init__(**kwargs)
+        self.lr      = kwargs['lr']      if 'lr'      in kwargs else 0.001
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
         self.beta1   = kwargs['beta1']   if 'beta1'   in kwargs else 0.9
         self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
@@ -203,7 +206,7 @@ class Adam(Optimizer):
         v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
         self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(), m_hat), np.sqrt(v_hat) + self.epsilon)
-
+        
         return self.weights
 
     @property
@@ -238,6 +241,7 @@ class Adamax(Optimizer):
 
     def __init__(self, **kwargs):
         super(Adamax, self).__init__(**kwargs)
+        self.lr      = kwargs['lr']      if 'lr'      in kwargs else 0.02
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
         self.beta1   = kwargs['beta1']   if 'beta1'   in kwargs else 0.9
         self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
@@ -257,13 +261,13 @@ class Adamax(Optimizer):
 
         self.t += 1
 
-        learning_rate_t = np.true_divide(super(Adamax, self).get_learning_rate(),
-                                         1. - np.power(self.beta1, self.t))
+        lr_t = np.true_divide(super(Adamax, self).get_learning_rate(),
+                              1. - np.power(self.beta1, self.t))
 
         m_hat = np.multiply(self.beta1, self.m) + np.multiply((1. - self.beta1), self.grads)
         u_hat = np.maximum(np.multiply(self.beta2, self.u), np.abs(self.grads))
 
-        self.weights -= np.true_divide(np.multiply(learning_rate_t, m_hat), (u_hat + self.epsilon))
+        self.weights -= np.true_divide(np.multiply(lr_t, m_hat), (u_hat + self.epsilon))
 
         return self.weights
 
@@ -296,6 +300,7 @@ class AdaGrad(Optimizer):
 
     def __init__(self, **kwargs):
         super(AdaGrad, self).__init__(**kwargs)
+        self.lr      = kwargs['lr']      if 'lr'      in kwargs else 0.01
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
         self.cache   = None
 
@@ -342,6 +347,7 @@ class Adadelta(Optimizer):
 
     def __init__(self, **kwargs):
         super(Adadelta, self).__init__(**kwargs)
+        self.lr      = kwargs['lr']      if 'lr'      in kwargs else 1.0
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
         self.rho     = kwargs['rho']     if 'rho'     in kwargs else 0.9
         self.cache   = None
@@ -398,10 +404,10 @@ class RMSprop(Optimizer):
 
     def __init__(self, **kwargs):
         super(RMSprop, self).__init__(**kwargs)
-        self.epsilon       = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
-        self.rho           = kwargs['rho']     if 'rho'     in kwargs else 0.9
-        self.learning_rate = 0.001 # preset and not decayed
-        self.cache         = None
+        self.lr      = kwargs['lr']      if 'lr'      in kwargs else 0.001
+        self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-6
+        self.rho     = kwargs['rho']     if 'rho'     in kwargs else 0.9
+        self.cache   = None
 
     def update(self, weights, grads):
         self.weights = weights
@@ -411,7 +417,7 @@ class RMSprop(Optimizer):
             self.cache = np.zeros_like(self.weights)
 
         self.cache    = np.multiply(self.rho, np.multiply(self.cache + (1 - self.rho), np.square(self.grads)))
-        self.weights -= np.multiply(self.learning_rate, np.true_divide(self.grads, (np.sqrt(self.cache) + self.epsilon)))
+        self.weights -= np.multiply(self.lr, np.true_divide(self.grads, (np.sqrt(self.cache) + self.epsilon)))
 
         return self.weights
 
@@ -447,6 +453,7 @@ class NesterovAcceleratedGradient(Optimizer):
 
     def __init__(self, **kwargs):
         super(NesterovAcceleratedGradient, self).__init__(**kwargs)
+        self.lr            = kwargs['lr']       if 'lr'       in kwargs else 0.001
         self.momentum      = kwargs['momentum'] if 'momemtum' in kwargs else 0.9
         self.velocity_prev = None
         self.velocity      = None
@@ -486,9 +493,16 @@ class OptimizationFunction:
     }
 
     def __init__(self, optimizer_kwargs):
-        if optimizer_kwargs['optimizer_name'] not in self._optimizers.keys():
-            raise Exception('Optimization function must be either one of the following: {}.'.format(', '.join(self._optimizers.keys())))
-        self.optimization_func = self._optimizers[optimizer_kwargs['optimizer_name']](**optimizer_kwargs)
+
+        # check if optimizer_kwargs is an instance of any of the classes in _optimizers.values
+        if any(isinstance(optimizer_kwargs, cls_type) for cls_type in list(self._optimizers.values())):
+            import copy
+            self.optimization_func = copy.copy(optimizer_kwargs)
+
+        else:
+            if optimizer_kwargs['optimizer_name'] not in self._optimizers.keys():
+                raise Exception('Optimization function must be either one of the following: {}.'.format(', '.join(self._optimizers.keys())))
+            self.optimization_func = self._optimizers[optimizer_kwargs['optimizer_name']](**optimizer_kwargs)
 
     @property
     def name(self):
@@ -500,19 +514,21 @@ class OptimizationFunction:
 
 def register_opt(**kwargs):
 
+    # @@TODO: ensure that key optimizer_name is present (MUST BE)
+
     allowed_kwargs = {
+        'lr',
         'rho',
         'beta2',
         'beta1',
         'epsilon',
         'epsilon',
+        'decay_lr',
         'momentum',
         'velocity',
         'step_size',
         'decay_rate',
         'decay_func',
-        'decay_lrate',
-        'learning_rate',
         'optimizer_name'
     }
 
