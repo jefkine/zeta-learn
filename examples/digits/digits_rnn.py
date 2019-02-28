@@ -27,7 +27,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model.summary(model_name = 'digits rnn')
 
-model_epochs = 100
+model_epochs = 200
 fit_stats = model.fit(train_data.reshape(-1, 8, 8),
                       one_hot(train_label),
                       batch_size      = 128,
