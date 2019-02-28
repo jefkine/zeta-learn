@@ -116,6 +116,6 @@ class Sequential(Trainer):
             layer_output = layer.pass_forward(layer_output, train_mode)
         return layer_output
 
-    def backward_pass(self, loss_grad):
+    def backward_pass(self, loss_grad, epoch_num, batch_num, batch_size):
         for layer in reversed(self.layers):
-            loss_grad = layer.pass_backward(loss_grad)
+            loss_grad = layer.pass_backward(loss_grad, epoch_num, batch_num, batch_size)

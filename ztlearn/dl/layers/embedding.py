@@ -53,7 +53,7 @@ class Embedding(Layer):
         self.optimizer_kwargs = optimizer_kwargs
 
     @property
-    def layer_parameters(self):        
+    def layer_parameters(self):
         return sum([np.prod(param.shape) for param in [self.weights]])
 
     @property
@@ -80,13 +80,13 @@ class Embedding(Layer):
 
         return np.array(embeded_inputs)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         prev_weights = self.weights
 
         if self.is_trainable:
 
             dweights = np.sum(grad @ self.weights.T, axis = 1)
-            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights.T)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights.T, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 

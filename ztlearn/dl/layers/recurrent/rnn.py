@@ -107,7 +107,7 @@ class RNN(Layer):
         return self.state_outputs
 
     # implementation based on techniques as seen here: https://github.com/dennybritz/rnn-tutorial-rnnlm/blob/master/RNNLM.ipynb
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         _, time_steps, _ = grad.shape
         next_grad        = np.zeros_like(grad)
 
@@ -133,12 +133,12 @@ class RNN(Layer):
                     dstate    = np.dot(dstate, self.W_recur) * activate(self.activation).backward(self.state_inputs[:, tt - 1])
 
             # optimize weights and bias
-            self.W_input  = optimizer(self.optimizer_kwargs).update(self.W_input,  cg(dW_input))
-            self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output))
-            self.W_recur  = optimizer(self.optimizer_kwargs).update(self.W_recur,  cg(dW_recur))
+            self.W_input  = optimizer(self.optimizer_kwargs).update(self.W_input,  cg(dW_input), epoch_num, batch_num, batch_size)
+            self.W_output = optimizer(self.optimizer_kwargs).update(self.W_output, cg(dW_output), epoch_num, batch_num, batch_size)
+            self.W_recur  = optimizer(self.optimizer_kwargs).update(self.W_recur,  cg(dW_recur), epoch_num, batch_num, batch_size)
 
-            self.b_input  = optimizer(self.optimizer_kwargs).update(self.b_input,  cg(db_input))
-            self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output))
+            self.b_input  = optimizer(self.optimizer_kwargs).update(self.b_input,  cg(db_input), epoch_num, batch_num, batch_size)
+            self.b_output = optimizer(self.optimizer_kwargs).update(self.b_output, cg(db_output), epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 

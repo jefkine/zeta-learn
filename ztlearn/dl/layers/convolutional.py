@@ -143,7 +143,7 @@ class Conv2D(Conv):
 
         return output.transpose(3, 0, 1, 2)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         input_num, input_depth, input_height, input_width = self.input_shape
         doutput_reshaped = grad.transpose(1, 2, 3, 0).reshape(self.filter_num, -1)
 
@@ -156,8 +156,8 @@ class Conv2D(Conv):
             dweights = dweights.reshape(self.weights.shape)
 
             # optimize the weights and bias
-            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights, epoch_num, batch_num, batch_size)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 
@@ -232,7 +232,7 @@ class ConvLoop2D(Conv):
 
         return output
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
         # initialize the gradient(s)
@@ -274,8 +274,8 @@ class ConvLoop2D(Conv):
                 dbias[f] = np.sum(grad[:, f]) / input_num
 
             # optimize the weights and bias
-            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights, epoch_num, batch_num, batch_size)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 
@@ -350,4 +350,4 @@ class ConvToeplitzMat(Conv):
 
         return output.transpose(3, 0, 1, 2)
 
-    def pass_backward(self, grad): pass
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size): pass

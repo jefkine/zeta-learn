@@ -69,7 +69,7 @@ class BatchNormalization(Layer):
 
         return self.gamma * self.input_norm + self.beta
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         dinput_norm = grad * self.gamma
 
         if self.is_trainable:
@@ -77,8 +77,8 @@ class BatchNormalization(Layer):
             dbeta  = np.sum(grad, axis = 0)
             dgamma = np.sum(grad * self.input_norm, axis = 0)
 
-            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
-            self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta)
+            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma, epoch_num, batch_num, batch_size)
+            self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 
@@ -129,7 +129,7 @@ class LayerNormalization1D(Layer):
 
         return self.input_norm * self.gamma + self.beta
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         dinput_norm = grad * self.gamma
 
         if self.is_trainable:
@@ -137,8 +137,8 @@ class LayerNormalization1D(Layer):
             dbeta  = np.sum(grad, axis = 0)
             dgamma = np.sum(grad * self.input_norm, axis = 0)
 
-            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma)
-            self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta)
+            self.gamma = optimizer(self.weight_optimizer).update(self.gamma, dgamma, epoch_num, batch_num, batch_size)
+            self.beta  = optimizer(self.weight_optimizer).update(self.beta, dbeta, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 

@@ -69,7 +69,7 @@ class Pool(Layer):
 
         return output.transpose(2, 3, 0, 1)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         input_num, input_depth, input_height, input_width = self.inputs.shape
 
         d_input_col = np.zeros_like(self.input_col)

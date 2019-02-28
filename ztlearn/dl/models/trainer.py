@@ -17,11 +17,17 @@ class Trainer:
     def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
         fit_stats = {'train_loss': [], 'train_acc': [], 'valid_loss': [], 'valid_acc': []}
 
+        batch_num = 0
         for epoch_idx in np.arange(epochs):
             batch_stats = {'batch_loss': [], 'batch_acc': []}
 
             for train_batch_data, train_batch_label in minibatches(train_data, train_label, batch_size, shuffle_data):
-                loss, acc = self.train_on_batch(train_batch_data, train_batch_label)
+                batch_num += 1
+                loss, acc  = self.train_on_batch(train_batch_data,
+                                                                   train_batch_label,
+                                                                   epoch_num  = epoch_idx,
+                                                                   batch_num  = batch_num,
+                                                                   batch_size = batch_size)
 
                 batch_stats['batch_loss'].append(loss)
                 batch_stats['batch_acc'].append(acc)
@@ -46,13 +52,21 @@ class Trainer:
 
         return fit_stats
 
-    def train_on_batch(self, train_batch_data, train_batch_label):
+    def train_on_batch(self,
+                              train_batch_data,
+                              train_batch_label,
+                              epoch_num  = 0,
+                              batch_num  = 0,
+                              batch_size = 1):
         predictions = self.foward_pass(train_batch_data, train_mode = True)
 
         loss = np.mean(objective(self.loss).forward(predictions, train_batch_label))
         acc  = objective(self.loss).accuracy(predictions, train_batch_label)
 
-        self.backward_pass(objective(self.loss).backward(predictions, train_batch_label))
+        self.backward_pass(objective(self.loss).backward(predictions, train_batch_label),
+                                                                                          epoch_num,
+                                                                                          batch_num,
+                                                                                          batch_size)
 
         return loss, acc
 

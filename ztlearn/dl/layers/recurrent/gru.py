@@ -140,7 +140,7 @@ class GRU(Layer):
 
         return self.final
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         _, time_steps, _ = grad.shape
         next_grad        = np.zeros_like(grad)
 
@@ -210,17 +210,17 @@ class GRU(Layer):
                 dstates_next = dstate_a + dstate_b + dstate_c
 
             # optimize weights and bias
-            self.W_final  = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final))
-            self.b_final  = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final))
+            self.W_final  = optimizer(self.optimizer_kwargs).update(self.W_final, cg(dW_final), epoch_num, batch_num, batch_size)
+            self.b_final  = optimizer(self.optimizer_kwargs).update(self.b_final, cg(db_final), epoch_num, batch_num, batch_size)
 
-            self.W_cell   = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell))
-            self.b_cell   = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell))
+            self.W_cell   = optimizer(self.optimizer_kwargs).update(self.W_cell, cg(dW_cell), epoch_num, batch_num, batch_size)
+            self.b_cell   = optimizer(self.optimizer_kwargs).update(self.b_cell, cg(db_cell), epoch_num, batch_num, batch_size)
 
-            self.W_reset  = optimizer(self.optimizer_kwargs).update(self.W_reset, cg(dW_reset))
-            self.b_reset  = optimizer(self.optimizer_kwargs).update(self.b_reset, cg(db_reset))
-            
-            self.W_update = optimizer(self.optimizer_kwargs).update(self.W_update, cg(dW_update))
-            self.b_update = optimizer(self.optimizer_kwargs).update(self.b_update, cg(db_update))
+            self.W_reset  = optimizer(self.optimizer_kwargs).update(self.W_reset, cg(dW_reset), epoch_num, batch_num, batch_size)
+            self.b_reset  = optimizer(self.optimizer_kwargs).update(self.b_reset, cg(db_reset), epoch_num, batch_num, batch_size)
+
+            self.W_update = optimizer(self.optimizer_kwargs).update(self.W_update, cg(dW_update), epoch_num, batch_num, batch_size)
+            self.b_update = optimizer(self.optimizer_kwargs).update(self.b_update, cg(db_update), epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 

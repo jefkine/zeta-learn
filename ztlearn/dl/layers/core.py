@@ -45,7 +45,7 @@ class Activation(Layer):
         self.input_signal = input_signal
         return self.activation_func.forward(input_signal)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         return grad * self.activation_func.backward(self.input_signal)
 
 
@@ -115,7 +115,7 @@ class Dense(Layer):
 
         return inputs @ self.weights + self.bias
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         prev_weights = self.weights
 
         if self.is_trainable:
@@ -123,8 +123,8 @@ class Dense(Layer):
             dweights = self.inputs.T @ grad
             dbias    = np.sum(grad, axis = 0, keepdims = True)
 
-            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights)
-            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias)
+            self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights, epoch_num, batch_num, batch_size)
+            self.bias    = optimizer(self.weight_optimizer).update(self.bias, dbias, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
 
@@ -163,7 +163,7 @@ class Dropout(Layer):
         else:
             return inputs
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         if 0. < self.drop < 1.:
             return grad * self.mask
         else:
@@ -196,7 +196,7 @@ class Flatten(Layer):
         self.prev_shape = inputs.shape
         return np.reshape(inputs, (inputs.shape[0], -1))
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         return np.reshape(grad, self.prev_shape)
 
 
@@ -228,7 +228,7 @@ class UpSampling2D(Layer):
         self.prev_shape = inputs.shape
         return np.repeat(np.repeat(inputs, self.h_scale, axis = 2), self.w_scale, axis = 3)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         grad = grad[:, :, ::self.h_scale, ::self.w_scale]
         assert grad.shape == self.prev_shape, 'grad shape incorrect'
 
@@ -262,5 +262,5 @@ class Reshape(Layer):
         self.prev_shape = inputs.shape
         return np.reshape(inputs, (inputs.shape[0],) + self.target_shape)
 
-    def pass_backward(self, grad):
+    def pass_backward(self, grad, epoch_num, batch_num, batch_size):
         return np.reshape(grad, self.prev_shape)

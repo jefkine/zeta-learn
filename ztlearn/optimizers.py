@@ -9,10 +9,8 @@ class Optimizer(object):
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
-        self.epoch = 0
 
-    def get_learning_rate(self):
-
+    def get_learning_rate(self, current_epoch):
         self.min_lr     = self.min_lr if hasattr(self, 'min_lr')   else 0
         self.max_lr     = self.max_lr if hasattr(self, 'max_lr')   else np.inf
         self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate')  else 1e-6
@@ -21,15 +19,14 @@ class Optimizer(object):
 
         if self.decay_lr is False: return self.lr
 
-        self.epoch += 1
-        if self.epoch == 1: return self.lr
+        if current_epoch == 1: return self.lr
 
         if hasattr(self, 'step_size') and isinstance(self.step_size, (int, np.integer)):
 
             return decayer(self.lr,
                                     self.decay_func,
                                     self.decay_rate,
-                                    self.epoch,
+                                    current_epoch,
                                     self.min_lr,
                                     self.max_lr,
                                     self.step_size).decompose
@@ -37,7 +34,7 @@ class Optimizer(object):
         return decayer(self.lr,
                                 self.decay_func,
                                 self.decay_rate,
-                                self.epoch,
+                                current_epoch,
                                 self.min_lr,
                                 self.max_lr).decompose
 
@@ -90,11 +87,11 @@ class SGD(Optimizer):
         super(SGD, self).__init__(**kwargs)
         self.lr = kwargs['lr'] if 'lr' in kwargs else 0.01
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
-        self.weights -= np.multiply(super(SGD, self).get_learning_rate(), self.grads, dtype = np.float128)
+        self.weights -= np.multiply(super(SGD, self).get_learning_rate(epoch_num), self.grads, dtype = np.float128)
 
         return self.weights
 
@@ -137,14 +134,14 @@ class SGDMomentum(Optimizer):
         self.momentum = kwargs['momentum'] if 'momemtum' in kwargs else 0.1
         self.velocity = None
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(), self.grads)
+        self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
         self.weights  += self.velocity
 
         return self.weights
@@ -185,11 +182,12 @@ class Adam(Optimizer):
         self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
         self.m       = None
         self.v       = None
-        self.t       = 0
+        self.t       = 1
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
+        self.t       = batch_num
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
@@ -197,15 +195,13 @@ class Adam(Optimizer):
         if self.v is None:
             self.v = np.zeros_like(self.weights)
 
-        self.t += 1 #@@TODO: this should come from the trainer class as the current epoch number
-
         self.m = np.multiply(self.beta1, self.m) + np.multiply((1 - self.beta1), self.grads)
         m_hat  = np.true_divide(self.m, (1 - np.power(self.beta1, self.t)))
 
         self.v = np.multiply(self.beta2, self.v)  + np.multiply((1 - self.beta2), np.square(self.grads))
         v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
-        self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(), m_hat), np.sqrt(v_hat) + self.epsilon)
+        self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat), np.sqrt(v_hat) + self.epsilon)
 
         return self.weights
 
@@ -247,11 +243,12 @@ class Adamax(Optimizer):
         self.beta2   = kwargs['beta2']   if 'beta2'   in kwargs else 0.999
         self.m       = None
         self.u       = None
-        self.t       = 0
+        self.t       = 1
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
+        self.t       = batch_num
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
@@ -259,9 +256,7 @@ class Adamax(Optimizer):
         if self.u is None:
             self.u = np.zeros_like(self.weights)
 
-        self.t += 1
-
-        lr_t = np.true_divide(super(Adamax, self).get_learning_rate(),
+        lr_t = np.true_divide(super(Adamax, self).get_learning_rate(epoch_num),
                               1. - np.power(self.beta1, self.t))
 
         m_hat = np.multiply(self.beta1, self.m) + np.multiply((1. - self.beta1), self.grads)
@@ -304,7 +299,7 @@ class AdaGrad(Optimizer):
         self.epsilon = kwargs['epsilon'] if 'epsilon' in kwargs else 1e-8
         self.cache   = None
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
@@ -312,7 +307,7 @@ class AdaGrad(Optimizer):
             self.cache = np.zeros_like(self.grads)
 
         self.cache   += np.square(self.grads)
-        self.weights -= np.multiply(super(AdaGrad, self).get_learning_rate(),
+        self.weights -= np.multiply(super(AdaGrad, self).get_learning_rate(epoch_num),
                                     np.true_divide(self.grads, np.sqrt(self.cache) + self.epsilon))
 
         return self.weights
@@ -353,7 +348,7 @@ class Adadelta(Optimizer):
         self.cache   = None
         self.delta   = None
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
@@ -370,7 +365,7 @@ class Adadelta(Optimizer):
 
         update = np.multiply(self.grads, np.true_divide(RMSE_delta, RMSE_grad))
 
-        self.weights -= np.multiply(super(Adadelta, self).get_learning_rate(), update)
+        self.weights -= np.multiply(super(Adadelta, self).get_learning_rate(epoch_num), update)
         self.delta    = np.multiply(self.rho, self.delta) + np.multiply((1 - self.rho), np.square(update))
 
         return self.weights
@@ -409,7 +404,7 @@ class RMSprop(Optimizer):
         self.rho     = kwargs['rho']     if 'rho'     in kwargs else 0.9
         self.cache   = None
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
@@ -458,7 +453,7 @@ class NesterovAcceleratedGradient(Optimizer):
         self.velocity_prev = None
         self.velocity      = None
 
-    def update(self, weights, grads):
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
 
@@ -469,7 +464,7 @@ class NesterovAcceleratedGradient(Optimizer):
             self.velocity = np.zeros_like(self.weights)
 
         self.velocity_prev  = self.velocity
-        self.velocity       = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(), self.grads)
+        self.velocity       = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)
         self.weights       += np.multiply(-self.momentum, self.velocity_prev) + np.multiply(1 + self.momentum, self.velocity)
 
         return self.weights
@@ -508,8 +503,8 @@ class OptimizationFunction:
     def name(self):
         return self.optimization_func.optimization_name
 
-    def update(self, weights, grads):
-        return self.optimization_func.update(weights, grads)
+    def update(self, weights, grads, epoch_num, batch_num, batch_size):
+        return self.optimization_func.update(weights, grads, epoch_num, batch_num, batch_size)
 
 
 def register_opt(**kwargs):
