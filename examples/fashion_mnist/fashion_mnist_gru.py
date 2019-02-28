@@ -17,7 +17,7 @@ train_data, test_data, train_label, test_label = train_test_split(fashion_mnist.
 plot_img_samples(train_data, train_label, dataset = 'mnist')
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, lr = 0.001)
 
 # model definition
 model = Sequential()

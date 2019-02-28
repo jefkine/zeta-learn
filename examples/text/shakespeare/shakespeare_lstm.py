@@ -14,7 +14,7 @@ del text
 train_data, test_data, train_label, test_label = train_test_split(x, y, test_size = 0.4)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, learning_rate = 0.01)
+opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.1, lr = 0.01)
 
 # model definition
 model = Sequential()

@@ -16,7 +16,7 @@ train_data, test_data, train_label, test_label = train_test_split(normalize(fash
 plot_img_samples(train_data[:40], unhot(train_label[:40]), dataset = 'mnist')
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, learning_rate = 0.01)
+opt = register_opt(optimizer_name = 'sgd_momentum', momentum = 0.01, lr = 0.01)
 
 # model definition
 model     = Perceptron(epochs = 4500, activation = 'softmax', loss = 'cce', init_method = 'he_normal', optimizer = opt)

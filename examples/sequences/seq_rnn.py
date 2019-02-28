@@ -13,7 +13,7 @@ train_data, test_data, train_label, test_label = train_test_split(x, y, test_siz
 print_seq_samples(train_data, train_label, 0)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.01)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.01)
 
 # model definition
 model = Sequential()

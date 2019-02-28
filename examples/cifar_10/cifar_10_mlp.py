@@ -20,7 +20,7 @@ transformed_train_data = z_score(train_data.reshape(train_data.shape[0], transfo
 transformed_test_data  = z_score(test_data.reshape(test_data.shape[0], transformed_image_dims).astype('float32'))
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.0001)
 
 model = Sequential()
 model.add(Dense(1024, input_shape = (3072, )))

@@ -37,7 +37,7 @@ def stack_decoder_layers(init):
 encoder = stack_encoder_layers(init = init_type)
 decoder = stack_decoder_layers(init = init_type)
 
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.0001)
 
 autoencoder = Sequential(init_method = init_type)
 autoencoder.layers.extend(encoder.layers)

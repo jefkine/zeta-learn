@@ -34,8 +34,8 @@ gen_noise = np.random.normal(0, 1, (36, latent_dim)) # for tiles 6 by 6 i.e (36)
 model_epochs = 400
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
-d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0002)
-g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, learning_rate = 0.0002)
+d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, lr = 0.0002)
+g_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, lr = 0.0002)
 
 
 def stack_generator_layers(init):

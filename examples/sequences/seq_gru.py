@@ -12,8 +12,8 @@ train_data, test_data, train_label, test_label = train_test_split(x, y, test_siz
 print_seq_samples(train_data, train_label)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, learning_rate = 0.01)
-# opt = register_opt(optimizer_name = 'adadelta', momentum = 0.01, learning_rate = 1)
+opt = register_opt(optimizer_name = 'rmsprop', momentum = 0.01, lr = 0.01)
+# opt = register_opt(optimizer_name = 'adadelta', momentum = 0.01, lr = 1)
 
 # model definition
 model = Sequential()

@@ -17,7 +17,7 @@ train_data, test_data, train_label, test_label = train_test_split(input_data,
                                                                   input_label,
                                                                   test_size = 0.3)
 
-opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'sgd', momentum = 0.01, lr = 0.001)
 
 # model definition
 model     = LinearRegression(epochs = 100, optimizer = opt, penalty = 'l1', penalty_weight = 0.8)

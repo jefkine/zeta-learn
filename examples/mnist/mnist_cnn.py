@@ -23,7 +23,7 @@ test_data  = range_normalize(test_data.astype('float32'), 0, 1)
 plot_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.001)
 
 # model definition
 model = Sequential(init_method = 'he_uniform')

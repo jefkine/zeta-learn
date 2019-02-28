@@ -19,7 +19,7 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 plot_img_samples(train_data, train_label, dataset = 'cifar', channels = 3)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, learning_rate = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.0001)
 
 # model definition
 model = Sequential(init_method = 'he_uniform')

@@ -17,8 +17,8 @@ train_data, test_data, train_label, test_label = train_test_split(fashion_mnist.
 plot_tiled_img_samples(train_data[:40], train_label[:40], dataset = 'mnist')
 
 # optimizer definition
-# opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, learning_rate = 0.0001)
-opt = register_opt(optimizer_name = 'adam', momentum = 0.001, learning_rate = 0.001)
+# opt = register_opt(optimizer_name = 'nestrov', momentum = 0.01, lr = 0.0001)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.001, lr = 0.001)
 
 # model definition
 model = Sequential()
