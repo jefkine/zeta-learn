@@ -516,7 +516,9 @@ class OptimizationFunction:
 
 def register_opt(**kwargs):
 
-    # @@TODO: ensure that key optimizer_name is present (MUST BE)
+    # ensure that key optimizer_name is present
+    if 'optimizer_name' not in kwargs:
+        raise Exception('optimizer_name must be included in the register_opt func to deduce the optimization type to be used')
 
     allowed_kwargs = {
         'lr',
