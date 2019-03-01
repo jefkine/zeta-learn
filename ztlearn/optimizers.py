@@ -11,11 +11,11 @@ class Optimizer(object):
         self.__dict__.update(kwargs)
 
     def get_learning_rate(self, current_epoch):
-        self.min_lr     = self.min_lr if hasattr(self, 'min_lr')   else 0
-        self.max_lr     = self.max_lr if hasattr(self, 'max_lr')   else np.inf
-        self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate')  else 1e-6
-        self.decay_func = self.decay_func if hasattr(self, 'decay_func')  else 'inverse'
-        self.decay_lr   = self.decay_lr if hasattr(self, 'decay_lr') else True
+        self.min_lr     = self.min_lr     if hasattr(self, 'min_lr')     else 0
+        self.max_lr     = self.max_lr     if hasattr(self, 'max_lr')     else np.inf
+        self.decay_rate = self.decay_rate if hasattr(self, 'decay_rate') else 1e-6
+        self.decay_func = self.decay_func if hasattr(self, 'decay_func') else 'inverse'
+        self.decay_lr   = self.decay_lr   if hasattr(self, 'decay_lr')   else True
 
         if self.decay_lr is False: return self.lr
 
