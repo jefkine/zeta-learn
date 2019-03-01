@@ -4,6 +4,14 @@ ztlearn.ml.classification package
 Submodules
 ----------
 
+ztlearn.ml.classification.knn module
+------------------------------------
+
+.. automodule:: ztlearn.ml.classification.knn
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 ztlearn.ml.classification.perceptron module
 -------------------------------------------
 

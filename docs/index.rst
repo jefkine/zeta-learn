@@ -26,7 +26,6 @@ Find this project on `Github`_
 Dependencies
 ------------
 * numpy >= 1.15.0
-* scikit-learn >= 0.18.0
 * matplotlib >= 2.0.0
 
 Features

@@ -17,6 +17,7 @@ Module contents
 ---------------
 
 .. automodule:: ztlearn.datasets.boston
+    :noindex:
     :members:
     :undoc-members:
     :show-inheritance:
