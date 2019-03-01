@@ -15,15 +15,13 @@ train_data, test_data, train_label, test_label = train_test_split(data.data,
 # plot samples of training data
 plot_img_samples(train_data, train_label)
 
-# optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.001)
-
 # model definition
 model = Sequential()
 model.add(RNN(128, activation = 'tanh', bptt_truncate = 5, input_shape = (8, 8)))
 model.add(Flatten())
 model.add(Dense(10, activation = 'softmax')) # 10 digits classes
-model.compile(loss = 'categorical_crossentropy', optimizer = opt)
+model.compile(loss = 'categorical_crossentropy', optimizer = 'adam')
+# NOTE: in model.compile you could use a string to define the optimization type
 
 model.summary(model_name = 'digits rnn')
 
