@@ -9,7 +9,6 @@ from ztlearn.initializers import InitializeWeights as init
 from ztlearn.optimizers import OptimizationFunction as optimizer
 
 
-# NOTE: Embedding Module is still experimental (does not work as expected)
 class Embedding(Layer):
 
     def __init__(self,
