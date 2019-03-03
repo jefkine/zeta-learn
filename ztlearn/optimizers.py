@@ -489,18 +489,18 @@ class OptimizationFunction:
 
     def __init__(self, optimizer_kwargs):
 
-        # check if optimizer_kwargs is an instance of any of the classes in _optimizers.values dict
+        # 1. using class types: check if optimizer_kwargs is an instance of any of the classes in _optimizers.values dict
         if any(isinstance(optimizer_kwargs, cls_type) for cls_type in list(self._optimizers.values())):
             import copy
             self.optimization_func = copy.copy(optimizer_kwargs)
 
-        # check if optimizer_kwargs is an instance of any of type string and is in _optimizers.keys dict
+        # 2. using string types: check if optimizer_kwargs is an instance of any of type string and is in _optimizers.keys dict
         elif any(isinstance(optimizer_kwargs, str) for cls_type in list(self._optimizers.keys())):
             if optimizer_kwargs not in self._optimizers.keys():
                 raise Exception('Optimization function must be either one of the following: {}.'.format(', '.join(self._optimizers.keys())))
             self.optimization_func = self._optimizers[optimizer_kwargs]()
 
-        # we have a dictionary of keyword arguments from the register_opt func
+        # 3. using kwargs: we have a dictionary of keyword arguments from the register_opt func
         else:
             if optimizer_kwargs['optimizer_name'] not in self._optimizers.keys():
                 raise Exception('Optimization function must be either one of the following: {}.'.format(', '.join(self._optimizers.keys())))
