@@ -247,7 +247,7 @@ class Adamax(Optimizer):
 
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
-        self.grads   = grads
+        self.grads   = np.true_divide(grads, batch_size)
         self.t       = batch_num
 
         if self.m is None:
@@ -301,7 +301,7 @@ class AdaGrad(Optimizer):
 
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
-        self.grads   = grads
+        self.grads   = np.true_divide(grads, batch_size)
 
         if self.cache is None:
             self.cache = np.zeros_like(self.grads)
@@ -350,7 +350,7 @@ class Adadelta(Optimizer):
 
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
-        self.grads   = grads
+        self.grads   = np.true_divide(grads, batch_size) # grads
 
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
@@ -406,7 +406,7 @@ class RMSprop(Optimizer):
 
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
-        self.grads   = grads
+        self.grads   = np.true_divide(grads, batch_size) # grads
 
         if self.cache is None:
             self.cache = np.zeros_like(self.weights)
