@@ -7,6 +7,7 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
         return (0, 0), (0, 0)
 
     elif padding == 'same':
+
         if (input_height % stride_height == 0):
           pad_along_height = max(kernel_height - stride_height, 0)
         else:
