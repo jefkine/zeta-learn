@@ -23,7 +23,7 @@ model.compile(loss = 'categorical_crossentropy', optimizer = opt)
 
 model.summary('iris mlp')
 
-model_epochs = 25
+model_epochs = 75
 fit_stats = model.fit(train_data,
                       one_hot(train_label),
                       batch_size      = 10,

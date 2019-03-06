@@ -15,7 +15,7 @@ train_data, test_data, train_label, test_label = train_test_split(z_score(data.d
                                                                   random_seed = 0)
 
 # optimizer definition
-opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.01)
+opt = register_opt(optimizer_name = 'adam', momentum = 0.01, lr = 0.001)
 
 # model definition
 model     = LogisticRegression(epochs = 1000, optimizer = opt)
