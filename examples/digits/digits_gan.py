@@ -26,7 +26,7 @@ init_type = 'he_uniform'
 gen_epoch = 500
 gen_noise = np.random.normal(0, 1, (36, latent_dim))  # 36 as batch size and is also the number of sample to be generated at the prediction stage
 
-model_epochs = 7000
+model_epochs = 8000
 model_stats  = {'d_train_loss': [], 'd_train_acc': [], 'g_train_loss': [], 'g_train_acc': []}
 
 d_opt = register_opt(optimizer_name = 'adam', beta1 = 0.5, lr = 0.0001)
@@ -85,12 +85,15 @@ images = range_normalize(data.data.astype(np.float32))
 for epoch_idx in range(model_epochs):
 
     # set the epoch id for print out
-    print_epoch = epoch_idx + 1
+    epoch_idx_p1 = epoch_idx + 1
 
     # set the discriminator to trainable
     discriminator.trainable = True
 
     for epoch_k in range(10):
+
+        # set the epoch id for print out
+        epoch_k_p1 = epoch_k + 1
 
         # draw random samples from real images
         index = np.random.choice(images.shape[0], half_batch, replace = False)
@@ -107,14 +110,14 @@ for epoch_idx in range(model_epochs):
         d_fake  = np.concatenate((np.zeros((half_batch, 1)), np.ones((half_batch, 1))), axis = 1)
 
         # discriminator training
-        d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid)
-        d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake)
+        d_loss_real, d_acc_real = discriminator.train_on_batch(imgs, d_valid, epoch_num = epoch_k_p1, batch_num = epoch_k_p1, batch_size = half_batch)
+        d_loss_fake, d_acc_fake = discriminator.train_on_batch(gen_imgs, d_fake, epoch_num = epoch_k_p1, batch_num = epoch_k_p1, batch_size = half_batch)
 
         d_loss = 0.5 * np.add(d_loss_real, d_loss_fake)
         d_acc  = 0.5 * np.add(d_acc_real, d_acc_fake)
 
         if verbose:
-            print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_epoch, epoch_k+1, d_loss, d_acc))
+            print('Epoch {} K:{} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(epoch_idx_p1, epoch_k+1, d_loss, d_acc))
 
     # end of for epoch_k in range(10):
 
@@ -131,7 +134,7 @@ for epoch_idx in range(model_epochs):
     g_valid = np.concatenate((np.ones((batch_size, 1)), np.zeros((batch_size, 1))), axis = 1)
 
     # train the generator
-    g_loss, g_acc = generator_discriminator.train_on_batch(g_noise, g_valid)
+    g_loss, g_acc = generator_discriminator.train_on_batch(g_noise, g_valid, epoch_num = epoch_idx_p1, batch_num = epoch_idx_p1, batch_size = batch_size)
 
     model_stats['g_train_loss'].append(g_loss)
     model_stats['g_train_acc'].append(g_acc)
@@ -144,8 +147,8 @@ for epoch_idx in range(model_epochs):
                                           model_name = model_name)
 
     if verbose:
-        print('{}Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_pad(1), print_epoch, d_loss, d_acc))
-        print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.{}'.format(print_epoch, g_loss, g_acc, print_pad(1)))
+        print('{}Epoch {} Discriminator Loss: {:2.4f}, Acc: {:2.4f}.'.format(print_pad(1), epoch_idx_p1, d_loss, d_acc))
+        print('Epoch {} Generator Loss: {:2.4f}, Acc: {:2.4f}.{}'.format(epoch_idx_p1, g_loss, g_acc, print_pad(1)))
     else:
         computebar(model_epochs, epoch_idx)
 
