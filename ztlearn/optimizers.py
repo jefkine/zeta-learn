@@ -187,7 +187,7 @@ class Adam(Optimizer):
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = grads
-        self.t       = batch_num + 1 # somewhat batch_num starts from zero
+        self.t       = batch_num
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
@@ -248,7 +248,7 @@ class Adamax(Optimizer):
     def update(self, weights, grads, epoch_num, batch_num, batch_size):
         self.weights = weights
         self.grads   = np.true_divide(grads, batch_size)
-        self.t       = batch_num + 1 # somewhat batch_num starts from zero
+        self.t       = batch_num
 
         if self.m is None:
             self.m = np.zeros_like(self.weights)
