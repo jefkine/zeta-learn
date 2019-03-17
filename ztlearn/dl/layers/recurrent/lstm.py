@@ -193,7 +193,7 @@ class LSTM(Layer):
                 dstates[:, t] += dstates_next[:, t]
                 next_grad      = np.dot(dstates, self.W_final)
 
-                doutput[:,t]  = activate(self.activation).forward(self.cell[:, t]) * dstates[:, t]
+                doutput[:,t]  = activate(self.activation).backward(self.cell[:, t]) * dstates[:, t]
                 doutput[:,t]  = activate(self.gate_activation).backward(self.output[:, t]) * doutput[:,t]
                 dW_output    += np.dot(self.z[:, t].T, doutput[:, t])
                 db_output    += np.sum(doutput[:, t], axis = 0)
