@@ -141,7 +141,6 @@ class SGDMomentum(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        #@@ALT-CODE: self.velocity = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
         self.velocity  = np.subtract(
                             np.multiply(self.momentum, self.velocity),
                             np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
@@ -205,7 +204,6 @@ class Adam(Optimizer):
         self.v = np.multiply(self.beta2, self.v)  + np.multiply((1 - self.beta2), np.square(self.grads))
         v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
-        #@@ALT-CODE: self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat), np.sqrt(v_hat) + self.epsilon)
         self.weights -= np.true_divide(
                            np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat),
                            (np.sqrt(v_hat) + self.epsilon)
@@ -474,7 +472,6 @@ class NesterovAcceleratedGradient(Optimizer):
             self.velocity = np.zeros_like(self.weights)
 
         self.velocity_prev  = self.velocity
-        #@@ALT-CODE: self.velocity = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)
         self.velocity       = np.subtract(
                                  np.multiply(self.momentum, self.velocity),
                                  np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)

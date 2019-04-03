@@ -245,7 +245,6 @@ class BinaryCrossEntropy(Objective):
 
         clipped_predictions, _ = super(BinaryCrossEntropy, self).clip(predictions)
 
-        # @@ALT-CODE: return np.mean(-np.sum(np.multiply(targets, np.log(clipped_predictions)) + np.multiply((1 - targets), np.log(1 - clipped_predictions)), axis = 1))
         return  np.mean(
                     -np.sum(
                         (
