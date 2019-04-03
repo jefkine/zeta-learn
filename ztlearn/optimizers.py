@@ -141,7 +141,11 @@ class SGDMomentum(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
+        #@@ALT-CODE: self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
+        self.velocity  = np.subtract(
+                            np.multiply(self.momentum, self.velocity),
+                            np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
+                         )
         self.weights  += self.velocity
 
         return self.weights
