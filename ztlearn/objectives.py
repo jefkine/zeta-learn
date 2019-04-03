@@ -273,7 +273,6 @@ class BinaryCrossEntropy(Objective):
 
         return np.true_divide((clipped_predictions - targets), clipped_divisor)
 
-
     def accuracy(self, predictions, targets, threshold = 0.5):
 
         """
