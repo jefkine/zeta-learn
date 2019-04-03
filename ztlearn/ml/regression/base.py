@@ -35,7 +35,15 @@ class Regression(object):
 
         for i in range(self.epochs):
             predictions = inputs.dot(self.weights)
-            mse         = self.loss.forward(np.expand_dims(predictions, axis = 1), np.expand_dims(targets, axis = 1)) + self.regularization.regulate(self.weights)
+            mse         = np.sum(
+                             (
+                                self.loss.forward(
+                                     np.expand_dims(predictions, axis = 1),
+                                     np.expand_dims(targets, axis = 1)
+                                ),
+                                self.regularization.regulate(self.weights)
+                             )
+                          )
             acc         = self.loss.accuracy(predictions, targets)
 
             fit_stats["train_loss"].append(np.mean(mse))

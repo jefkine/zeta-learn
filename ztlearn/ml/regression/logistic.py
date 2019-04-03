@@ -36,7 +36,15 @@ class LogisticRegression:
 
         for i in range(self.epochs):
             predictions = self.activate.forward(inputs.dot(self.weights))
-            cost        = self.loss.forward(np.expand_dims(predictions, axis = 1), np.expand_dims(targets, axis = 1)) + self.regularization.regulate(self.weights)
+            cost        = np.sum(
+                             (
+                                self.loss.forward(
+                                     np.expand_dims(predictions, axis = 1),
+                                     np.expand_dims(targets, axis = 1)
+                                ),
+                                self.regularization.regulate(self.weights)
+                             )
+                          )
             acc         = self.loss.accuracy(predictions, targets)
 
             fit_stats["train_loss"].append(np.mean(cost))
