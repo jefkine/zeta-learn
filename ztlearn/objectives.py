@@ -252,8 +252,8 @@ class BinaryCrossEntropy(Objective):
                     -np.sum
                     (
                        (
-                          np.multiply(targets, np.log(clipped_predictions)),
-                          np.multiply((1 - targets), np.log(1 - clipped_predictions))
+                            np.multiply(targets, np.log(clipped_predictions)),
+                            np.multiply((1 - targets), np.log(1 - clipped_predictions))
                        ), axis = 1
                     )
                 )
