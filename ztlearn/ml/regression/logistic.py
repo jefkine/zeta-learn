@@ -84,7 +84,6 @@ class LogisticRegression:
             fit_stats["train_acc"].append(np.mean(acc))
 
             diag_grad     = np.diag(self.activate.backward(inputs.dot(self.weights)))
-            # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
             self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) +
                             self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
 
