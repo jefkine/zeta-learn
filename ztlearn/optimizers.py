@@ -141,7 +141,7 @@ class SGDMomentum(Optimizer):
         if self.velocity is None:
             self.velocity = np.zeros_like(self.weights)
 
-        #@@ALT-CODE: self.velocity  = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
+        #@@ALT-CODE: self.velocity = np.multiply(self.momentum, self.velocity) - np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
         self.velocity  = np.subtract(
                             np.multiply(self.momentum, self.velocity),
                             np.multiply(super(SGDMomentum, self).get_learning_rate(epoch_num), self.grads)
@@ -205,7 +205,11 @@ class Adam(Optimizer):
         self.v = np.multiply(self.beta2, self.v)  + np.multiply((1 - self.beta2), np.square(self.grads))
         v_hat  = np.true_divide(self.v, (1 - np.power(self.beta2, self.t)))
 
-        self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat), np.sqrt(v_hat) + self.epsilon)
+        #@@ALT-CODE: self.weights -= np.true_divide(np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat), np.sqrt(v_hat) + self.epsilon)
+        self.weights -= np.true_divide(
+                           np.multiply(super(Adam, self).get_learning_rate(epoch_num), m_hat),
+                           (np.sqrt(v_hat) + self.epsilon)
+                        )
 
         return self.weights
 
@@ -311,8 +315,10 @@ class AdaGrad(Optimizer):
             self.cache = np.zeros_like(self.grads)
 
         self.cache   += np.square(self.grads)
-        self.weights -= np.multiply(super(AdaGrad, self).get_learning_rate(epoch_num),
-                                    np.true_divide(self.grads, np.sqrt(self.cache) + self.epsilon))
+        self.weights -= np.multiply(
+                            super(AdaGrad, self).get_learning_rate(epoch_num),
+                            np.true_divide(self.grads, np.sqrt(self.cache) + self.epsilon)
+                        )
 
         return self.weights
 
@@ -468,7 +474,11 @@ class NesterovAcceleratedGradient(Optimizer):
             self.velocity = np.zeros_like(self.weights)
 
         self.velocity_prev  = self.velocity
-        self.velocity       = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)
+        #@@ALT-CODE: self.velocity = np.multiply(self.momentum, self.velocity) - np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)
+        self.velocity       = np.subtract(
+                                 np.multiply(self.momentum, self.velocity),
+                                 np.multiply(super(NesterovAcceleratedGradient, self).get_learning_rate(epoch_num), self.grads)
+                              )
         self.weights       += np.multiply(-self.momentum, self.velocity_prev) + np.multiply(1 + self.momentum, self.velocity)
 
         return self.weights
