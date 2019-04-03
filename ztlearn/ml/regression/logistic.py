@@ -69,7 +69,15 @@ class LogisticRegression:
 
         for i in range(self.epochs):
             predictions = self.activate.forward(inputs.dot(self.weights))
-            cost        = self.loss.forward(np.expand_dims(predictions, axis = 1), np.expand_dims(targets, axis = 1)) + self.regularization.regulate(self.weights)
+            cost        = np.sum(
+                            (
+                                self.loss.forward(
+                                     np.expand_dims(predictions, axis = 1),
+                                     np.expand_dims(targets, axis = 1)
+                                ),
+                                self.regularization.regulate(self.weights)
+                            )
+                          )
             acc         = self.loss.accuracy(predictions, targets)
 
             fit_stats["train_loss"].append(np.mean(cost))
@@ -77,7 +85,8 @@ class LogisticRegression:
 
             diag_grad     = np.diag(self.activate.backward(inputs.dot(self.weights)))
             # self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T).dot((targets - predictions))
-            self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) + self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
+            self.weights += np.linalg.pinv(inputs.T.dot(diag_grad).dot(inputs) +
+                            self.regularization.derivative(self.weights)).dot(inputs.T.dot(diag_grad)).dot((targets - predictions))
 
             if verbose:
                 print('TRAINING: Epoch-{} loss: {:2.4f} acc: {:2.4f}'.format(i+1, cost, acc))
