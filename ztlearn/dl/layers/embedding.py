@@ -72,7 +72,7 @@ class Embedding(Layer):
         for _, tokens in enumerate(self.inputs.tolist()):
 
             for i, word_index in enumerate(tokens):
-                embed = np.expand_dims(self.uniques_one_hot[word_index,:], 1).T.dot(self.weights)
+                embed     = np.expand_dims(self.uniques_one_hot[word_index,:], 1).T.dot(self.weights)
                 tokens[i] = list(np.array(embed).flat)
 
             embeded_inputs.append(tokens)
@@ -84,7 +84,7 @@ class Embedding(Layer):
 
         if self.is_trainable:
 
-            dweights = np.sum(grad @ self.weights.T, axis = 1)
+            dweights     = np.sum(grad @ self.weights.T, axis = 1)
             self.weights = optimizer(self.weight_optimizer).update(self.weights, dweights.T, epoch_num, batch_num, batch_size)
 
         # endif self.is_trainable
