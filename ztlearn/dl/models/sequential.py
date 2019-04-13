@@ -50,7 +50,6 @@ class Sequential(Trainer):
         for _, layer in enumerate(self.layers):
             layer_names.append(layer.layer_name)
             layer_output.append(custom_tuple(layer.output_shape))
-            # @@DEPRECATED: added number formating for tuples: layer_output.append(str(layer.output_shape))
             layer_params.append("{:,}".format(layer.layer_parameters))
 
         max_name   = len(max(layer_names,  key = len))
