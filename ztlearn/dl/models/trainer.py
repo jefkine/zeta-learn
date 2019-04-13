@@ -14,7 +14,15 @@ class Trainer:
         self.loss = 'categorical_crossentropy' # default objective
 
     @LogIfBusy
-    def fit(self, train_data, train_label, batch_size, epochs, validation_data = (), shuffle_data = True, verbose = False):
+    def fit(self,
+                  train_data,
+                  train_label,
+                  batch_size,
+                  epochs,
+                  validation_data = (),
+                  shuffle_data    = True,
+                  verbose         = False):
+
         fit_stats = {'train_loss': [], 'train_acc': [], 'valid_loss': [], 'valid_acc': []}
 
         batch_num = 0
@@ -58,6 +66,7 @@ class Trainer:
                               epoch_num  = 0,
                               batch_num  = 0,
                               batch_size = 1):
+
         predictions = self.foward_pass(train_batch_data, train_mode = True)
 
         loss = np.mean(objective(self.loss).forward(predictions, train_batch_label))
@@ -70,7 +79,11 @@ class Trainer:
 
         return loss, acc
 
-    def test_on_batch(self, test_batch_data, test_batch_label, train_mode = False):
+    def test_on_batch(self,
+                            test_batch_data,
+                            test_batch_label,
+                            train_mode = False):
+
         predictions = self.foward_pass(test_batch_data, train_mode = train_mode)
 
         loss = np.mean(objective(self.loss).forward(predictions, test_batch_label))
@@ -79,7 +92,13 @@ class Trainer:
         return loss, acc
 
     @LogIfBusy
-    def evaluate(self, test_data, test_label, batch_size = 128, shuffle_data = True, verbose = False):
+    def evaluate(self,
+                       test_data,
+                       test_label,
+                       batch_size   = 128,
+                       shuffle_data = True,
+                       verbose      = False):
+                       
         eval_stats = {'valid_batches' : 0, 'valid_loss': [], 'valid_acc': []}
 
         batches = minibatches(test_data, test_label, batch_size, shuffle_data)
