@@ -6,7 +6,7 @@ import numpy as np
 class WeightInitializer:
 
     def compute_fans(self, shape):
-        # Original code forked from MIT licensed keras project
+        # Original code (func: compute_fans) forked from MIT licensed keras project
         # https://github.com/fchollet/keras/blob/master/keras/initializers.py
         # kernel shape: ('NF': Total Filters, 'CF': Filter Channels, 'HF': Filter Height 'WF': Filter Width)
 
