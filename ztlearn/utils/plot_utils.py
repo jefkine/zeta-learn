@@ -30,23 +30,23 @@ img_specs = {
 
 
 def plotter(x,
-                y           = [],
-                plot_dict   = {},
-                fig_dims    = (7, 5),
-                title       = 'Model',
-                title_dict  = {},
-                ylabel      = 'y-axis',
-                ylabel_dict = {},
-                xlabel      = 'x-axis',
-                xlabel_dict = {},
-                legend      = [], # ['train', 'valid'],
-                legend_dict = {},
-                file_path   = '',
-                to_save     = False,
-                plot_type   = 'line',
-                cmap_name   = None,
-                cmap_number = 10,
-                grid_on     = True):
+               y           = [],
+               plot_dict   = {},
+               fig_dims    = (7, 5),
+               title       = 'Model',
+               title_dict  = {},
+               ylabel      = 'y-axis',
+               ylabel_dict = {},
+               xlabel      = 'x-axis',
+               xlabel_dict = {},
+               legend      = [], # ['train', 'valid'],
+               legend_dict = {},
+               file_path   = '',
+               to_save     = False,
+               plot_type   = 'line',
+               cmap_name   = None,
+               cmap_number = 10,
+               grid_on     = True):
 
     fig, ax = plt.subplots()
     fig.set_size_inches(fig_dims)
@@ -86,12 +86,12 @@ def plotter(x,
 
 
 def plot_pca(components,
-                            n_components = 2,
-                            colour_array = None,
-                            model_name   = 'PCA',
-                            to_save      = False,
-                            fig_dims     = FIG_SIZE, #(10, 8),
-                            title_dict   = {'size' : SMALL_FONT}):
+                         n_components = 2,
+                         colour_array = None,
+                         model_name   = 'PCA',
+                         to_save      = False,
+                         fig_dims     = FIG_SIZE, #(10, 8),
+                         title_dict   = {'size' : SMALL_FONT}):
 
     file_path = '../plots/decompositions/'+('{}{}{}{}{}'.format(model_name,
                                                                '_',
@@ -107,31 +107,31 @@ def plot_pca(components,
     }
 
     plt = plotter(components,
-                                y           = None,
-                                plot_dict   = plt_dict,
-                                fig_dims    = fig_dims,
-                                title       = 'Model {}'.format(model_name.upper()),
-                                title_dict  = title_dict,
-                                xlabel      = 'PC 1',
-                                ylabel      = 'PC 2',
-                                file_path   = file_path,
-                                to_save     = to_save,
-                                plot_type   = 'scatter',
-                                cmap_name   = 'tab10',
-                                cmap_number = 10,
-                                grid_on     = False)
+                              y           = None,
+                              plot_dict   = plt_dict,
+                              fig_dims    = fig_dims,
+                              title       = 'Model {}'.format(model_name.upper()),
+                              title_dict  = title_dict,
+                              xlabel      = 'PC 1',
+                              ylabel      = 'PC 2',
+                              file_path   = file_path,
+                              to_save     = to_save,
+                              plot_type   = 'scatter',
+                              cmap_name   = 'tab10',
+                              cmap_number = 10,
+                              grid_on     = False)
 
     plt.show()
 
 
 def plot_kmeans(data,
-                        labels         = None,
-                        centroids      = None,
-                        model_name     = 'K-Means',
-                        model_clusters = 1,
-                        to_save        = False,
-                        fig_dims       = FIG_SIZE,
-                        title_dict     = {'size' : SMALL_FONT}):
+                      labels         = None,
+                      centroids      = None,
+                      model_name     = 'K-Means',
+                      model_clusters = 1,
+                      to_save        = False,
+                      fig_dims       = FIG_SIZE,
+                      title_dict     = {'size' : SMALL_FONT}):
 
     file_path = '../plots/clusters/'+('{}{}{}{}{}'.format(model_name,
                                                           '_',
@@ -191,23 +191,23 @@ def plot_metric(metric,
 
 
 def plot_opt_viz(dims,
-                        x,
-                        y,
-                        z,
-                        f_solution,
-                        overlay     = 'plot',
-                        to_save     = False,
-                        title       = 'Optimization',
-                        title_dict  = {'size' : LARGE_FONT},
-                        fig_dims    = FIG_SIZE,
-                        xticks_dict = {'size' : LARGE_FONT},
-                        yticks_dict = {'size' : LARGE_FONT},
-                        xlabel      = r'$\theta^1$',
-                        xlabel_dict = {'size' : LARGE_FONT},
-                        ylabel      = r'$\theta^2$',
-                        ylabel_dict = {'size' : LARGE_FONT},
-                        legend      = ['train', 'valid'],
-                        legend_dict = {}):
+                       x,
+                       y,
+                       z,
+                       f_solution,
+                       overlay     = 'plot',
+                       to_save     = False,
+                       title       = 'Optimization',
+                       title_dict  = {'size' : LARGE_FONT},
+                       fig_dims    = FIG_SIZE,
+                       xticks_dict = {'size' : LARGE_FONT},
+                       yticks_dict = {'size' : LARGE_FONT},
+                       xlabel      = r'$\theta^1$',
+                       xlabel_dict = {'size' : LARGE_FONT},
+                       ylabel      = r'$\theta^2$',
+                       ylabel_dict = {'size' : LARGE_FONT},
+                       legend      = ['train', 'valid'],
+                       legend_dict = {}):
 
     if dims == 3:
         fig = plt.figure(figsize = fig_dims)
@@ -334,13 +334,13 @@ def plot_img_results(test_data, test_label, predictions, fig_dims = (6, 6), data
 
 
 def plot_generated_img_samples(test_label,
-                                            predictions,
-                                            fig_dims   = (6, 6),
-                                            dataset    = 'digits',
-                                            channels   = 1,
-                                            to_save    = False,
-                                            iteration  = 0,
-                                            model_name = ''):
+                                           predictions,
+                                           fig_dims   = (6, 6),
+                                           dataset    = 'digits',
+                                           channels   = 1,
+                                           to_save    = False,
+                                           iteration  = 0,
+                                           model_name = ''):
 
     fig = plt.figure(figsize = fig_dims)
     fig.subplots_adjust(left = 0, right = 1, bottom = 0, top = 1, hspace = 0.05, wspace = 0.05)
