@@ -94,10 +94,10 @@ def plot_pca(components,
                          title_dict   = {'size' : SMALL_FONT}):
 
     file_path = '../plots/decompositions/'+('{}{}{}{}{}'.format(model_name,
-                                                               '_',
-                                                               n_components,
-                                                               '_Components_',
-                                                               time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
+                                                                '_',
+                                                                n_components,
+                                                                '_Components_',
+                                                                time.strftime("%Y-%m-%d_%H-%M-%S"),'.png'))
 
     plt_dict = {
         'c'         : colour_array,
