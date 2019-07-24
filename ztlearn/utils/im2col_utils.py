@@ -25,7 +25,8 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
 
         return (pad_top, pad_bottom), (pad_left, pad_right)
 
-# Original Code: CS231n Stanford  http://cs231n.github.io/assignments2017/assignment2/
+# Copyright for func: get_im2col_indices are held by CS231n Stanford, 2017
+# as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
 def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     # First figure out what the size of the output should be
     N, C, H, W            = x_shape
@@ -49,6 +50,8 @@ def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0
 
     return (k, i, j)
 
+# Copyright for func: im2col_indices are held by CS231n Stanford, 2017
+# as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
 def im2col_indices(x, field_height, field_width, padding, stride = 1):
     """ An implementation of im2col based on some fancy indexing """
     pad_height, pad_width = padding
@@ -61,6 +64,8 @@ def im2col_indices(x, field_height, field_width, padding, stride = 1):
 
     return cols
 
+# Copyright for func: col2im_indices are held by CS231n Stanford, 2017 
+# as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
 def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
     """ An implementation of col2im based on fancy indexing and np.add.at """
     N, C, H, W            = x_shape
