@@ -115,8 +115,8 @@ class RegularizationFunction:
 
     _regularizers = {
         'l1'          : L1Regularization,
-        'l2'          : L2Regularization,
         'lasso'       : L1Regularization,
+        'l2'          : L2Regularization,    
         'ridge'       : L2Regularization,
         'elastic'     : ElasticNetRegularization,
         'elastic_net' : ElasticNetRegularization
