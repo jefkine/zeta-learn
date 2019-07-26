@@ -87,12 +87,12 @@ class DecayFunction:
 
     _functions = {
         'step'                      : StepDecay,
-        'inverse'                   : InverseTimeDecay,
-        'exponential'               : ExponetialDecay,
-        'nat_exponential'           : NaturalExponentialDecay,
         'step_decay'                : StepDecay,
+        'exponential'               : ExponetialDecay,
         'exponential_decay'         : ExponetialDecay,
-        'inverse_time_decay'        : InverseTimeDecay,
+        'inverse'                   : InverseTimeDecay,
+        'inverse_time_decay'        : InverseTimeDecay,        
+        'nat_exponential'           : NaturalExponentialDecay,
         'natural_exponential_decay' : NaturalExponentialDecay
     }
 
