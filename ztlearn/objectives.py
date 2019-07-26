@@ -507,17 +507,18 @@ class ObjectiveFunction:
     _functions = {
         'svm'                         : HingeLoss,
         'hinge'                       : HingeLoss,
-        'huber'                       : HuberLoss,
-        'huber_loss'                  : HuberLoss,
         'hinge_loss'                  : HingeLoss,
+        'huber'                       : HuberLoss,
+        'huber_loss'                  : HuberLoss,        
         'kld'                         : KLDivergence,
-        'mse'                         : MeanSquaredError,
-        'bce'                         : BinaryCrossEntropy,
-        'cce'                         : CategoricalCrossEntropy,
-        'mean_squared_error'          : MeanSquaredError,
-        'hellinger_distance'          : HellingerDistance,
-        'binary_crossentropy'         : BinaryCrossEntropy,
         'kullback_leibler_divergence' : KLDivergence,
+        'mse'                         : MeanSquaredError,
+        'mean_squared_error'          : MeanSquaredError,
+        'hld'                         : HellingerDistance,
+        'hellinger_distance'          : HellingerDistance,
+        'bce'                         : BinaryCrossEntropy,
+        'binary_crossentropy'         : BinaryCrossEntropy,
+        'cce'                         : CategoricalCrossEntropy,
         'categorical_crossentropy'    : CategoricalCrossEntropy
     }
 
