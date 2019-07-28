@@ -28,8 +28,8 @@ def get_pad(padding, input_height, input_width, stride_height, stride_width, ker
 def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
 
     """
-    Copyright for func: get_im2col_indices are held by CS231n Stanford, 2017
-    as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
+    func: get_im2col_indices adapted from CS231n Stanford: http://cs231n.github.io/assignments2017/assignment2/
+    copyright held by Stanford, 2017 as part of CS231n Convolutional Neural Networks for Visual Recognition
     """
 
     # first figure out what the size of the output should be
@@ -57,8 +57,8 @@ def get_im2col_indices(x_shape, field_height = 3, field_width = 3, padding = ((0
 def im2col_indices(x, field_height, field_width, padding, stride = 1):
 
     """
-    Copyright for func: im2col_indices are held by CS231n Stanford, 2017
-    as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
+    func: im2col_indices adapted from CS231n Stanford: http://cs231n.github.io/assignments2017/assignment2/
+    copyright held by Stanford, 2017 as part of CS231n Convolutional Neural Networks for Visual Recognition
     """
 
     """ An implementation of im2col based on some fancy indexing """
@@ -75,8 +75,8 @@ def im2col_indices(x, field_height, field_width, padding, stride = 1):
 def col2im_indices(cols, x_shape, field_height = 3, field_width = 3, padding = ((0, 0), (0, 0)), stride = 1):
 
     """
-    Copyright for func: col2im_indices are held by CS231n Stanford, 2017
-    as part of project - assignment: http://cs231n.github.io/assignments2017/assignment2/
+    func: col2im_indices adapted from CS231n Stanford: http://cs231n.github.io/assignments2017/assignment2/
+    copyright held by Stanford, 2017 as part of CS231n Convolutional Neural Networks for Visual Recognition
     """
 
     """ An implementation of col2im based on fancy indexing and np.add.at """

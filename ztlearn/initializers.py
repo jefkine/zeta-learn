@@ -8,9 +8,9 @@ class WeightInitializer:
     def compute_fans(self, shape):
 
         """
-        Copyright for func: compute_fans are held by fchollet(keras-team)
-        as part of project - Keras: https://github.com/fchollet/keras/blob/master/keras/initializers.py
-        Licence: MIT
+        func: compute_fans adapted from keras: https://github.com/fchollet/keras/blob/master/keras/initializers.py
+        copyright held by fchollet(keras-team), 2017 as part of Keras project
+        licence: MIT
         """
 
         # kernel shape: ('NF': Total Filters, 'CF': Filter Channels, 'HF': Filter Height 'WF': Filter Width)
