@@ -65,7 +65,7 @@ class Sequential(Trainer):
         total_params  = 0
         model_layers  = print_pad(1)+ " " + self.model_name.upper() + print_pad(1)
         model_layers += print_pad(1)+ " Input Shape: " + str(self.layers[0].input_shape) + print_pad(1)
-        for i, layer in enumerate(self.layers):
+        for i, layer in enumerate(self.layers, start=1):
             if i < 2:
                 model_layers += lining + print_pad(1)
             model_layers += "¦ {:<{max_name}} ¦ {:>{max_params}} ¦ {:>{max_output}} ¦ ".format(layer_names[i],
