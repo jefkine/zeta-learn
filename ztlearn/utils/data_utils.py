@@ -48,7 +48,8 @@ def shuffle_data(input_data, input_label, random_seed = None):
     """ perfom randomized shuffle on a given input dataset """
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
 
-    np.random.seed(random_seed)
+    if random_seed is not None: # confirm that random seed has been set
+        np.random.seed(random_seed)
 
     indices = np.arange(input_data.shape[0])
     np.random.shuffle(indices)
@@ -69,6 +70,23 @@ def train_test_split(samples, labels, test_size = 0.2, shuffle = True, random_se
         return samples_train[:cut_off], samples_test[:cut_off], labels_train[:cut_off], labels_test[:cut_off]
 
     return samples_train, samples_test, labels_train, labels_test
+
+def kfold_split(samples, labels, n_splits = 5, shuffle = False, random_seed = None):
+    """ generate K folds for cross validation testing """
+    if shuffle:
+        samples, labels = shuffle_data(samples, labels, random_seed)
+
+    def get_folds(input_data, num_rows):
+        fold_size = int(num_rows / n_splits)
+        for idx in range(0, num_rows, fold_size):
+            yield input_data[idx:idx + fold_size]
+
+    sample_folds = list(get_folds(samples, samples.shape[0]))
+    label_folds  = list(get_folds(labels, samples.shape[0]))
+
+    # this returns two lists which can be accessed by the item index e.g sample_folds[0] for fold 1
+    return sample_folds, label_folds
+
 
 def minibatches(input_data, input_label, batch_size, shuffle):
     """ generate minibatches on a given input data matrix """

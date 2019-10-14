@@ -18,6 +18,7 @@ from .data_utils import print_pad
 from .data_utils import normalize
 from .data_utils import computebar
 from .data_utils import minibatches
+from .data_utils import kfold_split
 from .data_utils import custom_tuple
 from .data_utils import shuffle_data
 from .data_utils import extract_files
