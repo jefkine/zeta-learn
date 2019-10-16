@@ -84,6 +84,7 @@ def kfold_split(samples, labels, n_splits = 5, shuffle = False, random_seed = No
     sample_folds = list(get_folds(samples, samples.shape[0]))
     label_folds  = list(get_folds(labels, samples.shape[0]))
 
+    # @@TODO: split the sample_folds and label_folds into sizes K-1 and 1 for test and training sets
     # this returns two lists which can be accessed by the item index e.g sample_folds[0] for fold 1
     return sample_folds, label_folds
 
