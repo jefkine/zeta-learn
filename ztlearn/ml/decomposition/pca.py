@@ -30,9 +30,9 @@ class PCA(object):
 
         U, S, V = np.linalg.svd(self.standardized_inputs, full_matrices = False)
 
-        self.components     = V[:self.n_components]
-        transformed_inputs  = np.multiply(U[:, :self.n_components],
-                                          S[:self.n_components])
+        self.components    = V[:self.n_components]
+        transformed_inputs = np.multiply(U[:, :self.n_components],
+                                         S[:self.n_components])
 
         components_variance      = np.divide(np.square(S), (self.n_samples - 1))
         self.components_variance = components_variance[:self.n_components]
