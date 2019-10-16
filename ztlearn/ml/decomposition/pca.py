@@ -12,9 +12,9 @@ class PCA(object):
         self.n_samples, self.n_features = np.shape(inputs)
 
         self.mean = np.mean(inputs, axis = 0)
-        inputs   -= self.mean
+        self.standardized_inputs = np.subtract(inputs, self.mean)
 
-        self.U, self.S, self.V = np.linalg.svd(inputs, full_matrices = False)
+        self.U, self.S, self.V = np.linalg.svd(self.standardized_inputs, full_matrices = False)
 
         self.components          = self.V[:self.n_components]
         components_variance      = np.divide(np.square(self.S), (self.n_samples - 1))
@@ -26,9 +26,9 @@ class PCA(object):
         self.n_samples, self.n_features = np.shape(inputs)
 
         self.mean = np.mean(inputs, axis = 0)
-        inputs   -= self.mean
+        self.standardized_inputs = np.subtract(inputs, self.mean)
 
-        U, S, V = np.linalg.svd(inputs, full_matrices = False)
+        U, S, V = np.linalg.svd(self.standardized_inputs, full_matrices = False)
 
         self.components     = V[:self.n_components]
         transformed_inputs  = np.multiply(U[:, :self.n_components],
