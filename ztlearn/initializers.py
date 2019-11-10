@@ -196,7 +196,7 @@ class LeCunNormal(WeightInitializer):
 
         np.random.seed(random_seed)
 
-        return np.random.normal(low = -scale, high = scale, size = shape)
+        return np.random.normal(loc = -scale, scale = scale, size = shape)
 
     @property
     def init_name(self):
