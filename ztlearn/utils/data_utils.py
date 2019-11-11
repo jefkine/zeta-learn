@@ -44,6 +44,12 @@ def unhot(one_hot, unhot_axis = 1):
     """ reverse one hot encoded data back to labels """
     return np.argmax(one_hot, axis = unhot_axis)
 
+def imbalanced_dataset(input_data, input_label, digit, remainder):   
+    """ generate unbalanced dataset """
+    input_label_ids = np.squeeze(np.array(np.where(input_label == digit)), axis = 0)
+    remainder_ids   = input_label_ids[remainder:]       
+    return np.delete(input_data, remainder_ids, 0), np.delete(input_label, remainder_ids, 0)
+
 def shuffle_data(input_data, input_label, random_seed = None):
     """ perfom randomized shuffle on a given input dataset """
     assert input_data.shape[0] == input_label.shape[0], 'input data and label sizes do not match!'
