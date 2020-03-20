@@ -8,6 +8,20 @@ from ztlearn.optimizers import OptimizationFunction as optimizer
 
 class BatchNormalization(Layer):
 
+    """
+    **Batch Normalization**
+
+    Batch  Normalization seeks to reduce internal  covariate  shift by computing
+    the mean  and variance  used to be for  normalization from all of the summed
+    inputs to  the  neurons  in a  mini-batch on  a single training  case. Batch
+    Normalization enables  higher learning rates and also regularizes the model.    
+
+    References:
+        [1] Layer Normalization
+            * [Jimmy Lei Ba, 2016] https://arxiv.org/abs/1502.03167
+            * [PDF] https://arxiv.org/pdf/1502.03167.pdf
+    """
+
     def __init__(self, eps = 0.01, momentum = 0.99):
         self.eps      = eps
         self.momentum = momentum
@@ -88,6 +102,21 @@ class BatchNormalization(Layer):
 
 
 class LayerNormalization1D(Layer):
+
+    """
+    **Layer Normalization**
+
+    The Layer Normalization is a transpose of Batch Normalization which computes
+    the mean and variance used  for normalization from  all of the summed inputs
+    to the neurons in a layer on a single training case. Layer  normalization is
+    very effective at stabilizing the hidden state dynamics in recurrent networks
+
+    References:
+        [1] Layer Normalization
+            * [Jimmy Lei Ba, 2016] https://arxiv.org/abs/1607.06450
+            * [PDF] https://arxiv.org/pdf/1607.06450.pdf
+
+    """
 
     def __init__(self, eps = 1e-5):
         self.eps              = eps
