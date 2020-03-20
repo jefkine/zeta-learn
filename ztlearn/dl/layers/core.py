@@ -46,7 +46,7 @@ class Activation(Layer):
         return self.activation_func.forward(input_signal)
 
     def pass_backward(self, grad, epoch_num, batch_num, batch_size):
-        return grad * self.activation_func.backward(self.input_signal)
+        return grad * self.activation_func.backward(self.input_signal, epoch_num, batch_num, batch_size)
 
 
 class Dense(Layer):
