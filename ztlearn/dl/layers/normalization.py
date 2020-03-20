@@ -14,11 +14,11 @@ class BatchNormalization(Layer):
     Batch  Normalization seeks to reduce internal  covariate  shift by computing
     the mean  and variance  used to be for  normalization from all of the summed
     inputs to  the  neurons  in a  mini-batch on  a single training  case. Batch
-    Normalization enables  higher learning rates and also regularizes the model.    
+    Normalization enables  higher learning rates and also regularizes the model.
 
     References:
         [1] Layer Normalization
-            * [Jimmy Lei Ba, 2016] https://arxiv.org/abs/1502.03167
+            * [Sergey Ioffe, 2015] https://arxiv.org/abs/1502.03167
             * [PDF] https://arxiv.org/pdf/1502.03167.pdf
     """
 
